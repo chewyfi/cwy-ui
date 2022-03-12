@@ -14,7 +14,7 @@
   font-family: 'Avenir';
   src: local('Avenir'),
     url('/fonts/AvenirNextLTPro-It.woff2') format('woff2');
-  font-style: normal;
+  font-style: italic;
   font-weight: 500;
   font-display: swap;
 }
@@ -22,7 +22,7 @@
   font-family: 'Avenir';
   src: local('Avenir'),
     url('/fonts/AvenirNextLTPro-Bold.woff2') format('woff2');
-  font-style: normal;
+  font-style: bold;
   font-weight: 700;
   font-display: swap;
 }
@@ -38,7 +38,7 @@
 
 body {
   font-family: 'Avenir', 'system-ui', monospace;
-  @apply bg-gray-50 scroll-smooth min-h-screen overflow-y-auto;
+  @apply bg-gray-100 scroll-smooth min-h-screen overflow-y-auto;
 }
 
 .primary-outline {

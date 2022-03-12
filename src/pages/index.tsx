@@ -1,9 +1,22 @@
+import SearchIcon from 'src/components/icons/SearchIcon'
 import Layout from 'src/components/shared/Layout'
+import Table from 'src/components/Vaults/Table'
 
 export default function Home() {
   return (
     <Layout>
-      <div className="container max-w-4xl px-3 py-6 mx-auto md:px-0">wip</div>
+      <div className="p-4 mb-4 bg-white rounded-lg">
+        <h6 className="text-[19px] mb-4 font-semibold text-[#eb4d69]">
+          Staking opportunities
+        </h6>
+        <div className="flex items-center">
+          <span className="text-[19px] px-2 py-1.5 bg-white border-2 border-r-0 border-red-200 rounded-l-lg">
+            <SearchIcon />
+          </span>
+          <input className="w-full pr-2 py-0.5 text-xl border-2 border-l-0 border-red-200 rounded-r-lg outline-none" />
+        </div>
+        <Table />
+      </div>
     </Layout>
   )
 }

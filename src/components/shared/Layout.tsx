@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
       </Head>
       <div className="flex h-full gap-5 px-3">
         <Sidebar />
-        <div className="flex-1">
+        <div className="w-full pl-[calc(16rem)]">
           <Header />
           {children}
           <Footer />

@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className="flex px-20 py-10 bg-white rounded-lg">
+    <div className="flex px-20 py-10 bg-white rounded-lg shadow-sm">
       <div className="flex items-center space-x-10">
         <ul className="flex items-center space-x-6 text-[12px] text-gray-500">
           <li>
@@ -18,7 +18,7 @@ const Footer = () => {
                 <img
                   src="/static/twitter-logo.svg"
                   draggable={false}
-                  className="w-6 h-6"
+                  className="h-7"
                   alt=""
                 />
               </a>
@@ -29,7 +29,7 @@ const Footer = () => {
               <a target="_blank" rel="noreferrer">
                 <img
                   src="/static/discord-logo.svg"
-                  className="w-6 h-6"
+                  className="h-7"
                   alt=""
                   draggable={false}
                 />
@@ -42,14 +42,14 @@ const Footer = () => {
                 <img
                   draggable={false}
                   src="/static/github-logo.svg"
-                  className="w-6 h-6"
+                  className="h-8"
                   alt=""
                 />
               </a>
             </Link>
           </li>
         </ul>
-        <ul className="flex space-x-6 text-[#eb4d69] text-opacity-90">
+        <ul className="flex space-x-6 text-[#ffc3ce] text-opacity-90">
           <li>
             <Link href={''}>
               <a target="_blank" rel="noreferrer">

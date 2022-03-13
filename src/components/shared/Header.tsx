@@ -23,7 +23,7 @@ const Header = () => {
   }
 
   return (
-    <div className="sticky text-[12px] bg-gray-100 top-0 flex items-center justify-between w-full py-3 md:py-5">
+    <div className="sticky text-[12px] bg-gray-100 top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full">
         <h6 className="text-[19px] font-semibold">Vaults</h6>
         <div className="flex items-center font-medium">

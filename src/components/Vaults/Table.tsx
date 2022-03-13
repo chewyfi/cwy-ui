@@ -32,7 +32,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/movr.svg"
                   />
                 </span>
@@ -40,8 +40,8 @@ const Table = () => {
                 <span className="w-1/5">75.81%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -62,7 +62,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -80,7 +80,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -105,7 +105,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/weth.svg"
                   />
                 </span>
@@ -113,8 +113,8 @@ const Table = () => {
                 <span className="w-1/5">68.54%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -135,7 +135,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -153,7 +153,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -178,7 +178,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/wbtc.svg"
                   />
                 </span>
@@ -186,8 +186,8 @@ const Table = () => {
                 <span className="w-1/5">42.823%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -208,7 +208,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -226,7 +226,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -251,7 +251,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/usdc.svg"
                   />
                 </span>
@@ -259,8 +259,8 @@ const Table = () => {
                 <span className="w-1/5">18.52%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -281,7 +281,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -299,7 +299,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -325,7 +325,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/frax.svg"
                   />
                 </span>
@@ -333,8 +333,8 @@ const Table = () => {
                 <span className="w-1/5">14.25%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -355,7 +355,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -373,7 +373,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -398,7 +398,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/usdt.svg"
                   />
                 </span>
@@ -406,8 +406,8 @@ const Table = () => {
                 <span className="w-1/5">3.92%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -428,7 +428,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -446,7 +446,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -471,7 +471,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/3pool.svg"
                   />
                 </span>
@@ -479,8 +479,8 @@ const Table = () => {
                 <span className="w-1/5">3.92%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -501,7 +501,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -519,7 +519,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -544,7 +544,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/frax3pool.svg"
                   />
                 </span>
@@ -552,8 +552,8 @@ const Table = () => {
                 <span className="w-1/5">3.92%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -574,7 +574,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -592,7 +592,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>
@@ -617,7 +617,7 @@ const Table = () => {
                   <img
                     alt=""
                     draggable={false}
-                    className="h-6"
+                    className="w-8 h-8"
                     src="/static/tokens/2ksm.svg"
                   />
                 </span>
@@ -625,8 +625,8 @@ const Table = () => {
                 <span className="w-1/5">3.92%</span>
                 <span className="w-1/5">$0</span>
                 <span className="w-1/5">--</span>
-                <span className="w-1/5 text-[12px] text-right">
-                  <button className="inline-block p-1 px-6 border-2 border-gray-500 rounded">
+                <span className="w-1/5 text-[13px] text-right">
+                  <button className="inline-block p-1 px-6 font-bold border-2 border-black rounded">
                     Deposit
                   </button>
                 </span>
@@ -647,7 +647,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
                       Approve
                     </button>
                   </div>
@@ -665,7 +665,7 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded">
+                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
                       Withdraw
                     </button>
                   </div>

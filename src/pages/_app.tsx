@@ -12,9 +12,9 @@ const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL as string
 
 const supportedChains = [
   {
-    id: 1287,
+    id: 1285,
     name: 'Moon River',
-    // nativeCurrency: { name: 'Dev', symbol: 'DEV', decimal: 18 },
+    // nativeCurrency: { name: 'Moonriver', symbol: 'MOVR', decimal: 18 },
     rpcUrls: [rpcUrl],
     blockExplorers: [
       { name: 'Moonscan', url: 'https://moonbeam.moonscan.io/' }
@@ -29,7 +29,7 @@ const connectors = () => {
     new WalletConnectConnector({
       options: {
         rpc: {
-          1287: rpcUrl
+          1285: rpcUrl
         },
         qrcode: true
       }
@@ -39,7 +39,7 @@ const connectors = () => {
 
 const provider = () =>
   new providers.StaticJsonRpcProvider(rpcUrl, {
-    chainId: 1287,
+    chainId: 1285,
     name: 'moonriver'
   })
 

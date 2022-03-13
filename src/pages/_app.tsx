@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/font.css'
 
 import { providers } from 'ethers'
 import type { AppProps } from 'next/app'

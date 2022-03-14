@@ -1,6 +1,16 @@
 import { Disclosure } from '@headlessui/react'
 import clsx from 'clsx'
 import React, { useState } from 'react'
+import {
+  FRAX_3POOL_TOKEN_CONTRACT,
+  FRAX_TOKEN_CONTRACT,
+  THREE_POOL_TOKEN_CONTRACT,
+  TWO_KSM_TOKEN_CONTRACT,
+  USDT_TOKEN_CONTRACT,
+  WBTC_TOKEN_CONTRACT,
+  WETH_TOKEN_CONTRACT
+} from 'src/utils/constants'
+import { useBalance } from 'wagmi'
 
 const APYS = [
   {
@@ -79,7 +89,54 @@ const APYS = [
 
 const Table = () => {
   const [apyList, setApyList] = useState(APYS)
+  const [{ data: movr }] = useBalance()
+  const [{ data: weth }] = useBalance({
+    addressOrName: WETH_TOKEN_CONTRACT
+  })
+  const [{ data: wbtc }] = useBalance({
+    addressOrName: WBTC_TOKEN_CONTRACT
+  })
+  const [{ data: usdc }] = useBalance({
+    addressOrName: WBTC_TOKEN_CONTRACT
+  })
+  const [{ data: usdt }] = useBalance({
+    addressOrName: USDT_TOKEN_CONTRACT
+  })
+  const [{ data: frax }] = useBalance({
+    addressOrName: FRAX_TOKEN_CONTRACT
+  })
+  const [{ data: threePool }] = useBalance({
+    addressOrName: THREE_POOL_TOKEN_CONTRACT
+  })
+  const [{ data: frax3Pool }] = useBalance({
+    addressOrName: FRAX_3POOL_TOKEN_CONTRACT
+  })
+  const [{ data: ksm }] = useBalance({
+    addressOrName: TWO_KSM_TOKEN_CONTRACT
+  })
 
+  const getBalance = (token: string) => {
+    switch (token) {
+      case 'MOVR':
+        return movr?.formatted
+      case 'WETH':
+        return weth?.formatted
+      case 'WBTC':
+        return wbtc?.formatted
+      case 'USDC':
+        return usdc?.formatted
+      case 'FRAX':
+        return frax?.formatted
+      case 'USDT':
+        return usdt?.formatted
+      case 'solar3POOL':
+        return threePool?.formatted
+      case 'solar3FRAX':
+        return frax3Pool?.formatted
+      case 'KSM':
+        return ksm?.formatted
+    }
+  }
   const toggleDisclosure = (index: number) => {
     let apys = apyList
     apys.map((item, idx) => {
@@ -151,7 +208,7 @@ const Table = () => {
                 <div className="flex space-x-2">
                   <div className="mt-1 mb-3 text-gray-500">
                     <label className="mb-1 text-[11px]">
-                      Balance: 0 MOVR LP
+                      Balance: {getBalance(item.name)} {item.name} LP
                     </label>
                     <div className="flex items-center text-[12px]">
                       <input

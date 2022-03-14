@@ -10,7 +10,7 @@ import {
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
-import { useBalance } from 'wagmi'
+import { useAccount, useBalance } from 'wagmi'
 
 const APYS = [
   {
@@ -89,30 +89,42 @@ const APYS = [
 
 const Table = () => {
   const [apyList, setApyList] = useState(APYS)
-  const [{ data: movr }] = useBalance()
+  const [{ data: account }] = useAccount()
+
+  const [{ data: movr }] = useBalance({
+    addressOrName: account?.address
+  })
   const [{ data: weth }] = useBalance({
-    addressOrName: WETH_TOKEN_CONTRACT
+    token: WETH_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
   const [{ data: wbtc }] = useBalance({
-    addressOrName: WBTC_TOKEN_CONTRACT
+    token: WBTC_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
   const [{ data: usdc }] = useBalance({
-    addressOrName: WBTC_TOKEN_CONTRACT
+    token: WBTC_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
   const [{ data: usdt }] = useBalance({
-    addressOrName: USDT_TOKEN_CONTRACT
+    token: USDT_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
   const [{ data: frax }] = useBalance({
-    addressOrName: FRAX_TOKEN_CONTRACT
+    token: FRAX_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
   const [{ data: threePool }] = useBalance({
-    addressOrName: THREE_POOL_TOKEN_CONTRACT
+    token: THREE_POOL_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
   const [{ data: frax3Pool }] = useBalance({
-    addressOrName: FRAX_3POOL_TOKEN_CONTRACT
+    token: FRAX_3POOL_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
   const [{ data: ksm }] = useBalance({
-    addressOrName: TWO_KSM_TOKEN_CONTRACT
+    token: TWO_KSM_TOKEN_CONTRACT,
+    addressOrName: account?.address
   })
 
   const getBalance = (token: string) => {

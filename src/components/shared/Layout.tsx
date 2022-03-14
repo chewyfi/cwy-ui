@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Head from 'next/head'
 import React, { useState } from 'react'
 
@@ -14,11 +15,15 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
       <Head>
         <title>Chewy</title>
       </Head>
-      <WalletModal
-        show={showWalletModal}
-        onClose={() => setShowWalletModal(false)}
-      />
-      <div className="flex h-full gap-5 px-3">
+      <div
+        className={clsx('flex h-full gap-5 px-3', {
+          'overflow-hidden': showWalletModal
+        })}
+      >
+        <WalletModal
+          show={showWalletModal}
+          onClose={() => setShowWalletModal(false)}
+        />
         <Sidebar />
         <div className="w-full pl-[calc(11rem)]">
           <Header setShowWalletModal={setShowWalletModal} />

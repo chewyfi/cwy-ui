@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
   const [showWalletModal, setShowWalletModal] = useState(false)
 
   return (
-    <div className="container h-screen max-w-6xl mx-auto">
+    <div className="container max-w-6xl mx-auto mb-4">
       <Head>
         <title>Chewy</title>
       </Head>

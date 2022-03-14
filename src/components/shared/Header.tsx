@@ -1,15 +1,16 @@
 import clsx from 'clsx'
-import React, { useState } from 'react'
+import React from 'react'
 import toast from 'react-hot-toast'
 import { shortenAddress } from 'src/utils/helpers'
 import { useAccount, useNetwork } from 'wagmi'
 
 import ChevronDown from '../icons/ChevronDown'
-import WalletModal from '../WalletModal'
 
-const Header = () => {
-  const [showWalletModal, setShowWalletModal] = useState(false)
-
+const Header = ({
+  setShowWalletModal
+}: {
+  setShowWalletModal: React.Dispatch<boolean>
+}) => {
   const [{ data: network }, switchNetwork] = useNetwork()
   const [{ data: accountData }] = useAccount()
 
@@ -67,10 +68,6 @@ const Header = () => {
             )}
           </button>
         </div>
-        <WalletModal
-          show={showWalletModal}
-          onClose={() => setShowWalletModal(false)}
-        />
       </div>
     </div>
   )

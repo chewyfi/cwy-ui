@@ -11,15 +11,15 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
   const [showWalletModal, setShowWalletModal] = useState(false)
 
   return (
-    <div className="container max-w-6xl mx-auto mb-4">
+    <div
+      className={clsx('container max-w-6xl mx-auto mb-4', {
+        'overflow-hidden h-screen mb-0': showWalletModal
+      })}
+    >
       <Head>
         <title>Chewy</title>
       </Head>
-      <div
-        className={clsx('flex h-full gap-5 px-3', {
-          'overflow-hidden': showWalletModal
-        })}
-      >
+      <div className={clsx('flex h-full gap-5 px-3')}>
         <WalletModal
           show={showWalletModal}
           onClose={() => setShowWalletModal(false)}

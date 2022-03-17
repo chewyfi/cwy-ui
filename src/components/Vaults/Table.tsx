@@ -225,7 +225,7 @@ const Table = () => {
                 <div className="flex space-x-2">
                   <div className="mt-1 mb-3 text-gray-500">
                     <label className="mb-1 text-[11px]">
-                      Balance: {getBalance(item.name)} {item.name} LP
+                      Balance: {getBalance(item.name)} {item.name}
                     </label>
                     <div className="flex items-center text-[12px]">
                       <input
@@ -243,7 +243,7 @@ const Table = () => {
                   </div>
                   <div className="mt-1 mb-3 text-gray-500">
                     <label className="mb-1 text-[11px]">
-                      Deposited: 0 MOVR LP
+                      Deposited: 0 {item.name}
                     </label>
                     <div className="flex items-center text-[12px]">
                       <input

@@ -68,7 +68,8 @@ const APYS = [
     tvl: '$0',
     holdings: '--',
     isOpen: false,
-    suffix: 'LP'
+    suffix: 'LP',
+    getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/3pool'
   },
   {
     icon: '/static/tokens/frax3pool.svg',
@@ -77,16 +78,18 @@ const APYS = [
     tvl: '$0',
     holdings: '--',
     isOpen: false,
-    suffix: 'LP'
+    suffix: 'LP',
+    getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/frax-3pool'
   },
   {
     icon: '/static/tokens/2ksm.svg',
-    name: 'KSM',
+    name: 'solarstKSM',
     apy: '8.823%',
     tvl: '$0',
     holdings: '--',
     isOpen: false,
-    suffix: 'LP'
+    suffix: 'LP',
+    getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm'
   }
 ]
 
@@ -125,7 +128,7 @@ const Table = () => {
     token: FRAX_3POOL_TOKEN_CONTRACT,
     addressOrName: account?.address
   })
-  const [{ data: ksm }] = useBalance({
+  const [{ data: solarstKSM }] = useBalance({
     token: TWO_KSM_TOKEN_CONTRACT,
     addressOrName: account?.address
   })
@@ -148,8 +151,8 @@ const Table = () => {
         return threePool?.formatted
       case 'solar3FRAX':
         return frax3Pool?.formatted
-      case 'KSM':
-        return ksm?.formatted
+      case 'solarstKSM':
+        return solarstKSM?.formatted
     }
   }
   const toggleDisclosure = (index: number) => {
@@ -206,7 +209,19 @@ const Table = () => {
                     src={item.icon}
                   />
                 </span>
-                <span className="w-1/5">{item.name}</span>
+                <span className="flex items-center w-1/5">
+                  {item.name}
+                  {item.getSomeUrl && (
+                    <a
+                      className="ml-2 text-xs text-gray-500 underline"
+                      href={item.getSomeUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Get some
+                    </a>
+                  )}
+                </span>
                 <span className="w-1/5">{item.apy}</span>
                 <span className="w-1/5">{item.tvl}</span>
                 <span className="w-1/5">{item.holdings}</span>

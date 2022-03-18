@@ -14,7 +14,7 @@ const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL as string
 const supportedChains = [
   {
     id: 1285,
-    name: 'Moon River',
+    name: 'Moonriver',
     // nativeCurrency: { name: 'Moonriver', symbol: 'MOVR', decimal: 18 },
     rpcUrls: [rpcUrl],
     blockExplorers: [

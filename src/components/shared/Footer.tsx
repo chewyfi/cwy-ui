@@ -9,9 +9,9 @@ import {
 
 const Footer = () => {
   return (
-    <div className="flex px-20 py-10 bg-white rounded-lg shadow-sm">
+    <div className="flex px-20 h-[10rem] bg-white rounded-lg shadow-sm">
       <div className="flex items-center space-x-10">
-        <ul className="flex items-center space-x-6 text-[12px] text-gray-500">
+        <ul className="flex items-center space-x-4 text-[12px] text-gray-500">
           <li>
             <Link href={CWY_TWITTER_URL}>
               <a target="_blank" rel="noreferrer">

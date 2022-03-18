@@ -15,10 +15,10 @@ const Sidebar = () => {
         <img src="/chewy-header-logo.svg" className="h-6" alt="" />
       </div>
       <ul className="space-y-2 p-3 text-[19px]">
-        <li>
+        <li className="mt-1">
           <Link href={HOME}>
             <a
-              className={clsx('font-medium hover:opacity-100', {
+              className={clsx('font-semibold hover:opacity-100', {
                 'opacity-100': isActivePath(HOME),
                 'opacity-40': !isActivePath(HOME)
               })}

@@ -67,7 +67,8 @@ const APYS = [
     apy: '3.823%',
     tvl: '$0',
     holdings: '--',
-    isOpen: false
+    isOpen: false,
+    suffix: 'LP'
   },
   {
     icon: '/static/tokens/frax3pool.svg',
@@ -75,7 +76,8 @@ const APYS = [
     apy: '48.823%',
     tvl: '$0',
     holdings: '--',
-    isOpen: false
+    isOpen: false,
+    suffix: 'LP'
   },
   {
     icon: '/static/tokens/2ksm.svg',
@@ -83,7 +85,8 @@ const APYS = [
     apy: '8.823%',
     tvl: '$0',
     holdings: '--',
-    isOpen: false
+    isOpen: false,
+    suffix: 'LP'
   }
 ]
 
@@ -225,7 +228,7 @@ const Table = () => {
                 <div className="flex space-x-2">
                   <div className="mt-1 mb-3 text-gray-500">
                     <label className="mb-1 text-[11px]">
-                      Balance: {getBalance(item.name)} {item.name}
+                      Balance: {getBalance(item.name)} {item.name} {item.suffix}
                     </label>
                     <div className="flex items-center text-[12px]">
                       <input
@@ -243,7 +246,7 @@ const Table = () => {
                   </div>
                   <div className="mt-1 mb-3 text-gray-500">
                     <label className="mb-1 text-[11px]">
-                      Deposited: 0 {item.name}
+                      Deposited: 0 {item.name} {item.suffix}
                     </label>
                     <div className="flex items-center text-[12px]">
                       <input

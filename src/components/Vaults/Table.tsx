@@ -172,7 +172,7 @@ const Table = () => {
       <div className="w-full">
         <div className="text-[15px] flex py-3 px-2 items-center w-full font-medium">
           <span className="w-16"></span>
-          <span className="flex items-center w-1/5">
+          <span className="flex items-center w-2/5">
             Name
             <img className="h-3 ml-3" src="/static/down-arrow.svg" alt="" />
           </span>
@@ -185,7 +185,7 @@ const Table = () => {
             <img className="h-3 ml-3" src="/static/down-arrow.svg" alt="" />
           </span>
           <span className="w-1/5">Holdings</span>
-          <span className="w-1/5"></span>
+          {/* <span className="w-1/5"></span> */}
         </div>
       </div>
       <div>
@@ -209,7 +209,7 @@ const Table = () => {
                     src={item.icon}
                   />
                 </span>
-                <span className="flex items-center w-1/5">
+                <span className="flex items-center w-2/5">
                   {item.name}
                   {item.getSomeUrl && (
                     <a
@@ -225,14 +225,14 @@ const Table = () => {
                 <span className="w-1/5">{item.apy}</span>
                 <span className="w-1/5">{item.tvl}</span>
                 <span className="w-1/5">{item.holdings}</span>
-                <span className="w-1/5 text-[14px] text-right">
+                {/* <span className="w-1/5 text-[14px] text-right">
                   <button
                     onClick={(e) => e.stopPropagation()}
                     className="inline-block p-0.5 px-6 font-semibold tracking-wider border border-black rounded-md"
                   >
                     Deposit
                   </button>
-                </span>
+                </span> */}
               </div>
             </Disclosure.Button>
             {item.isOpen && (

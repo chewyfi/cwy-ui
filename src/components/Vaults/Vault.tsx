@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import React, { useState } from 'react'
 
 import { poolAddresses } from '../../chain-info/pool-addresses'
-import { AccountBalance } from './AccountBalance'
+import { PoolInfo } from './Pool-Info'
 
 interface Props {
   item: any
@@ -159,7 +159,7 @@ export const Vault: React.FC<Props> = ({ item, index, setApyList }) => {
           static
           className="px-2 text-sm bg-gray-100 rounded-b-lg"
         >
-          <AccountBalance name={item.name} />
+          <PoolInfo name={item.name} />
         </Disclosure.Panel>
       )}
     </Disclosure>

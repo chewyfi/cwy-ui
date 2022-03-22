@@ -1,5 +1,7 @@
-import { useAccount, useBalance } from 'wagmi'
+import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
 
+import normalAbi from '../../chain-info/abis/normalAbi.json'
+import { poolAddresses } from '../../chain-info/pool-addresses'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
   FRAX_TOKEN_CONTRACT,
@@ -16,7 +18,20 @@ interface Props {
   suffix: string
 }
 
-export const AccountBalance = (name) => {
+const contractMappings = {
+  MOVR: poolAddresses['MoonbeamMOVR'],
+  WETH: poolAddresses['MoonbeamETH'],
+  WBTC: poolAddresses['MoonbeamBTCSupplyOnly'],
+  USDC: poolAddresses['MoonbeamUSDC'],
+  FRAX: poolAddresses['MoonbeamFRAX'],
+  USDT: poolAddresses['MoonbeamUSDT'],
+  solar3POOL: poolAddresses['Solarbeam3pool'],
+  solar3FRAX: poolAddresses['SolarbeamFrax3pool'],
+  solarstKSM: poolAddresses['SolarbeamstKSMpool']
+}
+
+export const PoolInfo = (name) => {
+  const provider = useProvider()
   const getBalance = (token: string) => {
     switch (token) {
       case 'MOVR':
@@ -38,6 +53,22 @@ export const AccountBalance = (name) => {
       case 'solarstKSM':
         return solarstKSM?.formatted
     }
+  }
+  console.log('CONTRACT AT NAME ', contractMappings[name['name']])
+  const [{ data, error, loading }, writeApprove] = useContractWrite(
+    {
+      addressOrName: contractMappings[name['name']]['Want'],
+      contractInterface: normalAbi,
+      signerOrProvider: provider
+    },
+    'approve',
+    {
+      args: [contractMappings[name['name']]['Vault'], (10 ** 20).toString()]
+    }
+  )
+
+  const approve = async () => {
+    await writeApprove()
   }
 
   const [{ data: account }] = useAccount()
@@ -94,7 +125,7 @@ export const AccountBalance = (name) => {
           </button>
         </div>
         <button
-          // onClick={() => approve(item.contracts, provider)}
+          onClick={() => approve()}
           className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
         >
           Approve

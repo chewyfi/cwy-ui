@@ -10,9 +10,9 @@ import {
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
-import { useAccount, useBalance } from 'wagmi'
+import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
 import { poolAddresses } from '../../chain-info/pool-addresses'
-
+import normalAbi from '../../chain-info/abis/normalAbi.json'
 const APYS = [
   {
     icon: '/static/tokens/movr.svg',
@@ -104,6 +104,26 @@ const APYS = [
 ]
 
 const Table = () => {
+  const approve = async (contracts, provider) => {
+    console.log('Approve clicked!')
+    await writeApprove()
+    console.log(data2, error2, loading2)
+  }
+  const provider = useProvider()
+
+  const [{ data: data2, error: error2, loading: loading2 }, writeApprove] =
+    useContractWrite(
+      {
+        addressOrName: poolAddresses['MoonbeamFRAX']['Want'],
+        contractInterface: normalAbi,
+        signerOrProvider: provider
+      },
+      'approve',
+      {
+        args: [poolAddresses['MoonbeamFRAX']['Vault'], (10 ** 20).toString()]
+      }
+    )
+
   const [apyList, setApyList] = useState(APYS)
   const [{ data: account }] = useAccount()
 
@@ -265,7 +285,10 @@ const Table = () => {
                         max
                       </button>
                     </div>
-                    <button className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg">
+                    <button
+                      onClick={() => approve(item.contracts, provider)}
+                      className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
+                    >
                       Approve
                     </button>
                   </div>

@@ -102,8 +102,8 @@ const APYS = [
 export const Vault: React.FC<Props> = ({ item, index, setApyList }) => {
   const toggleDisclosure = (index: number) => {
     let apys = apyList
-    apys.map((item, index) => {
-      if (index === index) {
+    apys.map((item, idx) => {
+      if (index === idx) {
         item.isOpen = !item.isOpen
       } else {
         item.isOpen = false

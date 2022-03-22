@@ -95,18 +95,6 @@ const APYS = [
 const Table = () => {
   const [apyList, setApyList] = useState(APYS)
 
-  const toggleDisclosure = (index: number) => {
-    let apys = apyList
-    apys.map((item, idx) => {
-      if (idx === index) {
-        item.isOpen = !item.isOpen
-      } else {
-        item.isOpen = false
-      }
-    })
-    setApyList(JSON.parse(JSON.stringify(apys)))
-  }
-
   return (
     <div className="w-full my-4">
       <TableHeader />

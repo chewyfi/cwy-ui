@@ -107,22 +107,23 @@ const Table = () => {
   const approve = async (contracts, provider) => {
     console.log('Approve clicked!')
     await writeApprove()
-    console.log(data2, error2, loading2)
+    console.log(`Data ${data} Error ${error} Loading ${loading}`)
   }
   const provider = useProvider()
 
-  const [{ data: data2, error: error2, loading: loading2 }, writeApprove] =
-    useContractWrite(
-      {
-        addressOrName: poolAddresses['MoonbeamFRAX']['Want'],
-        contractInterface: normalAbi,
-        signerOrProvider: provider
-      },
-      'approve',
-      {
-        args: [poolAddresses['MoonbeamFRAX']['Vault'], (10 ** 20).toString()]
-      }
-    )
+  const [{ data, error, loading }, writeApprove] = useContractWrite(
+    {
+      addressOrName: poolAddresses['MoonbeamFRAX']['Want'],
+      contractInterface: normalAbi,
+      signerOrProvider: provider
+    },
+    'approve',
+    {
+      args: [poolAddresses['MoonbeamFRAX']['Vault'], (10 ** 20).toString()]
+    }
+  )
+
+  console.log(`Outside func Data ${data} Error ${error} Loading ${loading}`)
 
   const [apyList, setApyList] = useState(APYS)
   const [{ data: account }] = useAccount()

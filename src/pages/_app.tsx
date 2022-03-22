@@ -10,7 +10,7 @@ import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL as string
-console.log('RPC URL ', rpcUrl)
+
 const supportedChains = [
   {
     id: 1285,
@@ -49,7 +49,12 @@ console.log('provider ', provider)
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
-      <Provider provider={provider}>
+      <Provider
+        autoConnect
+        connectorStorageKey="chewy.wallet"
+        connectors={connectors}
+        provider={provider}
+      >
         <Toaster position="bottom-left" />
         <Component {...pageProps} />
       </Provider>

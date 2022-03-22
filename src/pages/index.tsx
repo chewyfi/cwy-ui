@@ -1,6 +1,6 @@
 import SearchIcon from 'src/components/icons/SearchIcon'
 import Layout from 'src/components/shared/Layout'
-import Table from 'src/components/Vaults/Table'
+import Table from 'src/components/Vaults/TableVaults'
 
 export default function Home() {
   return (

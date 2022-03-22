@@ -1,5 +1,3 @@
-import { Disclosure } from '@headlessui/react'
-import clsx from 'clsx'
 import React, { useState } from 'react'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
@@ -11,8 +9,10 @@ import {
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
 import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
-import { poolAddresses } from '../../chain-info/pool-addresses'
+
 import normalAbi from '../../chain-info/abis/normalAbi.json'
+import { poolAddresses } from '../../chain-info/pool-addresses'
+import { Vault } from './Vault'
 const APYS = [
   {
     icon: '/static/tokens/movr.svg',
@@ -126,6 +126,7 @@ const Table = () => {
   console.log(`Outside func Data ${data} Error ${error} Loading ${loading}`)
 
   const [apyList, setApyList] = useState(APYS)
+
   const [{ data: account }] = useAccount()
 
   const [{ data: movr }] = useBalance({
@@ -221,100 +222,12 @@ const Table = () => {
       </div>
       <div>
         {apyList.map((item, idx) => (
-          <Disclosure key={idx}>
-            <Disclosure.Button
-              as="div"
-              className={clsx('py-3 px-2 rounded-lg hover:bg-gray-100', {
-                'bg-gray-100 rounded-b-none': item.isOpen
-              })}
-            >
-              <div
-                onClick={() => toggleDisclosure(idx)}
-                className="flex items-center w-full cursor-pointer"
-              >
-                <span className="w-16">
-                  <img
-                    alt=""
-                    draggable={false}
-                    className="w-8 h-8"
-                    src={item.icon}
-                  />
-                </span>
-                <span className="flex items-center w-2/5">
-                  {item.name}
-                  {item.getSomeUrl && (
-                    <a
-                      className="ml-2 text-xs text-gray-500 underline"
-                      href={item.getSomeUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Get some
-                    </a>
-                  )}
-                </span>
-                <span className="w-1/5">{item.apy}</span>
-                <span className="w-1/5">{item.tvl}</span>
-                <span className="w-1/5">{item.holdings}</span>
-                {/* <span className="w-1/5 text-[14px] text-right">
-                  <button
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-block p-0.5 px-6 font-semibold tracking-wider border border-black rounded-md"
-                  >
-                    Deposit
-                  </button>
-                </span> */}
-              </div>
-            </Disclosure.Button>
-            {item.isOpen && (
-              <Disclosure.Panel
-                static
-                className="px-2 text-sm bg-gray-100 rounded-b-lg"
-              >
-                <div className="flex space-x-2">
-                  <div className="mt-1 mb-3 text-gray-500">
-                    <label className="mb-1 text-[11px]">
-                      Balance: {getBalance(item.name)} {item.name} {item.suffix}
-                    </label>
-                    <div className="flex items-center text-[12px]">
-                      <input
-                        type="number"
-                        placeholder="0.0"
-                        className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
-                      />
-                      <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
-                        max
-                      </button>
-                    </div>
-                    <button
-                      onClick={() => approve(item.contracts, provider)}
-                      className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
-                    >
-                      Approve
-                    </button>
-                  </div>
-                  <div className="mt-1 mb-3 text-gray-500">
-                    <label className="mb-1 text-[11px]">
-                      Deposited: 0 {item.name} {item.suffix}
-                    </label>
-                    <div className="flex items-center text-[12px]">
-                      <input
-                        type="number"
-                        placeholder="0.0"
-                        className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
-                      />
-                      <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
-                        max
-                      </button>
-                    </div>
-                    <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
-                      Withdraw
-                    </button>
-                  </div>
-                </div>
-              </Disclosure.Panel>
-            )}
-          </Disclosure>
+          <Vault
+            key={idx}
+            item={item}
+            idx={idx}
+            balance={getBalance(item.name)}
+          />
         ))}
       </div>
     </div>

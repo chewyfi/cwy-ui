@@ -1,17 +1,6 @@
 import React, { useState } from 'react'
-import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
 
-import normalAbi from '../../chain-info/abis/normalAbi.json'
 import { poolAddresses } from '../../chain-info/pool-addresses'
-import {
-  FRAX_3POOL_TOKEN_CONTRACT,
-  FRAX_TOKEN_CONTRACT,
-  THREE_POOL_TOKEN_CONTRACT,
-  TWO_KSM_TOKEN_CONTRACT,
-  USDT_TOKEN_CONTRACT,
-  WBTC_TOKEN_CONTRACT,
-  WETH_TOKEN_CONTRACT
-} from '../../utils/constants'
 import { TableHeader } from './TableHeader'
 import { Vault } from './Vault'
 const APYS = [
@@ -103,91 +92,9 @@ const APYS = [
     contracts: poolAddresses['SolarbeamstKSMpool']
   }
 ]
-
 const Table = () => {
-  const approve = async (contracts, provider) => {
-    console.log('Approve clicked!')
-    await writeApprove()
-    console.log(`Data ${data} Error ${error} Loading ${loading}`)
-  }
-  const provider = useProvider()
-
-  const [{ data, error, loading }, writeApprove] = useContractWrite(
-    {
-      addressOrName: poolAddresses['MoonbeamFRAX']['Want'],
-      contractInterface: normalAbi,
-      signerOrProvider: provider
-    },
-    'approve',
-    {
-      args: [poolAddresses['MoonbeamFRAX']['Vault'], (10 ** 20).toString()]
-    }
-  )
-
-  console.log(`Outside func Data ${data} Error ${error} Loading ${loading}`)
-
   const [apyList, setApyList] = useState(APYS)
 
-  const [{ data: account }] = useAccount()
-
-  const [{ data: movr }] = useBalance({
-    addressOrName: account?.address
-  })
-  const [{ data: weth }] = useBalance({
-    token: WETH_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: wbtc }] = useBalance({
-    token: WBTC_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: usdc }] = useBalance({
-    token: WBTC_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: usdt }] = useBalance({
-    token: USDT_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: frax }] = useBalance({
-    token: FRAX_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: threePool }] = useBalance({
-    token: THREE_POOL_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: frax3Pool }] = useBalance({
-    token: FRAX_3POOL_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: solarstKSM }] = useBalance({
-    token: TWO_KSM_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-
-  const getBalance = (token: string) => {
-    switch (token) {
-      case 'MOVR':
-        return movr?.formatted
-      case 'WETH':
-        return weth?.formatted
-      case 'WBTC':
-        return wbtc?.formatted
-      case 'USDC':
-        return usdc?.formatted
-      case 'FRAX':
-        return frax?.formatted
-      case 'USDT':
-        return usdt?.formatted
-      case 'solar3POOL':
-        return threePool?.formatted
-      case 'solar3FRAX':
-        return frax3Pool?.formatted
-      case 'solarstKSM':
-        return solarstKSM?.formatted
-    }
-  }
   const toggleDisclosure = (index: number) => {
     let apys = apyList
     apys.map((item, idx) => {
@@ -206,14 +113,11 @@ const Table = () => {
       <div>
         {apyList.map((item, index) => (
           <Vault
+            setApyList={setApyList}
             key={index}
             item={item}
             index={index}
-            balance={getBalance(item.name)}
-          >
-            {' '}
-            {console.log('INDEX 5', index)}
-          </Vault>
+          />
         ))}
       </div>
     </div>

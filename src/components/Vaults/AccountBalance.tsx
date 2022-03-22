@@ -17,8 +17,6 @@ interface Props {
 }
 
 export const AccountBalance = (name) => {
-  console.log('NAME ', JSON.stringify(name))
-
   const getBalance = (token: string) => {
     switch (token) {
       case 'MOVR':

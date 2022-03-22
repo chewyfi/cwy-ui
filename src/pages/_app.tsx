@@ -44,8 +44,6 @@ const provider = () =>
     name: 'moonriver'
   })
 
-console.log('provider ', provider)
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>

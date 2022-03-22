@@ -1,11 +1,15 @@
 import { Disclosure } from '@headlessui/react'
 import clsx from 'clsx'
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { poolAddresses } from '../../chain-info/pool-addresses'
 import { AccountBalance } from './AccountBalance'
 
+interface Props {
+  item: any
+  index: number
+  setApyList: any
+}
 const APYS = [
   {
     icon: '/static/tokens/movr.svg',
@@ -95,14 +99,7 @@ const APYS = [
     contracts: poolAddresses['SolarbeamstKSMpool']
   }
 ]
-
-interface Props {
-  item: any
-  index: number
-  balance: string | number
-}
-export const Vault: React.FC<Props> = ({ item, index, balance }) => {
-  const [apyList, setApyList] = useState(APYS)
+export const Vault: React.FC<Props> = ({ item, index, setApyList }) => {
   const toggleDisclosure = (index: number) => {
     let apys = apyList
     apys.map((item, index) => {
@@ -114,6 +111,7 @@ export const Vault: React.FC<Props> = ({ item, index, balance }) => {
     })
     setApyList(JSON.parse(JSON.stringify(apys)))
   }
+  const [apyList, _] = useState(APYS)
 
   return (
     <Disclosure key={index}>
@@ -156,7 +154,7 @@ export const Vault: React.FC<Props> = ({ item, index, balance }) => {
         </span> */}
         </div>
       </Disclosure.Button>
-      {true && (
+      {item.isOpen && (
         <Disclosure.Panel
           static
           className="px-2 text-sm bg-gray-100 rounded-b-lg"

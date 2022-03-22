@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
+
+import normalAbi from '../../chain-info/abis/normalAbi.json'
+import { poolAddresses } from '../../chain-info/pool-addresses'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
   FRAX_TOKEN_CONTRACT,
@@ -7,11 +11,7 @@ import {
   USDT_TOKEN_CONTRACT,
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
-} from 'src/utils/constants'
-import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
-
-import normalAbi from '../../chain-info/abis/normalAbi.json'
-import { poolAddresses } from '../../chain-info/pool-addresses'
+} from '../../utils/constants'
 import { TableHeader } from './TableHeader'
 import { Vault } from './Vault'
 const APYS = [
@@ -204,13 +204,16 @@ const Table = () => {
     <div className="w-full my-4">
       <TableHeader />
       <div>
-        {apyList.map((item, idx) => (
+        {apyList.map((item, index) => (
           <Vault
-            key={idx}
+            key={index}
             item={item}
-            idx={idx}
+            index={index}
             balance={getBalance(item.name)}
-          />
+          >
+            {' '}
+            {console.log('INDEX 5', index)}
+          </Vault>
         ))}
       </div>
     </div>

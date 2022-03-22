@@ -95,13 +95,17 @@ const APYS = [
   }
 ]
 
-export const Vault = (item, idx, balance) => {
-  item = item['item']
+interface Props {
+  item: any
+  index: number
+  balance: string | number
+}
+export const Vault: React.FC<Props> = ({ item, index, balance }) => {
   const [apyList, setApyList] = useState(APYS)
   const toggleDisclosure = (index: number) => {
     let apys = apyList
-    apys.map((item, idx) => {
-      if (idx === index) {
+    apys.map((item, index) => {
+      if (index === index) {
         item.isOpen = !item.isOpen
       } else {
         item.isOpen = false
@@ -111,15 +115,15 @@ export const Vault = (item, idx, balance) => {
   }
 
   return (
-    <Disclosure key={idx}>
+    <Disclosure key={index}>
       <Disclosure.Button
         as="div"
         className={clsx('py-3 px-2 rounded-lg hover:bg-gray-100', {
-          'bg-gray-100 rounded-b-none': item.isOpen
+          'bg-gray-100 rounded-b-none': false
         })}
       >
         <div
-          onClick={() => toggleDisclosure(idx)}
+          onClick={() => toggleDisclosure(index)}
           className="flex items-center w-full cursor-pointer"
         >
           <span className="w-16">

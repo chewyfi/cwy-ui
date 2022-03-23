@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
 
 import normalAbi from '../../chain-info/abis/normalAbi.json'
@@ -30,48 +31,13 @@ const contractMappings = {
   solarstKSM: poolAddresses['SolarbeamstKSMpool']
 }
 
-export const PoolInfo = (name) => {
+export const PoolInfo = (name: any) => {
+  const [depositAmount, setDepositAmount] = useState(0)
+  const [withdrawAmount, setWithdrawAmount] = useState(0)
   const provider = useProvider()
-  const getBalance = (token: string) => {
-    switch (token) {
-      case 'MOVR':
-        return movr?.formatted
-      case 'WETH':
-        return weth?.formatted
-      case 'WBTC':
-        return wbtc?.formatted
-      case 'USDC':
-        return usdc?.formatted
-      case 'FRAX':
-        return frax?.formatted
-      case 'USDT':
-        return usdt?.formatted
-      case 'solar3POOL':
-        return threePool?.formatted
-      case 'solar3FRAX':
-        return frax3Pool?.formatted
-      case 'solarstKSM':
-        return solarstKSM?.formatted
-    }
-  }
-  console.log('CONTRACT AT NAME ', contractMappings[name['name']])
-  const [{ data, error, loading }, writeApprove] = useContractWrite(
-    {
-      addressOrName: contractMappings[name['name']]['Want'],
-      contractInterface: normalAbi,
-      signerOrProvider: provider
-    },
-    'approve',
-    {
-      args: [contractMappings[name['name']]['Vault'], (10 ** 20).toString()]
-    }
-  )
-
-  const approve = async () => {
-    await writeApprove()
-  }
-
   const [{ data: account }] = useAccount()
+  console.log('ACCOUNT ', account)
+
   const [{ data: movr }] = useBalance({
     addressOrName: account?.address
   })
@@ -108,6 +74,74 @@ export const PoolInfo = (name) => {
     addressOrName: account?.address
   })
 
+  const getBalance = (token: string) => {
+    switch (token) {
+      case 'MOVR':
+        return movr?.formatted
+      case 'WETH':
+        return weth?.formatted
+      case 'WBTC':
+        return wbtc?.formatted
+      case 'USDC':
+        return usdc?.formatted
+      case 'FRAX':
+        return frax?.formatted
+      case 'USDT':
+        return usdt?.formatted
+      case 'solar3POOL':
+        return threePool?.formatted
+      case 'solar3FRAX':
+        return frax3Pool?.formatted
+      case 'solarstKSM':
+        return solarstKSM?.formatted
+    }
+  }
+  console.log('CONTRACT AT NAME ', contractMappings[name['name']])
+  const [{ data, error, loading }, writeApprove] = useContractWrite(
+    {
+      addressOrName: contractMappings[name['name']]['Want'],
+      contractInterface: normalAbi,
+      signerOrProvider: provider
+    },
+    'approve',
+    {
+      args: [contractMappings[name['name']]['Vault'], (10 ** 20).toString()]
+    }
+  )
+
+  const [{ data: _1, error: _2, loading: _3 }, writeDeposit] = useContractWrite(
+    {
+      addressOrName: contractMappings[name['name']]['Vault'],
+      contractInterface: normalAbi,
+      signerOrProvider: provider
+    },
+    'deposit',
+    {
+      args: [10 ** 5]
+    }
+  )
+
+  const withdrawAll = async () => {
+    await writeWithdrawAll()
+  }
+
+  const [{ data: data1, error: error1, loading: loading1 }, writeWithdrawAll] =
+    useContractWrite(
+      {
+        addressOrName: contractMappings[name['name']]['Vault'],
+        contractInterface: normalAbi,
+        signerOrProvider: provider
+      },
+      'withdrawAll'
+    )
+
+  console.log(`Data ${data} Error ${error} loading ${loading}`)
+
+  const approve = async () => {
+    await writeApprove()
+    await writeDeposit()
+  }
+
   return (
     <div className="flex space-x-2">
       <div className="mt-1 mb-3 text-gray-500">
@@ -116,8 +150,9 @@ export const PoolInfo = (name) => {
         </label>
         <div className="flex items-center text-[12px]">
           <input
+            value={depositAmount}
             type="number"
-            placeholder="0.0"
+            onChange={(e) => setDepositAmount(parseInt(e.target.value))}
             className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
           />
           <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
@@ -135,15 +170,19 @@ export const PoolInfo = (name) => {
         <label className="mb-1 text-[11px]">Deposited: 0</label>
         <div className="flex items-center text-[12px]">
           <input
+            value={withdrawAmount}
+            onChange={(e) => setWithdrawAmount(parseInt(e.target.value))}
             type="number"
-            placeholder="0.0"
             className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
           />
           <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
             max
           </button>
         </div>
-        <button className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg">
+        <button
+          onClick={withdrawAll}
+          className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg"
+        >
           Withdraw
         </button>
       </div>

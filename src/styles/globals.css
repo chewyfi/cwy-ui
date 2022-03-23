@@ -13,7 +13,7 @@
 
 body {
   font-family: 'Metropolis', 'system-ui', monospace;
-  @apply bg-white scroll-smooth min-h-screen overflow-y-scroll;
+  @apply bg-gray-100 scroll-smooth min-h-screen overflow-y-scroll;
 }
 
 .primary-outline {

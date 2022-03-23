@@ -13,12 +13,6 @@ import {
   WETH_TOKEN_CONTRACT
 } from '../../utils/constants'
 
-interface Props {
-  balance: string | number
-  name: string
-  suffix: string
-}
-
 const contractMappings = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
   WETH: { contract: poolAddresses['MoonbeamETH'], decimals: 18 },
@@ -31,12 +25,17 @@ const contractMappings = {
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
-export const PoolInfo = (name: any) => {
-  const [depositAmount, setDepositAmount] = useState(0)
-  const [withdrawAmount, setWithdrawAmount] = useState(0)
+interface Props {
+  name: any
+}
+
+export const PoolInfo: React.FC<Props> = ({ name }) => {
+  const [depositAmount, setDepositAmount] = useState('1.0')
+  const [withdrawAmount, setWithdrawAmount] = useState('1.0')
   const provider = useProvider()
   const [{ data: account }] = useAccount()
   console.log('ACCOUNT ', account)
+  console.log('NAME ', name)
 
   const [{ data: movr }] = useBalance({
     addressOrName: account?.address
@@ -96,31 +95,37 @@ export const PoolInfo = (name: any) => {
         return solarstKSM?.formatted
     }
   }
-  console.log('CONTRACT AT NAME ', contractMappings[name['name']]['contract'])
+  console.log('CONTRACT AT NAME ', contractMappings[name]['contract'])
   const [{ data, error, loading }, writeApprove] = useContractWrite(
     {
-      addressOrName: contractMappings[name['name']]['contract']['Want'],
+      addressOrName: contractMappings[name]['contract']['Want'],
       contractInterface: normalAbi,
       signerOrProvider: provider
     },
     'approve',
     {
       args: [
-        contractMappings[name['name']]['contract']['Vault'],
-        (10 ** 20).toString()
+        contractMappings[name]['contract']['Vault'],
+        BigInt(
+          parseFloat(depositAmount) * 10 ** contractMappings[name]['decimals']
+        )
       ]
     }
   )
 
   const [{ data: _1, error: _2, loading: _3 }, writeDeposit] = useContractWrite(
     {
-      addressOrName: contractMappings[name['name']]['contract']['Vault'],
+      addressOrName: contractMappings[name]['contract']['Vault'],
       contractInterface: normalAbi,
       signerOrProvider: provider
     },
     'deposit',
     {
-      args: [10 ** 5]
+      args: [
+        BigInt(
+          parseFloat(depositAmount) * 10 ** contractMappings[name]['decimals']
+        )
+      ]
     }
   )
 
@@ -131,7 +136,7 @@ export const PoolInfo = (name: any) => {
   const [{ data: data1, error: error1, loading: loading1 }, writeWithdrawAll] =
     useContractWrite(
       {
-        addressOrName: contractMappings[name['name']]['contract']['Vault'],
+        addressOrName: contractMappings[name]['contract']['Vault'],
         contractInterface: normalAbi,
         signerOrProvider: provider
       },
@@ -155,7 +160,9 @@ export const PoolInfo = (name: any) => {
           <input
             value={depositAmount}
             type="number"
-            onChange={(e) => setDepositAmount(parseInt(e.target.value))}
+            step="0.1"
+            min="0"
+            onChange={(e) => setDepositAmount(e.target.value)}
             className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
           />
           <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
@@ -173,6 +180,8 @@ export const PoolInfo = (name: any) => {
         <label className="mb-1 text-[11px]">Deposited: 0</label>
         <div className="flex items-center text-[12px]">
           <input
+            step="0.01"
+            min="0"
             value={withdrawAmount}
             onChange={(e) => setWithdrawAmount(parseInt(e.target.value))}
             type="number"

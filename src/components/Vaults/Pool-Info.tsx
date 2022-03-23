@@ -20,15 +20,15 @@ interface Props {
 }
 
 const contractMappings = {
-  MOVR: poolAddresses['MoonbeamMOVR'],
-  WETH: poolAddresses['MoonbeamETH'],
-  WBTC: poolAddresses['MoonbeamBTCSupplyOnly'],
-  USDC: poolAddresses['MoonbeamUSDC'],
-  FRAX: poolAddresses['MoonbeamFRAX'],
-  USDT: poolAddresses['MoonbeamUSDT'],
-  solar3POOL: poolAddresses['Solarbeam3pool'],
-  solar3FRAX: poolAddresses['SolarbeamFrax3pool'],
-  solarstKSM: poolAddresses['SolarbeamstKSMpool']
+  MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
+  WETH: { contract: poolAddresses['MoonbeamETH'], decimals: 18 },
+  WBTC: { contract: poolAddresses['MoonbeamBTCSupplyOnly'], decimals: 8 },
+  USDC: { contract: poolAddresses['MoonbeamUSDC'], decimals: 6 },
+  FRAX: { contract: poolAddresses['MoonbeamFRAX'], decimals: 18 },
+  USDT: { contract: poolAddresses['MoonbeamUSDT'], decimals: 6 },
+  solar3POOL: { contract: poolAddresses['Solarbeam3pool'], decimals: 18 },
+  solar3FRAX: { contract: poolAddresses['SolarbeamFrax3pool'], decimals: 18 },
+  solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
 export const PoolInfo = (name: any) => {
@@ -96,22 +96,25 @@ export const PoolInfo = (name: any) => {
         return solarstKSM?.formatted
     }
   }
-  console.log('CONTRACT AT NAME ', contractMappings[name['name']])
+  console.log('CONTRACT AT NAME ', contractMappings[name['name']]['contract'])
   const [{ data, error, loading }, writeApprove] = useContractWrite(
     {
-      addressOrName: contractMappings[name['name']]['Want'],
+      addressOrName: contractMappings[name['name']]['contract']['Want'],
       contractInterface: normalAbi,
       signerOrProvider: provider
     },
     'approve',
     {
-      args: [contractMappings[name['name']]['Vault'], (10 ** 20).toString()]
+      args: [
+        contractMappings[name['name']]['contract']['Vault'],
+        (10 ** 20).toString()
+      ]
     }
   )
 
   const [{ data: _1, error: _2, loading: _3 }, writeDeposit] = useContractWrite(
     {
-      addressOrName: contractMappings[name['name']]['Vault'],
+      addressOrName: contractMappings[name['name']]['contract']['Vault'],
       contractInterface: normalAbi,
       signerOrProvider: provider
     },
@@ -128,7 +131,7 @@ export const PoolInfo = (name: any) => {
   const [{ data: data1, error: error1, loading: loading1 }, writeWithdrawAll] =
     useContractWrite(
       {
-        addressOrName: contractMappings[name['name']]['Vault'],
+        addressOrName: contractMappings[name['name']]['contract']['Vault'],
         contractInterface: normalAbi,
         signerOrProvider: provider
       },

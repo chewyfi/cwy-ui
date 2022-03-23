@@ -13,7 +13,7 @@ import {
   WETH_TOKEN_CONTRACT
 } from '../../utils/constants'
 
-const contractMappings = {
+const contractMappings: any = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
   WETH: { contract: poolAddresses['MoonbeamETH'], decimals: 18 },
   WBTC: { contract: poolAddresses['MoonbeamBTCSupplyOnly'], decimals: 8 },
@@ -26,7 +26,7 @@ const contractMappings = {
 }
 
 interface Props {
-  name: any
+  name: string
 }
 
 export const PoolInfo: React.FC<Props> = ({ name }) => {
@@ -113,7 +113,7 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
     }
   )
 
-  const [{ data: _1, error: _2, loading: _3 }, writeDeposit] = useContractWrite(
+  const [{}, writeDeposit] = useContractWrite(
     {
       addressOrName: contractMappings[name]['contract']['Vault'],
       contractInterface: normalAbi,
@@ -133,15 +133,14 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
     await writeWithdrawAll()
   }
 
-  const [{ data: data1, error: error1, loading: loading1 }, writeWithdrawAll] =
-    useContractWrite(
-      {
-        addressOrName: contractMappings[name]['contract']['Vault'],
-        contractInterface: normalAbi,
-        signerOrProvider: provider
-      },
-      'withdrawAll'
-    )
+  const [{}, writeWithdrawAll] = useContractWrite(
+    {
+      addressOrName: contractMappings[name]['contract']['Vault'],
+      contractInterface: normalAbi,
+      signerOrProvider: provider
+    },
+    'withdrawAll'
+  )
 
   console.log(`Data ${data} Error ${error} loading ${loading}`)
 
@@ -154,7 +153,7 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
     <div className="flex space-x-2">
       <div className="mt-1 mb-3 text-gray-500">
         <label className="mb-1 text-[11px]">
-          Balance: {getBalance(name['name'])} LP
+          Balance: {getBalance(name)} LP
         </label>
         <div className="flex items-center text-[12px]">
           <input
@@ -183,7 +182,7 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
             step="0.01"
             min="0"
             value={withdrawAmount}
-            onChange={(e) => setWithdrawAmount(parseInt(e.target.value))}
+            onChange={(e) => setWithdrawAmount(e.target.value)}
             type="number"
             className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
           />

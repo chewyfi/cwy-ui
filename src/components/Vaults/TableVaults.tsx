@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { APYType } from 'src/types'
 
 import { poolAddresses } from '../../chain-info/pool-addresses'
 import { TableHeader } from './TableHeader'
 import { Vault } from './Vault'
-const APYS = [
+
+const APYS: Array<APYType> = [
   {
     icon: '/static/tokens/movr.svg',
     name: 'MOVR',
@@ -92,19 +94,29 @@ const APYS = [
     contracts: poolAddresses['SolarbeamstKSMpool']
   }
 ]
+
 const Table = () => {
   const [apyList, setApyList] = useState(APYS)
-
+  const toggleDisclosure = (index: number) => {
+    let apys = apyList
+    apys.map((item, idx) => {
+      if (index === idx) {
+        item.isOpen = !item.isOpen
+      } else {
+        item.isOpen = false
+      }
+    })
+    setApyList(JSON.parse(JSON.stringify(apys)))
+  }
   return (
     <div className="w-full my-4">
       <TableHeader />
       <div>
         {apyList.map((item, index) => (
           <Vault
-            setApyList={setApyList}
             key={index}
             item={item}
-            index={index}
+            toggleDisclosure={() => toggleDisclosure(index)}
           />
         ))}
       </div>

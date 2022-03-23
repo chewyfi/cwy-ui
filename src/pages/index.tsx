@@ -5,7 +5,7 @@ import Table from 'src/components/Vaults/TableVaults'
 export default function Home() {
   return (
     <Layout>
-      <div className="p-4 mb-4 bg-white rounded-lg shadow-sm">
+      <div className="p-4 mb-4 bg-white rounded-lg">
         <h6 className="text-[19px] mb-4 font-bold text-[#eb4d69]">
           Staking opportunities
         </h6>

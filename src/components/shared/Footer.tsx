@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className="flex px-20 h-[10rem] bg-white rounded-lg shadow-sm">
+    <div className="flex px-20 h-[10rem] bg-white rounded-lg">
       <div className="flex items-center space-x-10">
         <ul className="flex items-center space-x-4 text-[12px] text-gray-500">
           <li>

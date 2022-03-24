@@ -146,8 +146,6 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
     'withdrawAll'
   )
 
-  console.log(`Data ${data} Error ${error} loading ${loading}`)
-
   const approve = async () => {
     await writeApprove()
     await writeDeposit()

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { APYType } from 'src/types'
 
 import { poolAddresses } from '../../chain-info/pool-addresses'
+import { Alert } from '../ui/Alert'
 import { TableHeader } from './TableHeader'
 import { Vault } from './Vault'
 
@@ -110,6 +111,7 @@ const Table = () => {
   }
   return (
     <div className="w-full my-4">
+      <Alert />
       <TableHeader />
       <div>
         {apyList.map((item, index) => (

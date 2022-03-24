@@ -8,6 +8,7 @@ interface Props {
   item: APYType
   toggleDisclosure: () => void
 }
+
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   return (
     <Disclosure>

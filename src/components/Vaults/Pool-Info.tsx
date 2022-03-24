@@ -35,8 +35,6 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
   const [withdrawAmount, setWithdrawAmount] = useState('1.0')
   const provider = useProvider()
   const [{ data: account }] = useAccount()
-  console.log('ACCOUNT ', account)
-  console.log('NAME ', name)
 
   const [{ data: movr }] = useBalance({
     addressOrName: account?.address
@@ -96,23 +94,29 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
         return solarstKSM?.formatted
     }
   }
-  console.log('CONTRACT AT NAME ', contractMappings[name]['contract'])
-  const [{ data, error, loading }, writeApprove] = useContractWrite(
-    {
-      addressOrName: contractMappings[name]['contract']['Want'],
-      contractInterface:
-        contractMappings[name] !== 'MOVR' ? normalAbi : nativeAbi,
-      signerOrProvider: provider
-    },
-    'approve',
-    {
-      args: [
-        contractMappings[name]['contract']['Vault'],
-        BigInt(
-          parseFloat(depositAmount) * 10 ** contractMappings[name]['decimals']
-        )
-      ]
-    }
+  const [{ data: approveData, error, loading: loadingError }, writeApprove] =
+    useContractWrite(
+      {
+        addressOrName: contractMappings[name]['contract']['Want'],
+        contractInterface:
+          contractMappings[name] !== 'MOVR' ? normalAbi : nativeAbi,
+        signerOrProvider: provider
+      },
+      'approve',
+      {
+        args: [
+          contractMappings[name]['contract']['Vault'],
+          BigInt(
+            parseFloat(depositAmount) * 10 ** contractMappings[name]['decimals']
+          )
+        ]
+      }
+    )
+
+  console.log(
+    `Approve data ${JSON.stringify(
+      approveData
+    )} Error data ${error} loading data ${loadingError}`
   )
 
   const [{}, writeDeposit] = useContractWrite(
@@ -163,10 +167,17 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
             type="number"
             step="0.1"
             min="0"
-            onChange={(e) => setDepositAmount(e.target.value)}
+            onChange={(e) =>
+              !isNaN(parseFloat(e.target.value))
+                ? setDepositAmount(e.target.value)
+                : 0
+            }
             className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
           />
-          <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
+          <button
+            onClick={() => withdrawAll()}
+            className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+          >
             max
           </button>
         </div>

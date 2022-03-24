@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
 
+import nativeAbi from '../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../chain-info/abis/normalAbi.json'
 import { poolAddresses } from '../../chain-info/pool-addresses'
 import {
@@ -99,7 +100,8 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
   const [{ data, error, loading }, writeApprove] = useContractWrite(
     {
       addressOrName: contractMappings[name]['contract']['Want'],
-      contractInterface: normalAbi,
+      contractInterface:
+        contractMappings[name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'approve',
@@ -116,7 +118,8 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
   const [{}, writeDeposit] = useContractWrite(
     {
       addressOrName: contractMappings[name]['contract']['Vault'],
-      contractInterface: normalAbi,
+      contractInterface:
+        contractMappings[name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'deposit',
@@ -136,7 +139,8 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
   const [{}, writeWithdrawAll] = useContractWrite(
     {
       addressOrName: contractMappings[name]['contract']['Vault'],
-      contractInterface: normalAbi,
+      contractInterface:
+        contractMappings[name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'withdrawAll'

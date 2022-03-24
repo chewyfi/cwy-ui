@@ -10,7 +10,7 @@ import {
 const Footer = () => {
   return (
     <div className="flex px-20 h-[10rem] bg-white rounded-lg">
-      <div className="flex items-center space-x-10">
+      <div className="flex items-center space-x-16">
         <ul className="flex items-center space-x-4 text-[12px] text-gray-500">
           <li>
             <Link href={CWY_TWITTER_URL}>
@@ -49,18 +49,25 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <ul className="flex space-x-6 text-[#ffc3ce] text-opacity-90">
-          <li>
-            <Link href={''}>
-              <a target="_blank" rel="noreferrer">
-                Governance forum
-              </a>
-            </Link>
-          </li>
+        <ul className="flex space-x-8 text-[#ffc3ce] font-semibold text-[13px] text-opacity-90">
           <li>
             <Link href={CWY_DOCS_URL}>
               <a target="_blank" rel="noreferrer">
                 Docs
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href={''}>
+              <a target="_blank" rel="noreferrer">
+                Audits
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href={''}>
+              <a target="_blank" rel="noreferrer">
+                Bug bounty
               </a>
             </Link>
           </li>

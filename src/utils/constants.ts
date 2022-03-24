@@ -17,3 +17,13 @@ export const THREE_POOL_TOKEN_CONTRACT =
   '0x6aB6d61428fde76768D7b45D8BFeec19c6eF91A8'
 export const FRAX_3POOL_TOKEN_CONTRACT =
   '0x6aB6d61428fde76768D7b45D8BFeec19c6eF91A8'
+
+export const MoonbeamMOVRDecimals = 18
+export const MoonbeamETHDecimals = 18
+export const MoonbeamBTCSupplyOnlyDecimals = 8
+export const MoonbeamUSDCDecimals = 6
+export const MoonbeamFRAXDecimals = 18
+export const MoonbeamUSDTDecimals = 6
+export const Solarbeam3poolDecimals = 18
+export const SolarbeamFrax3poolDecimals = 18
+export const SolarbeamstKSMpoolDecimals = 18

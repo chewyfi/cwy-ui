@@ -185,7 +185,7 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
           onClick={() => approve()}
           className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
         >
-          Approve
+          Approve & Deposit
         </button>
       </div>
       <div className="mt-1 mb-3 text-gray-500">

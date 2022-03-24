@@ -9,6 +9,7 @@ import {
   FRAX_TOKEN_CONTRACT,
   THREE_POOL_TOKEN_CONTRACT,
   TWO_KSM_TOKEN_CONTRACT,
+  USDC_TOKEN_CONTRACT,
   USDT_TOKEN_CONTRACT,
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
@@ -48,9 +49,11 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
     addressOrName: account?.address
   })
   const [{ data: usdc }] = useBalance({
-    token: WBTC_TOKEN_CONTRACT,
+    token: USDC_TOKEN_CONTRACT,
     addressOrName: account?.address
   })
+
+  console.log('USDC BALANCE ', usdc)
   const [{ data: usdt }] = useBalance({
     token: USDT_TOKEN_CONTRACT,
     addressOrName: account?.address
@@ -81,11 +84,11 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
       case 'WBTC':
         return wbtc?.formatted
       case 'USDC':
-        return usdc?.formatted
+        return usdc?.formatted * 10 ** 12
       case 'FRAX':
         return frax?.formatted
       case 'USDT':
-        return usdt?.formatted
+        return usdt?.formatted * 10 ** 12
       case 'solar3POOL':
         return threePool?.formatted
       case 'solar3FRAX':

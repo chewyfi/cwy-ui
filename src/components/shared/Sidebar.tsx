@@ -6,7 +6,7 @@ import React from 'react'
 const LINKS = [
   {
     name: 'Home',
-    path: '/',
+    path: '/home',
     icon: '/static/sidebar/home-icon.svg'
   },
   {
@@ -16,17 +16,17 @@ const LINKS = [
   },
   {
     name: 'Staking',
-    path: '/',
+    path: '/staking',
     icon: '/static/sidebar/staking-icon.svg'
   },
   {
     name: 'Loans',
-    path: '/',
+    path: '/loans',
     icon: '/static/sidebar/loans-icon.svg'
   },
   {
     name: 'Bonds',
-    path: '/',
+    path: '/bonds',
     icon: '/static/sidebar/bonds-icon.svg'
   }
 ]
@@ -50,7 +50,7 @@ const Sidebar = () => {
               'hover:bg-gray-50': !isActivePath(path)
             })}
           >
-            <Link href={path}>
+            <Link href="/">
               <a
                 className={clsx(
                   'flex items-center space-x-2 font-semibold hover:opacity-100'

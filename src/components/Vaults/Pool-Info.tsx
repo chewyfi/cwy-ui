@@ -195,7 +195,12 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
             step="0.01"
             min="0"
             value={withdrawAmount}
-            onChange={(e) => setWithdrawAmount(e.target.value)}
+            type="number"
+            onChange={(e) =>
+              !isNaN(parseFloat(e.target.value))
+                ? setWithdrawAmount(e.target.value)
+                : 0
+            }
             type="number"
             className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
           />

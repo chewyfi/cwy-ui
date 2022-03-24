@@ -14,6 +14,7 @@ import {
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
 } from '../../utils/constants'
+import { Alert } from '../ui/Alert'
 
 const contractMappings: any = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
@@ -53,7 +54,6 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
     addressOrName: account?.address
   })
 
-  console.log('USDC BALANCE ', usdc)
   const [{ data: usdt }] = useBalance({
     token: USDT_TOKEN_CONTRACT,
     addressOrName: account?.address
@@ -84,11 +84,11 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
       case 'WBTC':
         return wbtc?.formatted
       case 'USDC':
-        return usdc?.formatted * 10 ** 12
+        return parseFloat(usdc?.formatted) * 10 ** 12
       case 'FRAX':
         return frax?.formatted
       case 'USDT':
-        return usdt?.formatted * 10 ** 12
+        return parseFloat(usdt?.formatted) * 10 ** 12
       case 'solar3POOL':
         return threePool?.formatted
       case 'solar3FRAX':
@@ -97,32 +97,25 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
         return solarstKSM?.formatted
     }
   }
-  const [{ data: approveData, error, loading: loadingError }, writeApprove] =
-    useContractWrite(
-      {
-        addressOrName: contractMappings[name]['contract']['Want'],
-        contractInterface:
-          contractMappings[name] !== 'MOVR' ? normalAbi : nativeAbi,
-        signerOrProvider: provider
-      },
-      'approve',
-      {
-        args: [
-          contractMappings[name]['contract']['Vault'],
-          BigInt(
-            parseFloat(depositAmount) * 10 ** contractMappings[name]['decimals']
-          )
-        ]
-      }
-    )
-
-  console.log(
-    `Approve data ${JSON.stringify(
-      approveData
-    )} Error data ${error} loading data ${loadingError}`
+  const [{}, writeApprove] = useContractWrite(
+    {
+      addressOrName: contractMappings[name]['contract']['Want'],
+      contractInterface:
+        contractMappings[name] !== 'MOVR' ? normalAbi : nativeAbi,
+      signerOrProvider: provider
+    },
+    'approve',
+    {
+      args: [
+        contractMappings[name]['contract']['Vault'],
+        BigInt(
+          parseFloat(depositAmount) * 10 ** contractMappings[name]['decimals']
+        )
+      ]
+    }
   )
 
-  const [{}, writeDeposit] = useContractWrite(
+  const [{ data, error, loading }, writeDeposit] = useContractWrite(
     {
       addressOrName: contractMappings[name]['contract']['Vault'],
       contractInterface:
@@ -139,6 +132,9 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
     }
   )
 
+  console.log(`
+  data ${JSON.stringify(data)} Error data ${error} loading data ${loading}`)
+
   const withdrawAll = async () => {
     await writeWithdrawAll()
   }
@@ -154,70 +150,77 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
   )
 
   const approve = async () => {
+    console.log('APPROVE CLICKED')
     await writeApprove()
     await writeDeposit()
   }
 
   return (
-    <div className="flex space-x-2">
-      <div className="mt-1 mb-3 text-gray-500">
-        <label className="mb-1 text-[11px]">
-          Balance: {getBalance(name)} LP
-        </label>
-        <div className="flex items-center text-[12px]">
-          <input
-            value={depositAmount}
-            type="number"
-            step="0.1"
-            min="0"
-            onChange={(e) =>
-              !isNaN(parseFloat(e.target.value))
-                ? setDepositAmount(e.target.value)
-                : 0
-            }
-            className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
-          />
+    <>
+      {' '}
+      {error ? <Alert errorMessage={error['data']['message']} /> : null}
+      <div className="flex space-x-2">
+        <div className="mt-1 mb-3 text-gray-500">
+          <label className="mb-1 text-[11px]">
+            Balance: {getBalance(name)} LP
+          </label>
+
+          <div className="flex items-center text-[12px]">
+            <input
+              value={depositAmount}
+              type="number"
+              step="0.1"
+              min="0"
+              onChange={(e) =>
+                !isNaN(parseFloat(e.target.value))
+                  ? setDepositAmount(e.target.value)
+                  : 0
+              }
+              className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
+            />
+
+            <button
+              onClick={() => withdrawAll()}
+              className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+            >
+              max
+            </button>
+          </div>
           <button
-            onClick={() => withdrawAll()}
-            className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+            onClick={() => approve()}
+            className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
           >
-            max
+            Approve & Deposit
           </button>
         </div>
-        <button
-          onClick={() => approve()}
-          className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
-        >
-          Approve & Deposit
-        </button>
-      </div>
-      <div className="mt-1 mb-3 text-gray-500">
-        <label className="mb-1 text-[11px]">Deposited: 0</label>
-        <div className="flex items-center text-[12px]">
-          <input
-            step="0.01"
-            min="0"
-            value={withdrawAmount}
-            type="number"
-            onChange={(e) =>
-              !isNaN(parseFloat(e.target.value))
-                ? setWithdrawAmount(e.target.value)
-                : 0
-            }
-            type="number"
-            className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
-          />
-          <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
-            max
+        <div className="mt-1 mb-3 text-gray-500">
+          <label className="mb-1 text-[11px]">Deposited: 0</label>
+          <div className="flex items-center text-[12px]">
+            <input
+              step="0.01"
+              min="0"
+              value={withdrawAmount}
+              type="number"
+              onChange={(e) =>
+                !isNaN(parseFloat(e.target.value))
+                  ? setWithdrawAmount(e.target.value)
+                  : 0
+              }
+              type="number"
+              className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
+            />
+            <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
+              max
+            </button>
+          </div>
+          <button
+            onClick={withdrawAll}
+            className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg"
+          >
+            Withdraw
           </button>
         </div>
-        <button
-          onClick={withdrawAll}
-          className="inline-block w-full p-1 mt-1 text-gray-500 border-2 border-gray-300 rounded-lg"
-        >
-          Withdraw
-        </button>
       </div>
-    </div>
+    </>
   )
 }

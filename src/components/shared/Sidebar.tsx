@@ -6,7 +6,7 @@ import React from 'react'
 const LINKS = [
   {
     name: 'Home',
-    path: '/home',
+    path: '/',
     icon: '/static/sidebar/home-icon.svg'
   },
   {
@@ -16,17 +16,17 @@ const LINKS = [
   },
   {
     name: 'Staking',
-    path: '/staking',
+    path: '/',
     icon: '/static/sidebar/staking-icon.svg'
   },
   {
     name: 'Loans',
-    path: '/loans',
+    path: '/',
     icon: '/static/sidebar/loans-icon.svg'
   },
   {
     name: 'Bonds',
-    path: '/bonds',
+    path: '/',
     icon: '/static/sidebar/bonds-icon.svg'
   }
 ]

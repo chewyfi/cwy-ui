@@ -188,11 +188,11 @@ const BalanceModal: React.FC<Props> = (props) => {
           <div className="px-5 py-4">
             {error ? <Alert errorMessage={error.message} /> : null}
             <div className="flex space-x-2">
-              <div className="mt-1 text-gray-500">
-                <label className="mb-1 text-[11px]">
+              <div className="mt-1">
+                <label className="mb-1 text-gray-500 text-[11px]">
                   Balance: {getBalance(props.name)} LP
                 </label>
-                <div className="flex items-center text-[12px]">
+                <div className="flex items-center text-[14px]">
                   <input
                     value={depositAmount}
                     type="number"
@@ -203,7 +203,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                         ? setDepositAmount(e.target.value)
                         : 0
                     }
-                    className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
+                    className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                   />
 
                   <button
@@ -220,9 +220,11 @@ const BalanceModal: React.FC<Props> = (props) => {
                   Approve & Deposit
                 </button>
               </div>
-              <div className="mt-1 text-gray-500">
-                <label className="mb-1 text-[11px]">Deposited: 0</label>
-                <div className="flex items-center text-[12px]">
+              <div className="mt-1">
+                <label className="mb-1 text-[11px] text-gray-500">
+                  Deposited: 0
+                </label>
+                <div className="flex items-center text-[14px]">
                   <input
                     step="0.01"
                     min="0"
@@ -233,7 +235,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                         ? setWithdrawAmount(e.target.value)
                         : 0
                     }
-                    className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
+                    className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                   />
                   <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
                     max

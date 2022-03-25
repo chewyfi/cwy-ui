@@ -1,22 +1,19 @@
 export const TableHeader = () => {
   return (
     <div className="w-full">
-      <div className="text-[15px] flex py-3 px-2 items-center w-full font-medium">
-        <span className="w-16"></span>
-        <span className="flex items-center w-2/5">
-          Name
-          <img className="h-3 ml-3" src="/static/down-arrow.svg" alt="" />
+      <div className="text-[12px] flex py-3 font-semibold items-center w-full">
+        <span className="flex items-center w-2/4">
+          <span>Token Strategy TVL</span>
+          <img className="h-2 ml-3" src="/static/down-arrow.svg" alt="" />
         </span>
-        <span className="flex items-center w-1/5">
+        <span className="flex items-center w-1/4">
           APY
-          <img className="h-3 ml-3" src="/static/down-arrow.svg" alt="" />
+          <img className="h-2 ml-3" src="/static/down-arrow.svg" alt="" />
         </span>
-        <span className="flex items-center w-1/5">
-          TVL
-          <img className="h-3 ml-3" src="/static/down-arrow.svg" alt="" />
+        <span className="flex flex-col items-start w-1/4">
+          <span>Balance</span>
+          <span>Deposited</span>
         </span>
-        <span className="w-1/5">Holdings</span>
-        {/* <span className="w-1/5"></span> */}
       </div>
     </div>
   )

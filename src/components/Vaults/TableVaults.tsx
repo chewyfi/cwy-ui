@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { APYType } from 'src/types'
 
 import { poolAddresses } from '../../chain-info/pool-addresses'
+import BalanceModal from './BalanceModal'
 import { TableHeader } from './TableHeader'
 import { Vault } from './Vault'
 
@@ -97,11 +98,13 @@ const APYS: Array<APYType> = [
 
 const Table = () => {
   const [apyList, setApyList] = useState(APYS)
+  const [selectedAPY, setSelectedAPY] = useState('')
   const toggleDisclosure = (index: number) => {
     let apys = apyList
     apys.map((item, idx) => {
       if (index === idx) {
         item.isOpen = !item.isOpen
+        setSelectedAPY(item.name)
       } else {
         item.isOpen = false
       }
@@ -111,7 +114,14 @@ const Table = () => {
   return (
     <div className="w-full my-4">
       <TableHeader />
-      <div>
+      {selectedAPY !== '' && (
+        <BalanceModal
+          onClose={() => setSelectedAPY('')}
+          name={selectedAPY}
+          show
+        />
+      )}
+      <div className="space-y-2">
         {apyList.map((item, index) => (
           <Vault
             key={index}

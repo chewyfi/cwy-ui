@@ -84,11 +84,11 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
       case 'WBTC':
         return wbtc?.formatted
       case 'USDC':
-        return parseFloat(usdc?.formatted) * 10 ** 12
+        return parseFloat(usdc?.formatted || '0') * 10 ** 12
       case 'FRAX':
         return frax?.formatted
       case 'USDT':
-        return parseFloat(usdt?.formatted) * 10 ** 12
+        return parseFloat(usdt?.formatted || '0') * 10 ** 12
       case 'solar3POOL':
         return threePool?.formatted
       case 'solar3FRAX':
@@ -157,8 +157,7 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
 
   return (
     <>
-      {' '}
-      {error ? <Alert errorMessage={error['data']['message']} /> : null}
+      {error ? <Alert errorMessage={error.message} /> : null}
       <div className="flex space-x-2">
         <div className="mt-1 mb-3 text-gray-500">
           <label className="mb-1 text-[11px]">
@@ -206,7 +205,6 @@ export const PoolInfo: React.FC<Props> = ({ name }) => {
                   ? setWithdrawAmount(e.target.value)
                   : 0
               }
-              type="number"
               className="w-full px-2 py-1 border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
             />
             <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">

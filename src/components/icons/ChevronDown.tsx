@@ -5,7 +5,7 @@ const ChevronDown = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={clsx('w-4 h-4 opacity-80', className)}
+      className={clsx('w-4 h-4 text-[#b2b2b2] opacity-80', className)}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

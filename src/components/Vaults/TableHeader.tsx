@@ -16,9 +16,11 @@ export const TableHeader = () => {
           APY
           <img className="h-2 ml-3" src="/static/down-arrow.svg" alt="" />
         </span>
-        <span className="flex flex-col items-end w-1/4 mr-6">
-          <span>Balance</span>
-          <span>Deposited</span>
+        <span className="flex justify-end w-1/4 mr-6 ">
+          <div className="flex flex-col text-left">
+            <span>Balance</span>
+            <span>Deposited</span>
+          </div>
         </span>
       </div>
     </div>

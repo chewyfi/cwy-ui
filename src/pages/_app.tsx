@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         connectors={connectors}
         provider={provider}
       >
-        <Toaster position="bottom-left" />
+        <Toaster position="top-right" />
         <Component {...pageProps} />
       </Provider>
     </ErrorBoundary>

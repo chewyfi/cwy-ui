@@ -31,7 +31,7 @@ const useTxnToast = () => {
         </div>
       ),
       {
-        duration: 100000
+        duration: 5000
       }
     )
   }

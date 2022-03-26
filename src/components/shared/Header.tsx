@@ -31,7 +31,7 @@ const Header = ({
           {accountData?.address && !network.chain?.unsupported && (
             <button
               onClick={() => setShowWalletModal(true)}
-              className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#eb4d6920] rounded"
+              className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded"
             >
               <img
                 src="/static/moonriver.svg"

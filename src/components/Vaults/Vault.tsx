@@ -25,8 +25,8 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             className="w-8 h-8 mx-2 "
             src={item.icon}
           />
-          <div className="flex flex-col">
-            <span className="text-[12px] flex space-x-2 font-semibold">
+          <div className="flex flex-col font-semibold">
+            <span className="text-[12px] flex space-x-2">
               {item.name}
               {item.getSomeUrl && (
                 <a
@@ -39,12 +39,12 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                 </a>
               )}
             </span>
-            <span className="text-[11px] text-gray-500">Solarbeam</span>
-            <span className="text-[11px] text-gray-500">TVL $125k</span>
+            <span className="text-[11px] text-gray-400">Solarbeam</span>
+            <span className="text-[11px] text-gray-400">TVL $125k</span>
           </div>
         </span>
         <span className="text-[14px] w-1/4">{item.apy}</span>
-        <span className="flex flex-col w-1/4 px-2 text-[14px] text-gray-500">
+        <span className="flex flex-col w-1/4 px-2 text-[14px] text-gray-400">
           <span>0.0</span>
           <span>0.0</span>
         </span>

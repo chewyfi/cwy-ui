@@ -112,7 +112,7 @@ const Table = () => {
     setApyList(JSON.parse(JSON.stringify(apys)))
   }
   return (
-    <div className="w-full my-4">
+    <div className="w-full">
       <TableHeader />
       {selectedAPY !== '' && (
         <BalanceModal

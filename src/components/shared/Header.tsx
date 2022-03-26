@@ -26,12 +26,12 @@ const Header = ({
   return (
     <div className="sticky text-[12px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
-        <h6 className="text-[19px] font-semibold">Vaults</h6>
-        <div className="flex items-center font-medium">
+        <h6 className="text-[19px] font-bold">Vaults</h6>
+        <div className="flex items-center">
           {accountData?.address && !network.chain?.unsupported && (
             <button
               onClick={() => setShowWalletModal(true)}
-              className="inline-flex items-center justify-between px-2 py-1 space-x-2 bg-[#eb4d6920] rounded"
+              className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#eb4d6920] rounded"
             >
               <img
                 src="/static/moonriver.svg"
@@ -50,7 +50,7 @@ const Header = ({
                 : setShowWalletModal(true)
             }
             className={clsx(
-              'px-2 py-1 ml-2 text-white font-medium bg-black rounded focus:outline-none',
+              'px-2 py-1 ml-2 text-white font-semibold bg-black rounded focus:outline-none',
               {
                 'bg-red-300 border-0 text-black':
                   network.chain?.unsupported && switchNetwork

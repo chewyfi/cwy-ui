@@ -1,24 +1,24 @@
 @font-face {
-    font-family: 'Metropolis';
+    font-family: 'DM Sans';
     font-style: normal;
     font-weight: 450;
-    src: local('Metropolis'), url('/fonts/Metropolis-Light.woff') format('woff');
+    src: local('DM Sans'), url('/fonts/DMSans-Regular.woff') format('woff');
 }
 @font-face {
-    font-family: 'Metropolis';
+    font-family: 'DM Sans';
     font-style: normal;
     font-weight: 600;
-    src: local('Metropolis'), url('/fonts/Metropolis-Medium.woff') format('woff');
+    src: local('DM Sans'), url('/fonts/DMSans-Medium.woff') format('woff');
 }
 @font-face {
-    font-family: 'Metropolis';
+    font-family: 'DM Sans';
     font-style: normal;
     font-weight: 700;
-    src: local('Metropolis'), url('/fonts/Metropolis-Bold.woff') format('woff');
+    src: local('DM Sans'), url('/fonts/DMSans-Bold.woff') format('woff');
 }
 @font-face {
-    font-family: 'Metropolis';
+    font-family: 'DM Sans';
     font-style: normal;
     font-weight: 500;
-    src: local('Metropolis'), url('/fonts/Metropolis-Regular.woff') format('woff');
+    src: local('DM Sans'), url('/fonts/DMSans-Regular.Medium') format('woff');
 }

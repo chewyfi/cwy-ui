@@ -9,11 +9,7 @@ interface Props {
 
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   return (
-    <div
-      className={clsx('py-3 px-2 rounded-lg bg-gray-100', {
-        'bg-gray-100 rounded-b-none': false
-      })}
-    >
+    <div className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7]')}>
       <div
         onClick={() => toggleDisclosure()}
         className="flex items-center w-full cursor-pointer"
@@ -22,7 +18,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
           <img
             alt=""
             draggable={false}
-            className="w-8 h-8 mx-2 "
+            className="w-8 h-8 mx-2"
             src={item.icon}
           />
           <div className="flex flex-col font-semibold">
@@ -30,7 +26,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
               {item.name}
               {item.getSomeUrl && (
                 <a
-                  className="ml-2 text-xs text-gray-400 underline"
+                  className="ml-2 text-xs text-[#c0c0c0] underline"
                   href={item.getSomeUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -39,12 +35,12 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                 </a>
               )}
             </span>
-            <span className="text-[11px] text-gray-400">Solarbeam</span>
-            <span className="text-[11px] text-gray-400">TVL $125k</span>
+            <span className="text-[11px] text-[#c0c0c0]">Solarbeam</span>
+            <span className="text-[11px] text-[#c0c0c0]">TVL $125k</span>
           </div>
         </span>
         <span className="text-[14px] w-1/4">{item.apy}</span>
-        <span className="flex flex-col w-1/4 px-2 text-[14px] text-gray-400">
+        <span className="flex mr-2 items-end flex-col w-1/4 px-2 text-[14px] text-[#c0c0c0]">
           <span>0.0</span>
           <span>0.0</span>
         </span>

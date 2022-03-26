@@ -59,8 +59,8 @@ const Sidebar = () => {
                 <img src={icon} className="w-5 h-5" alt={name} />
                 <span
                   className={clsx('group-hover:opacity-100', {
-                    'opacity-100': isActivePath(path),
-                    'hover:bg-gray-50 hover:opacity-100 opacity-40':
+                    'text-black': isActivePath(path),
+                    'hover:bg-gray-50 hover:opacity-100 text-[#cfcfcf]':
                       !isActivePath(path)
                   })}
                 >

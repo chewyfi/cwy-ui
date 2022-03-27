@@ -39,7 +39,7 @@ const Sidebar = () => {
   return (
     <div className="fixed z-10 w-[10rem] bg-white rounded-lg top-4 h-[96%]">
       <div className="flex items-center p-3 space-x-2">
-        <img src="/chewy-header-logo.svg" className="h-6" alt="" />
+        <img src="/chewy-header-logo.png" className="h-7" alt="" />
       </div>
       <ul className="p-3 mt-14 text-[19px]">
         {LINKS.map(({ path, name, icon }, idx) => (

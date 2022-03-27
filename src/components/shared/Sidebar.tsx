@@ -7,27 +7,27 @@ const LINKS = [
   {
     name: 'Home',
     path: '/home',
-    icon: '/static/sidebar/home-icon.svg'
+    icon: '/static/sidebar/home-icon.png'
   },
   {
     name: 'Vaults',
     path: '/',
-    icon: '/static/sidebar/vaults-icon.svg'
+    icon: '/static/sidebar/vaults-icon.png'
   },
   {
     name: 'Staking',
     path: '/staking',
-    icon: '/static/sidebar/staking-icon.svg'
+    icon: '/static/sidebar/staking-icon.png'
   },
   {
     name: 'Loans',
     path: '/loans',
-    icon: '/static/sidebar/loans-icon.svg'
+    icon: '/static/sidebar/loans-icon.png'
   },
   {
     name: 'Bonds',
     path: '/bonds',
-    icon: '/static/sidebar/bonds-icon.svg'
+    icon: '/static/sidebar/bonds-icon.png'
   }
 ]
 
@@ -56,7 +56,7 @@ const Sidebar = () => {
                   'flex items-center space-x-2 font-medium hover:opacity-100'
                 )}
               >
-                <img src={icon} className="w-5 h-5" alt={name} />
+                <img src={icon} className="w-8 h-8" alt={name} />
                 <span
                   className={clsx('group-hover:opacity-100', {
                     'text-black': isActivePath(path),

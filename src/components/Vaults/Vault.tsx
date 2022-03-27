@@ -20,7 +20,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
           <img
             alt=""
             draggable={false}
-            className="w-8 h-8 mx-2"
+            className="w-8 h-8 mx-3"
             src={item.icon}
           />
           <div className="flex flex-col">

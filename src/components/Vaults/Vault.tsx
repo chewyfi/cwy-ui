@@ -9,9 +9,7 @@ interface Props {
 
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   return (
-    <div
-      className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
-    >
+    <div className={clsx('py-3 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}>
       <div
         onClick={() => toggleDisclosure()}
         className="flex items-center w-full font-medium cursor-pointer"
@@ -43,8 +41,8 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             </span>
           </div>
         </span>
-        <span className="text-[17px] w-1/4 font-normal">{item.apy}</span>
-        <span className="flex mr-2 font-normal items-end flex-col w-1/4 px-2 text-[17px] text-[#c0c0c0]">
+        <span className="text-[17px] ml-6 w-1/3 font-normal">{item.apy}</span>
+        <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>0.00</span>
           <span>0.00</span>
         </span>

@@ -39,7 +39,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             </span>
             <span className="text-[14px] text-[#c0c0c0]">{item.strategy}</span>
             <span className="text-[14px] text-[#c0c0c0]">
-              TVL $<span className="font-normal">125</span>k
+              TVL $<span className="font-normal">125k</span>
             </span>
           </div>
         </span>

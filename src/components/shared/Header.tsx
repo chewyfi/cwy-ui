@@ -28,21 +28,19 @@ const Header = ({
       <div className="flex items-center justify-between w-full mt-2">
         <h6 className="text-[19px] font-medium">Vaults</h6>
         <div className="flex items-center">
-          {accountData?.address && !network.chain?.unsupported && (
-            <button
-              onClick={() => setShowWalletModal(true)}
-              className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded"
-            >
-              <img
-                src="/static/moonriver.svg"
-                className="w-4 h-4 rounded-full"
-                draggable={false}
-                alt=""
-              />
-              <span>{network.chain?.name}</span>
-              <ChevronDown />
-            </button>
-          )}
+          <button
+            onClick={() => setShowWalletModal(true)}
+            className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded"
+          >
+            <img
+              src="/static/moonriver.svg"
+              className="w-4 h-4 rounded-full"
+              draggable={false}
+              alt=""
+            />
+            <span>{network.chain?.name || 'Moonriver'}</span>
+            <ChevronDown />
+          </button>
           <button
             onClick={() =>
               network.chain?.unsupported && switchNetwork

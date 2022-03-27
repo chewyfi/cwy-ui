@@ -21,7 +21,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             className="w-8 h-8 mx-2"
             src={item.icon}
           />
-          <div className="flex flex-col font-medium">
+          <div className="flex flex-col font-normal">
             <span className="text-[12px] -mb-0.5 flex space-x-2">
               {item.name}
               {item.getSomeUrl && (
@@ -36,9 +36,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
               )}
             </span>
             <span className="text-[11px] text-[#c0c0c0]">Solarbeam</span>
-            <span className="text-[11px] text-[#c0c0c0]">
-              TVL $125 <span className="-ml-0.5 font-normal">k</span>
-            </span>
+            <span className="text-[11px] text-[#c0c0c0]">TVL $125k</span>
           </div>
         </span>
         <span className="text-[14px] w-1/4">{item.apy}</span>

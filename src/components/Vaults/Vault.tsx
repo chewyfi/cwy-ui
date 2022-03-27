@@ -22,7 +22,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             src={item.icon}
           />
           <div className="flex flex-col">
-            <span className="text-[12px] -mb-0.5 flex space-x-2">
+            <span className="text-[15px] -mb-0.5 flex space-x-2">
               {item.name}
               {item.getSomeUrl && (
                 <a
@@ -31,18 +31,18 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Get some
+                  get some
                 </a>
               )}
             </span>
-            <span className="text-[11px] text-[#c0c0c0]">{item.strategy}</span>
-            <span className="text-[11px] text-[#c0c0c0]">
+            <span className="text-[14px] text-[#c0c0c0]">{item.strategy}</span>
+            <span className="text-[14px] text-[#c0c0c0]">
               TVL $<span className="font-normal">125</span>k
             </span>
           </div>
         </span>
-        <span className="text-[14px] w-1/4 font-normal">{item.apy}</span>
-        <span className="flex mr-2 font-normal items-end flex-col w-1/4 px-2 text-[14px] text-[#c0c0c0]">
+        <span className="text-[17px] w-1/4 font-normal">{item.apy}</span>
+        <span className="flex mr-2 font-normal items-end flex-col w-1/4 px-2 text-[17px] text-[#c0c0c0]">
           <span>0.00</span>
           <span>0.00</span>
         </span>

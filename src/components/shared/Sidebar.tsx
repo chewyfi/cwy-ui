@@ -41,7 +41,7 @@ const Sidebar = () => {
       <div className="flex items-center p-3 space-x-2">
         <img src="/chewy-header-logo.svg" className="h-6" alt="" />
       </div>
-      <ul className="p-3 mt-14 text-[16px]">
+      <ul className="p-3 mt-14 text-[19px]">
         {LINKS.map(({ path, name, icon }, idx) => (
           <li
             key={idx}

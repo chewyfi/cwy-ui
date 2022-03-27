@@ -189,7 +189,7 @@ const BalanceModal: React.FC<Props> = (props) => {
             {error ? <Alert errorMessage={error.message} /> : null}
             <div className="flex space-x-2">
               <div className="mt-1">
-                <label className="mb-1 text-gray-500 text-[11px]">
+                <label className="mb-1 text-gray-500 text-[14px]">
                   Balance: {getBalance(props.name)} LP
                 </label>
                 <div className="flex items-center text-[14px]">
@@ -221,7 +221,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                 </button>
               </div>
               <div className="mt-1">
-                <label className="mb-1 text-[11px] text-gray-500">
+                <label className="mb-1 text-[14px] text-gray-500">
                   Deposited: 0
                 </label>
                 <div className="flex items-center text-[14px]">

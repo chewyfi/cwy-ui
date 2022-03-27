@@ -24,9 +24,9 @@ const Header = ({
   }
 
   return (
-    <div className="sticky text-[12px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
+    <div className="sticky text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
-        <h6 className="text-[19px] font-medium">Vaults</h6>
+        <h6 className="text-[22px] font-medium">Vaults</h6>
         <div className="flex items-center">
           <button
             onClick={() => setShowWalletModal(true)}

@@ -8,7 +8,7 @@ const useTxnToast = () => {
         <div className="flex w-[300px] rounded-lg pointer-events-auto bg-white border-2 border-gray-100">
           <div className="w-full p-3">
             <div className="flex items-center justify-between">
-              <h6 className="text-[12px] font-bold uppercase">Transaction</h6>
+              <h6 className="text-[15px] font-bold uppercase">Transaction</h6>
               <button
                 className="p-1 rounded hover:bg-gray-100 focus:outline-none"
                 onClick={() => toast.dismiss(t.id)}

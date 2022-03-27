@@ -26,7 +26,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
               {item.name}
               {item.getSomeUrl && (
                 <a
-                  className="ml-2 text-xs text-[#c0c0c0] underline"
+                  className="ml-2 text-[15px] text-[#c0c0c0] underline"
                   href={item.getSomeUrl}
                   target="_blank"
                   rel="noreferrer"

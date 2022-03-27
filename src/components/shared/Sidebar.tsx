@@ -53,7 +53,7 @@ const Sidebar = () => {
             <Link href="/">
               <a
                 className={clsx(
-                  'flex items-center space-x-2 font-normal hover:opacity-100'
+                  'flex items-center space-x-2 font-medium hover:opacity-100'
                 )}
               >
                 <img src={icon} className="w-5 h-5" alt={name} />

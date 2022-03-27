@@ -12,7 +12,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     <div className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7]')}>
       <div
         onClick={() => toggleDisclosure()}
-        className="flex items-center w-full cursor-pointer"
+        className="flex items-center w-full font-normal cursor-pointer"
       >
         <span className="flex items-center w-2/4 space-x-2">
           <img
@@ -21,7 +21,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             className="w-8 h-8 mx-2"
             src={item.icon}
           />
-          <div className="flex flex-col font-normal">
+          <div className="flex flex-col">
             <span className="text-[12px] -mb-0.5 flex space-x-2">
               {item.name}
               {item.getSomeUrl && (

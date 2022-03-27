@@ -49,7 +49,7 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <ul className="flex space-x-8 text-[#ffc3ce] font-bold text-[13px] text-opacity-90">
+        <ul className="flex space-x-8 text-[#ffc3ce] font-normal text-[13px] text-opacity-90">
           <li>
             <Link href={CWY_DOCS_URL}>
               <a target="_blank" rel="noreferrer">

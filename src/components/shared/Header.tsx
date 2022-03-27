@@ -26,7 +26,7 @@ const Header = ({
   return (
     <div className="sticky text-[12px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
-        <h6 className="text-[19px] font-bold">Vaults</h6>
+        <h6 className="text-[19px] font-normal">Vaults</h6>
         <div className="flex items-center">
           {accountData?.address && !network.chain?.unsupported && (
             <button

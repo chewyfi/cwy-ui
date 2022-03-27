@@ -21,8 +21,8 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             className="w-8 h-8 mx-2"
             src={item.icon}
           />
-          <div className="flex flex-col font-semibold">
-            <span className="text-[12px] flex space-x-2">
+          <div className="flex flex-col font-medium">
+            <span className="text-[12px] -mb-0.5 flex space-x-2">
               {item.name}
               {item.getSomeUrl && (
                 <a

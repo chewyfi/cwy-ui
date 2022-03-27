@@ -168,7 +168,7 @@ const BalanceModal: React.FC<Props> = (props) => {
           'top-0 bottom-0 z-20 left-0 right-0 min-h-screen bg-gray-100 bg-opacity-70 backdrop-filter backdrop-blur flex flex-col items-center justify-center',
           {
             hidden: !props.show,
-            absolute: props.show
+            fixed: props.show
           }
         )}
         onClose={props.onClose}

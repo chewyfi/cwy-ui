@@ -35,14 +35,16 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                 </a>
               )}
             </span>
-            <span className="text-[11px] text-[#c0c0c0]">Solarbeam</span>
-            <span className="text-[11px] text-[#c0c0c0]">TVL $125k</span>
+            <span className="text-[11px] text-[#c0c0c0]">{item.strategy}</span>
+            <span className="text-[11px] text-[#c0c0c0]">
+              TVL $<span className="font-normal">125</span>k
+            </span>
           </div>
         </span>
-        <span className="text-[14px] w-1/4">{item.apy}</span>
-        <span className="flex mr-2 items-end flex-col w-1/4 px-2 text-[14px] text-[#c0c0c0]">
-          <span>0.0</span>
-          <span>0.0</span>
+        <span className="text-[14px] w-1/4 font-normal">{item.apy}</span>
+        <span className="flex mr-2 font-normal items-end flex-col w-1/4 px-2 text-[14px] text-[#c0c0c0]">
+          <span>0.00</span>
+          <span>0.00</span>
         </span>
         {/* <span className="w-1/5 text-[14px] text-right">
           <button

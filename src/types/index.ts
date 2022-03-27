@@ -6,6 +6,7 @@ export type APYType = {
   holdings: string
   isOpen: boolean
   suffix?: string
+  strategy?: string
   getSomeUrl?: string
   contracts: {
     Vault: string

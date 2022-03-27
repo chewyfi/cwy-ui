@@ -14,6 +14,7 @@ const APYS: Array<APYType> = [
     tvl: '$0',
     holdings: '--',
     isOpen: false,
+    strategy: 'Moonwell',
     contracts: poolAddresses['MoonbeamMOVR']
   },
   {
@@ -22,6 +23,7 @@ const APYS: Array<APYType> = [
     apy: '68.54%',
     tvl: '$0',
     holdings: '--',
+    strategy: 'Moonwell',
     isOpen: false,
     contracts: poolAddresses['MoonbeamETH']
   },
@@ -31,6 +33,7 @@ const APYS: Array<APYType> = [
     apy: '48.823%',
     tvl: '$0',
     holdings: '--',
+    strategy: 'Moonwell',
     isOpen: false,
     contracts: poolAddresses['MoonbeamBTCSupplyOnly']
   },
@@ -40,6 +43,7 @@ const APYS: Array<APYType> = [
     apy: '18.52%',
     tvl: '$0',
     holdings: '--',
+    strategy: 'Moonwell',
     isOpen: false,
     contracts: poolAddresses['MoonbeamUSDC']
   },
@@ -48,6 +52,7 @@ const APYS: Array<APYType> = [
     name: 'FRAX',
     apy: '14.33%',
     tvl: '$0',
+    strategy: 'Moonwell',
     holdings: '--',
     isOpen: false,
     contracts: poolAddresses['MoonbeamFRAX']
@@ -57,6 +62,7 @@ const APYS: Array<APYType> = [
     name: 'USDT',
     apy: '3.823%',
     tvl: '$0',
+    strategy: 'Moonwell',
     holdings: '--',
     isOpen: false,
     contracts: poolAddresses['MoonbeamUSDT']
@@ -68,6 +74,7 @@ const APYS: Array<APYType> = [
     tvl: '$0',
     holdings: '--',
     isOpen: false,
+    strategy: 'Solarbeam',
     suffix: 'LP',
     getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/3pool',
     contracts: poolAddresses['Solarbeam3pool']
@@ -79,6 +86,7 @@ const APYS: Array<APYType> = [
     tvl: '$0',
     holdings: '--',
     isOpen: false,
+    strategy: 'Solarbeam',
     suffix: 'LP',
     getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/frax-3pool',
     contracts: poolAddresses['SolarbeamFrax3pool']
@@ -90,6 +98,7 @@ const APYS: Array<APYType> = [
     tvl: '$0',
     holdings: '--',
     isOpen: false,
+    strategy: 'Solarbeam',
     suffix: 'LP',
     getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm',
     contracts: poolAddresses['SolarbeamstKSMpool']

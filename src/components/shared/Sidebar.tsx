@@ -46,8 +46,8 @@ const Sidebar = () => {
           <li
             key={idx}
             className={clsx('mt-1 p-2 group rounded-lg', {
-              'bg-gray-50': isActivePath(path),
-              'hover:bg-gray-50': !isActivePath(path)
+              'bg-[#f7f7f7]': isActivePath(path),
+              'hover:bg-[#f7f7f7]': !isActivePath(path)
             })}
           >
             <Link href="/">
@@ -60,7 +60,7 @@ const Sidebar = () => {
                 <span
                   className={clsx('group-hover:opacity-100', {
                     'text-black': isActivePath(path),
-                    'hover:bg-gray-50 hover:opacity-100 text-[#cfcfcf]':
+                    'hover:bg-[#f7f7f7] hover:opacity-100 group-hover:text-black text-[#cfcfcf]':
                       !isActivePath(path)
                   })}
                 >

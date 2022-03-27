@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <div className="flex px-16 h-[10rem] bg-white rounded-lg">
       <div className="flex items-center space-x-16">
-        <ul className="flex items-center space-x-2 text-[15px] text-gray-500">
+        <ul className="flex items-center space-x-4 text-[15px] text-gray-500">
           <li>
             <Link href={CWY_TWITTER_URL}>
               <a target="_blank" rel="noreferrer">

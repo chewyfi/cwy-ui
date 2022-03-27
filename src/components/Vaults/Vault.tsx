@@ -9,7 +9,9 @@ interface Props {
 
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   return (
-    <div className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7]')}>
+    <div
+      className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-gray-100')}
+    >
       <div
         onClick={() => toggleDisclosure()}
         className="flex items-center w-full font-medium cursor-pointer"

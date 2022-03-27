@@ -36,7 +36,9 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
               )}
             </span>
             <span className="text-[11px] text-[#c0c0c0]">Solarbeam</span>
-            <span className="text-[11px] text-[#c0c0c0]">TVL $125k</span>
+            <span className="text-[11px] text-[#c0c0c0]">
+              TVL $125 <span className="-ml-0.5 font-normal">k</span>
+            </span>
           </div>
         </span>
         <span className="text-[14px] w-1/4">{item.apy}</span>

@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
   return (
     <div
       className={clsx('container max-w-3xl mx-auto mb-4', {
-        'overflow-hidden h-screen mb-0': showWalletModal
+        'h-screen mb-0': showWalletModal
       })}
     >
       <Head>

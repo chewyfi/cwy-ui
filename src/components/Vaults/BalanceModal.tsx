@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import React, { Fragment, useState } from 'react'
+import { APYType } from 'src/types'
 import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
 
 import nativeAbi from '../../chain-info/abis/nativeAbi.json'
@@ -21,7 +22,7 @@ import { Alert } from '../ui/Alert'
 interface Props {
   show: boolean
   onClose: () => void
-  name: string
+  item: APYType
 }
 
 const contractMappings: any = {
@@ -103,18 +104,18 @@ const BalanceModal: React.FC<Props> = (props) => {
   }
   const [{}, writeApprove] = useContractWrite(
     {
-      addressOrName: contractMappings[props.name]['contract']['Want'],
+      addressOrName: contractMappings[props.item.name]['contract']['Want'],
       contractInterface:
-        contractMappings[props.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'approve',
     {
       args: [
-        contractMappings[props.name]['contract']['Vault'],
+        contractMappings[props.item.name]['contract']['Vault'],
         BigInt(
           parseFloat(depositAmount) *
-            10 ** contractMappings[props.name]['decimals']
+            10 ** contractMappings[props.item.name]['decimals']
         )
       ]
     }
@@ -122,9 +123,9 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const [{ data, error, loading }, writeDeposit] = useContractWrite(
     {
-      addressOrName: contractMappings[props.name]['contract']['Vault'],
+      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
       contractInterface:
-        contractMappings[props.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'deposit',
@@ -132,7 +133,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       args: [
         BigInt(
           parseFloat(depositAmount) *
-            10 ** contractMappings[props.name]['decimals']
+            10 ** contractMappings[props.item.name]['decimals']
         )
       ]
     }
@@ -147,9 +148,9 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const [{}, writeWithdrawAll] = useContractWrite(
     {
-      addressOrName: contractMappings[props.name]['contract']['Vault'],
+      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
       contractInterface:
-        contractMappings[props.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'withdrawAll'
@@ -163,11 +164,11 @@ const BalanceModal: React.FC<Props> = (props) => {
   return (
     <Transition appear show as={Fragment}>
       <Dialog
+        open={props.show}
         as="div"
         className={clsx(
-          'top-0 bottom-0 z-20 left-0 right-0 min-h-screen bg-gray-100 bg-opacity-70 backdrop-filter backdrop-blur flex flex-col items-center justify-center',
+          'top-0 bottom-0 overflow-y-scroll z-20 left-0 right-0 min-h-screen bg-gray-100 bg-opacity-70 backdrop-filter backdrop-blur flex flex-col items-center justify-center',
           {
-            hidden: !props.show,
             fixed: props.show
           }
         )}
@@ -190,7 +191,7 @@ const BalanceModal: React.FC<Props> = (props) => {
             <div className="flex space-x-2">
               <div className="mt-1">
                 <label className="mb-1 text-gray-500 text-[14px]">
-                  Balance: {getBalance(props.name)} LP
+                  Balance: {getBalance(props.item.name)} {props.item.suffix}
                 </label>
                 <div className="flex items-center text-[14px]">
                   <input

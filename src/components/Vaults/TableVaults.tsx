@@ -10,6 +10,7 @@ const APYS: Array<APYType> = [
   {
     icon: '/static/tokens/movr.svg',
     name: 'MOVR',
+    suffix: 'MOVR',
     apy: '75.81%',
     tvl: '$0',
     holdings: '--',
@@ -22,6 +23,7 @@ const APYS: Array<APYType> = [
     name: 'WETH',
     apy: '68.54%',
     tvl: '$0',
+    suffix: 'WETH',
     holdings: '--',
     strategy: 'Moonwell',
     isOpen: false,
@@ -31,6 +33,7 @@ const APYS: Array<APYType> = [
     icon: '/static/tokens/wbtc.svg',
     name: 'WBTC',
     apy: '48.823%',
+    suffix: 'WBTC',
     tvl: '$0',
     holdings: '--',
     strategy: 'Moonwell',
@@ -43,6 +46,7 @@ const APYS: Array<APYType> = [
     apy: '18.52%',
     tvl: '$0',
     holdings: '--',
+    suffix: 'USDC',
     strategy: 'Moonwell',
     isOpen: false,
     contracts: poolAddresses['MoonbeamUSDC']
@@ -53,6 +57,7 @@ const APYS: Array<APYType> = [
     apy: '14.33%',
     tvl: '$0',
     strategy: 'Moonwell',
+    suffix: 'FRAX',
     holdings: '--',
     isOpen: false,
     contracts: poolAddresses['MoonbeamFRAX']
@@ -63,6 +68,7 @@ const APYS: Array<APYType> = [
     apy: '3.823%',
     tvl: '$0',
     strategy: 'Moonwell',
+    suffix: 'USDT',
     holdings: '--',
     isOpen: false,
     contracts: poolAddresses['MoonbeamUSDT']
@@ -107,13 +113,13 @@ const APYS: Array<APYType> = [
 
 const Table = () => {
   const [apyList, setApyList] = useState(APYS)
-  const [selectedAPY, setSelectedAPY] = useState('')
+  const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosure = (index: number) => {
     let apys = apyList
     apys.map((item, idx) => {
       if (index === idx) {
         item.isOpen = !item.isOpen
-        setSelectedAPY(item.name)
+        setSelectedAPY(item)
       } else {
         item.isOpen = false
       }
@@ -123,10 +129,10 @@ const Table = () => {
   return (
     <div className="w-full">
       <TableHeader />
-      {selectedAPY !== '' && (
+      {selectedAPY && (
         <BalanceModal
-          onClose={() => setSelectedAPY('')}
-          name={selectedAPY}
+          onClose={() => setSelectedAPY(null)}
+          item={selectedAPY}
           show
         />
       )}

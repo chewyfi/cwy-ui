@@ -25,7 +25,7 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
           onClose={() => setShowWalletModal(false)}
         />
         <Sidebar />
-        <div className="w-full pl-[calc(11rem)]">
+        <div className="w-full pl-[calc(12rem)]">
           <Header setShowWalletModal={setShowWalletModal} />
           {children}
           <Footer />

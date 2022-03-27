@@ -38,10 +38,10 @@ const Sidebar = () => {
 
   return (
     <div className="fixed z-10 w-[10rem] bg-white rounded-lg top-4 h-[96%]">
-      <div className="flex items-center p-3 space-x-2">
-        <img src="/chewy-header-logo.png" className="h-7" alt="" />
+      <div className="flex items-center px-2 py-3 space-x-2">
+        <img src="/chewy-header-logo.png" className="h-8" alt="" />
       </div>
-      <ul className="p-3 mt-14 text-[19px]">
+      <ul className="py-3 pr-5 mt-14 text-[19px]">
         {LINKS.map(({ path, name, icon }, idx) => (
           <li
             key={idx}
@@ -53,12 +53,12 @@ const Sidebar = () => {
             <Link href="/">
               <a
                 className={clsx(
-                  'flex items-center space-x-2 font-medium hover:opacity-100'
+                  'flex items-center font-medium hover:opacity-100'
                 )}
               >
-                <img src={icon} className="w-8 h-8" alt={name} />
+                <img src={icon} className="w-7 h-7" alt={name} />
                 <span
-                  className={clsx('group-hover:opacity-100', {
+                  className={clsx('ml-2 group-hover:opacity-100', {
                     'text-black': isActivePath(path),
                     'hover:bg-[#f7f7f7] hover:opacity-100 group-hover:text-black text-[#cfcfcf]':
                       !isActivePath(path)

@@ -37,7 +37,7 @@ const Sidebar = () => {
   const isActivePath = (path: string) => router.pathname === path
 
   return (
-    <div className="fixed z-10 w-[10rem] bg-white rounded-lg top-4 h-[96%]">
+    <div className="fixed z-10 w-[10rem] rounded-lg top-4 h-[96%]">
       <div className="flex items-center px-2 py-3 space-x-2">
         <img src="/chewy-header-logo.png" className="h-8" alt="" />
       </div>

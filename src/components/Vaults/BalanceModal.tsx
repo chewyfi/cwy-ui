@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import React, { Fragment, useState } from 'react'
 import { APYType } from 'src/types'
 import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
@@ -167,91 +168,95 @@ const BalanceModal: React.FC<Props> = (props) => {
         open={props.show}
         as="div"
         className={clsx(
-          'top-0 bottom-0 overflow-y-scroll z-20 left-0 right-0 min-h-screen bg-gray-100 bg-opacity-70 backdrop-filter backdrop-blur flex flex-col items-center justify-center',
+          'top-0 bottom-0 overflow-y-scroll z-20 left-0 right-0 min-h-screen flex flex-col items-center justify-center',
           {
             fixed: props.show
           }
         )}
         onClose={props.onClose}
       >
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-50" />
+        <motion.div
+          initial={{
+            opacity: 0
+          }}
+          animate={{
+            y: ['-15px', '0px'],
+            opacity: 1
+          }}
+          transition={{
+            type: 'keyframes',
+            duration: 0.3
+          }}
         >
-          <Dialog.Overlay className="fixed inset-0" />
-        </Transition.Child>
-        <div className="relative z-20 flex flex-col items-center max-w-lg mx-4 bg-white border-2 border-gray-200 rounded-2xl lg:mx-0 min-h-30">
-          <div className="px-5 py-4">
-            {error ? <Alert errorMessage={error.message} /> : null}
-            <div className="flex space-x-2">
-              <div className="mt-1">
-                <label className="mb-1 text-gray-500 text-[14px]">
-                  Balance: {getBalance(props.item.name)} {props.item.suffix}
-                </label>
-                <div className="flex items-center text-[14px]">
-                  <input
-                    value={depositAmount}
-                    type="number"
-                    step="0.1"
-                    min="0"
-                    onChange={(e) =>
-                      !isNaN(parseFloat(e.target.value))
-                        ? setDepositAmount(e.target.value)
-                        : 0
-                    }
-                    className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
-                  />
+          <div className="relative z-20 flex flex-col items-center max-w-lg mx-4 bg-white border-2 border-gray-200 rounded-2xl lg:mx-0 min-h-30">
+            <div className="px-5 py-4">
+              {error ? <Alert errorMessage={error.message} /> : null}
+              <div className="flex space-x-2">
+                <div className="mt-1">
+                  <label className="mb-1 text-gray-500 text-[14px]">
+                    Balance: {getBalance(props.item.name)} {props.item.suffix}
+                  </label>
+                  <div className="flex items-center text-[14px]">
+                    <input
+                      value={depositAmount}
+                      type="number"
+                      step="0.1"
+                      min="0"
+                      onChange={(e) =>
+                        !isNaN(parseFloat(e.target.value))
+                          ? setDepositAmount(e.target.value)
+                          : 0
+                      }
+                      className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
+                    />
 
+                    <button
+                      onClick={() => withdrawAll()}
+                      className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+                    >
+                      max
+                    </button>
+                  </div>
                   <button
-                    onClick={() => withdrawAll()}
-                    className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+                    onClick={() => approve()}
+                    className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
                   >
-                    max
+                    Approve & Deposit
                   </button>
                 </div>
-                <button
-                  onClick={() => approve()}
-                  className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
-                >
-                  Approve & Deposit
-                </button>
-              </div>
-              <div className="mt-1">
-                <label className="mb-1 text-[14px] text-gray-500">
-                  Deposited: 0
-                </label>
-                <div className="flex items-center text-[14px]">
-                  <input
-                    step="0.01"
-                    min="0"
-                    value={withdrawAmount}
-                    type="number"
-                    onChange={(e) =>
-                      !isNaN(parseFloat(e.target.value))
-                        ? setWithdrawAmount(e.target.value)
-                        : 0
-                    }
-                    className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
-                  />
-                  <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
-                    max
+                <div className="mt-1">
+                  <label className="mb-1 text-[14px] text-gray-500">
+                    Deposited: 0
+                  </label>
+                  <div className="flex items-center text-[14px]">
+                    <input
+                      step="0.01"
+                      min="0"
+                      value={withdrawAmount}
+                      type="number"
+                      onChange={(e) =>
+                        !isNaN(parseFloat(e.target.value))
+                          ? setWithdrawAmount(e.target.value)
+                          : 0
+                      }
+                      className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
+                    />
+                    <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
+                      max
+                    </button>
+                  </div>
+                  <button
+                    onClick={withdrawAll}
+                    className="inline-block w-full p-1 mt-1 text-gray-400 border-2 border-gray-300 rounded-lg bg-gray-50"
+                  >
+                    Withdraw
                   </button>
                 </div>
-                <button
-                  onClick={withdrawAll}
-                  className="inline-block w-full p-1 mt-1 text-gray-400 border-2 border-gray-300 rounded-lg bg-gray-50"
-                >
-                  Withdraw
-                </button>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Dialog>
     </Transition>
   )

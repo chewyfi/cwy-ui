@@ -144,6 +144,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   data ${JSON.stringify(data)} Error data ${error} loading data ${loading}`)
 
   const withdrawAll = async () => {
+    console.log('WITHDRAW ALL CLCIKED')
     await writeWithdrawAll()
   }
 
@@ -212,7 +213,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                     />
 
                     <button
-                      onClick={() => withdrawAll()}
+                      onClick={() => console.log('max clicked')}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
                     >
                       max
@@ -242,7 +243,10 @@ const BalanceModal: React.FC<Props> = (props) => {
                       }
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
-                    <button className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none">
+                    <button
+                      className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+                      onClick={() => writeWithdrawAll()}
+                    >
                       max
                     </button>
                   </div>

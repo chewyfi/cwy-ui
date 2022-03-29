@@ -1,9 +1,15 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { APYType } from 'src/types'
-import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
+import {
+  useAccount,
+  useBalance,
+  useContractRead,
+  useContractWrite,
+  useProvider
+} from 'wagmi'
 
 import nativeAbi from '../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../chain-info/abis/normalAbi.json'
@@ -19,6 +25,7 @@ import {
   WETH_TOKEN_CONTRACT
 } from '../../utils/constants'
 import { Alert } from '../ui/Alert'
+import { Spinner } from '../ui/Spinner'
 
 interface Props {
   show: boolean
@@ -41,6 +48,7 @@ const contractMappings: any = {
 const BalanceModal: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState('1.0')
   const [withdrawAmount, setWithdrawAmount] = useState('1.0')
+  const [balanceData, setBalanceData] = useState(0)
   const provider = useProvider()
   const [{ data: account }] = useAccount()
 
@@ -122,6 +130,46 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
+  const [{ data: allowanceBalance, loading: allowanceLoading }, getAllowance] =
+    useContractRead(
+      {
+        addressOrName: contractMappings[props.item.name]['contract']['Want'],
+        contractInterface:
+          contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        signerOrProvider: provider
+      },
+      'allowance',
+      {
+        args: [
+          '0x83646b933ee0CfA62363a7F15D7533BF2642f006',
+          contractMappings[props.item.name]['contract']['Vault']
+        ]
+      }
+    )
+
+  const [{ data: balanceDataUnformatted }, getBalanceUser] = useContractRead(
+    {
+      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      contractInterface:
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      signerOrProvider: provider
+    },
+    'balanceOf',
+    {
+      args: ['0x83646b933ee0CfA62363a7F15D7533BF2642f006']
+    }
+  )
+
+  console.log('ALLOWANCE BALANCE ', allowanceBalance)
+
+  useEffect(() => {
+    const asyncFunc = async () => {
+      await getBalanceUser()
+      await getAllowance()
+    }
+    asyncFunc()
+  }, [])
+
   const [{ data, error, loading }, writeDeposit] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
@@ -196,7 +244,10 @@ const BalanceModal: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
-                    Balance: {getBalance(props.item.name)} {props.item.suffix}
+                    Balance:{' '}
+                    {getBalance(props.item.name) &&
+                      parseFloat(getBalance(props.item.name)).toFixed(2)}{' '}
+                    {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -223,12 +274,25 @@ const BalanceModal: React.FC<Props> = (props) => {
                     onClick={() => approve()}
                     className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
                   >
-                    Approve & Deposit
+                    {/* {allowanceLoading && <Spinner />} */}
+                    {allowanceLoading ? (
+                      <Spinner />
+                    ) : allowanceBalance ? (
+                      'Deposit'
+                    ) : (
+                      'Approve'
+                    )}
                   </button>
                 </div>
                 <div className="mt-1">
                   <label className="mb-1 text-[14px] text-gray-500">
-                    Deposited: 0
+                    Deposited:{' '}
+                    {balanceDataUnformatted &&
+                      (
+                        parseInt(balanceDataUnformatted.toString(), 16) /
+                        (10 *
+                          10 ** contractMappings[props.item.name]['decimals'])
+                      ).toFixed(2)}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

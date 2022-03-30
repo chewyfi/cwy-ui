@@ -7,7 +7,7 @@ export const Spinner: React.FC<Props> = ({ size = 'sm' }) => {
     <div
       className={`
       rounded-full animate-spin border-gray-300 border-t-gray-500
-      ${size === 'xs' && 'h-4 w-4 border-[2px]'}
+      ${size === 'xs' && 'h-3 w-3 border-[2px]'}
       ${size === 'sm' && 'h-5 w-5 border-2'}
       ${size === 'md' && 'h-5 w-5 border-[3px]'}
       `}

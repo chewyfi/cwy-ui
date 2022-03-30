@@ -50,7 +50,7 @@ const Sidebar = () => {
               'hover:bg-[#f7f7f7]': !isActivePath(path)
             })}
           >
-            <Link href="/">
+            <Link href={path}>
               <a
                 className={clsx(
                   'flex items-center font-medium hover:opacity-100'

@@ -143,7 +143,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       'allowance',
       {
         args: [
-          '0x83646b933ee0CfA62363a7F15D7533BF2642f006',
+          account?.address,
           contractMappings[props.item.name]['contract']['Vault']
         ]
       }

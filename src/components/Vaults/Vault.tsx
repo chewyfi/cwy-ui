@@ -99,7 +99,6 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
         return solarstKSM?.formatted
     }
   }
-
   const [
     { data: balanceDataUnformatted, loading: loadingBalanceUser },
     getBalanceUser
@@ -112,9 +111,10 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     },
     'balanceOf',
     {
-      args: ['0x83646b933ee0CfA62363a7F15D7533BF2642f006']
+      args: [account?.address]
     }
   )
+  console.log(`Balance data unformatted ${balanceDataUnformatted}`)
   return (
     <div
       className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}

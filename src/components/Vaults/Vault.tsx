@@ -150,6 +150,8 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
         </span>
         <span className="text-[17px] ml-6 w-1/3 font-normal">{item.apy}</span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
+          <span>{getBalance(item.name)} </span>
+
           <span>
             {loadingBalanceUser ? (
               <Spinner />
@@ -161,7 +163,6 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
               ).toFixed(2)
             )}
           </span>
-          <span>{getBalance(item.name)} </span>
         </span>
         {/* <span className="w-1/5 text-[14px] text-right">
           <button

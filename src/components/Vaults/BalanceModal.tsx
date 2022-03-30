@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import { motion } from 'framer-motion'
 import React, { Fragment, useEffect, useState } from 'react'
 import { APYType } from 'src/types'
+import useTxnToast from 'src/utils/hooks/useTxnToast'
 import {
   useAccount,
   useBalance,
@@ -49,6 +50,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState('1.0')
   const [withdrawAmount, setWithdrawAmount] = useState('1.0')
   const [balanceData, setBalanceData] = useState(0)
+  const { txnToast } = useTxnToast()
   const provider = useProvider()
 
   const [{ data: account }] = useAccount()
@@ -243,7 +245,9 @@ const BalanceModal: React.FC<Props> = (props) => {
   const approve = async () => {
     console.log('APPROVE CLICKED')
     // await writeApprove()
-    await writeDepositBNB()
+    txnToast('Deposited', 'https://moonriver.moonscan.io/')
+    await writeDeposit()
+    // await writeDepositBNB()
   }
   return (
     <Transition appear show as={Fragment}>

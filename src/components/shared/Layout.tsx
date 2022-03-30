@@ -7,7 +7,13 @@ import Footer from './Footer'
 import Header from './Header'
 import Sidebar from './Sidebar'
 
-const Layout = ({ children }: { children: React.ReactElement }) => {
+const Layout = ({
+  children,
+  hideFooter
+}: {
+  children: React.ReactElement
+  hideFooter?: boolean
+}) => {
   const [showWalletModal, setShowWalletModal] = useState(false)
 
   return (
@@ -28,7 +34,7 @@ const Layout = ({ children }: { children: React.ReactElement }) => {
         <div className="w-full pl-[calc(11rem)]">
           <Header setShowWalletModal={setShowWalletModal} />
           {children}
-          <Footer />
+          {!hideFooter && <Footer />}
         </div>
       </div>
     </div>

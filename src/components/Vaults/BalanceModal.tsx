@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
+import { ethers } from 'ethers'
 import { motion } from 'framer-motion'
 import React, { Fragment, useEffect, useState } from 'react'
 import { APYType } from 'src/types'
@@ -26,7 +27,6 @@ import {
 } from '../../utils/constants'
 import { Alert } from '../ui/Alert'
 import { Spinner } from '../ui/Spinner'
-
 interface Props {
   show: boolean
   onClose: () => void
@@ -50,6 +50,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   const [withdrawAmount, setWithdrawAmount] = useState('1.0')
   const [balanceData, setBalanceData] = useState(0)
   const provider = useProvider()
+
   const [{ data: account }] = useAccount()
 
   const [{ data: movr }] = useBalance({
@@ -188,6 +189,35 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
+  const [
+    {
+      data: dataDepositBNB,
+      error: errorDepositBNB,
+      loading: loadingDepositBNB
+    },
+    writeDepositBNB
+  ] = useContractWrite(
+    {
+      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      contractInterface: nativeAbi,
+      signerOrProvider: provider
+    },
+    'depositBNB',
+    {
+      overrides: {
+        value: ethers.utils.parseEther('1.0')
+      }
+    }
+  )
+
+  console.log('WEI ', ethers.utils.parseEther('1.0'))
+
+  console.log(
+    `DATA BNB ${JSON.stringify(dataDepositBNB)} error ${JSON.stringify(
+      errorDepositBNB
+    )} loading BNB ${loadingDepositBNB}`
+  )
+
   console.log(`
   data ${JSON.stringify(data)} Error data ${error} loading data ${loading}`)
 
@@ -208,8 +238,8 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const approve = async () => {
     console.log('APPROVE CLICKED')
-    await writeApprove()
-    await writeDeposit()
+    // await writeApprove()
+    await writeDepositBNB()
   }
   return (
     <Transition appear show as={Fragment}>

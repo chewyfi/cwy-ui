@@ -175,7 +175,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             ) : (
               balanceDataUnformatted &&
               (
-                balanceDataUnformatted /
+                (balanceDataUnformatted as any) /
                 10 ** contractMappings[item.name]['decimals']
               )
                 .toString()

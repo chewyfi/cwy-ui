@@ -352,7 +352,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                     Deposited:{' '}
                     {balanceDataUnformatted &&
                       (
-                        balanceDataUnformatted.toString() /
+                        (balanceDataUnformatted as any) /
                         10 ** contractMappings[props.item.name]['decimals']
                       )
                         .toString()

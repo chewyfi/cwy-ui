@@ -34,6 +34,15 @@ const contractMappings: any = {
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
+interface priceFeedMappings {
+  FRAX: string
+  USDC: string
+  WBTC: string
+  WETH: string
+  MOVR: string
+  USDT: string
+}
+
 const priceFeedMappings: any = {
   FRAX: 'FRAX',
   USDC: 'USDC',
@@ -43,9 +52,20 @@ const priceFeedMappings: any = {
   MOVR: 'moonriver'
 }
 
+interface usdPriceFeedMappings {
+  bitcoin: number
+  ethereum: number
+  USDT: number
+  USDC: number
+  moonriver: number
+  moonwell: number
+  FRAX: number
+
+}
+
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   const provider = useProvider()
-  const [usdPriceFeed, setUsdPrice] = useState({})
+  const [usdPriceFeed, setUsdPrice] = useState<any>({ bitcoin: 0, ethereum: 0, USDT: 0, USDC: 0, moonriver: 0, FRAX: 0, moonwell: 0 })
   const [{ data: account }] = useAccount()
 
   const [{ data: movr }] = useBalance({
@@ -184,13 +204,13 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                   <Spinner size="xs" />
                 ) : (
                   (
-                    totalValueData &&
+                  totalValueData &&
                     ((totalValueData as any) *
-                      usdPriceFeed[priceFeedMappings[item.name]]) /
+                      usdPriceFeed[priceFeedMappings[item.name]])! /
                       10 ** contractMappings[item.name]['decimals']
-                  )
-                    ?.toString()
-                    .substring(0, 7)
+                  )?
+                    .toString()
+                    .substring(0, 4)
                 )}
               </span>
             </span>

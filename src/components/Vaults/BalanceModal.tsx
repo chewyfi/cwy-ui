@@ -248,7 +248,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   const approve = async () => {
     console.log('APPROVE CLICKED')
     console.log(`Balance data unformatted ${balanceDataUnformatted}`)
-    if (!balanceDataUnformatted) {
+    if (allowanceBalance) {
       await writeDeposit()
       txnToast(`Deposited ${depositAmount}`, 'https://moonriver.moonscan.io/')
     } else {

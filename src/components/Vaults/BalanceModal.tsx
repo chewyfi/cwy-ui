@@ -101,11 +101,13 @@ const BalanceModal: React.FC<Props> = (props) => {
       case 'WBTC':
         return wbtc?.formatted
       case 'USDC':
-        return parseFloat(usdc?.formatted || '0') * 10 ** 12
+        let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
+        return numUSDC.toString()
       case 'FRAX':
         return frax?.formatted
       case 'USDT':
-        return parseFloat(usdt?.formatted || '0') * 10 ** 12
+        let numUSDT = parseFloat(usdt?.formatted || '0') * 10 ** 12
+        return numUSDT.toString()
       case 'solar3POOL':
         return threePool?.formatted
       case 'solar3FRAX':
@@ -114,6 +116,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         return solarstKSM?.formatted
     }
   }
+
   const [{}, writeApprove] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Want'],
@@ -244,9 +247,15 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const approve = async () => {
     console.log('APPROVE CLICKED')
-    // await writeApprove()
-    txnToast('Deposited', 'https://moonriver.moonscan.io/')
-    await writeDeposit()
+
+    if (!balanceDataUnformatted) {
+      await writeDeposit()
+      txnToast('Deposited', 'https://moonriver.moonscan.io/')
+    } else {
+      await writeApprove()
+      txnToast('Approved', 'https://moonriver.moonscan.io/')
+    }
+
     // await writeDepositBNB()
   }
   return (
@@ -282,7 +291,8 @@ const BalanceModal: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
-                    Balance: {getBalance(props.item.name)} {props.item.suffix}
+                    Balance: {getBalance(props.item.name)?.substring(0, 7)}{' '}
+                    {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

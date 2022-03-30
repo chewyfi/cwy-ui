@@ -84,11 +84,13 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
       case 'WBTC':
         return wbtc?.formatted
       case 'USDC':
-        return parseFloat(usdc?.formatted || '0') * 10 ** 12
+        let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
+        return numUSDC.toString()
       case 'FRAX':
         return frax?.formatted
       case 'USDT':
-        return parseFloat(usdt?.formatted || '0') * 10 ** 12
+        let numUSDT = parseFloat(usdt?.formatted || '0') * 10 ** 12
+        return numUSDT.toString()
       case 'solar3POOL':
         return threePool?.formatted
       case 'solar3FRAX':
@@ -150,7 +152,13 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
         </span>
         <span className="text-[17px] ml-6 w-1/3 font-normal">{item.apy}</span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
-          <span>{getBalance(item.name)} </span>
+          <span>
+            {!getBalance(item.name) ? (
+              <Spinner />
+            ) : (
+              getBalance(item.name)?.substring(0, 7)
+            )}{' '}
+          </span>
 
           <span>
             {loadingBalanceUser ? (

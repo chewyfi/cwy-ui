@@ -46,8 +46,8 @@ const contractMappings: any = {
 }
 
 const BalanceModal: React.FC<Props> = (props) => {
-  const [depositAmount, setDepositAmount] = useState('1.0')
-  const [withdrawAmount, setWithdrawAmount] = useState('1.0')
+  const [depositAmount, setDepositAmount] = useState('0.0')
+  const [withdrawAmount, setWithdrawAmount] = useState('0.0')
   const [balanceData, setBalanceData] = useState(0)
   const { txnToast } = useTxnToast()
   const provider = useProvider()

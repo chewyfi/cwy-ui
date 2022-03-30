@@ -158,7 +158,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     },
     'balanceOf',
     {
-      args: ['0x83646b933ee0CfA62363a7F15D7533BF2642f006']
+      args: [account?.address]
     }
   )
 
@@ -168,7 +168,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       await getAllowance()
     }
     asyncFunc()
-  }, [])
+  }, [account?.address])
 
   const [{ data, error, loading }, writeDeposit] = useContractWrite(
     {
@@ -352,10 +352,11 @@ const BalanceModal: React.FC<Props> = (props) => {
                     Deposited:{' '}
                     {balanceDataUnformatted &&
                       (
-                        parseInt(balanceDataUnformatted.toString(), 16) /
-                        (10 *
-                          10 ** contractMappings[props.item.name]['decimals'])
-                      ).toFixed(2)}
+                        balanceDataUnformatted.toString() /
+                        10 ** contractMappings[props.item.name]['decimals']
+                      )
+                        .toString()
+                        .substring(0, 7)}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

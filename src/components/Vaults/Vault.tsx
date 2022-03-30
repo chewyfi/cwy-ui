@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { APYType } from 'src/types'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
@@ -75,6 +75,13 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     addressOrName: account?.address
   })
 
+  useEffect(() => {
+    const hydrate = async () => {
+      await getBalanceUser()
+    }
+    hydrate()
+  }, [account?.address])
+
   const getBalance = (token: string) => {
     switch (token) {
       case 'MOVR':
@@ -114,7 +121,9 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
       args: [account?.address]
     }
   )
-  console.log(`Balance data unformatted ${balanceDataUnformatted}`)
+  console.log(
+    `Balance data unformatted ${balanceDataUnformatted} typeof ${typeof balanceDataUnformatted}`
+  )
   return (
     <div
       className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
@@ -166,9 +175,12 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             ) : (
               balanceDataUnformatted &&
               (
-                parseInt(balanceDataUnformatted.toString(), 16) /
+                balanceDataUnformatted /
                 10 ** contractMappings[item.name]['decimals']
-              ).toFixed(2)
+              )
+                .toString()
+
+                .substring(0, 6)
             )}
           </span>
         </span>

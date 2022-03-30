@@ -178,10 +178,10 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             </span>
             <span className="text-[14px] text-[#c0c0c0]">{item.strategy}</span>
             <span className="text-[14px] text-[#c0c0c0]">
-              TVL $
-              <span className="font-normal">
+              <span className="flex items-center font-normal">
+                <span className="mr-1">TVL $</span>
                 {loadingTotalValue ? (
-                  <Spinner />
+                  <Spinner size="xs" />
                 ) : (
                   (
                     totalValueData &&

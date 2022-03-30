@@ -43,15 +43,14 @@ const Sidebar = () => {
       </div>
       <ul className="py-3 pr-5 mt-14 text-[19px]">
         {LINKS.map(({ path, name, icon }, idx) => (
-          <li
-            key={idx}
-            className={clsx('mt-1 p-2 group rounded-lg', {
-              'bg-[#f7f7f7]': isActivePath(path),
-              'hover:bg-[#f7f7f7]': !isActivePath(path)
-            })}
-          >
-            <Link href="/">
-              <a
+          <Link href={path} key={idx} passHref>
+            <li
+              className={clsx('cursor-pointer mt-1 p-2 group rounded-lg', {
+                'bg-[#f7f7f7]': isActivePath(path),
+                'hover:bg-[#f7f7f7]': !isActivePath(path)
+              })}
+            >
+              <span
                 className={clsx(
                   'flex items-center font-medium hover:opacity-100'
                 )}
@@ -66,9 +65,9 @@ const Sidebar = () => {
                 >
                   {name}
                 </span>
-              </a>
-            </Link>
-          </li>
+              </span>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>

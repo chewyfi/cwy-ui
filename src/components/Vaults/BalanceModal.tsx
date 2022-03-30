@@ -353,11 +353,11 @@ const BalanceModal: React.FC<Props> = (props) => {
                   </div>
                   <button
                     onClick={() => approve()}
-                    className="inline-block w-full p-1 mt-1 text-white bg-black border-2 border-black rounded-lg"
+                    className="inline-block w-full p-1 mt-1 text-center text-white bg-black border-2 border-black rounded-lg"
                   >
                     {/* {allowanceLoading && <Spinner />} */}
                     {allowanceLoading ? (
-                      <Spinner />
+                      <Spinner className="mx-auto my-0.5" />
                     ) : allowanceBalance ? (
                       'Deposit'
                     ) : (

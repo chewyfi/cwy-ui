@@ -1,6 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { ethers } from 'ethers'
 import { motion } from 'framer-motion'
 import React, { Fragment, useEffect, useState } from 'react'
 import { APYType } from 'src/types'
@@ -163,8 +162,6 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
-  console.log('ALLOWANCE BALANCE ', allowanceBalance)
-
   useEffect(() => {
     const asyncFunc = async () => {
       await getBalanceUser()
@@ -189,7 +186,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         )
       ],
       overrides: {
-        gasLimit: '1500000'
+        gasLimit: '4500000'
       }
     }
   )
@@ -211,12 +208,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     {
       overrides: {
         value: BigInt(5 * 10 ** 17),
-        gasLimit: '1500000'
+        gasLimit: '10500000'
       }
     }
   )
-
-  console.log('WEI ', ethers.utils.parseEther('1.0'))
 
   console.log(
     `DATA BNB ${JSON.stringify(dataDepositBNB)} error ${JSON.stringify(
@@ -237,7 +232,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     'withdrawAll',
     {
       overrides: {
-        gasLimit: '1500000'
+        gasLimit: '4500000'
       }
     }
   )
@@ -258,26 +253,22 @@ const BalanceModal: React.FC<Props> = (props) => {
         )
       ],
       overrides: {
-        gasLimit: '1500000'
+        gasLimit: '4500000'
       }
     }
   )
 
   const depositMaxAmount = async () => {
-    console.log('deposit max amount clicked')
     let balance = getBalance(props.item.name)!
     setDepositAmount(balance)
     await writeDeposit()
   }
 
   const approve = async () => {
-    console.log('APPROVE CLICKED')
-    console.log(`Balance data unformatted ${balanceDataUnformatted}`)
     if (allowanceBalance) {
-      console.log('Name is', props.item.name)
-      console.log(contractMappings[props.item.name]['contract']['Vault'])
-      // await writeDeposit()
-      await writeDepositBNB()
+      props.item.name === 'MOVR'
+        ? await writeDepositBNB()
+        : await writeDeposit()
 
       txnToast(`Deposited ${depositAmount}`, 'https://moonriver.moonscan.io/')
     } else {
@@ -381,13 +372,25 @@ const BalanceModal: React.FC<Props> = (props) => {
                     />
                     <button
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
-                      onClick={() => writeWithdrawAll()}
+                      onClick={() => {
+                        writeWithdrawAll()
+                        txnToast(
+                          `Withdrawed Total Deposit`,
+                          'https://moonriver.moonscan.io/'
+                        )
+                      }}
                     >
                       max
                     </button>
                   </div>
                   <button
-                    onClick={() => writeWithdrawAmount()}
+                    onClick={() => {
+                      writeWithdrawAmount()
+                      txnToast(
+                        `Withdrawed ${withdrawAmount}`,
+                        'https://moonriver.moonscan.io/'
+                      )
+                    }}
                     className="inline-block w-full p-1 mt-1 text-gray-400 border-2 border-gray-300 rounded-lg bg-gray-50"
                   >
                     Withdraw

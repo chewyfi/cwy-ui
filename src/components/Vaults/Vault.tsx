@@ -121,9 +121,20 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
       args: [account?.address]
     }
   )
-  console.log(
-    `Balance data unformatted ${balanceDataUnformatted} typeof ${typeof balanceDataUnformatted}`
-  )
+
+  const [{ data: totalValueData, loading: loadingTotalValue }, getTotalValue] =
+    useContractRead(
+      {
+        addressOrName: contractMappings[item.name]['contract']['Vault'],
+        contractInterface:
+          contractMappings[item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        signerOrProvider: provider
+      },
+      'balance'
+    )
+
+  console.log('TOTAL VALUE DATA ', totalValueData)
+
   return (
     <div
       className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
@@ -155,7 +166,20 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             </span>
             <span className="text-[14px] text-[#c0c0c0]">{item.strategy}</span>
             <span className="text-[14px] text-[#c0c0c0]">
-              TVL $<span className="font-normal">125k</span>
+              TVL $
+              <span className="font-normal">
+                {loadingTotalValue ? (
+                  <Spinner />
+                ) : (
+                  (
+                    totalValueData &&
+                    (totalValueData as any) /
+                      10 ** contractMappings[item.name]['decimals']
+                  )
+                    ?.toString()
+                    .substring(0, 7)
+                )}
+              </span>
             </span>
           </div>
         </span>

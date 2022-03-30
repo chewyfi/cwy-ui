@@ -91,6 +91,8 @@ const BalanceModal: React.FC<Props> = (props) => {
     addressOrName: account?.address
   })
 
+  console.log('USDT Data ', usdt)
+
   const getBalance = (token: string) => {
     switch (token) {
       case 'MOVR':
@@ -190,6 +192,22 @@ const BalanceModal: React.FC<Props> = (props) => {
       }
     }
   )
+
+  // const [{}, writeDepositMax] = useContractWrite(
+  //   {
+  //     addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+  //     contractInterface:
+  //       contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+  //     signerOrProvider: provider
+  //   },
+  //   'deposit',
+  //   {
+  //     args: [BigInt()],
+  //     overrides: {
+  //       gasLimit: '4500000'
+  //     }
+  //   }
+  // )
 
   const [
     {

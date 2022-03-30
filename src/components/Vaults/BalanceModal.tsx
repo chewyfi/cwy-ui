@@ -236,6 +236,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     'withdrawAll'
   )
 
+  const depositMaxAmount = async () => {
+    // await writeDeposit
+  }
+
   const approve = async () => {
     console.log('APPROVE CLICKED')
     // await writeApprove()
@@ -274,10 +278,7 @@ const BalanceModal: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
-                    Balance:{' '}
-                    {getBalance(props.item.name) &&
-                      parseFloat(getBalance(props.item.name)).toFixed(2)}{' '}
-                    {props.item.suffix}
+                    Balance: {getBalance(props.item.name)} {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -294,7 +295,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                     />
 
                     <button
-                      onClick={() => console.log('max clicked')}
+                      onClick={depositMaxAmount}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
                     >
                       max

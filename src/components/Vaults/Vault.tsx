@@ -161,10 +161,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
               ).toFixed(2)
             )}
           </span>
-          <span>
-            {getBalance(item.name) &&
-              parseFloat(getBalance(item.name)).toFixed(2)}{' '}
-          </span>
+          <span>{getBalance(item.name)} </span>
         </span>
         {/* <span className="w-1/5 text-[14px] text-right">
           <button

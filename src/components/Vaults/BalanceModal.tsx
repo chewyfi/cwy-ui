@@ -210,7 +210,8 @@ const BalanceModal: React.FC<Props> = (props) => {
     'depositBNB',
     {
       overrides: {
-        value: ethers.utils.parseEther('1.0')
+        value: BigInt(5 * 10 ** 17),
+        gasLimit: '1500000'
       }
     }
   )
@@ -226,11 +227,6 @@ const BalanceModal: React.FC<Props> = (props) => {
   console.log(`
   data ${JSON.stringify(data)} Error data ${error} loading data ${loading}`)
 
-  const withdrawAll = async () => {
-    console.log('WITHDRAW ALL CLCIKED')
-    await writeWithdrawAll()
-  }
-
   const [{}, writeWithdrawAll] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
@@ -238,7 +234,33 @@ const BalanceModal: React.FC<Props> = (props) => {
         contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
-    'withdrawAll'
+    'withdrawAll',
+    {
+      overrides: {
+        gasLimit: '1500000'
+      }
+    }
+  )
+
+  const [{}, writeWithdrawAmount] = useContractWrite(
+    {
+      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      contractInterface:
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      signerOrProvider: provider
+    },
+    'withdraw',
+    {
+      args: [
+        BigInt(
+          parseFloat(withdrawAmount) *
+            10 ** contractMappings[props.item.name]['decimals']
+        )
+      ],
+      overrides: {
+        gasLimit: '1500000'
+      }
+    }
   )
 
   const depositMaxAmount = async () => {
@@ -254,14 +276,14 @@ const BalanceModal: React.FC<Props> = (props) => {
     if (allowanceBalance) {
       console.log('Name is', props.item.name)
       console.log(contractMappings[props.item.name]['contract']['Vault'])
-      await writeDeposit()
+      // await writeDeposit()
+      await writeDepositBNB()
+
       txnToast(`Deposited ${depositAmount}`, 'https://moonriver.moonscan.io/')
     } else {
       await writeApprove()
       txnToast('Approved', 'https://moonriver.moonscan.io/')
     }
-
-    // await writeDepositBNB()
   }
   return (
     <Transition appear show as={Fragment}>
@@ -365,7 +387,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                     </button>
                   </div>
                   <button
-                    onClick={withdrawAll}
+                    onClick={() => writeWithdrawAmount()}
                     className="inline-block w-full p-1 mt-1 text-gray-400 border-2 border-gray-300 rounded-lg bg-gray-50"
                   >
                     Withdraw

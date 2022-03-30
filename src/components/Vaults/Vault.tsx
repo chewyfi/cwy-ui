@@ -16,6 +16,7 @@ import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
 import nativeAbi from '../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../chain-info/abis/normalAbi.json'
 import { poolAddresses } from '../../chain-info/pool-addresses'
+import { Spinner } from '../ui/Spinner'
 
 interface Props {
   item: APYType
@@ -97,7 +98,10 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     }
   }
 
-  const [{ data: balanceDataUnformatted }, getBalanceUser] = useContractRead(
+  const [
+    { data: balanceDataUnformatted, loading: loadingBalanceUser },
+    getBalanceUser
+  ] = useContractRead(
     {
       addressOrName: contractMappings[item.name]['contract']['Vault'],
       contractInterface:
@@ -147,11 +151,15 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
         <span className="text-[17px] ml-6 w-1/3 font-normal">{item.apy}</span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
-            {balanceDataUnformatted &&
+            {loadingBalanceUser ? (
+              <Spinner />
+            ) : (
+              balanceDataUnformatted &&
               (
                 parseInt(balanceDataUnformatted.toString(), 16) /
                 (10 * 10 ** contractMappings[item.name]['decimals'])
-              ).toFixed(2)}
+              ).toFixed(2)
+            )}
           </span>
           <span>
             {getBalance(item.name) &&

@@ -128,10 +128,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     {
       args: [
         contractMappings[props.item.name]['contract']['Vault'],
-        BigInt(
-          parseFloat(depositAmount) *
-            10 ** contractMappings[props.item.name]['decimals']
-        )
+        BigInt(10000000 * 10 ** contractMappings[props.item.name]['decimals'])
       ]
     }
   )
@@ -190,7 +187,10 @@ const BalanceModal: React.FC<Props> = (props) => {
           parseFloat(depositAmount) *
             10 ** contractMappings[props.item.name]['decimals']
         )
-      ]
+      ],
+      overrides: {
+        gasLimit: '1500000'
+      }
     }
   )
 
@@ -242,13 +242,18 @@ const BalanceModal: React.FC<Props> = (props) => {
   )
 
   const depositMaxAmount = async () => {
-    // await writeDeposit
+    console.log('deposit max amount clicked')
+    let balance = getBalance(props.item.name)!
+    setDepositAmount(balance)
+    await writeDeposit()
   }
 
   const approve = async () => {
     console.log('APPROVE CLICKED')
     console.log(`Balance data unformatted ${balanceDataUnformatted}`)
     if (allowanceBalance) {
+      console.log('Name is', props.item.name)
+      console.log(contractMappings[props.item.name]['contract']['Vault'])
       await writeDeposit()
       txnToast(`Deposited ${depositAmount}`, 'https://moonriver.moonscan.io/')
     } else {

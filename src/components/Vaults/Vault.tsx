@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
@@ -34,8 +34,18 @@ const contractMappings: any = {
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
+const priceFeedMappings: any = {
+  FRAX: 'FRAX',
+  USDC: 'USDC',
+  USDT: 'USDT',
+  WBTC: 'bitcoin',
+  WETH: 'ethereum',
+  MOVR: 'moonriver'
+}
+
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   const provider = useProvider()
+  const [usdPriceFeed, setUsdPrice] = useState({})
   const [{ data: account }] = useAccount()
 
   const [{ data: movr }] = useBalance({
@@ -77,6 +87,10 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
 
   useEffect(() => {
     const hydrate = async () => {
+      const res = await fetch(' https://chewy-api.vercel.app/prices')
+      const json = await res.json()
+      console.log('JSON ', json)
+      setUsdPrice(json)
       await getBalanceUser()
     }
     hydrate()
@@ -133,8 +147,6 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
       'balance'
     )
 
-  console.log('TOTAL VALUE DATA ', totalValueData)
-
   return (
     <div
       className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
@@ -173,7 +185,8 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                 ) : (
                   (
                     totalValueData &&
-                    (totalValueData as any) /
+                    ((totalValueData as any) *
+                      usdPriceFeed[priceFeedMappings[item.name]]) /
                       10 ** contractMappings[item.name]['decimals']
                   )
                     ?.toString()

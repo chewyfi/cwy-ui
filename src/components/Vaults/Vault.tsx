@@ -60,12 +60,19 @@ interface usdPriceFeedMappings {
   moonriver: number
   moonwell: number
   FRAX: number
-
 }
 
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   const provider = useProvider()
-  const [usdPriceFeed, setUsdPrice] = useState<any>({ bitcoin: 0, ethereum: 0, USDT: 0, USDC: 0, moonriver: 0, FRAX: 0, moonwell: 0 })
+  const [usdPriceFeed, setUsdPrice] = useState<any>({
+    bitcoin: 0,
+    ethereum: 0,
+    USDT: 0,
+    USDC: 0,
+    moonriver: 0,
+    FRAX: 0,
+    moonwell: 0
+  })
   const [{ data: account }] = useAccount()
 
   const [{ data: movr }] = useBalance({
@@ -204,13 +211,11 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                   <Spinner size="xs" />
                 ) : (
                   (
-                  totalValueData &&
+                    totalValueData &&
                     ((totalValueData as any) *
                       usdPriceFeed[priceFeedMappings[item.name]])! /
                       10 ** contractMappings[item.name]['decimals']
-                  )?
-                    .toString()
-                    .substring(0, 4)
+                  )?.toFixed(2)
                 )}
               </span>
             </span>

@@ -101,6 +101,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         return wbtc?.formatted ? wbtc?.formatted : 0
       case 'USDC':
         let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
+        console.log(`USDC VALUE ${usdc}`)
         return numUSDC.toString()
       case 'FRAX':
         return frax?.formatted ? frax?.formatted : 0
@@ -209,8 +210,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     {
       args: [
         BigInt(
-          (getBalance(props.item.name) as any) *
-            10 ** contractMappings[props.item.name]['decimals']
+          Math.trunc(
+            (getBalance(props.item.name) as any) *
+              10 ** contractMappings[props.item.name]['decimals']
+          )
         )
       ],
       overrides: {

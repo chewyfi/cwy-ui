@@ -242,7 +242,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     'depositBNB',
     {
       overrides: {
-        value: BigInt(5 * 10 ** 17),
+        value: BigInt(
+          parseFloat(depositAmount) *
+            10 ** contractMappings[props.item.name]['decimals']
+        ),
         gasLimit: '10500000'
       }
     }

@@ -1,14 +1,12 @@
-import React from 'react'
 import Layout from 'src/components/shared/Layout'
+import Table from 'src/components/Vaults/TableVaults'
 
-const home = () => {
+export default function Vaults() {
   return (
     <Layout>
-      <div className="grid h-full place-items-center">
-        <div className="font-bold">Coming soon</div>
+      <div className="py-4 mb-4 bg-white rounded-lg">
+        <Table />
       </div>
     </Layout>
   )
 }
-
-export default home

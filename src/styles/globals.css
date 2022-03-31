@@ -11,6 +11,10 @@
   }
 }
 
+html {
+  @apply !pr-0;
+}
+
 body {
   font-family: 'DM Sans', 'system-ui', monospace;
   @apply bg-white min-w-[800px] scroll-smooth min-h-screen overflow-y-scroll;

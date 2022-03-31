@@ -1,11 +1,18 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Layout from 'src/components/shared/Layout'
-import Table from 'src/components/Vaults/TableVaults'
 
 export default function Vaults() {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push('vaults')
+  }, [])
+
   return (
-    <Layout>
-      <div className="py-4 mb-4 bg-white rounded-lg">
-        <Table />
+    <Layout hideFooter>
+      <div className="grid h-full mt-8 place-items-center">
+        <div className="font-bold">Coming soon</div>
       </div>
     </Layout>
   )

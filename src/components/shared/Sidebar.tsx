@@ -6,12 +6,12 @@ import React from 'react'
 const LINKS = [
   {
     name: 'Home',
-    path: '/home',
+    path: '/',
     icon: '/static/sidebar/home-icon.png'
   },
   {
     name: 'Vaults',
-    path: '/',
+    path: '/vaults',
     icon: '/static/sidebar/vaults-icon.png'
   },
   {

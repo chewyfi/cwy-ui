@@ -133,22 +133,32 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
-  const [{ data: allowanceBalance, loading: allowanceLoading }, getAllowance] =
-    useContractRead(
-      {
-        addressOrName: contractMappings[props.item.name]['contract']['Want'],
-        contractInterface:
-          contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
-        signerOrProvider: provider
-      },
-      'allowance',
-      {
-        args: [
-          account?.address,
-          contractMappings[props.item.name]['contract']['Vault']
-        ]
-      }
-    )
+  const [
+    {
+      data: allowanceBalance,
+      loading: allowanceLoading,
+      error: allowanceError
+    },
+    getAllowance
+  ] = useContractRead(
+    {
+      addressOrName: contractMappings[props.item.name]['contract']['Want'],
+      contractInterface:
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      signerOrProvider: provider
+    },
+    'allowance',
+    {
+      args: [
+        account?.address,
+        contractMappings[props.item.name]['contract']['Vault']
+      ]
+    }
+  )
+
+  console.log(
+    `Allowance balance ${allowanceBalance} error ${allowanceError} address`
+  )
 
   const [{ data: balanceDataUnformatted }, getBalanceUser] = useContractRead(
     {
@@ -306,7 +316,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   }
 
   const approve = async () => {
-    if (allowanceBalance) {
+    if (allowanceBalance && parseInt(allowanceBalance.toString()) > 0) {
       props.item.name === 'MOVR'
         ? await writeDepositBNB()
         : await writeDeposit()

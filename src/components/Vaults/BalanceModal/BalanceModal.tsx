@@ -12,9 +12,9 @@ import {
   useProvider
 } from 'wagmi'
 
-import nativeAbi from '../../chain-info/abis/nativeAbi.json'
-import normalAbi from '../../chain-info/abis/normalAbi.json'
-import { poolAddresses } from '../../chain-info/pool-addresses'
+import nativeAbi from '../../../chain-info/abis/nativeAbi.json'
+import normalAbi from '../../../chain-info/abis/normalAbi.json'
+import { poolAddresses } from '../../../chain-info/pool-addresses'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
   FRAX_TOKEN_CONTRACT,
@@ -24,9 +24,9 @@ import {
   USDT_TOKEN_CONTRACT,
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
-} from '../../utils/constants'
-import { Alert } from '../ui/Alert'
-import { Spinner } from '../ui/Spinner'
+} from '../../../utils/constants'
+import { Alert } from '../../ui/Alert'
+import { Spinner } from '../../ui/Spinner'
 interface Props {
   show: boolean
   onClose: () => void
@@ -296,6 +296,15 @@ const BalanceModal: React.FC<Props> = (props) => {
   const depositMaxAmount = async () => {
     console.log('deposit max clicked')
     await writeDepositMax()
+    txnToast(
+      `Deposited ${BigInt(
+        Math.trunc(
+          (getBalance(props.item.name) as any) *
+            10 ** contractMappings[props.item.name]['decimals']
+        )
+      )}`,
+      'https://moonriver.moonscan.io/'
+    )
   }
 
   const approve = async () => {

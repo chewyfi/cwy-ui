@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { APYType } from 'src/types'
 
 import { poolAddresses } from '../../chain-info/pool-addresses'
-import BalanceModal from './BalanceModal'
+import BalanceModal from './BalanceModal/BalanceModal'
 import { TableHeader } from './TableHeader'
 import { Vault } from './Vault'
 

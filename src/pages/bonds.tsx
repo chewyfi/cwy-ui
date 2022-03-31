@@ -3,7 +3,7 @@ import Layout from 'src/components/shared/Layout'
 
 const bonds = () => {
   return (
-    <Layout hideFooter>
+    <Layout headerTitle="Bonds" hideFooter>
       <div className="grid h-full mt-8 place-items-center">
         <div className="font-bold">Coming soon</div>
       </div>

@@ -10,7 +10,7 @@ export default function Vaults() {
   }, [])
 
   return (
-    <Layout hideFooter>
+    <Layout headerTitle="Home" hideFooter>
       <div className="grid h-full mt-8 place-items-center">
         <div className="font-bold">Coming soon</div>
       </div>

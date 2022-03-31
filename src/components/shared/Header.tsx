@@ -7,9 +7,11 @@ import { useAccount, useNetwork } from 'wagmi'
 import ChevronDown from '../icons/ChevronDown'
 
 const Header = ({
-  setShowWalletModal
+  setShowWalletModal,
+  title
 }: {
   setShowWalletModal: React.Dispatch<boolean>
+  title: string
 }) => {
   const [{ data: network }, switchNetwork] = useNetwork()
   const [{ data: accountData }] = useAccount()
@@ -26,7 +28,7 @@ const Header = ({
   return (
     <div className="sticky z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
-        <h6 className="text-[22px] font-medium">Vaults</h6>
+        <h6 className="text-[22px] font-medium">{title}</h6>
         <div className="flex items-center">
           <button
             onClick={() => setShowWalletModal(true)}

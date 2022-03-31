@@ -9,10 +9,12 @@ import Sidebar from './Sidebar'
 
 const Layout = ({
   children,
-  hideFooter
+  hideFooter,
+  headerTitle
 }: {
   children: React.ReactElement
   hideFooter?: boolean
+  headerTitle: string
 }) => {
   const [showWalletModal, setShowWalletModal] = useState(false)
 
@@ -32,7 +34,7 @@ const Layout = ({
         />
         <Sidebar />
         <div className="w-full pl-[calc(11rem)]">
-          <Header setShowWalletModal={setShowWalletModal} />
+          <Header setShowWalletModal={setShowWalletModal} title={headerTitle} />
           {children}
           {!hideFooter && <Footer />}
         </div>

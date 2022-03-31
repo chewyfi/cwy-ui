@@ -6,7 +6,7 @@ import React from 'react'
 const LINKS = [
   {
     name: 'Home',
-    path: '/',
+    path: '/home',
     icon: '/static/sidebar/home-icon.png'
   },
   {

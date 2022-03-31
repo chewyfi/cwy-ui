@@ -391,7 +391,8 @@ const BalanceModal: React.FC<Props> = (props) => {
                     {/* {allowanceLoading && <Spinner />} */}
                     {allowanceLoading ? (
                       <Spinner className="mx-auto my-0.5" />
-                    ) : allowanceBalance ? (
+                    ) : allowanceBalance &&
+                      parseInt(allowanceBalance.toString()) > 0 ? (
                       'Deposit'
                     ) : (
                       'Approve'

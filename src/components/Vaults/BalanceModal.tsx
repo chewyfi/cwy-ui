@@ -94,26 +94,26 @@ const BalanceModal: React.FC<Props> = (props) => {
   const getBalance = (token: string) => {
     switch (token) {
       case 'MOVR':
-        return movr?.formatted ? movr?.formatted : 0
+        return movr?.formatted ? movr?.formatted : '0'
       case 'WETH':
-        return weth?.formatted ? weth?.formatted : 0
+        return weth?.formatted ? weth?.formatted : '0'
       case 'WBTC':
-        return wbtc?.formatted ? wbtc?.formatted : 0
+        return wbtc?.formatted ? wbtc?.formatted : '0'
       case 'USDC':
         let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
         console.log(`USDC VALUE ${usdc}`)
         return numUSDC.toString()
       case 'FRAX':
-        return frax?.formatted ? frax?.formatted : 0
+        return frax?.formatted ? frax?.formatted : '0'
       case 'USDT':
         let numUSDT = parseFloat(usdt?.formatted || '0') * 10 ** 12
         return numUSDT.toString()
       case 'solar3POOL':
-        return threePool?.formatted ? threePool?.formatted : 0
+        return threePool?.formatted ? threePool?.formatted : '0'
       case 'solar3FRAX':
-        return frax3Pool?.formatted ? frax3Pool?.formatted : 0
+        return frax3Pool?.formatted ? frax3Pool?.formatted : '0'
       case 'solarstKSM':
-        return solarstKSM?.formatted ? solarstKSM?.formatted : 0
+        return solarstKSM?.formatted ? solarstKSM?.formatted : '0'
     }
   }
 

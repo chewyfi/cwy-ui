@@ -49,7 +49,10 @@ const priceFeedMappings: any = {
   USDT: 'USDT',
   WBTC: 'bitcoin',
   WETH: 'ethereum',
-  MOVR: 'moonriver'
+  MOVR: 'moonriver',
+  solar3POOL: '3pool',
+  solar3FRAX: 'FRAX-3pool',
+  solarstKSM: 'KSM-pool'
 }
 
 interface usdPriceFeedMappings {
@@ -60,6 +63,7 @@ interface usdPriceFeedMappings {
   moonriver: number
   moonwell: number
   FRAX: number
+  '3pool': number
 }
 
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
@@ -71,7 +75,10 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     USDC: 0,
     moonriver: 0,
     FRAX: 0,
-    moonwell: 0
+    moonwell: 0,
+    '3pool': 0,
+    'FRAX-3pool': 0,
+    'KSM-pool': 0
   })
   const [{ data: account }] = useAccount()
 

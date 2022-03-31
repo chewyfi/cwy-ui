@@ -27,7 +27,7 @@ const contractMappings: any = {
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
-export const DepositMax: React.FC<any> = (props) => {
+const DepositMax: React.FC<any> = (props) => {
   const getBalance = (token: string) => {
     switch (token) {
       case 'MOVR':
@@ -146,3 +146,5 @@ export const DepositMax: React.FC<any> = (props) => {
     </button>
   )
 }
+
+export default DepositMax

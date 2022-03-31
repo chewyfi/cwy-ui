@@ -297,12 +297,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     console.log('deposit max clicked')
     await writeDepositMax()
     txnToast(
-      `Deposited ${BigInt(
-        Math.trunc(
-          (getBalance(props.item.name) as any) *
-            10 ** contractMappings[props.item.name]['decimals']
-        )
-      )}`,
+      `Deposited ${BigInt(Math.trunc(getBalance(props.item.name) as any))}`,
       'https://moonriver.moonscan.io/'
     )
   }

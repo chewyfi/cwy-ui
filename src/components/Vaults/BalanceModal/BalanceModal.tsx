@@ -194,33 +194,6 @@ const BalanceModal: React.FC<Props> = (props) => {
       }
     )
 
-  useEffect(() => {
-    const asyncFunc = async () => {
-      await getBalanceUser()
-      await getAllowance()
-    }
-    asyncFunc()
-    console.log('Data deposit useffect', dataDeposit)
-    if (dataDeposit) {
-      txnToast(
-        `Deposited ${depositAmount}`,
-        `https://moonriver.moonscan.io/tx/${dataDeposit.hash}`
-      )
-    }
-
-    if (dataApproved) {
-      console.log('use effect data approved')
-      txnToast('Approved', `https://moonriver.moonscan.io/${dataApproved.hash}`)
-    }
-
-    if (dataWithdrawAmount) {
-      txnToast(
-        `Withdrawed ${withdrawAmount}`,
-        `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
-      )
-    }
-  }, [account?.address, dataDeposit, dataWithdrawAmount, dataApproved])
-
   const [
     {
       data: dataDepositBNB,
@@ -279,6 +252,33 @@ const BalanceModal: React.FC<Props> = (props) => {
       await writeApprove()
     }
   }
+
+  useEffect(() => {
+    const asyncFunc = async () => {
+      await getBalanceUser()
+      await getAllowance()
+    }
+    asyncFunc()
+    console.log('Data deposit useffect', dataDeposit)
+    if (dataDeposit) {
+      txnToast(
+        `Deposited ${depositAmount}`,
+        `https://moonriver.moonscan.io/tx/${dataDeposit.hash}`
+      )
+    }
+
+    if (dataApproved) {
+      console.log('use effect data approved')
+      txnToast('Approved', `https://moonriver.moonscan.io/${dataApproved.hash}`)
+    }
+
+    if (dataWithdrawAmount) {
+      txnToast(
+        `Withdrawed ${withdrawAmount}`,
+        `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
+      )
+    }
+  }, [account?.address, dataDeposit, dataWithdrawAmount, dataApproved])
   return (
     <Transition appear show as={Fragment}>
       <Dialog

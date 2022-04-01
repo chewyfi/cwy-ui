@@ -45,7 +45,6 @@ const provider = () =>
   })
 
 function MyApp({ Component, pageProps }: AppProps) {
-  console.log('PAGE PROPS ', pageProps)
   return (
     <ErrorBoundary>
       <Provider
@@ -60,17 +59,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ErrorBoundary>
   )
 }
-export const getStaticProps = async () => {
-  const resPriceFeed = await fetch('https://chewy-api.vercel.app/prices')
-  const resPriceFeedJson = await resPriceFeed.json()
-  const resApyList = await fetch('https://chewy-api.vercel.app/apy')
-  const resApyListJson = await resApyList.json()
-  return {
-    props: {
-      resPriceFeed: resPriceFeedJson,
-      resApyList: resApyListJson
-    }
-  }
-}
-
 export default MyApp

@@ -112,7 +112,6 @@ const vaultData: Array<APYType> = [
 ]
 
 const Table = (props: any) => {
-  console.log(pro)
   const [apyList, setApyList] = useState(vaultData)
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosure = (index: number) => {

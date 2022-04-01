@@ -117,7 +117,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   }
 
-  const [{}, writeApprove] = useContractWrite(
+  const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Want'],
       contractInterface:
@@ -173,20 +173,11 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
-  useEffect(() => {
-    const asyncFunc = async () => {
-      await getBalanceUser()
-      await getAllowance()
-    }
-    asyncFunc()
-  }, [account?.address])
-
   const [{ data: dataDeposit, error: depositError, loading }, writeDeposit] =
     useContractWrite(
       {
         addressOrName: contractMappings[props.item.name]['contract']['Vault'],
-        contractInterface:
-          contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        contractInterface: normalAbi,
         signerOrProvider: provider
       },
       'deposit',
@@ -202,6 +193,33 @@ const BalanceModal: React.FC<Props> = (props) => {
         }
       }
     )
+
+  useEffect(() => {
+    const asyncFunc = async () => {
+      await getBalanceUser()
+      await getAllowance()
+    }
+    asyncFunc()
+    console.log('Data deposit useffect', dataDeposit)
+    if (dataDeposit) {
+      txnToast(
+        `Deposited ${depositAmount}`,
+        `https://moonriver.moonscan.io/tx/${dataDeposit.hash}`
+      )
+    }
+
+    if (dataApproved) {
+      console.log('use effect data approved')
+      txnToast('Approved', `https://moonriver.moonscan.io/${dataApproved.hash}`)
+    }
+
+    if (dataWithdrawAmount) {
+      txnToast(
+        `Withdrawed ${withdrawAmount}`,
+        `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
+      )
+    }
+  }, [account?.address, dataDeposit, dataWithdrawAmount, dataApproved])
 
   const [
     {
@@ -228,7 +246,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
-  const [{}, writeWithdrawAmount] = useContractWrite(
+  const [{ data: dataWithdrawAmount }, writeWithdrawAmount] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
       contractInterface:
@@ -253,20 +271,12 @@ const BalanceModal: React.FC<Props> = (props) => {
     if (allowanceBalance && parseInt(allowanceBalance.toString()) > 0) {
       if (props.item.name === 'MOVR') {
         await writeDepositBNB()
-        txnToast(`Deposited ${depositAmount}`, 'https://moonriver.moonscan.io/')
       } else {
         await writeDeposit()
         console.log(`Data deposit ${dataDeposit}`)
-        dataDeposit &&
-          !depositError &&
-          txnToast(
-            `Deposited ${depositAmount}`,
-            'https://moonriver.moonscan.io/'
-          )
       }
     } else {
       await writeApprove()
-      txnToast('Approved', 'https://moonriver.moonscan.io/')
     }
   }
   return (
@@ -298,7 +308,9 @@ const BalanceModal: React.FC<Props> = (props) => {
         >
           <div className="relative z-20 flex flex-col items-center max-w-lg mx-4 bg-white border-2 border-gray-200 rounded-2xl lg:mx-0 min-h-30">
             <div className="px-5 py-4">
-              {error ? <Alert errorMessage={error.message} /> : null}
+              {depositError ? (
+                <Alert errorMessage={depositError.message} />
+              ) : null}
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">

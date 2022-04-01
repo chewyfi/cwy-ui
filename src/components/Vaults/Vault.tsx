@@ -80,12 +80,12 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
   })
 
   const [apyList, setApyList] = useState<any>({
-    'moonwell-usdc-leverage': 0,
-    'moonwell-movr-leverage': 0,
-    'moonwell-usdt-leverage': 0,
-    'moonwell-eth-leverage': 0,
-    'moonwell-frax-leverage': 0,
-    'moonwell-btc-supply': 0
+    'moonwell-usdc-leverage': '0',
+    'moonwell-movr-leverage': '0',
+    'moonwell-usdt-leverage': ' 0',
+    'moonwell-eth-leverage': '0',
+    'moonwell-frax-leverage': '0',
+    'moonwell-btc-supply': ' 0'
   })
 
   const [{ data: account }] = useAccount()

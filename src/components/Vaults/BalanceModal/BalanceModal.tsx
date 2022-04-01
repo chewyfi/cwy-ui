@@ -279,7 +279,20 @@ const BalanceModal: React.FC<Props> = (props) => {
         `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
       )
     }
-  }, [account?.address, dataDeposit, dataWithdrawAmount, dataApproved])
+
+    if (dataDepositBNB) {
+      txnToast(
+        `Deposited ${depositAmount}`,
+        `https://moonriver.moonscan.io/tx/${dataDepositBNB.hash}`
+      )
+    }
+  }, [
+    account?.address,
+    dataDeposit,
+    dataWithdrawAmount,
+    dataApproved,
+    dataDepositBNB
+  ])
 
   return (
     <Transition appear show as={Fragment}>

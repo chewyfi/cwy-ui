@@ -20,7 +20,7 @@ const Layout = ({
 
   return (
     <div
-      className={clsx('container max-w-3xl mx-auto mb-4', {
+      className={clsx('container max-w-3xl mx-auto', {
         'h-screen mb-0': showWalletModal
       })}
     >

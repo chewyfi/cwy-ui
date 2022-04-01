@@ -219,10 +219,10 @@ export const Vault: React.FC<Props> = ({
                 <span className="mr-1">TVL $</span>
                 {loadingTotalValue ? (
                   <Spinner size="xs" />
-                ) : totalValueData ? (
+                ) : totalValueData && priceFeed ? (
                   (
                     ((totalValueData as any) *
-                      usdPriceFeed[priceFeedMappings[item.name]])! /
+                      priceFeed[priceFeedMappings[item.name]])! /
                     10 ** contractMappings[item.name]['decimals']
                   )?.toFixed(2)
                 ) : (
@@ -262,15 +262,4 @@ export const Vault: React.FC<Props> = ({
       </div>
     </div>
   )
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      priceFeed: await await (
-        await fetch(' https://chewy-api.vercel.app/prices')
-      ).json(),
-      apyList: await (await fetch('https://chewy-api.vercel.app/apy')).json()
-    }
-  }
 }

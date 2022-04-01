@@ -111,7 +111,7 @@ const APYS: Array<APYType> = [
   }
 ]
 
-const Table = () => {
+const Table = (props: any) => {
   const [apyList, setApyList] = useState(APYS)
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosure = (index: number) => {
@@ -139,6 +139,8 @@ const Table = () => {
       <div className="space-y-2">
         {apyList.map((item, index) => (
           <Vault
+            priceFeed={props.priceFeed}
+            apyList={props.apyList}
             key={index}
             item={item}
             toggleDisclosure={() => toggleDisclosure(index)}
@@ -149,4 +151,14 @@ const Table = () => {
   )
 }
 
+export async function getStaticProps() {
+  return {
+    props: {
+      priceFeed: await await (
+        await fetch(' https://chewy-api.vercel.app/prices')
+      ).json(),
+      apyList: await (await fetch('https://chewy-api.vercel.app/apy')).json()
+    }
+  }
+}
 export default Table

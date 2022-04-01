@@ -404,6 +404,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                             .toString()
                         )
                       }
+                      disabled={!balanceDataUnformatted}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
                     >
                       max

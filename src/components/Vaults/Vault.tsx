@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { APYType } from 'src/types'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
@@ -21,6 +21,8 @@ import { Spinner } from '../ui/Spinner'
 interface Props {
   item: APYType
   toggleDisclosure: () => void
+  priceFeed: any
+  apyList: any
 }
 const contractMappings: any = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
@@ -64,29 +66,27 @@ const apyMappings: any = {
   WBTC: 'moonwell-btc-supply'
 }
 
-export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
+export const Vault: React.FC<Props> = ({
+  item,
+  toggleDisclosure,
+  priceFeed,
+  apyList
+}) => {
+  console.log('PRICE FEED ', priceFeed)
+  console.log('APY LIST ', apyList)
   const provider = useProvider()
-  const [usdPriceFeed, setUsdPrice] = useState<any>({
-    bitcoin: 0,
-    ethereum: 0,
-    USDT: 0,
-    USDC: 0,
-    moonriver: 0,
-    FRAX: 0,
-    moonwell: 0,
-    '3pool': 0,
-    'FRAX-3pool': 0,
-    'KSM-pool': 0
-  })
-
-  const [apyList, setApyList] = useState<any>({
-    'moonwell-usdc-leverage': '0',
-    'moonwell-movr-leverage': '0',
-    'moonwell-usdt-leverage': ' 0',
-    'moonwell-eth-leverage': '0',
-    'moonwell-frax-leverage': '0',
-    'moonwell-btc-supply': ' 0'
-  })
+  // const [usdPriceFeed, setUsdPrice] = useState<any>({
+  //   bitcoin: 0,
+  //   ethereum: 0,
+  //   USDT: 0,
+  //   USDC: 0,
+  //   moonriver: 0,
+  //   FRAX: 0,
+  //   moonwell: 0,
+  //   '3pool': 0,
+  //   'FRAX-3pool': 0,
+  //   'KSM-pool': 0
+  // })
 
   const [{ data: account }] = useAccount()
 
@@ -127,19 +127,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     addressOrName: account?.address
   })
 
-  useEffect(() => {
-    const hydrate = async () => {
-      const res_prices = await fetch(' https://chewy-api.vercel.app/prices')
-      const json_prices = await res_prices.json()
-      setUsdPrice(json_prices)
-
-      const res_apy = await fetch('https://chewy-api.vercel.app/apy')
-      const json_apy = await res_apy.json()
-      setApyList(json_apy)
-      await getBalanceUser()
-    }
-    hydrate()
-  }, [account?.address])
+  useEffect(() => {}, [account?.address])
 
   const getBalance = (token: string) => {
     switch (token) {
@@ -245,7 +233,9 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
           </div>
         </span>
         <span className="text-[17px] ml-6 w-1/3 font-normal">
-          {(parseFloat(apyList[apyMappings[item.name]]) * 100).toFixed(2)}%
+          {apyList &&
+            (parseFloat(apyList[apyMappings[item.name]]) * 100).toFixed(2)}
+          %
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
@@ -272,4 +262,15 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
       </div>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      priceFeed: await await (
+        await fetch(' https://chewy-api.vercel.app/prices')
+      ).json(),
+      apyList: await (await fetch('https://chewy-api.vercel.app/apy')).json()
+    }
+  }
 }

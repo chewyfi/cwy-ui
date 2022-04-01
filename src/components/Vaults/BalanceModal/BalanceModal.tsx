@@ -160,7 +160,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     `Allowance balance ${allowanceBalance} error ${allowanceError} address`
   )
 
-  const [{ data: balanceDataUnformatted }, getBalanceUser] = useContractRead(
+  const [
+    { data: balanceDataUnformatted, loading: balanceDataLoading },
+    getBalanceUser
+  ] = useContractRead(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
       contractInterface:
@@ -329,7 +332,7 @@ const BalanceModal: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
-                    Balance:{' '}
+                    Balance: {}
                     {parseFloat(getBalance(props.item.name)!).toFixed(2)}{' '}
                     {props.item.suffix}
                   </label>

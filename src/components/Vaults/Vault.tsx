@@ -229,13 +229,14 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                 <span className="mr-1">TVL $</span>
                 {loadingTotalValue ? (
                   <Spinner size="xs" />
-                ) : (
+                ) : totalValueData ? (
                   (
-                    totalValueData &&
                     ((totalValueData as any) *
                       usdPriceFeed[priceFeedMappings[item.name]])! /
-                      10 ** contractMappings[item.name]['decimals']
+                    10 ** contractMappings[item.name]['decimals']
                   )?.toFixed(2)
+                ) : (
+                  <Spinner />
                 )}
               </span>
             </span>
@@ -256,12 +257,13 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
           <span>
             {loadingBalanceUser ? (
               <Spinner />
-            ) : (
-              balanceDataUnformatted &&
+            ) : balanceDataUnformatted ? (
               (
                 (balanceDataUnformatted as any) /
                 10 ** contractMappings[item.name]['decimals']
               ).toFixed(2)
+            ) : (
+              <Spinner />
             )}
           </span>
         </span>

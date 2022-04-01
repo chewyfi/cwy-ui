@@ -234,7 +234,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             {!getBalance(item.name) ? (
               <Spinner />
             ) : (
-              getBalance(item.name)?.substring(0, 7)
+              parseFloat(getBalance(item.name)!).toFixed(2)
             )}{' '}
           </span>
 
@@ -246,10 +246,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
               (
                 (balanceDataUnformatted as any) /
                 10 ** contractMappings[item.name]['decimals']
-              )
-                .toString()
-
-                .substring(0, 6)
+              ).toFixed(2)
             )}
           </span>
         </span>

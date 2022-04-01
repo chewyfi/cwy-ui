@@ -27,6 +27,8 @@ import {
 } from '../../../utils/constants'
 import { Alert } from '../../ui/Alert'
 import { Spinner } from '../../ui/Spinner'
+import DepositMax from './DepositMax'
+import WithdrawMax from './WithdrawMax'
 interface Props {
   show: boolean
   onClose: () => void
@@ -48,7 +50,6 @@ const contractMappings: any = {
 const BalanceModal: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState('0.0')
   const [withdrawAmount, setWithdrawAmount] = useState('0.0')
-  const [balanceData, setBalanceData] = useState(0)
   const { txnToast } = useTxnToast()
   const provider = useProvider()
 
@@ -101,13 +102,12 @@ const BalanceModal: React.FC<Props> = (props) => {
         return wbtc?.formatted ? wbtc?.formatted : '0'
       case 'USDC':
         let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
-        console.log(`USDC VALUE ${usdc}`)
-        return numUSDC.toString()
+        return numUSDC ? numUSDC.toString() : '0'
       case 'FRAX':
         return frax?.formatted ? frax?.formatted : '0'
       case 'USDT':
         let numUSDT = parseFloat(usdt?.formatted || '0') * 10 ** 12
-        return numUSDT.toString()
+        return numUSDT ? numUSDT.toString() : '0'
       case 'solar3POOL':
         return threePool?.formatted ? threePool?.formatted : '0'
       case 'solar3FRAX':
@@ -204,40 +204,6 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const [
     {
-      data: dataDepositMax,
-      loading: loadingDepositMax,
-      error: errorDepositMax
-    },
-    writeDepositMax
-  ] = useContractWrite(
-    {
-      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
-      contractInterface:
-        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
-      signerOrProvider: provider
-    },
-    'deposit',
-    {
-      args: [
-        BigInt(
-          Math.trunc(
-            (getBalance(props.item.name) as any) *
-              10 ** contractMappings[props.item.name]['decimals']
-          )
-        )
-      ],
-      overrides: {
-        gasLimit: '4500000'
-      }
-    }
-  )
-
-  console.log(
-    `Data max ${dataDepositMax} loading deposit max ${loadingDepositMax} error deposit max ${errorDepositMax}`
-  )
-
-  const [
-    {
       data: dataDepositBNB,
       error: errorDepositBNB,
       loading: loadingDepositBNB
@@ -267,24 +233,6 @@ const BalanceModal: React.FC<Props> = (props) => {
     )} loading BNB ${loadingDepositBNB}`
   )
 
-  console.log(`
-  data ${JSON.stringify(data)} Error data ${error} loading data ${loading}`)
-
-  const [{}, writeWithdrawAll] = useContractWrite(
-    {
-      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
-      contractInterface:
-        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
-      signerOrProvider: provider
-    },
-    'withdrawAll',
-    {
-      overrides: {
-        gasLimit: '4500000'
-      }
-    }
-  )
-
   const [{}, writeWithdrawAmount] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
@@ -305,15 +253,6 @@ const BalanceModal: React.FC<Props> = (props) => {
       }
     }
   )
-
-  const depositMaxAmount = async () => {
-    console.log('deposit max clicked')
-    await writeDepositMax()
-    txnToast(
-      `Deposited ${BigInt(Math.trunc(getBalance(props.item.name) as any))}`,
-      'https://moonriver.moonscan.io/'
-    )
-  }
 
   const approve = async () => {
     if (allowanceBalance && parseInt(allowanceBalance.toString()) > 0) {
@@ -360,7 +299,7 @@ const BalanceModal: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
-                    Balance: {getBalance(props.item.name)?.substring(0, 7)}{' '}
+                    Balance: {parseInt(getBalance(props.item.name)!).toFixed(2)}{' '}
                     {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
@@ -377,12 +316,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
 
-                    <button
-                      onClick={depositMaxAmount}
-                      className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
-                    >
-                      max
-                    </button>
+                    <DepositMax item={props.item} />
                   </div>
                   <button
                     onClick={() => approve()}
@@ -406,9 +340,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                       (
                         (balanceDataUnformatted as any) /
                         10 ** contractMappings[props.item.name]['decimals']
-                      )
-                        .toString()
-                        .substring(0, 7)}
+                      ).toFixed(2)}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -423,18 +355,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                       }
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
-                    <button
-                      className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
-                      onClick={() => {
-                        writeWithdrawAll()
-                        txnToast(
-                          `Withdrawed Total Deposit`,
-                          'https://moonriver.moonscan.io/'
-                        )
-                      }}
-                    >
-                      max
-                    </button>
+                    <WithdrawMax item={props.item} />
                   </div>
                   <button
                     onClick={() => {

@@ -6,7 +6,7 @@ import BalanceModal from './BalanceModal/BalanceModal'
 import { TableHeader } from './TableHeader'
 import { Vault } from './Vault'
 
-const APYS: Array<APYType> = [
+const vaultData: Array<APYType> = [
   {
     icon: '/static/tokens/movr.svg',
     name: 'MOVR',
@@ -112,11 +112,12 @@ const APYS: Array<APYType> = [
 ]
 
 const Table = (props: any) => {
-  const [apyList, setApyList] = useState(APYS)
+  console.log(pro)
+  const [apyList, setApyList] = useState(vaultData)
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosure = (index: number) => {
-    let apys = apyList
-    apys.map((item, idx) => {
+    let vaultData = apyList
+    vaultData.map((item, idx) => {
       if (index === idx) {
         item.isOpen = !item.isOpen
         setSelectedAPY(item)
@@ -124,7 +125,7 @@ const Table = (props: any) => {
         item.isOpen = false
       }
     })
-    setApyList(JSON.parse(JSON.stringify(apys)))
+    setApyList(JSON.parse(JSON.stringify(vaultData)))
   }
   return (
     <div className="w-full">
@@ -152,12 +153,15 @@ const Table = (props: any) => {
 }
 
 export async function getStaticProps() {
+  const resPriceFeed = await fetch(' https://chewy-api.vercel.app/prices')
+  const resPriceFeedJson = await resPriceFeed.json()
+
+  const resApyList = await fetch('https://chewy-api.vercel.app/apy')
+  const resApyListJson = await resApyList.json()
   return {
     props: {
-      priceFeed: await await (
-        await fetch(' https://chewy-api.vercel.app/prices')
-      ).json(),
-      apyList: await (await fetch('https://chewy-api.vercel.app/apy')).json()
+      priceFeed: resPriceFeedJson,
+      apyList: resApyListJson
     }
   }
 }

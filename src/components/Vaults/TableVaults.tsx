@@ -15,7 +15,7 @@ const APYS: Array<APYType> = [
     tvl: '$0',
     holdings: '--',
     isOpen: false,
-    strategy: 'Moonwell',
+    strategy: 'Lending',
     contracts: poolAddresses['MoonbeamMOVR']
   },
   {
@@ -25,7 +25,7 @@ const APYS: Array<APYType> = [
     tvl: '$0',
     suffix: 'WETH',
     holdings: '--',
-    strategy: 'Moonwell',
+    strategy: 'Lending',
     isOpen: false,
     contracts: poolAddresses['MoonbeamETH']
   },
@@ -36,7 +36,7 @@ const APYS: Array<APYType> = [
     suffix: 'WBTC',
     tvl: '$0',
     holdings: '--',
-    strategy: 'Moonwell',
+    strategy: 'Lending',
     isOpen: false,
     contracts: poolAddresses['MoonbeamBTCSupplyOnly']
   },
@@ -47,7 +47,7 @@ const APYS: Array<APYType> = [
     tvl: '$0',
     holdings: '--',
     suffix: 'USDC',
-    strategy: 'Moonwell',
+    strategy: 'Lending',
     isOpen: false,
     contracts: poolAddresses['MoonbeamUSDC']
   },
@@ -56,7 +56,7 @@ const APYS: Array<APYType> = [
     name: 'FRAX',
     apy: '14.33%',
     tvl: '$0',
-    strategy: 'Moonwell',
+    strategy: 'Lending',
     suffix: 'FRAX',
     holdings: '--',
     isOpen: false,
@@ -67,7 +67,7 @@ const APYS: Array<APYType> = [
     name: 'USDT',
     apy: '3.823%',
     tvl: '$0',
-    strategy: 'Moonwell',
+    strategy: 'Lending',
     suffix: 'USDT',
     holdings: '--',
     isOpen: false,

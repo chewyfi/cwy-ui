@@ -268,7 +268,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
 
     if (dataApproved) {
-      txnToast('Approved', `https://moonriver.moonscan.io/${dataApproved.hash}`)
+      txnToast(
+        'Approved',
+        `https://moonriver.moonscan.io/tx/${dataApproved.hash}`
+      )
     }
 
     if (dataWithdrawAmount) {

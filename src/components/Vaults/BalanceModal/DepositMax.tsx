@@ -130,7 +130,6 @@ const DepositMax: React.FC<any> = (props) => {
   useEffect(() => {
     if (dataDepositMax) {
       const hash = dataDepositMax.hash
-      console.log(`YO Hash ${hash} and typeof hash ${typeof hash}`)
       txnToast(
         `Deposited ${getBalance(props.item.name) as any}`,
         `https://moonriver.moonscan.io/tx/${hash}`

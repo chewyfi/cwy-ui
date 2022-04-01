@@ -11,7 +11,13 @@ import {
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
 import useTxnToast from 'src/utils/hooks/useTxnToast'
-import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
+import {
+  useAccount,
+  useBalance,
+  useContractRead,
+  useContractWrite,
+  useProvider
+} from 'wagmi'
 
 import normalAbi from '../../../chain-info/abis/normalAbi.json'
 import nativeAbi from '../../../chain-info/abis/normalAbi.json'
@@ -103,7 +109,7 @@ const WithdrawMax: React.FC<any> = (props) => {
     {
       data: dataWithdrawMax,
       loading: loadingWithdrawMax,
-      error: errorWithdrawtMax
+      error: errorWithdrawMax
     },
     writeWithdrawAll
   ] = useContractWrite(
@@ -121,11 +127,31 @@ const WithdrawMax: React.FC<any> = (props) => {
     }
   )
 
+  const [
+    { data: balanceDataUnformatted, loading: loadingBalanceUser },
+    getBalanceUser
+  ] = useContractRead(
+    {
+      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      contractInterface:
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      signerOrProvider: provider
+    },
+    'balanceOf',
+    {
+      args: [account?.address]
+    }
+  )
+
   useEffect(() => {
     if (dataWithdrawMax) {
       console.log('DATA WITHDRAW MAX YO ', dataWithdrawMax.hash)
+      const withdrawedAmount = (
+        (balanceDataUnformatted as any) /
+        10 ** contractMappings[props.item.name]['decimals']
+      ).toFixed(2)
       txnToast(
-        `Withdrawed ${getBalance(props.item.name) as any}`,
+        `Withdrawed Full Deposit Amount: ${withdrawedAmount}`,
         `https://moonriver.moonscan.io/tx/${dataWithdrawMax.hash}`
       )
     }

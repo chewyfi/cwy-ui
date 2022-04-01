@@ -181,6 +181,8 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     }
   )
 
+  console.log(`Item name ${item.name} and balance ${balanceDataUnformatted}`)
+
   const [{ data: totalValueData, loading: loadingTotalValue }, getTotalValue] =
     useContractRead(
       {
@@ -263,14 +265,6 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             )}
           </span>
         </span>
-        {/* <span className="w-1/5 text-[14px] text-right">
-          <button
-            onClick={(e) => e.stopPropagation()}
-            className="inline-block p-0.5 px-6 font-semibold tracking-wider border border-black rounded-md"
-          >
-            Deposit
-          </button>
-        </span> */}
       </div>
     </div>
   )

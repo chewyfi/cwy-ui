@@ -350,10 +350,14 @@ const BalanceModal: React.FC<Props> = (props) => {
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
 
-                    <DepositMax item={props.item} />
+                    <DepositMax
+                      allowanceLoading={allowanceLoading}
+                      item={props.item}
+                    />
                   </div>
                   <button
                     onClick={() => approve()}
+                    disabled={allowanceLoading}
                     className="inline-block w-full p-1 mt-1 text-center text-white bg-black border-2 border-black rounded-lg"
                   >
                     {/* {allowanceLoading && <Spinner />} */}

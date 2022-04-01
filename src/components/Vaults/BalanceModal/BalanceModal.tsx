@@ -27,8 +27,6 @@ import {
 } from '../../../utils/constants'
 import { Alert } from '../../ui/Alert'
 import { Spinner } from '../../ui/Spinner'
-import DepositMax from './DepositMax'
-import WithdrawMax from './WithdrawMax'
 interface Props {
   show: boolean
   onClose: () => void
@@ -249,7 +247,6 @@ const BalanceModal: React.FC<Props> = (props) => {
         await writeDepositBNB()
       } else {
         await writeDeposit()
-        console.log(`Data deposit ${dataDeposit}`)
       }
     } else {
       await writeApprove()
@@ -271,12 +268,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
 
     if (dataApproved) {
-      console.log('use effect data approved')
       txnToast('Approved', `https://moonriver.moonscan.io/${dataApproved.hash}`)
     }
 
     if (dataWithdrawAmount) {
-      console.log('IN DATA WITHDRAW ', dataWithdrawAmount)
       txnToast(
         `Withdrawed ${withdrawAmount}`,
         `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
@@ -350,10 +345,15 @@ const BalanceModal: React.FC<Props> = (props) => {
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
 
-                    <DepositMax
-                      allowanceLoading={allowanceLoading}
-                      item={props.item}
-                    />
+                    <button
+                      onClick={() =>
+                        setDepositAmount(getBalance(props.item.name)!)
+                      }
+                      disabled={allowanceLoading}
+                      className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+                    >
+                      max
+                    </button>
                   </div>
                   <button
                     onClick={() => approve()}
@@ -393,7 +393,21 @@ const BalanceModal: React.FC<Props> = (props) => {
                       }
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
-                    <WithdrawMax item={props.item} />
+                    <button
+                      onClick={() =>
+                        setWithdrawAmount(
+                          (
+                            (balanceDataUnformatted as any) /
+                            10 ** contractMappings[props.item.name]['decimals']
+                          )
+                            .toFixed(2)
+                            .toString()
+                        )
+                      }
+                      className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
+                    >
+                      max
+                    </button>{' '}
                   </div>
                   <button
                     onClick={() => {

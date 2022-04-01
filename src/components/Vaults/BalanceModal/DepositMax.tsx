@@ -11,7 +11,13 @@ import {
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
 import useTxnToast from 'src/utils/hooks/useTxnToast'
-import { useAccount, useBalance, useContractWrite, useProvider } from 'wagmi'
+import {
+  useAccount,
+  useBalance,
+  useContractRead,
+  useContractWrite,
+  useProvider
+} from 'wagmi'
 
 import normalAbi from '../../../chain-info/abis/normalAbi.json'
 import nativeAbi from '../../../chain-info/abis/normalAbi.json'
@@ -125,6 +131,22 @@ const DepositMax: React.FC<any> = (props) => {
       overrides: {
         gasLimit: '4500000'
       }
+    }
+  )
+
+  const [
+    { data: balanceDataUnformatted, loading: loadingBalanceUser },
+    getBalanceUser
+  ] = useContractRead(
+    {
+      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      contractInterface:
+        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      signerOrProvider: provider
+    },
+    'balanceOf',
+    {
+      args: [account?.address]
     }
   )
   useEffect(() => {

@@ -273,12 +273,14 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
 
     if (dataWithdrawAmount) {
+      console.log('IN DATA WITHDRAW ', dataWithdrawAmount)
       txnToast(
         `Withdrawed ${withdrawAmount}`,
         `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
       )
     }
   }, [account?.address, dataDeposit, dataWithdrawAmount, dataApproved])
+
   return (
     <Transition appear show as={Fragment}>
       <Dialog
@@ -376,10 +378,6 @@ const BalanceModal: React.FC<Props> = (props) => {
                   <button
                     onClick={() => {
                       writeWithdrawAmount()
-                      txnToast(
-                        `Withdrawed ${withdrawAmount}`,
-                        'https://moonriver.moonscan.io/'
-                      )
                     }}
                     className="inline-block w-full p-1 mt-1 text-gray-400 border-2 border-gray-300 rounded-lg bg-gray-50"
                   >

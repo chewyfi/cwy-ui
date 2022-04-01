@@ -21,8 +21,8 @@ export const poolAddresses = {
     Want: '0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C'
   },
   MoonbeamMOVR: {
-    Vault: '0x118CE6bCDb827a14C12dF2DeDd6c5af02904B895',
-    Strategy: '0x9CA8902E42300d5E2Afb890F690bC1139c965A23',
+    Vault: '0x07293A69f44Ae4eabd13E4aE1894dd6a9faDe197',
+    Strategy: '0x4c10EA7f14545f758438E4fe8482505bc34E602C',
     Want: '0x98878B06940aE243284CA214f92Bb71a2b032B8A'
   },
   Solarbeam3pool: {

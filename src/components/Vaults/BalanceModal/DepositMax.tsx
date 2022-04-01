@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { poolAddresses } from 'src/chain-info/pool-addresses'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
@@ -58,17 +59,7 @@ const DepositMax: React.FC<any> = (props) => {
   const { txnToast } = useTxnToast()
 
   const depositMaxAmount = async () => {
-    console.log('deposit max clicked')
     await writeDepositMax()
-    txnToast(
-      `Deposited ${BigInt(
-        Math.trunc(
-          (getBalance(props.item.name) as any) *
-            10 ** contractMappings[props.item.name]['decimals']
-        )
-      )}`,
-      'https://moonriver.moonscan.io/'
-    )
   }
 
   const [{ data: movr }] = useBalance({
@@ -136,6 +127,16 @@ const DepositMax: React.FC<any> = (props) => {
       }
     }
   )
+  useEffect(() => {
+    if (dataDepositMax) {
+      const hash = dataDepositMax.hash
+      console.log(`YO Hash ${hash} and typeof hash ${typeof hash}`)
+      txnToast(
+        `Deposited ${getBalance(props.item.name) as any}`,
+        `https://moonriver.moonscan.io/tx/${hash}`
+      )
+    }
+  }, [account?.address, dataDepositMax])
 
   return (
     <button

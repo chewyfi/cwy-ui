@@ -139,6 +139,8 @@ const Table = (props: any) => {
       <div className="space-y-2">
         {apyList.map((item, index) => (
           <Vault
+            resPriceFeed={props.resPriceFeed}
+            resApyList={props.resApyList}
             key={index}
             item={item}
             toggleDisclosure={() => toggleDisclosure(index)}

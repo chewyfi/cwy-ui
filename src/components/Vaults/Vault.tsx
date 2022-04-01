@@ -21,6 +21,8 @@ import { Spinner } from '../ui/Spinner'
 interface Props {
   item: APYType
   toggleDisclosure: () => void
+  resPriceFeed: any
+  resApyList: any
 }
 const contractMappings: any = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
@@ -64,7 +66,12 @@ const apyMappings: any = {
   WBTC: 'moonwell-btc-supply'
 }
 
-export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
+export const Vault: React.FC<Props> = ({
+  item,
+  toggleDisclosure,
+  resPriceFeed,
+  resApyList
+}) => {
   const provider = useProvider()
   const [usdPriceFeed, setUsdPrice] = useState<any>({
     bitcoin: 0,
@@ -127,19 +134,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     addressOrName: account?.address
   })
 
-  useEffect(() => {
-    const hydrate = async () => {
-      const res_prices = await fetch(' https://chewy-api.vercel.app/prices')
-      const json_prices = await res_prices.json()
-      setUsdPrice(json_prices)
-
-      const res_apy = await fetch('https://chewy-api.vercel.app/apy')
-      const json_apy = await res_apy.json()
-      setApyList(json_apy)
-      await getBalanceUser()
-    }
-    hydrate()
-  }, [account?.address])
+  useEffect(() => {}, [account?.address])
 
   const getBalance = (token: string) => {
     switch (token) {
@@ -234,7 +229,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
                 ) : totalValueData ? (
                   (
                     ((totalValueData as any) *
-                      usdPriceFeed[priceFeedMappings[item.name]])! /
+                      resPriceFeed[priceFeedMappings[item.name]])! /
                     10 ** contractMappings[item.name]['decimals']
                   )?.toFixed(2)
                 ) : (
@@ -245,7 +240,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
           </div>
         </span>
         <span className="text-[17px] ml-6 w-1/3 font-normal">
-          {(parseFloat(apyList[apyMappings[item.name]]) * 100).toFixed(2)}%
+          {(parseFloat(resApyList[apyMappings[item.name]]) * 100).toFixed(2)}%
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>

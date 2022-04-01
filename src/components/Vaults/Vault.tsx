@@ -240,7 +240,7 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
           </div>
         </span>
         <span className="text-[17px] ml-6 w-1/3 font-normal">
-          {parseFloat(apyList[apyMappings[item.name]]).toFixed(2)}%
+          {(parseFloat(apyList[apyMappings[item.name]]) * 100).toFixed(2)}%
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>

@@ -55,15 +55,13 @@ const priceFeedMappings: any = {
   solarstKSM: 'KSM-pool'
 }
 
-interface usdPriceFeedMappings {
-  bitcoin: number
-  ethereum: number
-  USDT: number
-  USDC: number
-  moonriver: number
-  moonwell: number
-  FRAX: number
-  '3pool': number
+const apyMappings: any = {
+  USDC: 'moonwell-usdc-leverage',
+  MOVR: 'moonwell-movr-leverage',
+  USDT: 'moonwell-usdt-leverage',
+  WETH: 'moonwell-eth-leverage',
+  FRAX: 'moonwell-frax-leverage',
+  WBTC: 'moonwell-btc-supply'
 }
 
 export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
@@ -80,6 +78,16 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
     'FRAX-3pool': 0,
     'KSM-pool': 0
   })
+
+  const [apyList, setApyList] = useState<any>({
+    'moonwell-usdc-leverage': 0,
+    'moonwell-movr-leverage': 0,
+    'moonwell-usdt-leverage': 0,
+    'moonwell-eth-leverage': 0,
+    'moonwell-frax-leverage': 0,
+    'moonwell-btc-supply': 0
+  })
+
   const [{ data: account }] = useAccount()
 
   const [{ data: movr }] = useBalance({
@@ -121,10 +129,13 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
 
   useEffect(() => {
     const hydrate = async () => {
-      const res = await fetch(' https://chewy-api.vercel.app/prices')
-      const json = await res.json()
-      console.log('JSON ', json)
-      setUsdPrice(json)
+      const res_prices = await fetch(' https://chewy-api.vercel.app/prices')
+      const json_prices = await res_prices.json()
+      setUsdPrice(json_prices)
+
+      const res_apy = await fetch('https://chewy-api.vercel.app/apy')
+      const json_apy = await res_apy.json()
+      setApyList(json_apy)
       await getBalanceUser()
     }
     hydrate()
@@ -228,7 +239,9 @@ export const Vault: React.FC<Props> = ({ item, toggleDisclosure }) => {
             </span>
           </div>
         </span>
-        <span className="text-[17px] ml-6 w-1/3 font-normal">{item.apy}</span>
+        <span className="text-[17px] ml-6 w-1/3 font-normal">
+          {parseFloat(apyList[apyMappings[item.name]]).toFixed(2)}%
+        </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
             {!getBalance(item.name) ? (

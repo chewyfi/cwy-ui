@@ -181,26 +181,27 @@ const BalanceModal: React.FC<Props> = (props) => {
     asyncFunc()
   }, [account?.address])
 
-  const [{ data, error, loading }, writeDeposit] = useContractWrite(
-    {
-      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
-      contractInterface:
-        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
-      signerOrProvider: provider
-    },
-    'deposit',
-    {
-      args: [
-        BigInt(
-          parseFloat(depositAmount) *
-            10 ** contractMappings[props.item.name]['decimals']
-        )
-      ],
-      overrides: {
-        gasLimit: '4500000'
+  const [{ data: dataDeposit, error: depositError, loading }, writeDeposit] =
+    useContractWrite(
+      {
+        addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+        contractInterface:
+          contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        signerOrProvider: provider
+      },
+      'deposit',
+      {
+        args: [
+          BigInt(
+            parseFloat(depositAmount) *
+              10 ** contractMappings[props.item.name]['decimals']
+          )
+        ],
+        overrides: {
+          gasLimit: '4500000'
+        }
       }
-    }
-  )
+    )
 
   const [
     {
@@ -227,12 +228,6 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
-  console.log(
-    `DATA BNB ${JSON.stringify(dataDepositBNB)} error ${JSON.stringify(
-      errorDepositBNB
-    )} loading BNB ${loadingDepositBNB}`
-  )
-
   const [{}, writeWithdrawAmount] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
@@ -256,11 +251,19 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const approve = async () => {
     if (allowanceBalance && parseInt(allowanceBalance.toString()) > 0) {
-      props.item.name === 'MOVR'
-        ? await writeDepositBNB()
-        : await writeDeposit()
-
-      txnToast(`Deposited ${depositAmount}`, 'https://moonriver.moonscan.io/')
+      if (props.item.name === 'MOVR') {
+        await writeDepositBNB()
+        txnToast(`Deposited ${depositAmount}`, 'https://moonriver.moonscan.io/')
+      } else {
+        await writeDeposit()
+        console.log(`Data deposit ${dataDeposit}`)
+        dataDeposit &&
+          !depositError &&
+          txnToast(
+            `Deposited ${depositAmount}`,
+            'https://moonriver.moonscan.io/'
+          )
+      }
     } else {
       await writeApprove()
       txnToast('Approved', 'https://moonriver.moonscan.io/')
@@ -299,7 +302,8 @@ const BalanceModal: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
-                    Balance: {parseInt(getBalance(props.item.name)!).toFixed(2)}{' '}
+                    Balance:{' '}
+                    {parseFloat(getBalance(props.item.name)!).toFixed(2)}{' '}
                     {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">

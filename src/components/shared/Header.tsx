@@ -20,7 +20,7 @@ const Header = ({
     if (switchNetwork) {
       let data = await switchNetwork(1285)
       if (data.error) {
-        toast.error(`${data.error.message}, please add chain to wallet.`)
+        toast.error(`${data.error.message}, please add network to your wallet.`)
       }
     }
   }

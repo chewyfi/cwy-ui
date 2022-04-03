@@ -231,8 +231,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     {
       args: [
         BigInt(
-          (parseFloat(withdrawAmount) - 0.00001) *
-            10 ** contractMappings[props.item.name]['decimals']
+          Math.trunc(
+            (parseFloat(withdrawAmount) - 0.00001) *
+              10 ** contractMappings[props.item.name]['decimals']
+          )
         )
       ],
       overrides: {

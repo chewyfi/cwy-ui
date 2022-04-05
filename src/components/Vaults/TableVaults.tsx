@@ -151,17 +151,4 @@ const Table = (props: any) => {
   )
 }
 
-export async function getStaticProps() {
-  const resPriceFeed = await fetch(' https://chewy-api.vercel.app/prices')
-  const resPriceFeedJson = await resPriceFeed.json()
-
-  const resApyList = await fetch('https://chewy-api.vercel.app/apy')
-  const resApyListJson = await resApyList.json()
-  return {
-    props: {
-      priceFeed: resPriceFeedJson,
-      apyList: resApyListJson
-    }
-  }
-}
 export default Table

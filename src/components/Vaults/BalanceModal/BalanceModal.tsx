@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 import React, { Fragment, useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import useTxnToast from 'src/utils/hooks/useTxnToast'
@@ -50,6 +51,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   const [withdrawAmount, setWithdrawAmount] = useState('0.0')
   const { txnToast } = useTxnToast()
   const provider = useProvider()
+  const router = useRouter()
 
   const [{ data: account }] = useAccount()
 
@@ -260,6 +262,15 @@ const BalanceModal: React.FC<Props> = (props) => {
   }
 
   useEffect(() => {
+    const getDeposit = async () => {
+      let obj = { basePath: router.basePath }
+
+      let val = await fetch(`${obj.basePath}/api/vault?=${props.item.name}`)
+      let valJson = await val.json()
+      console.log(`VAl get deposit ${valJson}`)
+    }
+    getDeposit()
+    console.log('CALLED')
     const asyncFunc = async () => {
       await getBalanceUser()
       await getAllowance()

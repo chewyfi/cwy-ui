@@ -130,21 +130,21 @@ export const Vault: React.FC<Props> = ({
         return solarstKSM?.formatted
     }
   }
-  const [{ data: balanceDataUnformatted, loading: loadingBalanceUser }] =
-    useContractRead(
-      {
-        addressOrName: contractMappings[item.name]['contract']['Vault'],
-        contractInterface:
-          contractMappings[item.name] !== 'MOVR' ? normalAbi : nativeAbi,
-        signerOrProvider: provider
-      },
-      'balanceOf',
-      {
-        args: [account?.address]
-      }
-    )
+  // const [{ data: balanceDataUnformatted, loading: loadingBalanceUser }] =
+  //   useContractRead(
+  //     {
+  //       addressOrName: contractMappings[item.name]['contract']['Vault'],
+  //       contractInterface:
+  //         contractMappings[item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+  //       signerOrProvider: provider
+  //     },
+  //     'balanceOf',
+  //     {
+  //       args: [account?.address]
+  //     }
+  //   )
 
-  console.log(`Item name ${item.name} and balance ${balanceDataUnformatted}`)
+  // console.log(`Item name ${item.name} and balance ${balanceDataUnformatted}`)
 
   const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(
@@ -219,7 +219,7 @@ export const Vault: React.FC<Props> = ({
             )}
           </span>
 
-          <span>
+          {/* <span>
             {loadingBalanceUser ? (
               <Spinner />
             ) : balanceDataUnformatted ? (
@@ -230,7 +230,7 @@ export const Vault: React.FC<Props> = ({
             ) : (
               <Spinner />
             )}
-          </span>
+          </span> */}
         </span>
       </div>
     </div>

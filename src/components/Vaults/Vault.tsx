@@ -160,25 +160,23 @@ export const Vault: React.FC<Props> = ({
         return solarstKSM?.formatted
     }
   }
-  const [
-    { data: balanceDataUnformatted, loading: loadingBalanceUser },
-    getBalanceUser
-  ] = useContractRead(
-    {
-      addressOrName: contractMappings[item.name]['contract']['Vault'],
-      contractInterface:
-        contractMappings[item.name] !== 'MOVR' ? normalAbi : nativeAbi,
-      signerOrProvider: provider
-    },
-    'balanceOf',
-    {
-      args: [account?.address]
-    }
-  )
+  const [{ data: balanceDataUnformatted, loading: loadingBalanceUser }] =
+    useContractRead(
+      {
+        addressOrName: contractMappings[item.name]['contract']['Vault'],
+        contractInterface:
+          contractMappings[item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        signerOrProvider: provider
+      },
+      'balanceOf',
+      {
+        args: [account?.address]
+      }
+    )
 
   console.log(`Item name ${item.name} and balance ${balanceDataUnformatted}`)
 
-  const [{ data: totalValueData, loading: loadingTotalValue }, getTotalValue] =
+  const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(
       {
         addressOrName: contractMappings[item.name]['contract']['Vault'],
@@ -233,7 +231,7 @@ export const Vault: React.FC<Props> = ({
                     10 ** contractMappings[item.name]['decimals']
                   )?.toFixed(2)
                 ) : (
-                  <Spinner />
+                  <Spinner size="xs" />
                 )}
               </span>
             </span>
@@ -248,7 +246,7 @@ export const Vault: React.FC<Props> = ({
               <Spinner />
             ) : (
               parseFloat(getBalance(item.name)!).toFixed(2)
-            )}{' '}
+            )}
           </span>
 
           <span>

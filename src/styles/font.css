@@ -20,5 +20,5 @@
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 500;
-    src: local('DM Sans'), url('/fonts/DMSans-Regular.Medium') format('woff');
+    src: local('DM Sans'), url('/fonts/DMSans-Regular.woff') format('woff');
 }

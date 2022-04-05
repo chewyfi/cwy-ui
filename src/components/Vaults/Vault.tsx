@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { APYType } from 'src/types'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
@@ -36,15 +36,6 @@ const contractMappings: any = {
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
-interface priceFeedMappings {
-  FRAX: string
-  USDC: string
-  WBTC: string
-  WETH: string
-  MOVR: string
-  USDT: string
-}
-
 const priceFeedMappings: any = {
   FRAX: 'FRAX',
   USDC: 'USDC',
@@ -73,27 +64,6 @@ export const Vault: React.FC<Props> = ({
   resApyList
 }) => {
   const provider = useProvider()
-  const [usdPriceFeed, setUsdPrice] = useState<any>({
-    bitcoin: 0,
-    ethereum: 0,
-    USDT: 0,
-    USDC: 0,
-    moonriver: 0,
-    FRAX: 0,
-    moonwell: 0,
-    '3pool': 0,
-    'FRAX-3pool': 0,
-    'KSM-pool': 0
-  })
-
-  const [apyList, setApyList] = useState<any>({
-    'moonwell-usdc-leverage': '0',
-    'moonwell-movr-leverage': '0',
-    'moonwell-usdt-leverage': ' 0',
-    'moonwell-eth-leverage': '0',
-    'moonwell-frax-leverage': '0',
-    'moonwell-btc-supply': ' 0'
-  })
 
   const [{ data: account }] = useAccount()
 

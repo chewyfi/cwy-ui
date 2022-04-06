@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       name: providerRPC.moonriver.name
     }
   )
-  var contract = new ethers.Contract(poolAddresses[vault], normalAbi, provider)
+  let contract = new ethers.Contract(poolAddresses[vault], normalAbi, provider)
   let balance =
     parseInt(await contract.balance(), 16) / contractMappings[vault]['decimals']
 

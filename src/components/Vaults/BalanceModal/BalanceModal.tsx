@@ -247,7 +247,7 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const approve = async () => {
     if (
-      localStorage.getItem(props.item.name) ||
+      localStorage.getItem(`props.item.name${account?.address}`) ||
       (allowanceBalance && parseInt(allowanceBalance.toString()) > 0)
     ) {
       if (props.item.name === 'MOVR') {
@@ -256,7 +256,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         await writeDeposit()
       }
     } else {
-      localStorage.setItem(props.item.name, '1')
+      localStorage.setItem(`props.item.name${account?.address}`, '1')
       await writeApprove()
     }
   }

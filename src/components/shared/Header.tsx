@@ -26,7 +26,7 @@ const Header = ({
   }
 
   return (
-    <div className="sticky flex-col z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
+    <div className="sticky z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
         <h6 className="text-[22px] font-medium">{title}</h6>
         <div className="flex items-center">
@@ -67,20 +67,6 @@ const Header = ({
               <span className="mx-2">Connect Wallet</span>
             )}
           </button>
-        </div>
-      </div>
-      <div className="grid w-full grid-cols-3 text-[#c0c0c0] gap-2 mt-10">
-        <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
-          <h6>Total TVL</h6>
-          <p>$1.0m</p>
-        </div>
-        <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
-          <h6>Moonriver TVL</h6>
-          <p>$1.0m</p>
-        </div>
-        <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
-          <h6>My Deposits</h6>
-          <p>$0.00</p>
         </div>
       </div>
     </div>

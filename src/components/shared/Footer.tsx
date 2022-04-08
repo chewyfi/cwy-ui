@@ -13,7 +13,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className="flex h-[10rem] items-center bg-white rounded-lg">
+    <div className="flex h-[10rem] items-center bg-white mt-6 mb-24 rounded-lg">
       <div className="flex items-start justify-between w-full">
         <div className="flex flex-col justify-start space-y-2">
           <h6 className="text-[19px] font-semibold">Community</h6>

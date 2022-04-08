@@ -216,11 +216,13 @@ export const Vault: React.FC<Props> = ({
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
-            {!getBalance(item.name) ? (
+            available soon
+            {/* TODO: opimize loading speed */}
+            {/* {!getBalance(item.name) ? (
               <Spinner />
             ) : (
               parseFloat(getBalance(item.name)!).toFixed(2)
-            )}
+            )} */}
           </span>
 
           {/* <span>

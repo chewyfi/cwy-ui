@@ -10,15 +10,15 @@ export default function Vaults(props: any) {
         <div className="grid w-full grid-cols-3 my-4 text-[#c0c0c0] gap-2">
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>Total TVL</h6>
-            <p>$1.0m</p>
+            <p>Available soon</p>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>Moonriver TVL</h6>
-            <p>$1.0m</p>
+            <p>Available soon</p>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>My Deposits</h6>
-            <p>$0.00</p>
+            <p>Available soon</p>
           </div>
         </div>
         <TableVault

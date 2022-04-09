@@ -27,7 +27,7 @@ const WalletModal: React.FC<Props> = (props) => {
     >
       <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-60" />
       <motion.div
-        className='className="relative z-20 max-w-lg w-full md:w-1/2 shadow flex flex-col mt-20 rounded-2xl items-center mx-4 bg-white lg:mt-[10%] lg:mx-0 min-h-30"'
+        className="relative z-20 max-w-lg w-full md:w-1/2 shadow flex flex-col mt-20 rounded-2xl items-center mx-4 bg-white lg:mt-[10%] lg:mx-0 min-h-30"
         initial={{
           opacity: 0
         }}

@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 
 import normalAbi from '../../chain-info/abis/normalAbi.json'
-import poolAddresses from '../../chain-info/pool-addresses'
+import { poolAddresses } from '../../chain-info/pool-addresses'
 
 const contractMappings = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
@@ -16,7 +16,7 @@ const contractMappings = {
 }
 
 export default async function handler(req, res) {
-  const { vault } = req.query
+  const { address } = req.query
   let rpcUrl =
     'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
   const providerRPC = {
@@ -34,9 +34,30 @@ export default async function handler(req, res) {
       name: providerRPC.moonriver.name
     }
   )
-  var contract = new ethers.Contract(poolAddresses[vault], normalAbi, provider)
-  let balance =
-    parseInt(await contract.balance(), 16) / contractMappings[vault]['decimals']
 
-  res.status(200).json({ balance })
+  const activeVaultsTotalDeposited = {
+    MOVR: 'NaN',
+    WETH: 'NaN',
+    WBTC: 'NaN',
+    USDC: 'NaN',
+    USDT: 'NaN',
+    FRAX: 'NaN',
+    solar3POOL: 'NaN',
+    solar3FRAX: 'NaN',
+    solarstKSM: 'NaN'
+  }
+
+  for (const vault of Object.keys(activeVaultsTotalDeposited)) {
+    var contract = new ethers.Contract(
+      contractMappings[vault]['contract']['Vault'],
+      normalAbi,
+      provider
+    )
+    let balance =
+      parseInt(await contract.balanceOf(address)) /
+      10 ** contractMappings[vault]['decimals']
+    activeVaultsTotalDeposited[vault] = balance
+  }
+
+  res.status(200).json({ activeVaultsTotalDeposited })
 }

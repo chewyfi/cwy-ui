@@ -104,7 +104,9 @@ export const Vault: React.FC<Props> = ({
     addressOrName: account?.address
   })
 
-  useEffect(() => {}, [account?.address])
+  useEffect(() => {
+    console.log('VAULT PROPS ITEM', item)
+  }, [account?.address])
 
   const getBalance = (token: string) => {
     switch (token) {
@@ -208,21 +210,15 @@ export const Vault: React.FC<Props> = ({
           </div>
         </span>
         <span className="text-[17px] ml-6 w-1/3 font-normal">
-          {item.tvl
-            ? item.tvl
-            : `${(parseFloat(resApyList[apyMappings[item.name]]) * 100).toFixed(
-                2
-              )}%`}
+          {(parseFloat(resApyList[apyMappings[item.name]]) * 100).toFixed(2)}%
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
-            available soon
-            {/* TODO: opimize loading speed */}
-            {/* {!getBalance(item.name) ? (
+            {!getBalance(item.name) ? (
               <Spinner />
             ) : (
               parseFloat(getBalance(item.name)!).toFixed(2)
-            )} */}
+            )}
           </span>
 
           {/* <span>

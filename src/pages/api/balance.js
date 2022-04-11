@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 
 import normalAbi from '../../chain-info/abis/normalAbi.json'
 import { poolAddresses } from '../../chain-info/pool-addresses'
+
 const contractMappings = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
   WETH: { contract: poolAddresses['MoonbeamETH'], decimals: 18 },
@@ -13,26 +14,9 @@ const contractMappings = {
   solar3FRAX: { contract: poolAddresses['SolarbeamFrax3pool'], decimals: 18 },
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
-const priceFeedMappings = {
-  FRAX: 'FRAX',
-  USDC: 'USDC',
-  USDT: 'USDT',
-  WBTC: 'bitcoin',
-  WETH: 'ethereum',
-  MOVR: 'moonriver',
-  solar3POOL: '3pool',
-  solar3FRAX: 'FRAX-3pool',
-  solarstKSM: 'KSM-pool'
-}
 
 export default async function handler(req, res) {
-  const resPriceFeed = await (
-    await fetch('https://chewy-api.vercel.app/prices')
-  ).json()
-  console.log('RES PRICE FEED ', resPriceFeed)
-  const { vault } = req.query
-  console.log(`Vault is ${vault}`)
-
+  const { address } = req.query
   let rpcUrl =
     'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
   const providerRPC = {
@@ -51,7 +35,7 @@ export default async function handler(req, res) {
     }
   )
 
-  const activeVaultsTotalValueLocked = {
+  const activeVaultsTotalDeposited = {
     MOVR: 'NaN',
     WETH: 'NaN',
     WBTC: 'NaN',
@@ -60,18 +44,17 @@ export default async function handler(req, res) {
     FRAX: 'NaN'
   }
 
-  for (const vault of Object.keys(activeVaultsTotalValueLocked)) {
-    let contract = new ethers.Contract(
+  for (const vault of Object.keys(activeVaultsTotalDeposited)) {
+    var contract = new ethers.Contract(
       contractMappings[vault]['contract']['Vault'],
       normalAbi,
       provider
     )
     let balance =
-      (parseInt(await contract.balance()) /
-        10 ** contractMappings[vault]['decimals']) *
-      resPriceFeed[priceFeedMappings[vault]]
-    activeVaultsTotalValueLocked[vault] = balance
+      parseInt(await contract.balanceOf(address)) /
+      10 ** contractMappings[vault]['decimals']
+    activeVaultsTotalDeposited[vault] = balance
   }
 
-  res.status(200).json({ activeVaultsTotalValueLocked })
+  res.status(200).json({ activeVaultsTotalDeposited })
 }

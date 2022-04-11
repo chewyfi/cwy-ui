@@ -46,6 +46,18 @@ const contractMappings: any = {
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
+const accountMappings: any = {
+  WETH: WETH_TOKEN_CONTRACT,
+  MOVR: null,
+  WBTC: WBTC_TOKEN_CONTRACT,
+  USDC: USDC_TOKEN_CONTRACT,
+  USDT: USDT_TOKEN_CONTRACT,
+  FRAX: FRAX_TOKEN_CONTRACT,
+  solar3FRAX: FRAX_3POOL_TOKEN_CONTRACT,
+  solarstKSM: TWO_KSM_TOKEN_CONTRACT,
+  solar3POOL: THREE_POOL_TOKEN_CONTRACT
+}
+
 const BalanceModal: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState('0.0')
   const [withdrawAmount, setWithdrawAmount] = useState('0.0')
@@ -55,66 +67,16 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const [{ data: account }] = useAccount()
 
-  const [{ data: movr }] = useBalance({
-    addressOrName: account?.address
-  })
-  const [{ data: weth }] = useBalance({
-    token: WETH_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: wbtc }] = useBalance({
-    token: WBTC_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: usdc }] = useBalance({
-    token: USDC_TOKEN_CONTRACT,
+  const [{ data: metaMaskBalance }] = useBalance({
+    token: accountMappings[props.item.name],
     addressOrName: account?.address
   })
 
-  const [{ data: usdt }] = useBalance({
-    token: USDT_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: frax }] = useBalance({
-    token: FRAX_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: threePool }] = useBalance({
-    token: THREE_POOL_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: frax3Pool }] = useBalance({
-    token: FRAX_3POOL_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: solarstKSM }] = useBalance({
-    token: TWO_KSM_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-
-  const getBalance = (token: string) => {
-    switch (token) {
-      case 'MOVR':
-        return movr?.formatted ? movr?.formatted : '0'
-      case 'WETH':
-        return weth?.formatted ? weth?.formatted : '0'
-      case 'WBTC':
-        return wbtc?.formatted ? wbtc?.formatted : '0'
-      case 'USDC':
-        let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
-        return numUSDC ? numUSDC.toString() : '0'
-      case 'FRAX':
-        return frax?.formatted ? frax?.formatted : '0'
-      case 'USDT':
-        let numUSDT = parseFloat(usdt?.formatted || '0') * 10 ** 12
-        return numUSDT ? numUSDT.toString() : '0'
-      case 'solar3POOL':
-        return threePool?.formatted ? threePool?.formatted : '0'
-      case 'solar3FRAX':
-        return frax3Pool?.formatted ? frax3Pool?.formatted : '0'
-      case 'solarstKSM':
-        return solarstKSM?.formatted ? solarstKSM?.formatted : '0'
+  const getBalance = (token: any) => {
+    if (token === 'USDC' || token === 'USDT') {
+      return parseInt(token.formatted) * 10 ** 12
     }
+    return parseFloat(token?.formatted).toFixed(2)
   }
 
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
@@ -348,8 +310,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
                     Balance: {}
-                    {parseFloat(getBalance(props.item.name)!).toFixed(2)}{' '}
-                    {props.item.suffix}
+                    {getBalance(metaMaskBalance)} {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

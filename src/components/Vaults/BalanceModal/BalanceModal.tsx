@@ -328,7 +328,9 @@ const BalanceModal: React.FC<Props> = (props) => {
                     <button
                       onClick={() =>
                         metaMaskBalance
-                          ? setDepositAmount(metaMaskBalance?.value.toString())
+                          ? setDepositAmount(
+                              formatMetaMaskBalance(metaMaskBalance)
+                            )
                           : null
                       }
                       disabled={allowanceLoading}

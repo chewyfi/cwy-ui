@@ -36,34 +36,6 @@ export default async function handler(req, res) {
     }
   )
 
-  const activeVaultsTotalDeposited = {
-    MOVR: 'NaN',
-    WETH: 'NaN',
-    WBTC: 'NaN',
-    USDC: 'NaN',
-    USDT: 'NaN',
-    FRAX: 'NaN',
-    solar3POOL: 'NaN',
-    solar3FRAX: 'NaN',
-    solarstKSM: 'NaN'
-  }
-
-  // All vaults
-  // for (const vault of Object.keys(activeVaultsTotalDeposited)) {
-  //   var contract = new ethers.Contract(
-  //     contractMappings[vault]['contract']['Vault'],
-  //     normalAbi,
-  //     provider
-  //   )
-  //   let balance =
-  //     parseInt(await contract.balanceOf(useraddress)) /
-  //     10 ** contractMappings[vault]['decimals']
-  //   activeVaultsTotalDeposited[vault] = balance
-  // }
-
-  // One vault
-  console.log(contractMappings[MOVR])
-
   var contract = new ethers.Contract(
     contractMappings[vault]['contract']['Vault'],
     normalAbi,
@@ -73,5 +45,5 @@ export default async function handler(req, res) {
     parseInt(await contract.balanceOf(useraddress)) /
     10 ** contractMappings[vault]['decimals']
 
-  res.status(200).json({ vault: balance })
+  res.status(200).json({ deposited: balance })
 }

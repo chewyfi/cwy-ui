@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
@@ -78,6 +78,7 @@ export const Vault: React.FC<Props> = ({
 }) => {
   const provider = useProvider()
   const router = useRouter()
+  const [deposited, setDeposited] = useState(0)
 
   const [{ data: account }] = useAccount()
 
@@ -90,12 +91,14 @@ export const Vault: React.FC<Props> = ({
     if (account?.address) {
       const getDeposited = async () => {
         const { basePath: baseURL } = router
-        const { vault } = await (
+        const { deposited } = await (
           await fetch(
-            `${baseURL}/deposited?vault=${item.name}&useraddress=${account.address}`
+            `${baseURL}/api/deposited?vault=${item.name}&useraddress=${account.address}`
           )
         ).json()
-        console.log('Vault deposited ', vault)
+
+        setDeposited(deposited)
+        console.log('Vault deposited ', deposited)
       }
       getDeposited()
     }
@@ -176,18 +179,7 @@ export const Vault: React.FC<Props> = ({
               : null}
           </span>
 
-          {/* <span>
-            {loadingBalanceUser ? (
-              <Spinner />
-            ) : balanceDataUnformatted ? (
-              (
-                (balanceDataUnformatted as any) /
-                10 ** contractMappings[item.name]['decimals']
-              ).toFixed(2)
-            ) : (
-              <Spinner />
-            )}
-          </span> */}
+          <span>{deposited ? deposited.toFixed(2) : null}</span>
         </span>
       </div>
     </div>

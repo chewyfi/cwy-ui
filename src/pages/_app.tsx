@@ -5,6 +5,7 @@ import { providers } from 'ethers'
 import type { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
 import ErrorBoundary from 'src/components/ErrorBoundary'
+import { AppProvider } from 'src/context'
 import { Provider } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
@@ -48,15 +49,17 @@ const provider = () =>
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
-      <Provider
-        autoConnect
-        connectorStorageKey="chewy.wallet"
-        connectors={connectors}
-        provider={provider}
-      >
-        <Toaster position="top-right" />
-        <Component {...pageProps} />
-      </Provider>
+      <AppProvider>
+        <Provider
+          autoConnect
+          connectorStorageKey="chewy.wallet"
+          connectors={connectors}
+          provider={provider}
+        >
+          <Toaster position="top-right" />
+          <Component {...pageProps} />
+        </Provider>
+      </AppProvider>
     </ErrorBoundary>
   )
 }

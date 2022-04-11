@@ -176,12 +176,15 @@ export const Vault: React.FC<Props> = ({
             </span>
           </div>
         </span>
-        <span className="text-[17px] ml-6 w-1/3 font-normal">
-          {item.tvl
-            ? item.tvl
-            : `${(parseFloat(resApyList[apyMappings[item.name]]) * 100).toFixed(
-                2
-              )}%`}
+        <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
+          <span>
+            {item.apy
+              ? item.apy
+              : `${(
+                  parseFloat(resApyList[apyMappings[item.name]]) * 100
+                ).toFixed(2)}%`}
+          </span>
+          <span>{item.emoji}</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>

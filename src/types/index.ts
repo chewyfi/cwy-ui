@@ -1,9 +1,9 @@
 export type APYType = {
   icon: string
   name: string
-  apy: string
+  apy?: string
   tvl?: string
-  holdings: string
+  emoji?: string
   isOpen: boolean
   suffix?: string
   strategy?: string

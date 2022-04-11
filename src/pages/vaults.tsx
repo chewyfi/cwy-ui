@@ -55,7 +55,7 @@ export default function Vaults(props: any) {
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>Moonriver TVL</h6>
-            <p>$281.98m</p>
+            <span>${!totalTVL ? null : totalTVL}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>My Deposits</h6>

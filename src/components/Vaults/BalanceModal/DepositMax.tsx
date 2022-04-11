@@ -45,7 +45,6 @@ const DepositMax: React.FC<any> = (props) => {
         return wbtc?.formatted ? wbtc?.formatted : '0'
       case 'USDC':
         let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
-        console.log(`USDC VALUE ${usdc}`)
         return numUSDC.toString()
       case 'FRAX':
         return frax?.formatted ? frax?.formatted : '0'

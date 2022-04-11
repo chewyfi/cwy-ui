@@ -117,10 +117,6 @@ const BalanceModal: React.FC<Props> = (props) => {
     }
   )
 
-  console.log(
-    `Allowance balance ${allowanceBalance} error ${allowanceError} address`
-  )
-
   const [
     { data: balanceDataUnformatted, loading: balanceDataLoading },
     getBalanceUser
@@ -223,21 +219,18 @@ const BalanceModal: React.FC<Props> = (props) => {
   }
 
   useEffect(() => {
-    const getDeposit = async () => {
-      let obj = { basePath: router.basePath }
+    // const getDeposit = async () => {
+    //   let obj = { basePath: router.basePath }
 
-      let val = await fetch(`${obj.basePath}/api/vault?=${props.item.name}`)
-      let valJson = await val.json()
-      console.log(`VAl get deposit ${valJson}`)
-    }
-    getDeposit()
-    console.log('CALLED')
+    //   let val = await fetch(`${obj.basePath}/api/vault?=${props.item.name}`)
+    //   let valJson = await val.json()
+    // }
+    // getDeposit()
     const asyncFunc = async () => {
       await getBalanceUser()
       await getAllowance()
     }
     asyncFunc()
-    console.log('Data deposit useffect', dataDeposit)
     if (dataDeposit) {
       txnToast(
         `Deposited ${depositAmount}`,
@@ -314,6 +307,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                   <div className="flex items-center text-[14px]">
                     <input
                       value={depositAmount}
+                      placeholder={'0.0'}
                       type="number"
                       step="0.1"
                       min="0"
@@ -368,6 +362,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                     <input
                       step="0.01"
                       min="0"
+                      placeholder={'0.0'}
                       value={withdrawAmount}
                       type="number"
                       onChange={(e) =>

@@ -31,7 +31,6 @@ export default async function handler(req, res) {
   let resPriceFeed = await (
     await fetch('https://chewy-api.vercel.app/prices')
   ).json()
-  console.log('RES PRICE FEED ', resPriceFeed)
 
   if (Object.keys(resPriceFeed).length !== 10) {
     resPriceFeed = {

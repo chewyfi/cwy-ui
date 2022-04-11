@@ -17,7 +17,6 @@ const contractMappings = {
 
 export default async function handler(req, res) {
   const { vault, useraddress } = req.query
-  console.log(`Vault ${vault} useraddress ${useraddress}`)
   let rpcUrl =
     'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
   const providerRPC = {

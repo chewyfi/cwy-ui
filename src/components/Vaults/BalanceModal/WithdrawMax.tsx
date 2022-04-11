@@ -45,7 +45,6 @@ const WithdrawMax: React.FC<any> = (props) => {
         return wbtc?.formatted ? wbtc?.formatted : '0'
       case 'USDC':
         let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
-        console.log(`USDC VALUE ${usdc}`)
         return numUSDC.toString()
       case 'FRAX':
         return frax?.formatted ? frax?.formatted : '0'
@@ -65,7 +64,6 @@ const WithdrawMax: React.FC<any> = (props) => {
   const { txnToast } = useTxnToast()
 
   const withdrawMaxAmount = async () => {
-    console.log('deposit max clicked')
     await writeWithdrawAll()
   }
 
@@ -145,7 +143,6 @@ const WithdrawMax: React.FC<any> = (props) => {
 
   useEffect(() => {
     if (dataWithdrawMax) {
-      console.log('DATA WITHDRAW MAX YO ', dataWithdrawMax.hash)
       const withdrawedAmount = (
         (balanceDataUnformatted as any) /
         10 ** contractMappings[props.item.name]['decimals']

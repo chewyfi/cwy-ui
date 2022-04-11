@@ -30,8 +30,6 @@ export default async function handler(req, res) {
     await fetch('https://chewy-api.vercel.app/prices')
   ).json()
   console.log('RES PRICE FEED ', resPriceFeed)
-  const { vault } = req.query
-  console.log(`Vault is ${vault}`)
 
   let rpcUrl =
     'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
@@ -57,7 +55,10 @@ export default async function handler(req, res) {
     WBTC: 'NaN',
     USDC: 'NaN',
     USDT: 'NaN',
-    FRAX: 'NaN'
+    FRAX: 'NaN',
+    solar3POOL: 'NaN',
+    solar3FRAX: 'NaN',
+    solarstKSM: 'NaN'
   }
 
   for (const vault of Object.keys(activeVaultsTotalValueLocked)) {

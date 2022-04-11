@@ -87,6 +87,15 @@ export const Vault: React.FC<Props> = ({
     addressOrName: account?.address
   })
 
+  console.log('META MASK BALANCE ', metaMaskBalance)
+
+  const formatMetaMaskBalance = (token: any) => {
+    if (token.symbol === 'USDC' || token.symbol === 'USDT') {
+      return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
+    }
+    return parseFloat(token?.formatted).toFixed(2)
+  }
+
   useEffect(() => {
     if (account?.address) {
       const getDeposited = async () => {
@@ -175,7 +184,7 @@ export const Vault: React.FC<Props> = ({
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
             {metaMaskBalance?.formatted
-              ? parseFloat(metaMaskBalance?.formatted).toFixed(2)
+              ? formatMetaMaskBalance(metaMaskBalance)
               : null}
           </span>
 

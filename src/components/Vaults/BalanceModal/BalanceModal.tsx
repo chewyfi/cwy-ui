@@ -72,13 +72,12 @@ const BalanceModal: React.FC<Props> = (props) => {
     addressOrName: account?.address
   })
 
-  const getBalance = (token: any) => {
-    if (token === 'USDC' || token === 'USDT') {
-      return parseInt(token.formatted) * 10 ** 12
+  const formatMetaMaskBalance = (token: any) => {
+    if (token.symbol === 'USDC' || token.symbol === 'USDT') {
+      return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
     }
     return parseFloat(token?.formatted).toFixed(2)
   }
-
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Want'],
@@ -310,7 +309,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
                     Balance: {}
-                    {getBalance(metaMaskBalance)} {props.item.suffix}
+                    {formatMetaMaskBalance(metaMaskBalance)} {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

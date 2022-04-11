@@ -26,7 +26,7 @@ const priceFeedMappings = {
 }
 
 export default async function handler(req, res) {
-  const resPriceFeed = await (
+  let resPriceFeed = await (
     await fetch('https://chewy-api.vercel.app/prices')
   ).json()
   console.log('RES PRICE FEED ', resPriceFeed)

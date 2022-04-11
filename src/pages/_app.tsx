@@ -15,10 +15,10 @@ const supportedChains = [
   {
     id: 1285,
     name: 'Moonriver',
-    // nativeCurrency: { name: 'Moonriver', symbol: 'MOVR', decimal: 18 },
-    rpcUrls: [rpcUrl],
+    nativeCurrency: { name: 'Moonriver', symbol: 'MOVR', decimals: 18 },
+    rpcUrls: ['https://rpc.api.moonriver.moonbeam.network'],
     blockExplorers: [
-      { name: 'Moonscan', url: 'https://moonbeam.moonscan.io/' }
+      { name: 'Moonscan', url: 'https://moonriver.moonscan.io' }
     ],
     testnet: true
   }

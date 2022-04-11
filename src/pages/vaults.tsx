@@ -20,7 +20,9 @@ export default function Vaults(props: any) {
       const { activeVaultsTotalValueLocked } = await (
         await fetch(`${baseURL}/api/total-value-locked-usd`)
       ).json()
-      console.log(`Active value ${activeVaultsTotalValueLocked}`)
+      console.log(
+        `Active value ${JSON.stringify(activeVaultsTotalValueLocked)}`
+      )
       let sum = 0
       Object.values(activeVaultsTotalValueLocked).forEach(
         (val: any) => (sum += parseInt(val))

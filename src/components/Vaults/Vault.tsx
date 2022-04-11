@@ -17,7 +17,6 @@ import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
 import nativeAbi from '../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../chain-info/abis/normalAbi.json'
 import { poolAddresses } from '../../chain-info/pool-addresses'
-import { Spinner } from '../ui/Spinner'
 
 interface Props {
   item: APYType
@@ -79,6 +78,7 @@ export const Vault: React.FC<Props> = ({
   const provider = useProvider()
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
+  const [tvl, setTVL] = useState(0)
 
   const [{ data: account }] = useAccount()
 
@@ -98,18 +98,26 @@ export const Vault: React.FC<Props> = ({
 
   useEffect(() => {
     if (account?.address) {
-      const getDeposited = async () => {
+      const getDepositedAndTVL = async () => {
         const { basePath: baseURL } = router
         const { deposited } = await (
           await fetch(
             `${baseURL}/api/deposited?vault=${item.name}&useraddress=${account.address}`
           )
         ).json()
-
         setDeposited(deposited)
+
+        const { info } = await (
+          await fetch(
+            `${baseURL}/api/total-value-locked-usd-vault?vault=${item.name}`
+          )
+        ).json()
+
+        console.log(`Vault data ${info.balance}`)
+        setTVL(info.balance)
         console.log('Vault deposited ', deposited)
       }
-      getDeposited()
+      getDepositedAndTVL()
     }
   }, [account?.address])
 
@@ -161,7 +169,8 @@ export const Vault: React.FC<Props> = ({
             <span className="text-[14px] text-[#c0c0c0]">
               <span className="flex items-center font-normal">
                 <span className="mr-1">TVL $</span>
-                {loadingTotalValue ? (
+                {tvl && tvl.toFixed(2)}
+                {/* {loadingTotalValue ? (
                   <Spinner size="xs" />
                 ) : totalValueData ? (
                   (
@@ -171,7 +180,7 @@ export const Vault: React.FC<Props> = ({
                   )?.toFixed(2)
                 ) : (
                   <Spinner size="xs" />
-                )}
+                )} */}
               </span>
             </span>
           </div>

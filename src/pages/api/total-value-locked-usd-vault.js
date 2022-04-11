@@ -2,7 +2,6 @@ import { ethers } from 'ethers'
 
 import normalAbi from '../../chain-info/abis/normalAbi.json'
 import { poolAddresses } from '../../chain-info/pool-addresses'
-
 const contractMappings = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
   WETH: { contract: poolAddresses['MoonbeamETH'], decimals: 18 },
@@ -14,7 +13,6 @@ const contractMappings = {
   solar3FRAX: { contract: poolAddresses['SolarbeamFrax3pool'], decimals: 18 },
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
-
 const priceFeedMappings = {
   FRAX: 'FRAX',
   USDC: 'USDC',
@@ -28,35 +26,7 @@ const priceFeedMappings = {
 }
 
 export default async function handler(req, res) {
-  let rpcUrl =
-    'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
-  const providerRPC = {
-    moonriver: {
-      name: 'moonriver',
-      rpc: rpcUrl, // Insert your RPC URL here
-      chainId: 1285 // 0x505 in hex,
-    }
-  }
-  // 3. Create ethers provider
-  const provider = new ethers.providers.StaticJsonRpcProvider(
-    providerRPC.moonriver.rpc,
-    {
-      chainId: providerRPC.moonriver.chainId,
-      name: providerRPC.moonriver.name
-    }
-  )
-
-  const activeVaultsTotalDeposited = {
-    MOVR: 'NaN',
-    WETH: 'NaN',
-    WBTC: 'NaN',
-    USDC: 'NaN',
-    USDT: 'NaN',
-    FRAX: 'NaN',
-    solar3POOL: 'NaN',
-    solar3FRAX: 'NaN',
-    solarstKSM: 'NaN'
-  }
+  const { vault } = req.query
 
   let resPriceFeed = await (
     await fetch('https://chewy-api.vercel.app/prices')
@@ -78,19 +48,33 @@ export default async function handler(req, res) {
     }
   }
 
-  let sum = 0
-  for (const vault of Object.keys(activeVaultsTotalDeposited)) {
-    var contract = new ethers.Contract(
-      contractMappings[vault]['contract']['Vault'],
-      normalAbi,
-      provider
-    )
-    let balance =
-      (parseInt(await contract.balance()) /
-        10 ** contractMappings[vault]['decimals']) *
-      resPriceFeed[priceFeedMappings[vault]]
-    sum += balance
+  let rpcUrl =
+    'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
+  const providerRPC = {
+    moonriver: {
+      name: 'moonriver',
+      rpc: rpcUrl, // Insert your RPC URL here
+      chainId: 1285 // 0x505 in hex,
+    }
   }
+  // 3. Create ethers provider
+  const provider = new ethers.providers.StaticJsonRpcProvider(
+    providerRPC.moonriver.rpc,
+    {
+      chainId: providerRPC.moonriver.chainId,
+      name: providerRPC.moonriver.name
+    }
+  )
 
-  res.status(200).json({ sum })
+  let contract = new ethers.Contract(
+    contractMappings[vault]['contract']['Vault'],
+    normalAbi,
+    provider
+  )
+  let balance =
+    (parseInt(await contract.balance()) /
+      10 ** contractMappings[vault]['decimals']) *
+    resPriceFeed[priceFeedMappings[vault]]
+
+  res.status(200).json({ info: { vault, balance } })
 }

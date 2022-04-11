@@ -179,7 +179,7 @@ export const Vault: React.FC<Props> = ({
               : null}
           </span>
 
-          <span>{deposited ? deposited.toFixed(2) : null}</span>
+          <span>{deposited.toFixed(2)}</span>
         </span>
       </div>
     </div>

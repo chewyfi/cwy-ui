@@ -7,7 +7,7 @@ export type APYType = {
   isOpen: boolean
   suffix?: string
   strategy?: string
-  userBalance?: number
+  userBalance?: string
   deposited?: number
   getSomeUrl?: string
   contracts: {

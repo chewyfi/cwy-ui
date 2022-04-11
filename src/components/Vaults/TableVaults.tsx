@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
-import { useAccount } from 'wagmi'
+import {
+  FRAX_3POOL_TOKEN_CONTRACT,
+  FRAX_TOKEN_CONTRACT,
+  THREE_POOL_TOKEN_CONTRACT,
+  TWO_KSM_TOKEN_CONTRACT,
+  USDC_TOKEN_CONTRACT,
+  USDT_TOKEN_CONTRACT,
+  WBTC_TOKEN_CONTRACT,
+  WETH_TOKEN_CONTRACT
+} from 'src/utils/constants'
+import { useAccount, useBalance } from 'wagmi'
 
 import { poolAddresses } from '../../chain-info/pool-addresses'
 import BalanceModal from './BalanceModal/BalanceModal'
@@ -108,9 +118,71 @@ const vaultData: Array<APYType> = [
 
 const Table = (props: any) => {
   const [{ data: account }] = useAccount()
-
   const [apyList, setApyList] = useState(vaultData)
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
+
+  const [{ data: movr }] = useBalance({
+    addressOrName: account?.address
+  })
+  const [{ data: weth }] = useBalance({
+    token: WETH_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+  const [{ data: wbtc }] = useBalance({
+    token: WBTC_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+  const [{ data: usdc }] = useBalance({
+    token: USDC_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+
+  const [{ data: usdt }] = useBalance({
+    token: USDT_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+  const [{ data: frax }] = useBalance({
+    token: FRAX_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+  const [{ data: threePool }] = useBalance({
+    token: THREE_POOL_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+  const [{ data: frax3Pool }] = useBalance({
+    token: FRAX_3POOL_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+  const [{ data: solarstKSM }] = useBalance({
+    token: TWO_KSM_TOKEN_CONTRACT,
+    addressOrName: account?.address
+  })
+
+  const getBalance = (token: string) => {
+    switch (token) {
+      case 'MOVR':
+        return movr?.formatted ? movr?.formatted : '0'
+      case 'WETH':
+        return weth?.formatted ? weth?.formatted : '0'
+      case 'WBTC':
+        return wbtc?.formatted ? wbtc?.formatted : '0'
+      case 'USDC':
+        let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
+        return numUSDC ? numUSDC.toString() : '0'
+      case 'FRAX':
+        return frax?.formatted ? frax?.formatted : '0'
+      case 'USDT':
+        let numUSDT = parseFloat(usdt?.formatted || '0') * 10 ** 12
+        return numUSDT ? numUSDT.toString() : '0'
+      case 'solar3POOL':
+        return threePool?.formatted ? threePool?.formatted : '0'
+      case 'solar3FRAX':
+        return frax3Pool?.formatted ? frax3Pool?.formatted : '0'
+      case 'solarstKSM':
+        return solarstKSM?.formatted ? solarstKSM?.formatted : '0'
+    }
+  }
+
   const toggleDisclosure = (index: number) => {
     let vaultData = apyList
     vaultData.map((item, idx) => {
@@ -130,11 +202,6 @@ const Table = (props: any) => {
         await fetch('http://localhost:3000/api/total-value-locked-usd')
       ).json()
       if (account?.address) {
-        const { activeVaultsTotalDeposited } = await (
-          await fetch(
-            `http://localhost:3000/api/deposited?useraddress=${account?.address}`
-          )
-        ).json()
         const vaultData2: Array<APYType> = [
           {
             icon: '/static/tokens/movr.svg',
@@ -142,7 +209,7 @@ const Table = (props: any) => {
             suffix: 'MOVR',
             apy: '75.81%',
             tvl: activeVaultsTotalValueLocked['MOVR'],
-            userBalance: activeVaultsTotalDeposited['MOVR'],
+            userBalance: getBalance('MOVR'),
             holdings: '--',
             isOpen: false,
             strategy: 'Lending',
@@ -154,7 +221,7 @@ const Table = (props: any) => {
             apy: '68.54%',
             tvl: activeVaultsTotalValueLocked['WETH'],
             suffix: 'WETH',
-            userBalance: activeVaultsTotalDeposited['WETH'],
+            userBalance: getBalance('WETH'),
             holdings: '--',
             strategy: 'Lending',
             isOpen: false,
@@ -166,7 +233,7 @@ const Table = (props: any) => {
             apy: '48.823%',
             suffix: 'WBTC',
             tvl: activeVaultsTotalValueLocked['WBTC'],
-            userBalance: activeVaultsTotalDeposited['WBTC'],
+            userBalance: getBalance('WBTC'),
             holdings: '--',
             strategy: 'Lending',
             isOpen: false,
@@ -177,7 +244,7 @@ const Table = (props: any) => {
             name: 'USDC',
             apy: '18.52%',
             tvl: activeVaultsTotalValueLocked['USDC'],
-            userBalance: activeVaultsTotalDeposited['USDC'],
+            userBalance: getBalance('USDC'),
             holdings: '--',
             suffix: 'USDC',
             strategy: 'Lending',
@@ -189,7 +256,7 @@ const Table = (props: any) => {
             name: 'FRAX',
             apy: '14.33%',
             tvl: activeVaultsTotalValueLocked['FRAX'],
-            userBalance: activeVaultsTotalDeposited['FRAX'],
+            userBalance: getBalance('FRAX'),
             strategy: 'Lending',
             suffix: 'FRAX',
             holdings: '--',
@@ -201,7 +268,7 @@ const Table = (props: any) => {
             name: 'USDT',
             apy: '3.823%',
             tvl: activeVaultsTotalValueLocked['USDT'],
-            userBalance: activeVaultsTotalDeposited['USDT'],
+            userBalance: getBalance('USDT'),
             strategy: 'Lending',
             suffix: 'USDT',
             holdings: '--',
@@ -214,7 +281,7 @@ const Table = (props: any) => {
             apy: '3.823%',
             tvl: activeVaultsTotalValueLocked['solar3POOL'],
             holdings: '--',
-            userBalance: activeVaultsTotalDeposited['solar3POOL'],
+            userBalance: getBalance('solar3POOL'),
             isOpen: false,
             strategy: 'Solarbeam',
             suffix: 'LP',
@@ -228,7 +295,7 @@ const Table = (props: any) => {
             apy: '48.823%',
             holdings: '--',
             tvl: activeVaultsTotalValueLocked['solar3FRAX'],
-            userBalance: activeVaultsTotalDeposited['solar3FRAX'],
+            userBalance: getBalance('solar3FRAX'),
             isOpen: false,
             strategy: 'Solarbeam',
             suffix: 'LP',
@@ -242,7 +309,7 @@ const Table = (props: any) => {
             apy: '8.823%',
             tvl: activeVaultsTotalValueLocked['solarstKSM'],
             holdings: '--',
-            userBalance: activeVaultsTotalDeposited['solarstKSM'],
+            userBalance: getBalance('solarstKSM'),
             isOpen: false,
             strategy: 'Solarbeam',
             suffix: 'LP',

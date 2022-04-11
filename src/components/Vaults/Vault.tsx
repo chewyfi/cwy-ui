@@ -88,7 +88,11 @@ export const Vault: React.FC<Props> = ({
           {(parseFloat(resApyList[apyMappings[item.name]]) * 100).toFixed(2)}%
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
-          <span>{twoDecimalPoints(item.userBalance)}</span>
+          <span>
+            {typeof item.userBalance == 'number'
+              ? twoDecimalPoints(item.userBalance)
+              : null}
+          </span>
         </span>
       </div>
     </div>

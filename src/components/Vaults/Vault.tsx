@@ -90,7 +90,7 @@ export const Vault: React.FC<Props> = ({
   console.log('META MASK BALANCE ', metaMaskBalance)
 
   const formatMetaMaskBalance = (token: any) => {
-    if (token.symbol === 'USDC' || token.symbol === 'USDT') {
+    if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
       return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
     }
     return parseFloat(token?.formatted).toFixed(2)

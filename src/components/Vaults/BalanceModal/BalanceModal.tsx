@@ -73,7 +73,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   })
 
   const formatMetaMaskBalance = (token: any) => {
-    if (token.symbol === 'USDC' || token.symbol === 'USDT') {
+    if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
       return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
     }
     return parseFloat(token?.formatted).toFixed(2)
@@ -327,7 +327,9 @@ const BalanceModal: React.FC<Props> = (props) => {
 
                     <button
                       onClick={() =>
-                        setDepositAmount(getBalance(props.item.name)!)
+                        metaMaskBalance
+                          ? setDepositAmount(metaMaskBalance?.value.toString())
+                          : null
                       }
                       disabled={allowanceLoading}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"

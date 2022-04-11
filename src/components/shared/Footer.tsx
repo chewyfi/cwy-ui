@@ -18,21 +18,21 @@ const Footer = () => {
         <div className="flex flex-col justify-start space-y-2">
           <h6 className="text-[19px] font-semibold">Community</h6>
           <ul className="text-[#c0c0c0] text-[19px]">
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_TWITTER_URL}>
                 <a target="_blank" rel="noreferrer">
                   Twitter
                 </a>
               </Link>
             </li>
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_DISCORD_URL}>
                 <a target="_blank" rel="noreferrer">
                   Discord
                 </a>
               </Link>
             </li>
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_BLOG_URL}>
                 <a target="_blank" rel="noreferrer">
                   Blog
@@ -44,21 +44,21 @@ const Footer = () => {
         <div className="flex flex-col justify-start space-y-2">
           <h6 className="text-[19px] font-semibold">Development</h6>
           <ul className="text-[#c0c0c0] text-[19px]">
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_DOCS_URL}>
                 <a target="_blank" rel="noreferrer">
                   Docs
                 </a>
               </Link>
             </li>
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_AUDITS_URL}>
                 <a target="_blank" rel="noreferrer">
                   Audits
                 </a>
               </Link>
             </li>
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_BUG_BOUNTY_URL}>
                 <a target="_blank" rel="noreferrer">
                   Bug bounty
@@ -70,14 +70,14 @@ const Footer = () => {
         <div className="flex flex-col justify-start space-y-2">
           <h6 className="text-[19px] font-semibold">Governance</h6>
           <ul className="text-[#c0c0c0] text-[19px]">
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_FORUM_URL}>
                 <a target="_blank" rel="noreferrer">
                   Forum
                 </a>
               </Link>
             </li>
-            <li className="hover:opacity-60">
+            <li className="transition duration-200 ease-in-out hover:opacity-60">
               <Link href={CWY_SNAPSHOT_URL}>
                 <a target="_blank" rel="noreferrer">
                   Snapshot

@@ -126,7 +126,9 @@ export const Vault: React.FC<Props> = ({
 
   return (
     <div
-      className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
+      className={clsx(
+        'py-3 px-2 rounded-lg bg-[#f7f7f7] transition duration-200 ease-in-out hover:bg-[#f0f0f0]'
+      )}
     >
       <div
         onClick={() => toggleDisclosure()}

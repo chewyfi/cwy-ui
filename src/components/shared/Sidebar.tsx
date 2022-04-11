@@ -45,10 +45,13 @@ const Sidebar = () => {
         {LINKS.map(({ path, name, icon }, idx) => (
           <Link href={path} key={idx} passHref>
             <li
-              className={clsx('cursor-pointer mt-1 p-2 group rounded-lg', {
-                'bg-[#f7f7f7]': isActivePath(path),
-                'hover:bg-[#f7f7f7]': !isActivePath(path)
-              })}
+              className={clsx(
+                'transition duration-200 ease-in-out cursor-pointer mt-1 p-2 group rounded-lg',
+                {
+                  'bg-[#f7f7f7]': isActivePath(path),
+                  'hover:bg-[#f7f7f7]': !isActivePath(path)
+                }
+              )}
             >
               <span
                 className={clsx(
@@ -57,11 +60,14 @@ const Sidebar = () => {
               >
                 <img src={icon} className="w-7 h-7" alt={name} />
                 <span
-                  className={clsx('ml-2 group-hover:opacity-100', {
-                    'text-black': isActivePath(path),
-                    'hover:bg-[#f7f7f7] hover:opacity-100 group-hover:text-black text-[#cfcfcf]':
-                      !isActivePath(path)
-                  })}
+                  className={clsx(
+                    'transition duration-200 ease-in-out ml-2 group-hover:opacity-100',
+                    {
+                      'text-black': isActivePath(path),
+                      'hover:bg-[#f7f7f7] hover:opacity-100 group-hover:text-black text-[#cfcfcf]':
+                        !isActivePath(path)
+                    }
+                  )}
                 >
                   {name}
                 </span>

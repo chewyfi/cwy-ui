@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { APYType } from 'src/types'
 import {
@@ -57,6 +58,18 @@ const apyMappings: any = {
   WBTC: 'moonwell-btc-supply'
 }
 
+const accountMappings: any = {
+  WETH: WETH_TOKEN_CONTRACT,
+  MOVR: null,
+  WBTC: WBTC_TOKEN_CONTRACT,
+  USDC: USDC_TOKEN_CONTRACT,
+  USDT: USDT_TOKEN_CONTRACT,
+  FRAX: FRAX_TOKEN_CONTRACT,
+  solar3FRAX: FRAX_3POOL_TOKEN_CONTRACT,
+  solarstKSM: TWO_KSM_TOKEN_CONTRACT,
+  solar3POOL: THREE_POOL_TOKEN_CONTRACT
+}
+
 export const Vault: React.FC<Props> = ({
   item,
   toggleDisclosure,
@@ -64,87 +77,29 @@ export const Vault: React.FC<Props> = ({
   resApyList
 }) => {
   const provider = useProvider()
+  const router = useRouter()
 
   const [{ data: account }] = useAccount()
 
-  const [{ data: movr }] = useBalance({
-    addressOrName: account?.address
-  })
-  const [{ data: weth }] = useBalance({
-    token: WETH_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: wbtc }] = useBalance({
-    token: WBTC_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: usdc }] = useBalance({
-    token: USDC_TOKEN_CONTRACT,
+  const [{ data: metaMaskBalance }] = useBalance({
+    token: accountMappings[item.name],
     addressOrName: account?.address
   })
 
-  const [{ data: usdt }] = useBalance({
-    token: USDT_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: frax }] = useBalance({
-    token: FRAX_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: threePool }] = useBalance({
-    token: THREE_POOL_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: frax3Pool }] = useBalance({
-    token: FRAX_3POOL_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-  const [{ data: solarstKSM }] = useBalance({
-    token: TWO_KSM_TOKEN_CONTRACT,
-    addressOrName: account?.address
-  })
-
-  useEffect(() => {}, [account?.address])
-
-  const getBalance = (token: string) => {
-    switch (token) {
-      case 'MOVR':
-        return movr?.formatted
-      case 'WETH':
-        return weth?.formatted
-      case 'WBTC':
-        return wbtc?.formatted
-      case 'USDC':
-        let numUSDC = parseFloat(usdc?.formatted || '0') * 10 ** 12
-        return numUSDC.toString()
-      case 'FRAX':
-        return frax?.formatted
-      case 'USDT':
-        let numUSDT = parseFloat(usdt?.formatted || '0') * 10 ** 12
-        return numUSDT.toString()
-      case 'solar3POOL':
-        return threePool?.formatted
-      case 'solar3FRAX':
-        return frax3Pool?.formatted
-      case 'solarstKSM':
-        return solarstKSM?.formatted
+  useEffect(() => {
+    if (account?.address) {
+      const getDeposited = async () => {
+        const { basePath: baseURL } = router
+        const { vault } = await (
+          await fetch(
+            `${baseURL}/deposited?vault=${item.name}&useraddress=${account.address}`
+          )
+        ).json()
+        console.log('Vault deposited ', vault)
+      }
+      getDeposited()
     }
-  }
-  // const [{ data: balanceDataUnformatted, loading: loadingBalanceUser }] =
-  //   useContractRead(
-  //     {
-  //       addressOrName: contractMappings[item.name]['contract']['Vault'],
-  //       contractInterface:
-  //         contractMappings[item.name] !== 'MOVR' ? normalAbi : nativeAbi,
-  //       signerOrProvider: provider
-  //     },
-  //     'balanceOf',
-  //     {
-  //       args: [account?.address]
-  //     }
-  //   )
-
-  // console.log(`Item name ${item.name} and balance ${balanceDataUnformatted}`)
+  }, [account?.address])
 
   const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(
@@ -216,13 +171,9 @@ export const Vault: React.FC<Props> = ({
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
-            available soon
-            {/* TODO: opimize loading speed */}
-            {/* {!getBalance(item.name) ? (
-              <Spinner />
-            ) : (
-              parseFloat(getBalance(item.name)!).toFixed(2)
-            )} */}
+            {metaMaskBalance?.formatted
+              ? parseFloat(metaMaskBalance?.formatted).toFixed(2)
+              : null}
           </span>
 
           {/* <span>

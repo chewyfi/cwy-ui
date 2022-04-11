@@ -6,22 +6,10 @@ import { useAccount } from 'wagmi'
 
 // import db from '../db/db.js'
 
-const priceFeedMappings: any = {
-  FRAX: 'FRAX',
-  USDC: 'USDC',
-  USDT: 'USDT',
-  WBTC: 'bitcoin',
-  WETH: 'ethereum',
-  MOVR: 'moonriver',
-  solar3POOL: '3pool',
-  solar3FRAX: 'FRAX-3pool',
-  solarstKSM: 'KSM-pool'
-}
-
 export default function Vaults(props: any) {
   // db.push('hey')
   const [totalTVL, setTotalTVL] = useState(0)
-  const [myDeposits, setMyDeposits] = useState<any>({})
+  const [myDeposits, setMyDeposits] = useState<any>(0)
   const router = useRouter()
   const [{ data: account }] = useAccount()
 
@@ -46,19 +34,12 @@ export default function Vaults(props: any) {
       const getTotalDeposits = async () => {
         const { basePath: baseURL } = router
 
-        const { activeVaultsTotalDeposited } = await (
+        const { sum } = await (
           await fetch(
-            `${baseURL}/api/deposited-all?useraddress=${account?.address}`
+            `${baseURL}/api/balance-all?useraddress=${account?.address}`
           )
         ).json()
-
-        Object.keys(activeVaultsTotalDeposited).forEach((key) => {
-          if (activeVaultsTotalDeposited[key] == 'NaN') {
-            delete activeVaultsTotalDeposited[key]
-          }
-        })
-
-        setMyDeposits(activeVaultsTotalDeposited)
+        setMyDeposits(sum)
       }
       getTotalDeposits()
     }
@@ -78,19 +59,7 @@ export default function Vaults(props: any) {
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>My Deposits</h6>
-            <p>
-              {myDeposits &&
-                props.resPriceFeed &&
-                Object.keys(myDeposits).map((pool, index) => (
-                  <p key={index}>
-                    {pool}: $
-                    {(
-                      parseFloat(myDeposits[pool]) *
-                      props.resPriceFeed[priceFeedMappings[pool]]
-                    ).toFixed(2)}{' '}
-                  </p>
-                ))}
-            </p>
+            <p>${myDeposits.toFixed(2)}</p>
           </div>
         </div>
         <TableVault

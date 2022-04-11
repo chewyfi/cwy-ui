@@ -59,7 +59,7 @@ export default function Vaults(props: any) {
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>My Deposits</h6>
-            <p>${myDeposits.toFixed(2)}</p>
+            <p>${myDeposits?.toFixed(2)}</p>
           </div>
         </div>
         <TableVault

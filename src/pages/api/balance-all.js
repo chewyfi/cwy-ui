@@ -28,7 +28,6 @@ const priceFeedMappings = {
 }
 
 export default async function handler(req, res) {
-  const { useraddress } = req.query
   let rpcUrl =
     'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
   const providerRPC = {
@@ -72,7 +71,7 @@ export default async function handler(req, res) {
       provider
     )
     let balance =
-      (parseInt(await contract.balanceOf(useraddress)) /
+      (parseInt(await contract.balance()) /
         10 ** contractMappings[vault]['decimals']) *
       resPriceFeed[priceFeedMappings[vault]]
     sum += balance

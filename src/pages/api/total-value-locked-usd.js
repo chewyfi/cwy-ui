@@ -31,6 +31,21 @@ export default async function handler(req, res) {
   ).json()
   console.log('RES PRICE FEED ', resPriceFeed)
 
+  if (Object.keys(resPriceFeed).length !== 10) {
+    resPriceFeed = {
+      bitcoin: 40425,
+      ethereum: 3025.23,
+      moonriver: 57.12,
+      moonwell: 0.03929106,
+      USDT: 1,
+      USDC: 1,
+      FRAX: 1,
+      '3pool': 1,
+      'FRAX-3pool': 1,
+      'KSM-pool': 1
+    }
+  }
+
   let rpcUrl =
     'https://moonriver.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b'
   const providerRPC = {

@@ -1,14 +1,12 @@
 export type APYType = {
   icon: string
   name: string
-  apy?: string
-  tvl?: number
+  apy: string
+  tvl?: string
   holdings: string
   isOpen: boolean
   suffix?: string
   strategy?: string
-  userBalance?: number
-  deposited?: number
   getSomeUrl?: string
   contracts: {
     Vault: string

@@ -87,8 +87,6 @@ export const Vault: React.FC<Props> = ({
     addressOrName: account?.address
   })
 
-  console.log('META MASK BALANCE ', metaMaskBalance)
-
   const formatMetaMaskBalance = (token: any) => {
     if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
       return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
@@ -102,7 +100,7 @@ export const Vault: React.FC<Props> = ({
         const { basePath: baseURL } = router
         const { deposited } = await (
           await fetch(
-            `${baseURL}/api/deposited?vault=${item.name}&useraddress=${account.address}`
+            `${baseURL}/api/user-deposited?vault=${item.name}&useraddress=${account.address}`
           )
         ).json()
         setDeposited(deposited)
@@ -113,9 +111,7 @@ export const Vault: React.FC<Props> = ({
           )
         ).json()
 
-        console.log(`Vault data ${info.balance}`)
         setTVL(info.balance)
-        console.log('Vault deposited ', deposited)
       }
       getDepositedAndTVL()
     }

@@ -15,6 +15,17 @@ const contractMappings = {
   solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
 }
 
+const priceFeedMappings = {
+  FRAX: 'FRAX',
+  USDC: 'USDC',
+  USDT: 'USDT',
+  WBTC: 'bitcoin',
+  WETH: 'ethereum',
+  MOVR: 'moonriver',
+  solar3POOL: '3pool',
+  solar3FRAX: 'FRAX-3pool',
+  solarstKSM: 'KSM-pool'
+}
 export default async function handler(req, res) {
   const { useraddress } = req.query
   let rpcUrl =
@@ -46,6 +57,24 @@ export default async function handler(req, res) {
     solar3FRAX: 'NaN',
     solarstKSM: 'NaN'
   }
+  let resPriceFeed = await (
+    await fetch('https://chewy-api.vercel.app/prices')
+  ).json()
+
+  if (Object.keys(resPriceFeed).length !== 10) {
+    resPriceFeed = {
+      bitcoin: 40425,
+      ethereum: 3025.23,
+      moonriver: 57.12,
+      moonwell: 0.03929106,
+      USDT: 1,
+      USDC: 1,
+      FRAX: 1,
+      '3pool': 1,
+      'FRAX-3pool': 1,
+      'KSM-pool': 1
+    }
+  }
 
   for (const vault of Object.keys(activeVaultsTotalDeposited)) {
     console.log('Vault is ', contractMappings[vault]['contract']['Vault'])
@@ -55,8 +84,9 @@ export default async function handler(req, res) {
       provider
     )
     let balance =
-      parseInt(await contract.balanceOf(useraddress)) /
-      10 ** contractMappings[vault]['decimals']
+      (parseInt(await contract.balanceOf(useraddress)) /
+        10 ** contractMappings[vault]['decimals']) *
+      resPriceFeed[priceFeedMappings[vault]]
 
     activeVaultsTotalDeposited[vault] = balance
   }

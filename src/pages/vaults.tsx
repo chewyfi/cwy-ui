@@ -33,11 +33,18 @@ export default function Vaults(props: any) {
       const getTotalDeposits = async () => {
         const { basePath: baseURL } = router
 
-        const { sum } = await (
+        const { activeVaultsTotalDeposited } = await (
           await fetch(
-            `${baseURL}/api/balance-all?useraddress=${account?.address}`
+            `${baseURL}/api/user-deposited-all-price?useraddress=${account?.address}`
           )
         ).json()
+        console.log(
+          `active vaults total ${JSON.stringify(activeVaultsTotalDeposited)}`
+        )
+        let sum = 0
+        Object.values(activeVaultsTotalDeposited).forEach(
+          (val: any) => (sum += parseInt(val))
+        )
         setMyDeposits(sum)
       }
       getTotalDeposits()

@@ -26,6 +26,7 @@ const supportedChains = [
 
 const connectors = () => {
   return [
+    // @ts-ignore
     new InjectedConnector({ chains: supportedChains }),
     new WalletConnectConnector({
       options: {

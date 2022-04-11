@@ -20,7 +20,7 @@ const supportedChains = [
     blockExplorers: [
       { name: 'Moonscan', url: 'https://moonriver.moonscan.io' }
     ],
-    testnet: true
+    testnet: false
   }
 ]
 

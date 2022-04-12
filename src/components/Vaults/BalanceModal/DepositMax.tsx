@@ -128,7 +128,7 @@ const DepositMax: React.FC<any> = (props) => {
         )
       ],
       overrides: {
-        gasLimit: '4500000'
+        gasLimit: '9500000'
       }
     }
   )

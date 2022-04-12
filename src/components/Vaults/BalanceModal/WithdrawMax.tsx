@@ -120,7 +120,7 @@ const WithdrawMax: React.FC<any> = (props) => {
     'withdrawAll',
     {
       overrides: {
-        gasLimit: '4500000'
+        gasLimit: '9500000'
       }
     }
   )

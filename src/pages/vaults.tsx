@@ -86,9 +86,14 @@ export const getServerSideProps = async () => {
   try {
     resApyListJson = await resApyList.json()
     if (
-      Object.keys(resApyListJson).length !== 10 ||
+      Object.keys(resApyListJson).length !== 6 ||
       Object.values(resApyListJson).includes(null)
     ) {
+      console.log(
+        'Values not equal to 10 if statement ',
+        Object.keys(resApyListJson).length,
+        resApyListJson
+      )
       resApyListJson = {
         'moonwell-usdc-leverage': '0.1337401113977239',
         'moonwell-movr-leverage': '0.5055548104085432',
@@ -97,8 +102,12 @@ export const getServerSideProps = async () => {
         'moonwell-frax-leverage': '0.1828348193747143',
         'moonwell-btc-supply': '0.07304095403867654'
       }
+      let update = resApyListJson
+      resApyListJson = Object.assign({}, resApyListJson, update)
     }
   } catch (error) {
+    console.log('Values not equal to 10 catch error ', error)
+
     resApyListJson = {
       'moonwell-usdc-leverage': '0.1337401113977239',
       'moonwell-movr-leverage': '0.5055548104085432',

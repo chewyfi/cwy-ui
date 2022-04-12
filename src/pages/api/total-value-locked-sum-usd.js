@@ -62,6 +62,8 @@ export default async function handler(req, res) {
     await fetch('https://chewy-api.vercel.app/prices')
   ).json()
 
+  console.log('entered total locked sum usd')
+
   if (Object.keys(resPriceFeed).length !== 10) {
     resPriceFeed = {
       bitcoin: 40425,
@@ -75,6 +77,7 @@ export default async function handler(req, res) {
       'FRAX-3pool': 1,
       'KSM-pool': 1
     }
+    console.log('Having to use default prices')
   }
 
   let sum = 0

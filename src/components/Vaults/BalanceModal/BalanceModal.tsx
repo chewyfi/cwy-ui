@@ -248,13 +248,6 @@ const BalanceModal: React.FC<Props> = (props) => {
   }
 
   useEffect(() => {
-    // const getDeposit = async () => {
-    //   let obj = { basePath: router.basePath }
-
-    //   let val = await fetch(`${obj.basePath}/api/vault?=${props.item.name}`)
-    //   let valJson = await val.json()
-    // }
-    // getDeposit()
     const asyncFunc = async () => {
       await getBalanceUser()
       await getAllowance()

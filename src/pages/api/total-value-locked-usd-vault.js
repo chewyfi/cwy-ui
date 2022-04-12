@@ -45,6 +45,7 @@ export default async function handler(req, res) {
       'FRAX-3pool': 1,
       'KSM-pool': 1
     }
+    console.log('Having to use default prices')
   }
 
   let rpcUrl =

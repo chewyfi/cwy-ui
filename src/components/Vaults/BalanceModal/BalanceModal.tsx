@@ -73,11 +73,23 @@ const BalanceModal: React.FC<Props> = (props) => {
     addressOrName: account?.address
   })
 
+  console.log(`Meta mask balance ${JSON.stringify(metaMaskBalance?.value)}`)
+
   const formatMetaMaskBalance = (token: any) => {
-    if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
-      return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
+    // if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
+    //   return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
+    // }
+    if (metaMaskBalance?.decimals && token?.value) {
+      console.log(
+        'Formatted metamask balance ',
+        (parseFloat(token?.value) / 10 ** metaMaskBalance?.decimals)
+          .toFixed(2)
+          .toString()
+      )
+      return (parseFloat(token?.value) / 10 ** metaMaskBalance?.decimals)
+        .toFixed(2)
+        .toString()
     }
-    return parseFloat(token?.formatted).toFixed(2)
   }
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
@@ -144,10 +156,10 @@ const BalanceModal: React.FC<Props> = (props) => {
       'deposit',
       {
         args: [
-          BigInt(
+          (
             parseFloat(depositAmount) *
-              10 ** contractMappings[props.item.name]['decimals']
-          )
+            10 ** contractMappings[props.item.name]['decimals']
+          ).toString()
         ],
         overrides: {
           gasLimit: '4500000'
@@ -171,10 +183,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     'depositBNB',
     {
       overrides: {
-        value: BigInt(
+        value: (
           parseFloat(depositAmount) *
-            10 ** contractMappings[props.item.name]['decimals']
-        ),
+          10 ** contractMappings[props.item.name]['decimals']
+        ).toString(),
         gasLimit: '10500000'
       }
     }
@@ -337,14 +349,22 @@ const BalanceModal: React.FC<Props> = (props) => {
                     />
 
                     <button
-                      onClick={() =>
-                        metaMaskBalance
-                          ? setDepositAmount(
-                              formatMetaMaskBalance(metaMaskBalance)
-                            )
-                          : null
-                      }
-                      disabled={allowanceLoading}
+                      onClick={() => {
+                        if (metaMaskBalance) {
+                          props.item.name === 'USDT' ||
+                          props.item.name === 'USDC'
+                            ? setDepositAmount(
+                                (
+                                  metaMaskBalance.value /
+                                  10 **
+                                    contractMappings[props.item.name][
+                                      'decimals'
+                                    ]
+                                ).toString()
+                              )
+                            : setDepositAmount(metaMaskBalance?.formatted)
+                        }
+                      }}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
                     >
                       max

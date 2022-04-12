@@ -21,11 +21,11 @@ export default function Vaults(props: any) {
         await fetch(`${baseURL}/api/total-value-locked-usd`)
       ).json()
 
-      let sum = 0
+      let sum = 0.0
       Object.values(activeVaultsTotalValueLocked).forEach(
-        (val: any) => (sum += parseInt(val))
+        (val: any) => (sum += parseFloat(val))
       )
-      setTotalTVL(sum)
+      setTotalTVL(parseFloat(sum.toFixed(2)))
     }
     getTotalTVL()
 
@@ -43,9 +43,9 @@ export default function Vaults(props: any) {
         )
         let sum = 0
         Object.values(activeVaultsTotalDeposited).forEach(
-          (val: any) => (sum += parseInt(val))
+          (val: any) => (sum += parseFloat(val))
         )
-        setMyDeposits(sum)
+        setMyDeposits(parseFloat(sum.toFixed(2)))
       }
       getTotalDeposits()
     }

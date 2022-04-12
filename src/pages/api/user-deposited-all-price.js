@@ -82,10 +82,11 @@ export default async function handler(req, res) {
       normalAbi,
       provider
     )
+    const contractBalance = await contract.balanceOf(useraddress)
     let balance =
-      (parseInt(await contract.balanceOf(useraddress)) /
-        10 ** contractMappings[vault]['decimals']) *
+      (parseInt(contractBalance) / 10 ** contractMappings[vault]['decimals']) *
       resPriceFeed[priceFeedMappings[vault]]
+    console.log('CONTRACT BALANCE ', balance)
 
     activeVaultsTotalDeposited[vault] = balance
   }

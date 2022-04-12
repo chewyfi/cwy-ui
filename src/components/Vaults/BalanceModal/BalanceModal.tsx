@@ -266,6 +266,12 @@ const BalanceModal: React.FC<Props> = (props) => {
         `https://moonriver.moonscan.io/tx/${dataDeposit.hash}`
       )
     }
+    if (dataWithdrawAmountMax) {
+      txnToast(
+        `Withdrew ${withdrawAmount}`,
+        `https://moonriver.moonscan.io/tx/${dataDeposit.hash}`
+      )
+    }
 
     if (dataApproved) {
       txnToast(
@@ -276,7 +282,7 @@ const BalanceModal: React.FC<Props> = (props) => {
 
     if (dataWithdrawAmount) {
       txnToast(
-        `Withdrawed ${withdrawAmount}`,
+        `Withdrawed Balance`,
         `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
       )
     }

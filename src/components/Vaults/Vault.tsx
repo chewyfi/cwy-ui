@@ -95,8 +95,20 @@ export const Vault: React.FC<Props> = ({
   }
 
   useEffect(() => {
+    const TVLFetch = async () => {
+      const { basePath: baseURL } = router
+
+      const { info } = await (
+        await fetch(
+          `${baseURL}/api/total-value-locked-usd-vault?vault=${item.name}`
+        )
+      ).json()
+
+      setTVL(info.balance)
+    }
+    TVLFetch()
     if (account?.address) {
-      const getDepositedAndTVL = async () => {
+      const getDeposited = async () => {
         const { basePath: baseURL } = router
         const { deposited } = await (
           await fetch(
@@ -104,16 +116,8 @@ export const Vault: React.FC<Props> = ({
           )
         ).json()
         setDeposited(deposited)
-
-        const { info } = await (
-          await fetch(
-            `${baseURL}/api/total-value-locked-usd-vault?vault=${item.name}`
-          )
-        ).json()
-
-        setTVL(info.balance)
       }
-      getDepositedAndTVL()
+      getDeposited()
     }
   }, [account?.address])
 

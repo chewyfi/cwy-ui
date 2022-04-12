@@ -355,13 +355,11 @@ const BalanceModal: React.FC<Props> = (props) => {
                           props.item.name === 'USDC'
                             ? setDepositAmount(
                                 (
-                                  BigInt(metaMaskBalance!.value.toString()) /
-                                  BigInt(
-                                    10 **
-                                      contractMappings[props.item.name][
-                                        'decimals'
-                                      ]
-                                  )
+                                  parseInt(metaMaskBalance!.value.toString()) /
+                                  10 **
+                                    contractMappings[props.item.name][
+                                      'decimals'
+                                    ]
                                 ).toString()
                               )
                             : setDepositAmount(metaMaskBalance?.formatted)

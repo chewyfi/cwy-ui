@@ -77,7 +77,6 @@ export default async function handler(req, res) {
   }
 
   for (const vault of Object.keys(activeVaultsTotalDeposited)) {
-    console.log('Vault is ', contractMappings[vault]['contract']['Vault'])
     var contract = new ethers.Contract(
       contractMappings[vault]['contract']['Vault'],
       normalAbi,

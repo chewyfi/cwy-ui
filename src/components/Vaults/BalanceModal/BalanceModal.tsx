@@ -61,6 +61,7 @@ const accountMappings: any = {
 const BalanceModal: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState('0.0')
   const [withdrawAmount, setWithdrawAmount] = useState('0.0')
+  const [withdrawMax, setWithdrawMax] = useState(false)
   const { txnToast } = useTxnToast()
   const provider = useProvider()
   const router = useRouter()
@@ -201,6 +202,22 @@ const BalanceModal: React.FC<Props> = (props) => {
       }
     }
   )
+
+  const [{ data: dataWithdrawAmountMax }, writeWithdrawAmountMax] =
+    useContractWrite(
+      {
+        addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+        contractInterface:
+          contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        signerOrProvider: provider
+      },
+      'withdrawAll',
+      {
+        overrides: {
+          gasLimit: '4500000'
+        }
+      }
+    )
 
   const approve = async () => {
     if (
@@ -367,13 +384,14 @@ const BalanceModal: React.FC<Props> = (props) => {
                       type="number"
                       onChange={(e) =>
                         !isNaN(parseFloat(e.target.value))
-                          ? setWithdrawAmount(e.target.value)
+                          ? (setWithdrawAmount(e.target.value),
+                            setWithdrawMax(false))
                           : 0
                       }
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
                     <button
-                      onClick={() =>
+                      onClick={() => {
                         setWithdrawAmount(
                           (
                             (balanceDataUnformatted as any) /
@@ -382,7 +400,8 @@ const BalanceModal: React.FC<Props> = (props) => {
                             .toFixed(2)
                             .toString()
                         )
-                      }
+                        setWithdrawMax(true)
+                      }}
                       disabled={!balanceDataUnformatted}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
                     >
@@ -391,7 +410,11 @@ const BalanceModal: React.FC<Props> = (props) => {
                   </div>
                   <button
                     onClick={() => {
-                      writeWithdrawAmount()
+                      if (withdrawMax) {
+                        writeWithdrawAmountMax()
+                      } else {
+                        writeWithdrawAmount()
+                      }
                     }}
                     className="inline-block w-full p-1 mt-1 text-gray-400 border-2 border-gray-300 rounded-lg bg-gray-50"
                   >

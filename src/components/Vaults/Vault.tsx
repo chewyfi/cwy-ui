@@ -191,10 +191,14 @@ export const Vault: React.FC<Props> = ({
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
           <span>
             {item.apy
-              ? item.apy
-              : `${(
-                  parseFloat(resApyList[apyMappings[item.name]]) * 100
-                ).toFixed(2)}%`}
+              ? parseFloat(item.apy) > 100
+                ? `${(
+                    parseFloat(resApyList[apyMappings[item.name]]) / 100
+                  ).toFixed(2)}%`
+                : `${(
+                    parseFloat(resApyList[apyMappings[item.name]]) * 100
+                  ).toFixed(2)}%`
+              : null}
           </span>
           <span>{item.emoji}</span>
         </span>

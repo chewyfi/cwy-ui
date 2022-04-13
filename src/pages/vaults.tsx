@@ -85,12 +85,13 @@ export const getServerSideProps = async () => {
   let resApyListJson = {}
   try {
     resApyListJson = await resApyList.json()
+    console.log('successfuly used prices')
     if (
       Object.keys(resApyListJson).length !== 6 ||
       Object.values(resApyListJson).includes(null)
     ) {
       console.log(
-        'Values not equal to 10 if statement ',
+        'Values not equal to 6 if statement ',
         Object.keys(resApyListJson).length,
         resApyListJson
       )

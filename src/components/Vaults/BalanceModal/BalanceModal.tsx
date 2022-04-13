@@ -59,8 +59,8 @@ const accountMappings: any = {
 }
 
 const BalanceModal: React.FC<Props> = (props) => {
-  const [depositAmount, setDepositAmount] = useState('0.0')
-  const [withdrawAmount, setWithdrawAmount] = useState('0.0')
+  const [depositAmount, setDepositAmount] = useState('0')
+  const [withdrawAmount, setWithdrawAmount] = useState('0')
   const [withdrawMax, setWithdrawMax] = useState(false)
   const { txnToast } = useTxnToast()
   const provider = useProvider()

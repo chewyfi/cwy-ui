@@ -87,7 +87,7 @@ export const getServerSideProps = async () => {
     resApyListJson = await resApyList.json()
     console.log('successfuly used prices')
     if (
-      Object.keys(resApyListJson).length !== 6 ||
+      Object.keys(resApyListJson).length !== 9 ||
       Object.values(resApyListJson).includes(null)
     ) {
       console.log(
@@ -96,12 +96,15 @@ export const getServerSideProps = async () => {
         resApyListJson
       )
       resApyListJson = {
-        'moonwell-usdc-leverage': '0.1337401113977239',
-        'moonwell-movr-leverage': '0.5055548104085432',
-        'moonwell-usdt-leverage': '0.2656411461037247',
-        'moonwell-eth-leverage': '0.07642844172276833',
-        'moonwell-frax-leverage': '0.1828348193747143',
-        'moonwell-btc-supply': '0.07304095403867654'
+        'moonwell-usdc-leverage': 0.0738170409718809,
+        'moonwell-movr-leverage': 0.3624081757246836,
+        'moonwell-usdt-leverage': 0.16182239266351,
+        'moonwell-eth-leverage': 0.0530452880209417,
+        'moonwell-frax-leverage': 0.10939141742714727,
+        'moonwell-btc-supply': 0.06771444175688035,
+        solar3POOL: 9.543339242173845,
+        solarstKSM: 51.35319496290187,
+        solar3FRAX: 14.432707914902142
       }
       let update = resApyListJson
       resApyListJson = Object.assign({}, resApyListJson, update)
@@ -110,12 +113,15 @@ export const getServerSideProps = async () => {
     console.log('Values not equal to 10 catch error ', error)
 
     resApyListJson = {
-      'moonwell-usdc-leverage': '0.1337401113977239',
-      'moonwell-movr-leverage': '0.5055548104085432',
-      'moonwell-usdt-leverage': '0.2656411461037247',
-      'moonwell-eth-leverage': '0.07642844172276833',
-      'moonwell-frax-leverage': '0.1828348193747143',
-      'moonwell-btc-supply': '0.07304095403867654'
+      'moonwell-usdc-leverage': 0.0738170409718809,
+      'moonwell-movr-leverage': 0.3624081757246836,
+      'moonwell-usdt-leverage': 0.16182239266351,
+      'moonwell-eth-leverage': 0.0530452880209417,
+      'moonwell-frax-leverage': 0.10939141742714727,
+      'moonwell-btc-supply': 0.06771444175688035,
+      solar3POOL: 9.543339242173845,
+      solarstKSM: 51.35319496290187,
+      solar3FRAX: 14.432707914902142
     }
   }
 

@@ -60,7 +60,6 @@ const initialState = {
     {
       icon: '/static/tokens/3pool.svg',
       name: 'solar3POOL',
-      apy: 'available soon',
       isOpen: false,
       strategy: 'Solarbeam',
       suffix: 'LP',
@@ -70,7 +69,6 @@ const initialState = {
     {
       icon: '/static/tokens/frax3pool.svg',
       name: 'solar3FRAX',
-      apy: 'available soon',
       isOpen: false,
       strategy: 'Solarbeam',
       suffix: 'LP',
@@ -81,7 +79,6 @@ const initialState = {
     {
       icon: '/static/tokens/2ksm.svg',
       name: 'solarstKSM',
-      apy: 'available soon',
       isOpen: false,
       strategy: 'Solarbeam',
       suffix: 'LP',

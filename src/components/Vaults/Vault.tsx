@@ -54,7 +54,10 @@ const apyMappings: any = {
   USDT: 'moonwell-usdt-leverage',
   WETH: 'moonwell-eth-leverage',
   FRAX: 'moonwell-frax-leverage',
-  WBTC: 'moonwell-btc-supply'
+  WBTC: 'moonwell-btc-supply',
+  solar3FRAX: 'solar3FRAX',
+  solarstKSM: 'solarstKSM',
+  solar3POOL: 'solar3POOL'
 }
 
 const accountMappings: any = {

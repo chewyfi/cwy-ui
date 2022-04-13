@@ -119,9 +119,9 @@ export const getServerSideProps = async () => {
       'moonwell-eth-leverage': 0.0530452880209417,
       'moonwell-frax-leverage': 0.10939141742714727,
       'moonwell-btc-supply': 0.06771444175688035,
-      solar3POOL: 9.543339242173845,
-      solarstKSM: 51.35319496290187,
-      solar3FRAX: 14.432707914902142
+      solar3POOL: 0.09543339242173845,
+      solarstKSM: 0.5135319496290187,
+      solar3FRAX: 0.14432707914902142
     }
   }
 

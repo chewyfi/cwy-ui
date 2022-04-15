@@ -22,7 +22,7 @@ export const poolAddresses = {
   },
   MoonbeamMOVR: {
     Vault: '0x1E80764d0f4A0d6DF3762CA38eF908485300DBC1',
-    Strategy: '0x77F1D288DB60682C629D818e053a9f2e1F9d38AF',
+    Strategy: '0x391d396ebe8f48e17483561d6603066f7d7a0514',
     Want: '0x98878B06940aE243284CA214f92Bb71a2b032B8A'
   },
   Solarbeam3pool: {

@@ -199,7 +199,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
-    contractMappings[props.item.name] !== 'MOVR' ? 'withdraw' : 'withdrawBNB',
+    props.item.name !== 'MOVR' ? 'withdraw' : 'withdrawBNB',
     {
       args: [
         BigInt(
@@ -223,9 +223,7 @@ const BalanceModal: React.FC<Props> = (props) => {
           contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
-      contractMappings[props.item.name] !== 'MOVR'
-        ? 'withdrawAll'
-        : 'withdrawAllBNB',
+      props.item.name !== 'MOVR' ? 'withdrawAll' : 'withdrawAllBNB',
       {
         overrides: {
           gasLimit: '9500000'

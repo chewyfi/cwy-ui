@@ -195,8 +195,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   const [{ data: dataWithdrawAmount }, writeWithdrawAmount] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
-      contractInterface:
-        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     props.item.name !== 'MOVR' ? 'withdraw' : 'withdrawBNB',
@@ -219,11 +218,10 @@ const BalanceModal: React.FC<Props> = (props) => {
     useContractWrite(
       {
         addressOrName: contractMappings[props.item.name]['contract']['Vault'],
-        contractInterface:
-          contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
-      props.item.name !== 'MOVR' ? 'withdrawAll' : 'withdrawAll',
+      props.item.name !== 'MOVR' ? 'withdrawAll' : 'withdrawAllBNB',
       {
         overrides: {
           gasLimit: '9500000'

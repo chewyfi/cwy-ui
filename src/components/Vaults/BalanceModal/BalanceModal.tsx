@@ -223,7 +223,9 @@ const BalanceModal: React.FC<Props> = (props) => {
           contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
-      'withdrawAll',
+      contractMappings[props.item.name] !== 'MOVR'
+        ? 'withdrawAll'
+        : 'withdrawAllBNB',
       {
         overrides: {
           gasLimit: '9500000'

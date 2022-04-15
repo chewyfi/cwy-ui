@@ -199,7 +199,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
-    'withdraw',
+    contractMappings[props.item.name] !== 'MOVR' ? 'withdraw' : 'withdrawBNB',
     {
       args: [
         BigInt(

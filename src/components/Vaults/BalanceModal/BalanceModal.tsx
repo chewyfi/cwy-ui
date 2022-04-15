@@ -34,6 +34,24 @@ interface Props {
   item: APYType
 }
 
+function roundTo(n: any, digits: any) {
+  var negative = false
+  if (digits === undefined) {
+    digits = 0
+  }
+  if (n < 0) {
+    negative = true
+    n = n * -1
+  }
+  var multiplicator = Math.pow(10, digits)
+  n = parseFloat((n * multiplicator).toFixed(11))
+  n = (Math.round(n) / multiplicator).toFixed(digits)
+  if (negative) {
+    n = (n * -1).toFixed(digits)
+  }
+  return n
+}
+
 const contractMappings: any = {
   MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
   WETH: { contract: poolAddresses['MoonbeamETH'], decimals: 18 },
@@ -348,19 +366,19 @@ const BalanceModal: React.FC<Props> = (props) => {
                           props.item.name === 'USDT' ||
                           props.item.name === 'USDC'
                             ? setDepositAmount(
-                                (
+                                roundTo(
                                   parseInt(metaMaskBalance!.value.toString()) /
-                                  10 **
-                                    contractMappings[props.item.name][
-                                      'decimals'
-                                    ]
-                                )
-                                  .toFixed(4)
-                                  .toString()
+                                    10 **
+                                      contractMappings[props.item.name][
+                                        'decimals'
+                                      ],
+                                  5
+                                ).toString()
                               )
                             : setDepositAmount(
-                                parseFloat(metaMaskBalance?.formatted).toFixed(
-                                  6
+                                roundTo(
+                                  parseFloat(metaMaskBalance?.formatted),
+                                  5
                                 )
                               )
                         }

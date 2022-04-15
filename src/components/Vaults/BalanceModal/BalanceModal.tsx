@@ -59,8 +59,8 @@ const accountMappings: any = {
 }
 
 const BalanceModal: React.FC<Props> = (props) => {
-  const [depositAmount, setDepositAmount] = useState('0')
-  const [withdrawAmount, setWithdrawAmount] = useState('0')
+  const [depositAmount, setDepositAmount] = useState<string>('')
+  const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [withdrawMax, setWithdrawMax] = useState(false)
   const { txnToast } = useTxnToast()
   const provider = useProvider()
@@ -154,7 +154,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       {
         args: [
           (
-            parseFloat(depositAmount) *
+            parseFloat(!depositAmount ? '0' : depositAmount) *
             10 ** contractMappings[props.item.name]['decimals']
           ).toString()
         ],
@@ -181,7 +181,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     {
       overrides: {
         value: (
-          parseFloat(depositAmount) *
+          parseFloat(!depositAmount ? '0' : depositAmount) *
           10 ** contractMappings[props.item.name]['decimals']
         ).toString(),
         gasLimit: '10500000'
@@ -199,7 +199,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     {
       args: [
         BigInt(
-          parseFloat(withdrawAmount) *
+          parseFloat(!withdrawAmount ? '0' : withdrawAmount) *
             10 ** contractMappings[props.item.name]['decimals']
         )
       ],
@@ -354,9 +354,15 @@ const BalanceModal: React.FC<Props> = (props) => {
                                     contractMappings[props.item.name][
                                       'decimals'
                                     ]
-                                ).toString()
+                                )
+                                  .toFixed(4)
+                                  .toString()
                               )
-                            : setDepositAmount(metaMaskBalance?.formatted)
+                            : setDepositAmount(
+                                parseFloat(metaMaskBalance?.formatted).toFixed(
+                                  6
+                                )
+                              )
                         }
                       }}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"

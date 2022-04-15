@@ -390,7 +390,12 @@ const BalanceModal: React.FC<Props> = (props) => {
                   </div>
                   <button
                     onClick={() => approve()}
-                    disabled={allowanceLoading}
+                    disabled={
+                      allowanceLoading ||
+                      (allowanceBalance &&
+                        parseInt(allowanceBalance.toString()) > 0 &&
+                        !depositAmount)
+                    }
                     className="inline-block w-full p-1 mt-1 text-center text-white bg-black border-2 border-black rounded-lg"
                   >
                     {/* {allowanceLoading && <Spinner />} */}
@@ -447,6 +452,12 @@ const BalanceModal: React.FC<Props> = (props) => {
                     </button>{' '}
                   </div>
                   <button
+                    disabled={
+                      !(
+                        allowanceBalance &&
+                        parseInt(allowanceBalance.toString()) > 0
+                      ) || !withdrawAmount
+                    }
                     onClick={() => {
                       if (withdrawMax) {
                         console.log('withdrawing max!')

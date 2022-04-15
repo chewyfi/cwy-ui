@@ -94,8 +94,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Want'],
-      contractInterface:
-        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'approve',
@@ -117,8 +116,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   ] = useContractRead(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Want'],
-      contractInterface:
-        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'allowance',
@@ -136,8 +134,7 @@ const BalanceModal: React.FC<Props> = (props) => {
   ] = useContractRead(
     {
       addressOrName: contractMappings[props.item.name]['contract']['Vault'],
-      contractInterface:
-        contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+      contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'balanceOf',
@@ -229,8 +226,9 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const approve = async () => {
     if (
-      localStorage.getItem(`props.item.name${account?.address}`) ||
-      (allowanceBalance && parseInt(allowanceBalance.toString()) > 0)
+      // localStorage.getItem(`props.item.name${account?.address}`) ||
+      allowanceBalance &&
+      parseInt(allowanceBalance.toString()) > 0
     ) {
       if (props.item.name === 'MOVR') {
         await writeDepositBNB()
@@ -238,8 +236,8 @@ const BalanceModal: React.FC<Props> = (props) => {
         await writeDeposit()
       }
     } else {
-      localStorage.setItem(`props.item.name${account?.address}`, '1')
       await writeApprove()
+      // localStorage.setItem(`props.item.name${account?.address}`, '1')
     }
   }
 

@@ -128,8 +128,7 @@ export const Vault: React.FC<Props> = ({
     useContractRead(
       {
         addressOrName: contractMappings[item.name]['contract']['Vault'],
-        contractInterface:
-          contractMappings[item.name] !== 'MOVR' ? normalAbi : nativeAbi,
+        contractInterface: item.name !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
       'balance'

@@ -223,7 +223,7 @@ const BalanceModal: React.FC<Props> = (props) => {
           contractMappings[props.item.name] !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
-      props.item.name !== 'MOVR' ? 'withdrawAll' : 'withdrawAllBNB',
+      props.item.name !== 'MOVR' ? 'withdrawAll' : 'withdrawAll',
       {
         overrides: {
           gasLimit: '9500000'
@@ -431,6 +431,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                   <button
                     onClick={() => {
                       if (withdrawMax) {
+                        console.log('withdrawing max!')
                         writeWithdrawAmountMax()
                       } else {
                         writeWithdrawAmount()

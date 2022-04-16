@@ -350,13 +350,7 @@ const BalanceModal: React.FC<Props> = (props) => {
                       value={depositAmount}
                       placeholder={'0.0'}
                       type="number"
-                      step="0.1"
-                      min="0"
-                      onChange={(e) =>
-                        !isNaN(parseFloat(e.target.value))
-                          ? setDepositAmount(e.target.value)
-                          : 0
-                      }
+                      onChange={(e) => setDepositAmount(e.target.value)}
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
 
@@ -425,12 +419,9 @@ const BalanceModal: React.FC<Props> = (props) => {
                       placeholder={'0.0'}
                       value={withdrawAmount}
                       type="number"
-                      onChange={(e) =>
-                        !isNaN(parseFloat(e.target.value))
-                          ? (setWithdrawAmount(e.target.value),
-                            setWithdrawMax(false))
-                          : 0
-                      }
+                      onChange={(e) => (
+                        setWithdrawAmount(e.target.value), setWithdrawMax(false)
+                      )}
                       className="w-full px-2 py-1 font-semibold border-2 border-r-0 border-gray-200 rounded-l-lg outline-none"
                     />
                     <button

@@ -3,7 +3,6 @@ import { AppContext } from 'src/context'
 import { APYType } from 'src/types'
 import { useNetwork } from 'wagmi'
 
-import { AstarVault } from './AstarVault'
 import BalanceModal from './BalanceModal/BalanceModal'
 import { MoonriverVault } from './MoonriverVault'
 import { TableHeader } from './TableHeader'
@@ -35,7 +34,7 @@ const Table = (props: any) => {
     const astarApyList = context.apysAstar
     currentNetwork === 'Moonriver'
       ? setApyList(moonriverApyList)
-      : setApyList(astarApyList)
+      : setApyList(moonriverApyList)
   }, [network?.chain?.name])
 
   return (
@@ -49,22 +48,10 @@ const Table = (props: any) => {
         />
       )}
 
-      {network?.chain?.name === 'Moonriver' ? (
+      {network?.chain?.name === 'Moonriver' && (
         <div className="space-y-2">
           {apyList.map((item, index) => (
             <MoonriverVault
-              resPriceFeed={props.resPriceFeed}
-              resApyList={props.resApyList}
-              key={index}
-              item={item}
-              toggleDisclosure={() => toggleDisclosure(index)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="space-y-2">
-          {apyList.map((item, index) => (
-            <AstarVault
               resPriceFeed={props.resPriceFeed}
               resApyList={props.resApyList}
               key={index}

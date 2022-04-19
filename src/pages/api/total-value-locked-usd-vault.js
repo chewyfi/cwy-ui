@@ -79,7 +79,7 @@ export default async function handler(req, res) {
   )
 
   let contract = new ethers.Contract(
-    contractMappings['Moonriver'][vault]['contract']['Vault'],
+    contractMappings[vault]['contract']['Vault'],
     normalAbi,
     provider
   )

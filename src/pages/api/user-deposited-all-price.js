@@ -91,7 +91,7 @@ export default async function handler(req, res) {
 
   for (const vault of Object.keys(activeVaultsTotalDeposited)) {
     var contract = new ethers.Contract(
-      contractMappings['Moonriver'][vault]['contract']['Vault'],
+      contractMappings[vault]['contract']['Vault'],
       normalAbi,
       provider
     )

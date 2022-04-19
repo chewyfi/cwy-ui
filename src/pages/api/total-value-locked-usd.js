@@ -89,13 +89,13 @@ export default async function handler(req, res) {
 
   for (const vault of Object.keys(activeVaultsTotalValueLocked)) {
     let contract = new ethers.Contract(
-      contractMappings['Moonriver'][vault]['contract']['Vault'],
+      contractMappings[vault]['contract']['Vault'],
       normalAbi,
       provider
     )
     let balance =
       (parseInt(await contract.balance()) /
-        10 ** contractMappings['Moonriver'][vault]['decimals']) *
+        10 ** contractMappings[vault]['decimals']) *
       resPriceFeed[priceFeedMappings[vault]]
     activeVaultsTotalValueLocked[vault] = balance
   }

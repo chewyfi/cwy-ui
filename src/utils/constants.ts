@@ -1,5 +1,5 @@
+import { poolAddressesAstar } from 'src/chain-info/pool-addresses-astar'
 import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
-
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const CWY_DOCS_URL = 'https://docs.cwy.money'
@@ -55,6 +55,28 @@ export const contractMappings: any = {
     },
     solarstKSM: {
       contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
+      decimals: 18
+    }
+  },
+  Astar: {
+    'USDT-USDC': {
+      contract: poolAddressesAstar['USDT-USDC'],
+      decimals: 6
+    },
+    'WETH-WASTAR': {
+      contract: poolAddressesAstar['WETH-WASTAR'],
+      decimals: 18
+    },
+    'WBTC-WASTAR': {
+      contract: poolAddressesAstar['WBTC-WASTAR'],
+      decimals: 18
+    },
+    'USDC-WASTAR': {
+      contract: poolAddressesAstar['USDC-WASTAR'],
+      deicmals: 18
+    },
+    'BEAST-USDC': {
+      contract: poolAddressesAstar['BEAST-USDC'],
       decimals: 18
     }
   }

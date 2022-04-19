@@ -107,7 +107,7 @@ const initialState = {
       contracts: poolAddressesAstar['WETH-WASTAR']
     },
     {
-      icon: '/static/tokens/wbtc.svg',
+      icon: '/static/tokens/wastr.svg',
       name: 'WBTC-WASTAR',
       suffix: 'WBTC-WASTAR',
       strategy: 'Lending',
@@ -123,7 +123,7 @@ const initialState = {
       contracts: poolAddressesAstar['USDC-WASTAR']
     },
     {
-      icon: '/static/tokens/usdc.svg',
+      icon: '/static/tokens/funbeast.svg',
       name: 'BEAST-USDC',
       strategy: 'Lending',
       suffix: 'BEAST-USDC',

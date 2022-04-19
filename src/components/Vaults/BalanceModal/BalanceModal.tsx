@@ -15,7 +15,7 @@ import {
 
 import nativeAbi from '../../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../../chain-info/abis/normalAbi.json'
-import { poolAddressesMoonriver } from '../../../chain-info/pool-addresses-moonriver'
+import { contractMappings } from '../../../utils/constants'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
   FRAX_TOKEN_CONTRACT,
@@ -50,30 +50,6 @@ function roundTo(n: any, digits: any) {
     n = (n * -1).toFixed(digits)
   }
   return n
-}
-
-const contractMappings: any = {
-  MOVR: { contract: poolAddressesMoonriver['MoonbeamMOVR'], decimals: 18 },
-  WETH: { contract: poolAddressesMoonriver['MoonbeamETH'], decimals: 18 },
-  WBTC: {
-    contract: poolAddressesMoonriver['MoonbeamBTCSupplyOnly'],
-    decimals: 8
-  },
-  USDC: { contract: poolAddressesMoonriver['MoonbeamUSDC'], decimals: 6 },
-  FRAX: { contract: poolAddressesMoonriver['MoonbeamFRAX'], decimals: 18 },
-  USDT: { contract: poolAddressesMoonriver['MoonbeamUSDT'], decimals: 6 },
-  solar3POOL: {
-    contract: poolAddressesMoonriver['Solarbeam3pool'],
-    decimals: 18
-  },
-  solar3FRAX: {
-    contract: poolAddressesMoonriver['SolarbeamFrax3pool'],
-    decimals: 18
-  },
-  solarstKSM: {
-    contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
-    decimals: 18
-  }
 }
 
 const accountMappings: any = {
@@ -123,15 +99,19 @@ const BalanceModal: React.FC<Props> = (props) => {
   }
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
-      addressOrName: contractMappings[props.item.name]['contract']['Want'],
+      addressOrName:
+        contractMappings['Moonriver'][props.item.name]['contract']['Want'],
       contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
     'approve',
     {
       args: [
-        contractMappings[props.item.name]['contract']['Vault'],
-        BigInt(10000000 * 10 ** contractMappings[props.item.name]['decimals'])
+        contractMappings['Moonriver'][props.item.name]['contract']['Vault'],
+        BigInt(
+          10000000 *
+            10 ** contractMappings['Moonriver'][props.item.name]['decimals']
+        )
       ]
     }
   )
@@ -164,7 +144,8 @@ const BalanceModal: React.FC<Props> = (props) => {
     getBalanceUser
   ] = useContractRead(
     {
-      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      addressOrName:
+        contractMappings['Moonriver'][props.item.name]['contract']['Vault'],
       contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
@@ -177,7 +158,8 @@ const BalanceModal: React.FC<Props> = (props) => {
   const [{ data: dataDeposit, error: depositError, loading }, writeDeposit] =
     useContractWrite(
       {
-        addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+        addressOrName:
+          contractMappings['Moonriver'][props.item.name]['contract']['Vault'],
         contractInterface: normalAbi,
         signerOrProvider: provider
       },
@@ -186,7 +168,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         args: [
           (
             parseFloat(!depositAmount ? '0' : depositAmount) *
-            10 ** contractMappings[props.item.name]['decimals']
+            10 ** contractMappings['Moonriver'][props.item.name]['decimals']
           ).toString()
         ],
         overrides: {
@@ -204,7 +186,8 @@ const BalanceModal: React.FC<Props> = (props) => {
     writeDepositBNB
   ] = useContractWrite(
     {
-      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      addressOrName:
+        contractMappings['Moonriver'][props.item.name]['contract']['Vault'],
       contractInterface: nativeAbi,
       signerOrProvider: provider
     },
@@ -213,7 +196,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       overrides: {
         value: (
           parseFloat(!depositAmount ? '0' : depositAmount) *
-          10 ** contractMappings[props.item.name]['decimals']
+          10 ** contractMappings['Moonriver'][props.item.name]['decimals']
         ).toString(),
         gasLimit: '10500000'
       }
@@ -222,7 +205,8 @@ const BalanceModal: React.FC<Props> = (props) => {
 
   const [{ data: dataWithdrawAmount }, writeWithdrawAmount] = useContractWrite(
     {
-      addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+      addressOrName:
+        contractMappings['Moonriver'][props.item.name]['contract']['Vault'],
       contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
@@ -231,7 +215,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       args: [
         BigInt(
           parseFloat(!withdrawAmount ? '0' : withdrawAmount) *
-            10 ** contractMappings[props.item.name]['decimals']
+            10 ** contractMappings['Moonriver'][props.item.name]['decimals']
         )
       ],
       overrides: {
@@ -243,7 +227,8 @@ const BalanceModal: React.FC<Props> = (props) => {
   const [{ data: dataWithdrawAmountMax }, writeWithdrawAmountMax] =
     useContractWrite(
       {
-        addressOrName: contractMappings[props.item.name]['contract']['Vault'],
+        addressOrName:
+          contractMappings['Moonriver'][props.item.name]['contract']['Vault'],
         contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
@@ -376,9 +361,9 @@ const BalanceModal: React.FC<Props> = (props) => {
                                 roundTo(
                                   parseInt(metaMaskBalance!.value.toString()) /
                                     10 **
-                                      contractMappings[props.item.name][
-                                        'decimals'
-                                      ],
+                                      contractMappings['Moonriver'][
+                                        props.item.name
+                                      ]['decimals'],
                                   5
                                 ).toString()
                               )
@@ -422,7 +407,10 @@ const BalanceModal: React.FC<Props> = (props) => {
                     {balanceDataUnformatted &&
                       (
                         (balanceDataUnformatted as any) /
-                        10 ** contractMappings[props.item.name]['decimals']
+                        10 **
+                          contractMappings['Moonriver'][props.item.name][
+                            'decimals'
+                          ]
                       ).toFixed(2)}
                   </label>
                   <div className="flex items-center text-[14px]">
@@ -442,7 +430,10 @@ const BalanceModal: React.FC<Props> = (props) => {
                         setWithdrawAmount(
                           (
                             (balanceDataUnformatted as any) /
-                            10 ** contractMappings[props.item.name]['decimals']
+                            10 **
+                              contractMappings['Moonriver'][props.item.name][
+                                'decimals'
+                              ]
                           )
                             .toFixed(2)
                             .toString()

@@ -2,16 +2,6 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
-import {
-  FRAX_3POOL_TOKEN_CONTRACT,
-  FRAX_TOKEN_CONTRACT,
-  THREE_POOL_TOKEN_CONTRACT,
-  TWO_KSM_TOKEN_CONTRACT,
-  USDC_TOKEN_CONTRACT,
-  USDT_TOKEN_CONTRACT,
-  WBTC_TOKEN_CONTRACT,
-  WETH_TOKEN_CONTRACT
-} from 'src/utils/constants'
 import { contractMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
 import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
@@ -26,15 +16,11 @@ interface Props {
 }
 
 const accountMappings: any = {
-  WETH: WETH_TOKEN_CONTRACT,
-  MOVR: null,
-  WBTC: WBTC_TOKEN_CONTRACT,
-  USDC: USDC_TOKEN_CONTRACT,
-  USDT: USDT_TOKEN_CONTRACT,
-  FRAX: FRAX_TOKEN_CONTRACT,
-  solar3FRAX: FRAX_3POOL_TOKEN_CONTRACT,
-  solarstKSM: TWO_KSM_TOKEN_CONTRACT,
-  solar3POOL: THREE_POOL_TOKEN_CONTRACT
+  'USDT-USDC': contractMappings['Astar']['USDT-USDC']['contract']['lp'],
+  'WETH-WASTAR': contractMappings['Astar']['WETH-WASTAR']['contract']['lp'],
+  'WBTC-WASTAR': contractMappings['Astar']['WBTC-WASTAR']['contract']['lp'],
+  'USDC-WASTAR': contractMappings['Astar']['USDC-WASTAR']['contract']['lp'],
+  'BEAST-USDC': contractMappings['Astar']['BEAST-USDC']['contract']['lp']
 }
 
 export const AstarVault: React.FC<Props> = ({

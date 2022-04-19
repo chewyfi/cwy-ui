@@ -5,6 +5,7 @@ import { useNetwork } from 'wagmi'
 
 import { AstarVault } from './AstarVault'
 import BalanceModal from './BalanceModal/BalanceModal'
+import BalanceModalAstar from './BalanceModal/BalanceModalAstar'
 import { MoonriverVault } from './MoonriverVault'
 import { TableHeader } from './TableHeader'
 
@@ -49,8 +50,15 @@ const Table = (props: any) => {
   return (
     <div className="w-full">
       <TableHeader />
-      {selectedAPY && (
+      {selectedAPY && network?.chain?.name === 'Moonriver' && (
         <BalanceModal
+          onClose={() => setSelectedAPY(null)}
+          item={selectedAPY}
+          show
+        />
+      )}
+      {selectedAPY && network?.chain?.name === 'Astar' && (
+        <BalanceModalAstar
           onClose={() => setSelectedAPY(null)}
           item={selectedAPY}
           show

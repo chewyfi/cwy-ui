@@ -30,8 +30,8 @@ export default function NetworkDropdown(props: any) {
       className="bg-[#ededed] rounded relative inline-block text-left"
     >
       <div>
-        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          {/* <span className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded">
+        <Menu.Button className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded">
+          <span className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded">
             <img
               src={
                 props.activeNetwork === 'Moonriver'
@@ -42,7 +42,7 @@ export default function NetworkDropdown(props: any) {
               draggable={false}
               alt=""
             />
-          </span> */}
+          </span>
           {props.activeNetwork}
 
           <ChevronDown className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />

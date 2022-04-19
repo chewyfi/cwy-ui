@@ -145,7 +145,8 @@ const BalanceModal: React.FC<Props> = (props) => {
     getAllowance
   ] = useContractRead(
     {
-      addressOrName: contractMappings[props.item.name]['contract']['Want'],
+      addressOrName:
+        contractMappings['Moonriver'][props.item.name]['contract']['Want'],
       contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
@@ -153,7 +154,7 @@ const BalanceModal: React.FC<Props> = (props) => {
     {
       args: [
         account?.address,
-        contractMappings[props.item.name]['contract']['Vault']
+        contractMappings['Moonriver'][props.item.name]['contract']['Vault']
       ]
     }
   )

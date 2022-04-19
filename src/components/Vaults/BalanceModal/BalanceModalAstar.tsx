@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
+import { providers } from 'ethers'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import React, { Fragment, useEffect, useState } from 'react'
@@ -9,8 +10,7 @@ import {
   useAccount,
   useBalance,
   useContractRead,
-  useContractWrite,
-  useProvider
+  useContractWrite
 } from 'wagmi'
 
 import astarAbi from '../../../chain-info/abis/astarAbi.json'
@@ -68,7 +68,13 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [withdrawMax, setWithdrawMax] = useState(false)
   const { txnToast } = useTxnToast()
-  const provider = useProvider()
+  const provider = new providers.StaticJsonRpcProvider(
+    'https://rpc.astar.network:8545',
+    {
+      chainId: 592,
+      name: 'Astar'
+    }
+  )
   const router = useRouter()
 
   const [{ data: account }] = useAccount()
@@ -138,6 +144,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     }
   )
 
+  console.log('allowance balance astar ', allowanceBalance)
+
   const [
     { data: balanceDataUnformatted, loading: balanceDataLoading },
     getBalanceUser
@@ -192,7 +200,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
       contractInterface: astarAbi,
       signerOrProvider: provider
     },
-    'depositBNB',
+    'chewIn',
     {
       overrides: {
         value: (
@@ -233,7 +241,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
         contractInterface: astarAbi,
         signerOrProvider: provider
       },
-      props.item.name !== 'MOVR' ? 'withdrawAll' : 'withdrawAllBNB',
+      'chewAllOut',
       {
         overrides: {
           gasLimit: '9500000'
@@ -267,34 +275,34 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     if (dataDeposit) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://moonriver.moonscan.io/tx/${dataDeposit.hash}`
+        `https://blockscout.com/astar/address/${dataDeposit.hash}`
       )
     }
     if (dataWithdrawAmountMax) {
       txnToast(
         `Withdrew Contract Balance`,
-        `https://moonriver.moonscan.io/tx/${dataWithdrawAmountMax.hash}`
+        `https://blockscout.com/astar/address/${dataWithdrawAmountMax.hash}`
       )
     }
 
     if (dataApproved) {
       txnToast(
         'Approved',
-        `https://moonriver.moonscan.io/tx/${dataApproved.hash}`
+        `https://blockscout.com/astar/address/${dataApproved.hash}`
       )
     }
 
     if (dataWithdrawAmount) {
       txnToast(
         `Withdrawed ${withdrawAmount}`,
-        `https://moonriver.moonscan.io/tx/${dataWithdrawAmount.hash}`
+        `https://blockscout.com/astar/address/${dataWithdrawAmount.hash}`
       )
     }
 
     if (dataDepositBNB) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://moonriver.moonscan.io/tx/${dataDepositBNB.hash}`
+        `https://blockscout.com/astar/address/${dataDepositBNB.hash}`
       )
     }
   }, [
@@ -342,7 +350,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
                     Balance: {}
-                    {formatMetaMaskBalance(metaMaskBalance)} {props.item.suffix}
+                    {formatMetaMaskBalance(metaMaskBalance)} ASTR
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

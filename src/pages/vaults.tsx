@@ -14,38 +14,55 @@ export default function Vaults(props: any) {
   const [{ data: account }] = useAccount()
 
   useEffect(() => {
-    const getTotalTVL = async () => {
-      const { basePath: baseURL } = router
-
-      const { activeVaultsTotalValueLocked } = await (
-        await fetch(`${baseURL}/api/total-value-locked-usd`)
-      ).json()
-
-      let sum = 0.0
-      Object.values(activeVaultsTotalValueLocked).forEach(
-        (val: any) => (sum += parseFloat(val))
-      )
-      setTotalTVL(parseFloat(sum.toFixed(2)))
-    }
-    getTotalTVL()
-
-    if (account?.address) {
-      const getTotalDeposits = async () => {
+    if (
+      sessionStorage.getItem('totalTVL') &&
+      sessionStorage.getItem('totalDeposits')
+    ) {
+      console.log('entered session storage')
+      setTotalTVL(parseFloat(sessionStorage.getItem('totalTVL')!))
+      setMyDeposits(parseFloat(sessionStorage.getItem('totalDeposits')!))
+    } else {
+      const getTotalTVL = async () => {
         const { basePath: baseURL } = router
 
-        const { activeVaultsTotalDeposited } = await (
-          await fetch(
-            `${baseURL}/api/user-deposited-all-price?useraddress=${account?.address}`
-          )
+        const { activeVaultsTotalValueLocked } = await (
+          await fetch(`${baseURL}/api/total-value-locked-usd`)
         ).json()
 
-        let sum = 0
-        Object.values(activeVaultsTotalDeposited).forEach(
+        let sum = 0.0
+        Object.values(activeVaultsTotalValueLocked).forEach(
           (val: any) => (sum += parseFloat(val))
         )
-        setMyDeposits(parseFloat(sum.toFixed(2)))
+        setTotalTVL(parseFloat(sum.toFixed(2)))
+        sessionStorage.setItem(
+          'totalTVL',
+          parseFloat(sum.toFixed(2)).toString()
+        )
       }
-      getTotalDeposits()
+      getTotalTVL()
+
+      if (account?.address) {
+        const getTotalDeposits = async () => {
+          const { basePath: baseURL } = router
+
+          const { activeVaultsTotalDeposited } = await (
+            await fetch(
+              `${baseURL}/api/user-deposited-all-price?useraddress=${account?.address}`
+            )
+          ).json()
+
+          let sum = 0
+          Object.values(activeVaultsTotalDeposited).forEach(
+            (val: any) => (sum += parseFloat(val))
+          )
+          setMyDeposits(parseFloat(sum.toFixed(2)))
+          sessionStorage.setItem(
+            'totalDeposits',
+            parseFloat(sum.toFixed(2)).toString()
+          )
+        }
+        getTotalDeposits()
+      }
     }
   }, [account?.address])
 

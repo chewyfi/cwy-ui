@@ -6,7 +6,7 @@ import { useAccount, useNetwork } from 'wagmi'
 
 import ChevronDown from '../icons/ChevronDown'
 
-function classNames(...classes) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 

@@ -1,13 +1,15 @@
 import { createContext } from 'react'
+import { poolAddressesAstar } from 'src/chain-info/pool-addresses-astar'
 import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
 import { APYType } from 'src/types'
 
 export type InitialStateType = {
-  apys: APYType[]
+  apysMoonriver: APYType[]
+  apysAstar?: APYType[]
 }
 
 const initialState = {
-  apys: [
+  apysMoonriver: [
     {
       icon: '/static/tokens/movr.svg',
       name: 'MOVR',
@@ -84,6 +86,58 @@ const initialState = {
       suffix: 'LP',
       getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm',
       contracts: poolAddressesMoonriver['SolarbeamstKSMpool']
+    }
+  ],
+  apysAstar: [
+    {
+      icon: '/static/tokens/movr.svg',
+      name: 'USDT-USDC',
+      suffix: 'USDT-USDC',
+      isOpen: false,
+      emoji: '🔥',
+      strategy: 'Lending',
+      contracts: poolAddressesAstar['USDT-USDC']
+    },
+    {
+      icon: '/static/tokens/weth.svg',
+      name: 'WETH-WASTAR',
+      suffix: 'WETH',
+      strategy: 'Lending',
+      isOpen: false,
+      contracts: poolAddressesAstar['WETH-WASTAR']
+    },
+    {
+      icon: '/static/tokens/usdc.svg',
+      name: 'WBTC-WASTAR',
+      suffix: 'WBTC-WASTAR',
+      strategy: 'Lending',
+      isOpen: false,
+      contracts: poolAddressesAstar['WBTC-WASTAR']
+    },
+    {
+      icon: '/static/tokens/frax.svg',
+      name: 'USDC-WASTAR',
+      strategy: 'Lending',
+      suffix: 'USDC-WASTAR',
+      isOpen: false,
+      contracts: poolAddressesAstar['USDC-WASTAR']
+    },
+    {
+      icon: '/static/tokens/usdt.svg',
+      name: 'BEAST-USDC',
+      strategy: 'Lending',
+      suffix: 'BEAST-USDC',
+      isOpen: false,
+      contracts: poolAddressesAstar['BEAST-USDC']
+    },
+    {
+      icon: '/static/tokens/3pool.svg',
+      name: 'solar3POOL',
+      isOpen: false,
+      strategy: 'Solarbeam',
+      suffix: 'LP',
+      getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/3pool',
+      contracts: poolAddressesMoonriver['Solarbeam3pool']
     }
   ]
 }

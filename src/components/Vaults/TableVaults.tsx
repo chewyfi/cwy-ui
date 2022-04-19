@@ -10,8 +10,8 @@ import { Vault } from './Vault'
 const Table = (props: any) => {
   const context = useContext(AppContext)
   const [{ data: network }, switchNetwork] = useNetwork()
+  const [apyList, setApyList] = useState(context.apysMoonriver)
 
-  const [apyList, setApyList] = useState(context.apys)
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosure = (index: number) => {
     let vaultData = apyList
@@ -25,6 +25,7 @@ const Table = (props: any) => {
     })
     setApyList(JSON.parse(JSON.stringify(vaultData)))
   }
+
   return (
     <div className="w-full">
       <TableHeader />

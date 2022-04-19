@@ -1,4 +1,4 @@
-export const poolAddressesMoonriver = {
+export const poolAddressesAstar = {
   Treasury: '0x9E23d450F4AFB829d3AeEFeA64fc95374658B883',
   Want: '0xaC7f1A6034d2d60a14AD75A4Ed19d4b7836627C1',
   'USDT-USDC': {

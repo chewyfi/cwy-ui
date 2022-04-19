@@ -12,3 +12,10 @@ export const getWalletLogo = (name: string) => {
       return '/static/metamask.svg'
   }
 }
+
+export const formatMetaMaskBalance = (token: any) => {
+  if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
+    return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
+  }
+  return parseFloat(token?.formatted).toFixed(2)
+}

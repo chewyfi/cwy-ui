@@ -1,3 +1,5 @@
+import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
+
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const CWY_DOCS_URL = 'https://docs.cwy.money'
@@ -31,3 +33,55 @@ export const MoonbeamUSDTDecimals = 6
 export const Solarbeam3poolDecimals = 18
 export const SolarbeamFrax3poolDecimals = 18
 export const SolarbeamstKSMpoolDecimals = 18
+
+export const contractMappings: any = {
+  Moonriver: {
+    MOVR: { contract: poolAddressesMoonriver['MoonbeamMOVR'], decimals: 18 },
+    WETH: { contract: poolAddressesMoonriver['MoonbeamETH'], decimals: 18 },
+    WBTC: {
+      contract: poolAddressesMoonriver['MoonbeamBTCSupplyOnly'],
+      decimals: 8
+    },
+    USDC: { contract: poolAddressesMoonriver['MoonbeamUSDC'], decimals: 6 },
+    FRAX: { contract: poolAddressesMoonriver['MoonbeamFRAX'], decimals: 18 },
+    USDT: { contract: poolAddressesMoonriver['MoonbeamUSDT'], decimals: 6 },
+    solar3POOL: {
+      contract: poolAddressesMoonriver['Solarbeam3pool'],
+      decimals: 18
+    },
+    solar3FRAX: {
+      contract: poolAddressesMoonriver['SolarbeamFrax3pool'],
+      decimals: 18
+    },
+    solarstKSM: {
+      contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
+      decimals: 18
+    }
+  }
+}
+
+export const priceFeedMappings: any = {
+  FRAX: 'FRAX',
+  USDC: 'USDC',
+  USDT: 'USDT',
+  WBTC: 'bitcoin',
+  WETH: 'ethereum',
+  MOVR: 'moonriver',
+  solar3POOL: '3pool',
+  solar3FRAX: 'FRAX-3pool',
+  solarstKSM: 'KSM-pool'
+}
+
+export const apyMappings: any = {
+  Moonriver: {
+    USDC: 'moonwell-usdc-leverage',
+    MOVR: 'moonwell-movr-leverage',
+    USDT: 'moonwell-usdt-leverage',
+    WETH: 'moonwell-eth-leverage',
+    FRAX: 'moonwell-frax-leverage',
+    WBTC: 'moonwell-btc-supply',
+    solar3FRAX: 'solar3FRAX',
+    solarstKSM: 'solarstKSM',
+    solar3POOL: 'solar3POOL'
+  }
+}

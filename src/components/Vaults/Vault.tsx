@@ -12,64 +12,23 @@ import {
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
-import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
+import { apyMappings, contractMappings } from 'src/utils/constants'
+import { formatMetaMaskBalance } from 'src/utils/helpers'
+import {
+  useAccount,
+  useBalance,
+  useContractRead,
+  useNetwork,
+  useProvider
+} from 'wagmi'
 
 import nativeAbi from '../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../chain-info/abis/normalAbi.json'
-import { poolAddressesMoonriver } from '../../chain-info/pool-addresses-moonriver'
-
 interface Props {
   item: APYType
   toggleDisclosure: () => void
   resPriceFeed: any
   resApyList: any
-}
-const contractMappings: any = {
-  MOVR: { contract: poolAddressesMoonriver['MoonbeamMOVR'], decimals: 18 },
-  WETH: { contract: poolAddressesMoonriver['MoonbeamETH'], decimals: 18 },
-  WBTC: {
-    contract: poolAddressesMoonriver['MoonbeamBTCSupplyOnly'],
-    decimals: 8
-  },
-  USDC: { contract: poolAddressesMoonriver['MoonbeamUSDC'], decimals: 6 },
-  FRAX: { contract: poolAddressesMoonriver['MoonbeamFRAX'], decimals: 18 },
-  USDT: { contract: poolAddressesMoonriver['MoonbeamUSDT'], decimals: 6 },
-  solar3POOL: {
-    contract: poolAddressesMoonriver['Solarbeam3pool'],
-    decimals: 18
-  },
-  solar3FRAX: {
-    contract: poolAddressesMoonriver['SolarbeamFrax3pool'],
-    decimals: 18
-  },
-  solarstKSM: {
-    contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
-    decimals: 18
-  }
-}
-
-const priceFeedMappings: any = {
-  FRAX: 'FRAX',
-  USDC: 'USDC',
-  USDT: 'USDT',
-  WBTC: 'bitcoin',
-  WETH: 'ethereum',
-  MOVR: 'moonriver',
-  solar3POOL: '3pool',
-  solar3FRAX: 'FRAX-3pool',
-  solarstKSM: 'KSM-pool'
-}
-
-const apyMappings: any = {
-  USDC: 'moonwell-usdc-leverage',
-  MOVR: 'moonwell-movr-leverage',
-  USDT: 'moonwell-usdt-leverage',
-  WETH: 'moonwell-eth-leverage',
-  FRAX: 'moonwell-frax-leverage',
-  WBTC: 'moonwell-btc-supply',
-  solar3FRAX: 'solar3FRAX',
-  solarstKSM: 'solarstKSM',
-  solar3POOL: 'solar3POOL'
 }
 
 const accountMappings: any = {
@@ -94,6 +53,7 @@ export const Vault: React.FC<Props> = ({
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
+  const [{ data: network }, switchNetwork] = useNetwork()
 
   const [{ data: account }] = useAccount()
 
@@ -101,13 +61,6 @@ export const Vault: React.FC<Props> = ({
     token: accountMappings[item.name],
     addressOrName: account?.address
   })
-
-  const formatMetaMaskBalance = (token: any) => {
-    if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
-      return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
-    }
-    return parseFloat(token?.formatted).toFixed(2)
-  }
 
   useEffect(() => {
     const TVLFetch = async () => {
@@ -139,7 +92,10 @@ export const Vault: React.FC<Props> = ({
   const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(
       {
-        addressOrName: contractMappings[item.name]['contract']['Vault'],
+        addressOrName:
+          contractMappings[network?.chain?.name][item.name]['contract'][
+            'Vault'
+          ],
         contractInterface: item.name !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
@@ -184,17 +140,6 @@ export const Vault: React.FC<Props> = ({
               <span className="flex items-center font-normal">
                 <span className="mr-1">TVL $</span>
                 {tvl && tvl.toFixed(2)}
-                {/* {loadingTotalValue ? (
-                  <Spinner size="xs" />
-                ) : totalValueData ? (
-                  (
-                    ((totalValueData as any) *
-                      resPriceFeed[priceFeedMappings[item.name]])! /
-                    10 ** contractMappings[item.name]['decimals']
-                  )?.toFixed(2)
-                ) : (
-                  <Spinner size="xs" />
-                )} */}
               </span>
             </span>
           </div>
@@ -204,7 +149,9 @@ export const Vault: React.FC<Props> = ({
             {item.apy
               ? item.apy
               : `${(
-                  parseFloat(resApyList[apyMappings[item.name]]) * 100
+                  parseFloat(
+                    resApyList[apyMappings[network?.chain?.name][item.name]]
+                  ) * 100
                 ).toFixed(2)}%`}
           </span>
           <span>{item.emoji}</span>

@@ -12,7 +12,7 @@ import {
   WBTC_TOKEN_CONTRACT,
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
-import { apyMappings, contractMappings } from 'src/utils/constants'
+import { contractMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
 import {
   useAccount,
@@ -49,6 +49,8 @@ export const Vault: React.FC<Props> = ({
   resPriceFeed,
   resApyList
 }) => {
+  console.log('ITEM NAME ', item.name)
+
   const provider = useProvider()
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
@@ -93,9 +95,7 @@ export const Vault: React.FC<Props> = ({
     useContractRead(
       {
         addressOrName:
-          contractMappings[network?.chain?.name][item.name]['contract'][
-            'Vault'
-          ],
+          contractMappings['Astar'][item.name]['contract']['Vault'],
         contractInterface: item.name !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
@@ -146,13 +146,13 @@ export const Vault: React.FC<Props> = ({
         </span>
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
           <span>
-            {item.apy
+            {/* {item.apy
               ? item.apy
               : `${(
                   parseFloat(
                     resApyList[apyMappings[network?.chain?.name][item.name]]
                   ) * 100
-                ).toFixed(2)}%`}
+                ).toFixed(2)}%`} */}
           </span>
           <span>{item.emoji}</span>
         </span>

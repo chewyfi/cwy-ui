@@ -61,7 +61,7 @@ export const contractMappings: any = {
   Astar: {
     'USDT-USDC': {
       contract: poolAddressesAstar['USDT-USDC'],
-      decimals: 6
+      decimals: 18
     },
     'WETH-WASTAR': {
       contract: poolAddressesAstar['WETH-WASTAR'],
@@ -105,5 +105,12 @@ export const apyMappings: any = {
     solar3FRAX: 'solar3FRAX',
     solarstKSM: 'solarstKSM',
     solar3POOL: 'solar3POOL'
+  },
+  Astar: {
+    'USDT-USDC': null,
+    'WETH-WASTAR': null,
+    'WBTC-WASTAR': null,
+    'USDC-WASTAR': null,
+    'BEAST-USDC': null
   }
 }

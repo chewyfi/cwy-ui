@@ -10,7 +10,9 @@ import { Vault } from './Vault'
 const Table = (props: any) => {
   const context = useContext(AppContext)
   const [{ data: network }, switchNetwork] = useNetwork()
-  const [apyList, setApyList] = useState(context.apysMoonriver)
+  const [apyList, setApyList] = useState(context.apysAstar)
+  console.log('current apy list ', apyList)
+  console.log('current network ', network?.chain?.name)
 
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosure = (index: number) => {
@@ -36,21 +38,18 @@ const Table = (props: any) => {
           show
         />
       )}
-      {network?.chain?.name === 'Moonriver' ? (
-        <div className="space-y-2">
-          {apyList.map((item, index) => (
-            <Vault
-              resPriceFeed={props.resPriceFeed}
-              resApyList={props.resApyList}
-              key={index}
-              item={item}
-              toggleDisclosure={() => toggleDisclosure(index)}
-            />
-          ))}
-        </div>
-      ) : (
-        <></>
-      )}
+
+      <div className="space-y-2">
+        {apyList.map((item, index) => (
+          <Vault
+            resPriceFeed={props.resPriceFeed}
+            resApyList={props.resApyList}
+            key={index}
+            item={item}
+            toggleDisclosure={() => toggleDisclosure(index)}
+          />
+        ))}
+      </div>
     </div>
   )
 }

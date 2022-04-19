@@ -5,7 +5,7 @@ import { APYType } from 'src/types'
 
 export type InitialStateType = {
   apysMoonriver: APYType[]
-  apysAstar?: APYType[]
+  apysAstar: APYType[]
 }
 
 const initialState = {
@@ -90,7 +90,7 @@ const initialState = {
   ],
   apysAstar: [
     {
-      icon: '/static/tokens/movr.svg',
+      icon: '/static/tokens/usdt.svg',
       name: 'USDT-USDC',
       suffix: 'USDT-USDC',
       isOpen: false,
@@ -107,7 +107,7 @@ const initialState = {
       contracts: poolAddressesAstar['WETH-WASTAR']
     },
     {
-      icon: '/static/tokens/usdc.svg',
+      icon: '/static/tokens/wbtc.svg',
       name: 'WBTC-WASTAR',
       suffix: 'WBTC-WASTAR',
       strategy: 'Lending',
@@ -115,7 +115,7 @@ const initialState = {
       contracts: poolAddressesAstar['WBTC-WASTAR']
     },
     {
-      icon: '/static/tokens/frax.svg',
+      icon: '/static/tokens/usdc.svg',
       name: 'USDC-WASTAR',
       strategy: 'Lending',
       suffix: 'USDC-WASTAR',
@@ -123,21 +123,12 @@ const initialState = {
       contracts: poolAddressesAstar['USDC-WASTAR']
     },
     {
-      icon: '/static/tokens/usdt.svg',
+      icon: '/static/tokens/usdc.svg',
       name: 'BEAST-USDC',
       strategy: 'Lending',
       suffix: 'BEAST-USDC',
       isOpen: false,
       contracts: poolAddressesAstar['BEAST-USDC']
-    },
-    {
-      icon: '/static/tokens/3pool.svg',
-      name: 'solar3POOL',
-      isOpen: false,
-      strategy: 'Solarbeam',
-      suffix: 'LP',
-      getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/3pool',
-      contracts: poolAddressesMoonriver['Solarbeam3pool']
     }
   ]
 }

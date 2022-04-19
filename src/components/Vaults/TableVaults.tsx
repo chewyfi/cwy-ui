@@ -10,7 +10,7 @@ import { Vault } from './Vault'
 const Table = (props: any) => {
   const context = useContext(AppContext)
   const [{ data: network }, switchNetwork] = useNetwork()
-  const [apyList, setApyList] = useState(context.apysAstar)
+  const [apyList, setApyList] = useState(context.apysMoonriver)
   console.log('current apy list ', apyList)
   console.log('current network ', network?.chain?.name)
 

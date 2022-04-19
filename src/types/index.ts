@@ -1,6 +1,6 @@
 export type APYType = {
   icon?: string
-  name?: string
+  name: string
   apy?: string
   tvl?: string
   emoji?: string

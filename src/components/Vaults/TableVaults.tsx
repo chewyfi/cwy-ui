@@ -1,16 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from 'src/context'
 import { APYType } from 'src/types'
 import { useNetwork } from 'wagmi'
 
+import { AstarVault } from './AstarVault'
 import BalanceModal from './BalanceModal/BalanceModal'
+import { MoonriverVault } from './MoonriverVault'
 import { TableHeader } from './TableHeader'
-import { Vault } from './Vault'
 
 const Table = (props: any) => {
   const context = useContext(AppContext)
   const [{ data: network }, switchNetwork] = useNetwork()
-  const [apyList, setApyList] = useState(context.apysMoonriver)
+  const [apyList, setApyList] = useState(context.apysAstar)
   console.log('current apy list ', apyList)
   console.log('current network ', network?.chain?.name)
 
@@ -28,6 +29,15 @@ const Table = (props: any) => {
     setApyList(JSON.parse(JSON.stringify(vaultData)))
   }
 
+  useEffect(() => {
+    const currentNetwork = network?.chain?.name
+    const moonriverApyList = context.apysMoonriver
+    const astarApyList = context.apysAstar
+    currentNetwork === 'Moonriver'
+      ? setApyList(moonriverApyList)
+      : setApyList(astarApyList)
+  }, [network?.chain?.name])
+
   return (
     <div className="w-full">
       <TableHeader />
@@ -39,17 +49,31 @@ const Table = (props: any) => {
         />
       )}
 
-      <div className="space-y-2">
-        {apyList.map((item, index) => (
-          <Vault
-            resPriceFeed={props.resPriceFeed}
-            resApyList={props.resApyList}
-            key={index}
-            item={item}
-            toggleDisclosure={() => toggleDisclosure(index)}
-          />
-        ))}
-      </div>
+      {network?.chain?.name === 'Moonriver' ? (
+        <div className="space-y-2">
+          {apyList.map((item, index) => (
+            <MoonriverVault
+              resPriceFeed={props.resPriceFeed}
+              resApyList={props.resApyList}
+              key={index}
+              item={item}
+              toggleDisclosure={() => toggleDisclosure(index)}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {apyList.map((item, index) => (
+            <AstarVault
+              resPriceFeed={props.resPriceFeed}
+              resApyList={props.resApyList}
+              key={index}
+              item={item}
+              toggleDisclosure={() => toggleDisclosure(index)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

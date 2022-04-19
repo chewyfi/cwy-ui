@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { poolAddresses } from 'src/chain-info/pool-addresses'
+import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
 import { APYType } from 'src/types'
 
 export type InitialStateType = {
@@ -15,7 +15,7 @@ const initialState = {
       isOpen: false,
       emoji: '🔥',
       strategy: 'Lending',
-      contracts: poolAddresses['MoonbeamMOVR']
+      contracts: poolAddressesMoonriver['MoonbeamMOVR']
     },
     {
       icon: '/static/tokens/weth.svg',
@@ -23,7 +23,7 @@ const initialState = {
       suffix: 'WETH',
       strategy: 'Lending',
       isOpen: false,
-      contracts: poolAddresses['MoonbeamETH']
+      contracts: poolAddressesMoonriver['MoonbeamETH']
     },
     {
       icon: '/static/tokens/wbtc.svg',
@@ -31,7 +31,7 @@ const initialState = {
       suffix: 'WBTC',
       strategy: 'Lending',
       isOpen: false,
-      contracts: poolAddresses['MoonbeamBTCSupplyOnly']
+      contracts: poolAddressesMoonriver['MoonbeamBTCSupplyOnly']
     },
     {
       icon: '/static/tokens/usdc.svg',
@@ -39,7 +39,7 @@ const initialState = {
       suffix: 'USDC',
       strategy: 'Lending',
       isOpen: false,
-      contracts: poolAddresses['MoonbeamUSDC']
+      contracts: poolAddressesMoonriver['MoonbeamUSDC']
     },
     {
       icon: '/static/tokens/frax.svg',
@@ -47,7 +47,7 @@ const initialState = {
       strategy: 'Lending',
       suffix: 'FRAX',
       isOpen: false,
-      contracts: poolAddresses['MoonbeamFRAX']
+      contracts: poolAddressesMoonriver['MoonbeamFRAX']
     },
     {
       icon: '/static/tokens/usdt.svg',
@@ -55,7 +55,7 @@ const initialState = {
       strategy: 'Lending',
       suffix: 'USDT',
       isOpen: false,
-      contracts: poolAddresses['MoonbeamUSDT']
+      contracts: poolAddressesMoonriver['MoonbeamUSDT']
     },
     {
       icon: '/static/tokens/3pool.svg',
@@ -64,7 +64,7 @@ const initialState = {
       strategy: 'Solarbeam',
       suffix: 'LP',
       getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/3pool',
-      contracts: poolAddresses['Solarbeam3pool']
+      contracts: poolAddressesMoonriver['Solarbeam3pool']
     },
     {
       icon: '/static/tokens/frax3pool.svg',
@@ -74,7 +74,7 @@ const initialState = {
       suffix: 'LP',
       getSomeUrl:
         'https://app.solarbeam.io/exchange/stable-pool/add/frax-3pool',
-      contracts: poolAddresses['SolarbeamFrax3pool']
+      contracts: poolAddressesMoonriver['SolarbeamFrax3pool']
     },
     {
       icon: '/static/tokens/2ksm.svg',
@@ -83,7 +83,7 @@ const initialState = {
       strategy: 'Solarbeam',
       suffix: 'LP',
       getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm',
-      contracts: poolAddresses['SolarbeamstKSMpool']
+      contracts: poolAddressesMoonriver['SolarbeamstKSMpool']
     }
   ]
 }

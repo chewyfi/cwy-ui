@@ -1,4 +1,4 @@
-export const poolAddresses = {
+export const poolAddressesMoonriver = {
   Treasure: '0x9E7e642DEA4a7C95F70CA3B6f1d15A416097517A',
   MoonbeamUSDC: {
     Vault: '0x934c5419286B2F5722871c1206E4B8E9c59246E0',

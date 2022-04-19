@@ -15,7 +15,7 @@ import {
 
 import nativeAbi from '../../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../../chain-info/abis/normalAbi.json'
-import { poolAddresses } from '../../../chain-info/pool-addresses'
+import { poolAddressesMoonriver } from '../../../chain-info/pool-addresses-moonriver'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
   FRAX_TOKEN_CONTRACT,
@@ -53,15 +53,27 @@ function roundTo(n: any, digits: any) {
 }
 
 const contractMappings: any = {
-  MOVR: { contract: poolAddresses['MoonbeamMOVR'], decimals: 18 },
-  WETH: { contract: poolAddresses['MoonbeamETH'], decimals: 18 },
-  WBTC: { contract: poolAddresses['MoonbeamBTCSupplyOnly'], decimals: 8 },
-  USDC: { contract: poolAddresses['MoonbeamUSDC'], decimals: 6 },
-  FRAX: { contract: poolAddresses['MoonbeamFRAX'], decimals: 18 },
-  USDT: { contract: poolAddresses['MoonbeamUSDT'], decimals: 6 },
-  solar3POOL: { contract: poolAddresses['Solarbeam3pool'], decimals: 18 },
-  solar3FRAX: { contract: poolAddresses['SolarbeamFrax3pool'], decimals: 18 },
-  solarstKSM: { contract: poolAddresses['SolarbeamstKSMpool'], decimals: 18 }
+  MOVR: { contract: poolAddressesMoonriver['MoonbeamMOVR'], decimals: 18 },
+  WETH: { contract: poolAddressesMoonriver['MoonbeamETH'], decimals: 18 },
+  WBTC: {
+    contract: poolAddressesMoonriver['MoonbeamBTCSupplyOnly'],
+    decimals: 8
+  },
+  USDC: { contract: poolAddressesMoonriver['MoonbeamUSDC'], decimals: 6 },
+  FRAX: { contract: poolAddressesMoonriver['MoonbeamFRAX'], decimals: 18 },
+  USDT: { contract: poolAddressesMoonriver['MoonbeamUSDT'], decimals: 6 },
+  solar3POOL: {
+    contract: poolAddressesMoonriver['Solarbeam3pool'],
+    decimals: 18
+  },
+  solar3FRAX: {
+    contract: poolAddressesMoonriver['SolarbeamFrax3pool'],
+    decimals: 18
+  },
+  solarstKSM: {
+    contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
+    decimals: 18
+  }
 }
 
 const accountMappings: any = {

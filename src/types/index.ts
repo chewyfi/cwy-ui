@@ -1,6 +1,6 @@
 export type APYType = {
-  icon: string
-  name: string
+  icon?: string
+  name?: string
   apy?: string
   tvl?: string
   emoji?: string
@@ -11,6 +11,7 @@ export type APYType = {
   contracts: {
     Vault: string
     Strategy: string
-    Want: string
+    Want?: string
+    lp?: string
   }
 }

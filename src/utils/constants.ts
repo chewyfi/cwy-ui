@@ -73,7 +73,7 @@ export const contractMappings: any = {
     },
     'USDC-WASTAR': {
       contract: poolAddressesAstar['USDC-WASTAR'],
-      deicmals: 18
+      decimals: 18
     },
     'BEAST-USDC': {
       contract: poolAddressesAstar['BEAST-USDC'],

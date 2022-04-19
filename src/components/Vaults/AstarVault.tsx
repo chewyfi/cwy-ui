@@ -6,8 +6,7 @@ import { contractMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
 import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
 
-import nativeAbi from '../../chain-info/abis/nativeAbi.json'
-import normalAbi from '../../chain-info/abis/normalAbi.json'
+import astarAbi from '../../chain-info/abis/astarAbi.json'
 interface Props {
   item: APYType
   toggleDisclosure: () => void
@@ -73,7 +72,7 @@ export const AstarVault: React.FC<Props> = ({
       {
         addressOrName:
           contractMappings['Astar'][item.name]['contract']['Vault'],
-        contractInterface: item.name !== 'MOVR' ? normalAbi : nativeAbi,
+        contractInterface: astarAbi,
         signerOrProvider: provider
       },
       'balance'

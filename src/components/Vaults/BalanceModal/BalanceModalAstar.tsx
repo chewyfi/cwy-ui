@@ -125,7 +125,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   ] = useContractRead(
     {
       addressOrName:
-        contractMappings['Astar'][props.item.name]['contract']['Want'],
+        contractMappings['Astar'][props.item.name]['contract']['lp'],
       contractInterface: astarAbi,
       signerOrProvider: provider
     },
@@ -154,6 +154,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     }
   )
 
+  console.log('BALANCE DATA UNFORMATTED ', balanceDataUnformatted)
+
   const [{ data: dataDeposit, error: depositError, loading }, writeDeposit] =
     useContractWrite(
       {
@@ -162,7 +164,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
         contractInterface: astarAbi,
         signerOrProvider: provider
       },
-      'deposit',
+      'chewIn',
       {
         args: [
           (
@@ -209,7 +211,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
       contractInterface: astarAbi,
       signerOrProvider: provider
     },
-    props.item.name !== 'MOVR' ? 'withdraw' : 'withdrawBNB',
+    'chewOut',
     {
       args: [
         BigInt(

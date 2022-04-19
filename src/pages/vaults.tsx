@@ -38,9 +38,7 @@ export default function Vaults(props: any) {
             `${baseURL}/api/user-deposited-all-price?useraddress=${account?.address}`
           )
         ).json()
-        console.log(
-          `active vaults total ${JSON.stringify(activeVaultsTotalDeposited)}`
-        )
+
         let sum = 0
         Object.values(activeVaultsTotalDeposited).forEach(
           (val: any) => (sum += parseFloat(val))

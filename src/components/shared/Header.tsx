@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { shortenAddress } from 'src/utils/helpers'
 import { useAccount, useNetwork } from 'wagmi'
 
-import ChevronDown from '../icons/ChevronDown'
+import NetworkDropdown from '../ui/NetworkDropdown'
 
 const Header = ({
   setShowWalletModal,
@@ -25,24 +25,19 @@ const Header = ({
     }
   }
 
+  console.log('Network name ', JSON.stringify(network?.chain?.name))
+
   return (
     <div className="sticky z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
         <h6 className="text-[22px] font-medium">{title}</h6>
         <div className="flex items-center">
-          <button
-            onClick={() => setShowWalletModal(true)}
-            className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded"
-          >
-            <img
-              src="/static/moonriver.svg"
-              className="w-4 h-4 rounded-full"
-              draggable={false}
-              alt=""
-            />
-            <span>{network.chain?.name || 'Moonriver'}</span>
-            <ChevronDown />
-          </button>
+          <NetworkDropdown
+            activeNetwork={network?.chain?.name}
+            otherOption={
+              network?.chain?.name === 'Astar' ? 'Moonriver' : 'Astar'
+            }
+          />
           <button
             onClick={() =>
               network.chain?.unsupported && switchNetwork

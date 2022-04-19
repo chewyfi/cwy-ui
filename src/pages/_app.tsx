@@ -22,6 +22,16 @@ const supportedChains = [
       { name: 'Moonscan', url: 'https://moonriver.moonscan.io' }
     ],
     testnet: false
+  },
+  {
+    id: 592,
+    name: 'Astar',
+    nativeCurrency: { name: 'Astar', symbol: 'ASTR', decimals: 18 },
+    rpcUrls: ['https://rpc.astar.network:8545'],
+    blockExplorers: [
+      { name: 'Block Scout', url: 'https://blockscout.com/astar/' }
+    ],
+    testnet: false
   }
 ]
 

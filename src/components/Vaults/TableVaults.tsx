@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from 'src/context'
 import { APYType } from 'src/types'
+import { useNetwork } from 'wagmi'
 
 import BalanceModal from './BalanceModal/BalanceModal'
 import { TableHeader } from './TableHeader'
@@ -8,6 +9,7 @@ import { Vault } from './Vault'
 
 const Table = (props: any) => {
   const context = useContext(AppContext)
+  const [{ data: network }, switchNetwork] = useNetwork()
 
   const [apyList, setApyList] = useState(context.apys)
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
@@ -33,17 +35,21 @@ const Table = (props: any) => {
           show
         />
       )}
-      <div className="space-y-2">
-        {apyList.map((item, index) => (
-          <Vault
-            resPriceFeed={props.resPriceFeed}
-            resApyList={props.resApyList}
-            key={index}
-            item={item}
-            toggleDisclosure={() => toggleDisclosure(index)}
-          />
-        ))}
-      </div>
+      {network?.chain?.name === 'Moonriver' ? (
+        <div className="space-y-2">
+          {apyList.map((item, index) => (
+            <Vault
+              resPriceFeed={props.resPriceFeed}
+              resApyList={props.resApyList}
+              key={index}
+              item={item}
+              toggleDisclosure={() => toggleDisclosure(index)}
+            />
+          ))}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }

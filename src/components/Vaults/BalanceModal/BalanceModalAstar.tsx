@@ -50,7 +50,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   const [withdrawMax, setWithdrawMax] = useState(false)
   const { txnToast } = useTxnToast()
   const provider = new providers.StaticJsonRpcProvider(
-    'https://rpc.astar.network:8545',
+    'https://astar.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
     {
       chainId: 592,
       name: 'Astar'

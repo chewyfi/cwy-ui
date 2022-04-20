@@ -50,11 +50,21 @@ const connectors = () => {
   ]
 }
 
-const provider = () =>
+const providerMoonriver = () =>
   new providers.StaticJsonRpcProvider(rpcUrl, {
     chainId: 1285,
     name: 'moonriver'
   })
+
+const providerAstar = new providers.StaticJsonRpcProvider(
+  'https://rpc.astar.network:8545',
+  {
+    chainId: 592,
+    name: 'Astar'
+  }
+)
+
+const allProviders: any = [providerAstar, providerMoonriver]
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -64,7 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           autoConnect
           connectorStorageKey="chewy.wallet"
           connectors={connectors}
-          provider={provider}
+          provider={providerAstar}
         >
           <Toaster position="top-right" />
           <Component {...pageProps} />

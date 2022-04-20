@@ -14,16 +14,6 @@ import {
 } from 'wagmi'
 
 import astarAbi from '../../../chain-info/abis/astarAbi.json'
-import {
-  FRAX_3POOL_TOKEN_CONTRACT,
-  FRAX_TOKEN_CONTRACT,
-  THREE_POOL_TOKEN_CONTRACT,
-  TWO_KSM_TOKEN_CONTRACT,
-  USDC_TOKEN_CONTRACT,
-  USDT_TOKEN_CONTRACT,
-  WBTC_TOKEN_CONTRACT,
-  WETH_TOKEN_CONTRACT
-} from '../../../utils/constants'
 import { contractMappings } from '../../../utils/constants'
 import { Alert } from '../../ui/Alert'
 import { Spinner } from '../../ui/Spinner'
@@ -52,15 +42,11 @@ function roundTo(n: any, digits: any) {
 }
 
 const accountMappings: any = {
-  WETH: WETH_TOKEN_CONTRACT,
-  MOVR: null,
-  WBTC: WBTC_TOKEN_CONTRACT,
-  USDC: USDC_TOKEN_CONTRACT,
-  USDT: USDT_TOKEN_CONTRACT,
-  FRAX: FRAX_TOKEN_CONTRACT,
-  solar3FRAX: FRAX_3POOL_TOKEN_CONTRACT,
-  solarstKSM: TWO_KSM_TOKEN_CONTRACT,
-  solar3POOL: THREE_POOL_TOKEN_CONTRACT
+  'USDT-USDC': '0x13cC5a0ec3c1561645195b6f3086eAE2a0fb7e8d',
+  'WETH-WASTAR': '0x0ADcc0e7F1087665bc4639BdddAeAcE30005910f',
+  'WBTC-WASTAR': '0xabC9f3c5F164D751f3A21A60fF5D306D4c44A723',
+  'USDC-WASTAR': '0xC4ba558D1700b156a3511F112dFF8b86D108DEE9',
+  'BEAST-USDC': '0xC1E0579bAA899E596Ca6d3331E2Da00b3A6b39c3'
 }
 
 const BalanceModalAstar: React.FC<Props> = (props) => {
@@ -164,27 +150,42 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
 
   console.log('BALANCE DATA UNFORMATTED ', balanceDataUnformatted)
 
-  const [{ data: dataDeposit, error: depositError, loading }, writeDeposit] =
-    useContractWrite(
-      {
-        addressOrName:
-          contractMappings['Astar'][props.item.name]['contract']['Vault'],
-        contractInterface: astarAbi,
-        signerOrProvider: provider
-      },
-      'chewIn',
-      {
-        args: [
-          (
-            parseFloat(!depositAmount ? '0' : depositAmount) *
-            10 ** contractMappings['Astar'][props.item.name]['decimals']
-          ).toString()
-        ],
-        overrides: {
-          gasLimit: '9500000'
-        }
+  const [
+    { data: dataDeposit, error: depositError, loading: depositLoading },
+    writeDeposit
+  ] = useContractWrite(
+    {
+      addressOrName:
+        contractMappings['Astar'][props.item.name]['contract']['Vault'],
+      contractInterface: astarAbi,
+      signerOrProvider: provider
+    },
+    'chewIn',
+    {
+      args: [
+        (
+          parseFloat(!depositAmount ? '0' : depositAmount) *
+          10 ** contractMappings['Astar'][props.item.name]['decimals']
+        ).toString()
+      ],
+      overrides: {
+        gasLimit: '9500000'
       }
-    )
+    }
+  )
+
+  console.log(
+    `Data deposit ${JSON.stringify(
+      dataDeposit
+    )} deposit Error ${depositError} deposit loading ${depositLoading} `
+  )
+  console.log(
+    'DEPOSIT AMOUNT ',
+    (
+      parseFloat(!depositAmount ? '0' : depositAmount) *
+      10 ** contractMappings['Astar'][props.item.name]['decimals']
+    ).toString()
+  )
 
   const [
     {
@@ -255,12 +256,10 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
       allowanceBalance &&
       parseInt(allowanceBalance.toString()) > 0
     ) {
-      if (props.item.name === 'MOVR') {
-        await writeDepositBNB()
-      } else {
-        await writeDeposit()
-      }
+      console.log('wrote deposit')
+      await writeDeposit()
     } else {
+      console.log('wrote withdraw')
       await writeApprove()
       // localStorage.setItem(`props.item.name${account?.address}`, '1')
     }
@@ -275,34 +274,34 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     if (dataDeposit) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://blockscout.com/astar/address/${dataDeposit.hash}`
+        `https://blockscout.com/tx/${dataDeposit.hash}`
       )
     }
     if (dataWithdrawAmountMax) {
       txnToast(
         `Withdrew Contract Balance`,
-        `https://blockscout.com/astar/address/${dataWithdrawAmountMax.hash}`
+        `https://blockscout.com/astar/tx/${dataWithdrawAmountMax.hash}`
       )
     }
 
     if (dataApproved) {
       txnToast(
         'Approved',
-        `https://blockscout.com/astar/address/${dataApproved.hash}`
+        `https://blockscout.com/astar/tx/${dataApproved.hash}`
       )
     }
 
     if (dataWithdrawAmount) {
       txnToast(
         `Withdrawed ${withdrawAmount}`,
-        `https://blockscout.com/astar/address/${dataWithdrawAmount.hash}`
+        `https://blockscout.com/astar/tx/${dataWithdrawAmount.hash}`
       )
     }
 
     if (dataDepositBNB) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://blockscout.com/astar/address/${dataDepositBNB.hash}`
+        `https://blockscout.com/astar/tx/${dataDepositBNB.hash}`
       )
     }
   }, [
@@ -350,7 +349,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
                     Balance: {}
-                    {formatMetaMaskBalance(metaMaskBalance)} ASTR
+                    {formatMetaMaskBalance(metaMaskBalance)} Astar
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -379,7 +378,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                             : setDepositAmount(
                                 roundTo(
                                   parseFloat(metaMaskBalance?.formatted),
-                                  5
+                                  11
                                 )
                               )
                         }

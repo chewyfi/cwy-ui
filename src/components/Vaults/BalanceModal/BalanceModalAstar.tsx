@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { providers } from 'ethers'
+import { ethers, providers } from 'ethers'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import React, { Fragment, useEffect, useState } from 'react'
@@ -49,6 +49,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [withdrawMax, setWithdrawMax] = useState(false)
   const { txnToast } = useTxnToast()
+  const [metaMaskBalance, setMetaMaskBalance] = useState('0')
   const provider = new providers.StaticJsonRpcProvider(
     'https://astar.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
     {
@@ -64,30 +65,46 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   //   token: accountMappings[props.item.name],
   //   addressOrName: account?.address
   // })
-
-  const metaMaskBalance = {
-    value: 1,
-    decimals: 18
-  }
-
-  console.log(`Meta mask balance ${JSON.stringify(metaMaskBalance?.value)}`)
-
-  const formatMetaMaskBalance = (token: any) => {
-    // if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
-    //   return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
-    // }
-    if (metaMaskBalance?.decimals && token?.value) {
-      console.log(
-        'Formatted metamask balance ',
-        (parseFloat(token?.value) / 10 ** metaMaskBalance?.decimals)
-          .toFixed(2)
-          .toString()
+  async function connectToMetamask() {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum, 'any')
+      // Prompt user for account connections
+      await provider.send('eth_requestAccounts', [])
+      const contract = new ethers.Contract(
+        accountMappings[props.item.name],
+        astarAbi,
+        provider
       )
-      return (parseFloat(token?.value) / 10 ** metaMaskBalance?.decimals)
-        .toFixed(2)
-        .toString()
+      const signer = await provider.getSigner()
+
+      const balance = (await contract.balanceOf(signer.getAddress())).toString()
+
+      setMetaMaskBalance(balance)
+
+      console.log(`${props.item.name} balance ${balance}`)
+    } catch (Error) {
+      console.log('ERROR ', Error)
     }
   }
+
+  // console.log(`Meta mask balance ${JSON.stringify(metaMaskBalance?.value)}`)
+
+  // const formatMetaMaskBalance = (token: any) => {
+  //   // if (token && (token.symbol === 'USDC' || token.symbol === 'USDT')) {
+  //   //   return (parseFloat(token.formatted) * 10 ** 12).toFixed(2)
+  //   // }
+  //   if (metaMaskBalance?.decimals && token?.value) {
+  //     console.log(
+  //       'Formatted metamask balance ',
+  //       (parseFloat(token?.value) / 10 ** metaMaskBalance?.decimals)
+  //         .toFixed(2)
+  //         .toString()
+  //     )
+  //     return (parseFloat(token?.value) / 10 ** metaMaskBalance?.decimals)
+  //       .toFixed(2)
+  //       .toString()
+  //   }
+  // }
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
       addressOrName:
@@ -269,6 +286,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     const asyncFunc = async () => {
       await getBalanceUser()
       await getAllowance()
+      connectToMetamask()
     }
     asyncFunc()
     if (dataDeposit) {
@@ -349,7 +367,10 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
                     Balance: {}
-                    {formatMetaMaskBalance(metaMaskBalance)} {props.item.name}
+                    {(parseInt(metaMaskBalance) / 10 ** 18)
+                      .toFixed(10)
+                      .toString()}{' '}
+                    {props.item.name}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

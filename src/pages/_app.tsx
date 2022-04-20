@@ -57,7 +57,7 @@ const providerMoonriver = () =>
   })
 
 const providerAstar = new providers.StaticJsonRpcProvider(
-  'https://rpc.astar.network:8545',
+  'https://astar.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b5',
   {
     chainId: 592,
     name: 'Astar'

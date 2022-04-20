@@ -6,12 +6,7 @@ import { useRouter } from 'next/router'
 import React, { Fragment, useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import useTxnToast from 'src/utils/hooks/useTxnToast'
-import {
-  useAccount,
-  useBalance,
-  useContractRead,
-  useContractWrite
-} from 'wagmi'
+import { useAccount, useContractRead, useContractWrite } from 'wagmi'
 
 import astarAbi from '../../../chain-info/abis/astarAbi.json'
 import { contractMappings } from '../../../utils/constants'
@@ -65,10 +60,15 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
 
   const [{ data: account }] = useAccount()
 
-  const [{ data: metaMaskBalance }] = useBalance({
-    token: accountMappings[props.item.name],
-    addressOrName: account?.address
-  })
+  // const [{ data: metaMaskBalance }] = useBalance({
+  //   token: accountMappings[props.item.name],
+  //   addressOrName: account?.address
+  // })
+
+  const metaMaskBalance = {
+    value: 1,
+    decimals: 18
+  }
 
   console.log(`Meta mask balance ${JSON.stringify(metaMaskBalance?.value)}`)
 
@@ -349,7 +349,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[14px]">
                     Balance: {}
-                    {formatMetaMaskBalance(metaMaskBalance)} Astar
+                    {formatMetaMaskBalance(metaMaskBalance)} {props.item.name}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

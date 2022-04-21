@@ -92,7 +92,7 @@ const initialState = {
     {
       icon: '/static/tokens/funbeast.svg',
       name: 'BEAST-USDC',
-      strategy: 'Lending',
+      strategy: 'Funbeast',
       suffix: 'BEAST-USDC',
       emoji: '🔥',
       isOpen: false,
@@ -103,14 +103,14 @@ const initialState = {
       name: 'USDT-USDC',
       suffix: 'USDT-USDC',
       isOpen: false,
-      strategy: 'Lending',
+      strategy: 'Funbeast',
       contracts: poolAddressesAstar['USDT-USDC']
     },
     {
       icon: '/static/tokens/weth.svg',
       name: 'WETH-WASTAR',
       suffix: 'WETH',
-      strategy: 'Lending',
+      strategy: 'Funbeast',
       isOpen: false,
       contracts: poolAddressesAstar['WETH-WASTAR']
     },
@@ -118,14 +118,14 @@ const initialState = {
       icon: '/static/tokens/wastr.svg',
       name: 'WBTC-WASTAR',
       suffix: 'WBTC-WASTAR',
-      strategy: 'Lending',
+      strategy: 'Funbeast',
       isOpen: false,
       contracts: poolAddressesAstar['WBTC-WASTAR']
     },
     {
       icon: '/static/tokens/usdc.svg',
       name: 'USDC-WASTAR',
-      strategy: 'Lending',
+      strategy: 'Funbeast',
       suffix: 'USDC-WASTAR',
       isOpen: false,
       contracts: poolAddressesAstar['USDC-WASTAR']

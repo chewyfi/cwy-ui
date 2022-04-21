@@ -1,10 +1,11 @@
 import clsx from 'clsx'
+import { providers } from 'ethers'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
-import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
+import { useAccount, useBalance, useContractRead } from 'wagmi'
 
 import astarAbi from '../../chain-info/abis/astarAbi.json'
 interface Props {
@@ -39,7 +40,6 @@ export const AstarVault: React.FC<Props> = ({
 }) => {
   console.log('ITEM NAME ', item.name)
 
-  const provider = useProvider()
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
@@ -50,6 +50,13 @@ export const AstarVault: React.FC<Props> = ({
     token: accountMappings[item.name],
     addressOrName: account?.address
   })
+  const provider = new providers.StaticJsonRpcProvider(
+    'https://astar.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
+    {
+      chainId: 592,
+      name: 'Astar'
+    }
+  )
 
   useEffect(() => {
     // const TVLFetch = async () => {
@@ -87,6 +94,22 @@ export const AstarVault: React.FC<Props> = ({
       'balance'
     )
 
+  const [
+    { data: balanceDataUnformatted, loading: balanceDataLoading },
+    getBalanceUser
+  ] = useContractRead(
+    {
+      addressOrName: contractMappings['Astar'][item.name]['contract']['Vault'],
+      contractInterface: astarAbi,
+      signerOrProvider: provider
+    },
+    'balanceOf',
+    {
+      args: [account?.address]
+    }
+  )
+
+  console.log(`Balance data unformatted ${balanceDataUnformatted}`)
   return (
     <div
       className={clsx(
@@ -141,6 +164,16 @@ export const AstarVault: React.FC<Props> = ({
               ? formatMetaMaskBalance(metaMaskBalance)
               : null}
           </span>
+          <span>
+            {metaMaskBalance?.formatted
+              ? formatMetaMaskBalance(metaMaskBalance)
+              : null}
+          </span>
+          {balanceDataUnformatted &&
+            (
+              (balanceDataUnformatted as any) /
+              10 ** contractMappings['Astar'][item.name]['decimals']
+            ).toFixed(2)}
 
           <span>{deposited.toFixed(2)}</span>
         </span>

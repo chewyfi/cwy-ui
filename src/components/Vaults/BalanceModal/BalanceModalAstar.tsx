@@ -434,7 +434,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                         (balanceDataUnformatted as any) /
                         10 **
                           contractMappings['Astar'][props.item.name]['decimals']
-                      ).toFixed(2)}
+                      ).toFixed(10)}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -458,7 +458,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                                 'decimals'
                               ]
                           )
-                            .toFixed(2)
+                            .toFixed(10)
                             .toString()
                         )
                         setWithdrawMax(true)

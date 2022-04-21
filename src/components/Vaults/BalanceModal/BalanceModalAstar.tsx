@@ -352,7 +352,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
         open={props.show}
         as="div"
         className={clsx(
-          'top-0 bottom-0 overflow-y-scroll z-20 left-0 right-0 min-h-screen flex flex-col items-center justify-center',
+          'top-0 bottom-0 overflow-y-scroll z-30 left-0 right-0 min-h-screen flex flex-col items-center justify-center',
           {
             fixed: props.show
           }
@@ -400,7 +400,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                     <button
                       onClick={() => {
                         setDepositAmount(
-                          parseInt(metaMaskBalance).toFixed(18).toString()
+                          parseFloat(metaMaskBalance).toFixed(18).toString()
                         )
                       }}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"

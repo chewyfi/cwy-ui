@@ -399,7 +399,9 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
 
                     <button
                       onClick={() => {
-                        setDepositAmount(metaMaskBalance.toString())
+                        setDepositAmount(
+                          parseInt(metaMaskBalance).toFixed(18).toString()
+                        )
                       }}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
                     >

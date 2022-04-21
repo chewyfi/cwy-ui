@@ -25,11 +25,11 @@ const accountMappings: any = {
 
 // TODO: REMOVE
 const apyMappings: any = {
-  'USDT-USDC': 45.12,
-  'WETH-WASTAR': 34.34,
-  'WBTC-WASTAR': 14.72,
-  'USDC-WASTAR': 20.02,
-  'BEAST-USDC': 2550.57
+  'USDT-USDC': 'N/A',
+  'WETH-WASTAR': 'N/A',
+  'WBTC-WASTAR': 'N/A',
+  'USDC-WASTAR': 'N/A',
+  'BEAST-USDC': 'N/A'
 }
 
 const tvlMappings: any = {

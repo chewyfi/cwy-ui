@@ -352,7 +352,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
         open={props.show}
         as="div"
         className={clsx(
-          'top-0 bottom-0 overflow-y-scroll z-30 left-0 right-0 min-h-screen flex flex-col items-center justify-center',
+          'top-0 bottom-0 overflow-y-scroll z-20 left-0 right-0 min-w-max flex flex-col items-center justify-center',
           {
             fixed: props.show
           }
@@ -383,10 +383,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                   <label className="mb-1 text-gray-500 text-[13px]">
                     Balance:
                     <br />
-                    {parseFloat(metaMaskBalance) > 0
-                      ? parseFloat(metaMaskBalance).toFixed(18).toString()
-                      : '0.00'}{' '}
-                    LP
+                    {parseFloat(metaMaskBalance).toFixed(18).toString()} LP
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

@@ -383,7 +383,10 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                   <label className="mb-1 text-gray-500 text-[13px]">
                     Balance:
                     <br />
-                    {parseFloat(metaMaskBalance).toFixed(18).toString()} LP
+                    {parseFloat(metaMaskBalance) > 0
+                      ? parseFloat(metaMaskBalance).toFixed(18).toString()
+                      : '0.0000000000000000'}{' '}
+                    LP
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

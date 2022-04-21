@@ -381,11 +381,12 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[13px]">
-                    Balance: {}
+                    Balance:
+                    <br />
                     {parseFloat(metaMaskBalance) > 0
                       ? parseFloat(metaMaskBalance).toFixed(18).toString()
                       : '0.00'}{' '}
-                    {props.item.suffix}
+                    lp
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -428,13 +429,15 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                 </div>
                 <div className="mt-1">
                   <label className="mb-1 text-[13px] text-gray-500">
-                    Deposited:{' '}
+                    Deposited:
+                    <br />
                     {balanceDataUnformatted &&
                       (
                         (balanceDataUnformatted as any) /
                         10 **
                           contractMappings['Astar'][props.item.name]['decimals']
-                      ).toFixed(18)}
+                      ).toFixed(18)}{' '}
+                    lp
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

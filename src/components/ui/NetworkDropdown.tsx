@@ -32,15 +32,14 @@ export default function NetworkDropdown(props: any) {
       <div>
         <Menu.Button className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded">
           <span className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded">
-            <img
+            <embed
               src={
                 props.activeNetwork === 'Moonriver'
                   ? '/static/moonriver.svg'
-                  : '/static/astar.svg'
+                  : '/static/Astar.svg'
               }
               className="w-4 h-4 rounded-full"
               draggable={false}
-              alt=""
             />
           </span>
           {props.activeNetwork}

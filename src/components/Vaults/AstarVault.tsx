@@ -89,12 +89,7 @@ export const AstarVault: React.FC<Props> = ({
         className="flex items-center w-full font-medium cursor-pointer"
       >
         <span className="flex items-center w-2/4 space-x-2">
-          <img
-            alt=""
-            draggable={false}
-            className="w-8 h-8 mx-3"
-            src={item.icon}
-          />
+          <embed draggable={false} className="w-8 h-8 mx-3" src={item.icon} />
           <div className="flex flex-col">
             <span className="text-[15px] -mb-0.5 flex space-x-2">
               {item.name}

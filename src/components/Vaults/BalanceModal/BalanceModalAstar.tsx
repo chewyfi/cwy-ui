@@ -79,7 +79,13 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
 
       const balance = (await contract.balanceOf(signer.getAddress())).toString()
 
-      setMetaMaskBalance(balance)
+      console.log(
+        'Balance ',
+        props.item.name,
+        (parseInt(balance) / 10 ** 18).toString()
+      )
+
+      setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
 
       console.log(`${props.item.name} balance ${balance}`)
     } catch (Error) {
@@ -365,12 +371,12 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
               ) : null}
               <div className="flex space-x-2">
                 <div className="mt-1">
-                  <label className="mb-1 text-gray-500 text-[14px]">
+                  <label className="mb-1 text-gray-500 text-[13px]">
                     Balance: {}
-                    {(parseInt(metaMaskBalance) / 10 ** 18)
-                      .toFixed(10)
-                      .toString()}{' '}
-                    {props.item.name}
+                    {parseFloat(metaMaskBalance) > 0
+                      ? parseFloat(metaMaskBalance).toFixed(8).toString()
+                      : '0.00'}{' '}
+                    {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -383,26 +389,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
 
                     <button
                       onClick={() => {
-                        if (metaMaskBalance) {
-                          props.item.name === 'USDT' ||
-                          props.item.name === 'USDC'
-                            ? setDepositAmount(
-                                roundTo(
-                                  parseInt(metaMaskBalance!.value.toString()) /
-                                    10 **
-                                      contractMappings['Astar'][
-                                        props.item.name
-                                      ]['decimals'],
-                                  5
-                                ).toString()
-                              )
-                            : setDepositAmount(
-                                roundTo(
-                                  parseFloat(metaMaskBalance?.formatted),
-                                  11
-                                )
-                              )
-                        }
+                        setDepositAmount(metaMaskBalance.toString())
                       }}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
                     >
@@ -431,7 +418,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                   </button>
                 </div>
                 <div className="mt-1">
-                  <label className="mb-1 text-[14px] text-gray-500">
+                  <label className="mb-1 text-[13px] text-gray-500">
                     Deposited:{' '}
                     {balanceDataUnformatted &&
                       (

@@ -68,7 +68,7 @@ export default function NetworkDropdown(props: any) {
                 <button
                   onClick={switchToNetwork}
                   className={clsx(
-                    'py-1 outline-none font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
+                    'py-1 outline-none rounded-md font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
                   )}
                 >
                   <span className="inline-flex items-center space-x-2">

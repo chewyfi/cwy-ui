@@ -66,30 +66,35 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   //   addressOrName: account?.address
   // })
   async function connectToMetamask() {
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum, 'any')
-      // Prompt user for account connections
-      await provider.send('eth_requestAccounts', [])
-      const contract = new ethers.Contract(
-        accountMappings[props.item.name],
-        astarAbi,
-        provider
-      )
-      const signer = await provider.getSigner()
+    if (window.ethereum) {
+      try {
+        let providerEth: any = window.ethereum
+        const provider = new ethers.providers.Web3Provider(providerEth, 'any')
+        // Prompt user for account connections
+        await provider.send('eth_requestAccounts', [])
+        const contract = new ethers.Contract(
+          accountMappings[props.item.name],
+          astarAbi,
+          provider
+        )
+        const signer = await provider.getSigner()
 
-      const balance = (await contract.balanceOf(signer.getAddress())).toString()
+        const balance = (
+          await contract.balanceOf(signer.getAddress())
+        ).toString()
 
-      console.log(
-        'Balance ',
-        props.item.name,
-        (parseInt(balance) / 10 ** 18).toString()
-      )
+        console.log(
+          'Balance ',
+          props.item.name,
+          (parseInt(balance) / 10 ** 18).toString()
+        )
 
-      setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
+        setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
 
-      console.log(`${props.item.name} balance ${balance}`)
-    } catch (Error) {
-      console.log('ERROR ', Error)
+        console.log(`${props.item.name} balance ${balance}`)
+      } catch (Error) {
+        console.log('ERROR ', Error)
+      }
     }
   }
 

@@ -90,6 +90,15 @@ const initialState = {
   ],
   apysAstar: [
     {
+      icon: '/static/tokens/funbeast.svg',
+      name: 'BEAST-USDC',
+      strategy: 'Lending',
+      suffix: 'BEAST-USDC',
+      emoji: '🔥',
+      isOpen: false,
+      contracts: poolAddressesAstar['BEAST-USDC']
+    },
+    {
       icon: '/static/tokens/usdt.svg',
       name: 'USDT-USDC',
       suffix: 'USDT-USDC',
@@ -120,15 +129,6 @@ const initialState = {
       suffix: 'USDC-WASTAR',
       isOpen: false,
       contracts: poolAddressesAstar['USDC-WASTAR']
-    },
-    {
-      icon: '/static/tokens/funbeast.svg',
-      name: 'BEAST-USDC',
-      strategy: 'Lending',
-      suffix: 'BEAST-USDC',
-      emoji: '🔥',
-      isOpen: false,
-      contracts: poolAddressesAstar['BEAST-USDC']
     }
   ]
 }

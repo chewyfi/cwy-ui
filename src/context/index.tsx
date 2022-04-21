@@ -94,7 +94,6 @@ const initialState = {
       name: 'USDT-USDC',
       suffix: 'USDT-USDC',
       isOpen: false,
-      emoji: '🔥',
       strategy: 'Lending',
       contracts: poolAddressesAstar['USDT-USDC']
     },
@@ -127,6 +126,7 @@ const initialState = {
       name: 'BEAST-USDC',
       strategy: 'Lending',
       suffix: 'BEAST-USDC',
+      emoji: '🔥',
       isOpen: false,
       contracts: poolAddressesAstar['BEAST-USDC']
     }

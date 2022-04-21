@@ -22,6 +22,15 @@ const accountMappings: any = {
   'BEAST-USDC': contractMappings['Astar']['BEAST-USDC']['contract']['lp']
 }
 
+// TODO: REMOVE
+const apyMappings: any = {
+  'USDT-USDC': 45.12,
+  'WETH-WASTAR': 34.34,
+  'WBTC-WASTAR': 14.72,
+  'USDC-WASTAR': 20.02,
+  'BEAST-USDC': 2550.57
+}
+
 export const AstarVault: React.FC<Props> = ({
   item,
   toggleDisclosure,
@@ -117,6 +126,7 @@ export const AstarVault: React.FC<Props> = ({
         </span>
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
           <span>
+            {apyMappings[item.name]}%
             {/* {item.apy
               ? item.apy
               : `${(

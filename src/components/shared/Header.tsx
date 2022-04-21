@@ -33,7 +33,7 @@ const Header = ({
         <h6 className="text-[22px] font-medium">{title}</h6>
         <div className="flex items-center">
           <NetworkDropdown
-            activeNetwork={network?.chain?.name}
+            activeNetwork={network?.chain?.name || 'Moonriver'}
             otherOption={
               network?.chain?.name === 'Astar' ? 'Moonriver' : 'Astar'
             }

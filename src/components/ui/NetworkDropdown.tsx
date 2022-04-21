@@ -1,18 +1,17 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Menu, Transition } from '@headlessui/react'
+import clsx from 'clsx'
 import { Fragment } from 'react'
 import toast from 'react-hot-toast'
-import { useAccount, useNetwork } from 'wagmi'
+import { useNetwork } from 'wagmi'
 
 import ChevronDown from '../icons/ChevronDown'
 
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export default function NetworkDropdown(props: any) {
+  console.log(
+    '🚀 ~ file: NetworkDropdown.tsx ~ line 10 ~ NetworkDropdown ~ props',
+    props
+  )
   const [{ data: network }, switchNetwork] = useNetwork()
-  const [{ data: accountData }] = useAccount()
   const switchToNetwork = async () => {
     if (switchNetwork) {
       let data
@@ -27,55 +26,70 @@ export default function NetworkDropdown(props: any) {
   return (
     <Menu
       as="div"
-      className="bg-[#ededed] rounded relative inline-block text-left"
+      className="bg-[#F2F2F2] w-36 rounded relative inline-block text-left"
     >
-      <div>
-        <Menu.Button className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded">
-          <span className="inline-flex font-semibold items-center justify-between px-2 py-1 space-x-2 bg-[#ededed] rounded">
-            <embed
-              src={
-                props.activeNetwork === 'Moonriver'
-                  ? '/static/moonriver.svg'
-                  : '/static/Astar.svg'
-              }
-              className="w-4 h-4 rounded-full"
-              draggable={false}
+      {({ open }) => (
+        <>
+          <Menu.Button className="flex w-full font-semibold items-center justify-between px-2 py-1 bg-[#F2F2F2] rounded">
+            <span className="inline-flex items-center space-x-2">
+              <img
+                src={
+                  props.activeNetwork === 'Moonriver'
+                    ? '/static/moonriver.svg'
+                    : '/static/astar.svg'
+                }
+                className="w-4 h-4 rounded-full"
+                draggable={false}
+                alt=""
+              />
+              <span>{props.activeNetwork}</span>
+            </span>
+            <ChevronDown
+              className={clsx(
+                'w-5 transition ease-in-out duration-200 h-5 ml-2 -mr-1',
+                {
+                  'rotate-180': open
+                }
+              )}
+              aria-hidden="true"
             />
-          </span>
-          {props.activeNetwork}
-
-          <ChevronDown className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
+          </Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute right-0 mt-1 origin-top-right bg-white border-[1.75px] border-[#E7E8E7] rounded-md w-36 focus:outline-none">
+              <Menu.Item>
+                <button
                   onClick={switchToNetwork}
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+                  className={clsx(
+                    'py-1 outline-none font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
                   )}
                 >
-                  {props.otherOption}
-                </a>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
+                  <span className="inline-flex items-center space-x-2">
+                    <img
+                      src={
+                        props.otherOption === 'Moonriver'
+                          ? '/static/moonriver.svg'
+                          : '/static/astar.svg'
+                      }
+                      className="w-4 h-4 rounded-full"
+                      draggable={false}
+                      alt=""
+                    />
+                    <span>{props.otherOption}</span>
+                  </span>
+                </button>
+              </Menu.Item>
+            </Menu.Items>
+          </Transition>
+        </>
+      )}
     </Menu>
   )
 }

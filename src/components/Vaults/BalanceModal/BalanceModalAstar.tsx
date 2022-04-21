@@ -303,20 +303,23 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     if (dataDeposit) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://blockscout.com/tx/${dataDeposit.hash}`
+        `https://blockscout.com/tx/${dataDeposit.hash}`,
+        'Blockscout'
       )
     }
     if (dataWithdrawAmountMax) {
       txnToast(
         `Withdrew Contract Balance`,
-        `https://blockscout.com/astar/tx/${dataWithdrawAmountMax.hash}`
+        `https://blockscout.com/astar/tx/${dataWithdrawAmountMax.hash}`,
+        'Blockscout'
       )
     }
 
     if (dataApproved) {
       txnToast(
         'Approved',
-        `https://blockscout.com/astar/tx/${dataApproved.hash}`
+        `https://blockscout.com/astar/tx/${dataApproved.hash}`,
+        'Blockscout'
       )
     }
 
@@ -330,7 +333,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     if (dataDepositBNB) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://blockscout.com/astar/tx/${dataDepositBNB.hash}`
+        `https://blockscout.com/astar/tx/${dataDepositBNB.hash}`,
+        'Blockscout'
       )
     }
   }, [

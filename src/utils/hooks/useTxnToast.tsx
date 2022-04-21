@@ -2,7 +2,7 @@ import toast from 'react-hot-toast'
 import { CloseIcon } from 'src/components/icons/CloseIcon'
 
 const useTxnToast = () => {
-  const txnToast = (text: string, explorerUri: string) => {
+  const txnToast = (text: string, explorerUri: string, network?: string) => {
     toast.custom(
       (t) => (
         <div className="flex w-[300px] rounded-lg pointer-events-auto bg-white border-2 border-gray-100">
@@ -24,7 +24,7 @@ const useTxnToast = () => {
                 className="text-[#eb4e6a] text-xs"
                 rel="noreferrer"
               >
-                View on Moonscan
+                View on {network ? network : 'Moonscan'}
               </a>
             </div>
           </div>

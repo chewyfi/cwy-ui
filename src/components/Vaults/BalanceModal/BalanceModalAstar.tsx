@@ -461,7 +461,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                                 'decimals'
                               ]
                           )
-                            .toFixed(10)
+                            .toFixed(18)
                             .toString()
                         )
                         setWithdrawMax(true)

@@ -32,6 +32,14 @@ const apyMappings: any = {
   'BEAST-USDC': 2550.57
 }
 
+const tvlMappings: any = {
+  'USDT-USDC': 340.12,
+  'WETH-WASTAR': 1134.34,
+  'WBTC-WASTAR': 3314.72,
+  'USDC-WASTAR': 20.02,
+  'BEAST-USDC': 5550.57
+}
+
 export const AstarVault: React.FC<Props> = ({
   item,
   toggleDisclosure,
@@ -142,7 +150,7 @@ export const AstarVault: React.FC<Props> = ({
             <span className="text-[14px] text-[#c0c0c0]">
               <span className="flex items-center font-normal">
                 <span className="mr-1">TVL $</span>
-                {tvl && tvl.toFixed(2)}
+                0$
               </span>
             </span>
           </div>

@@ -18,17 +18,17 @@ const LINKS = [
     name: 'Staking',
     path: '/staking',
     icon: '/static/sidebar/staking-icon.png'
-  },
-  {
-    name: 'Loans',
-    path: '/loans',
-    icon: '/static/sidebar/loans-icon.png'
-  },
-  {
-    name: 'Bonds',
-    path: '/bonds',
-    icon: '/static/sidebar/bonds-icon.png'
   }
+  // {
+  //   name: 'Loans',
+  //   path: '/loans',
+  //   icon: '/static/sidebar/loans-icon.png'
+  // },
+  // {
+  //   name: 'Bonds',
+  //   path: '/bonds',
+  //   icon: '/static/sidebar/bonds-icon.png'
+  // }
 ]
 
 const Sidebar = () => {

@@ -28,12 +28,12 @@ const Header = ({
   console.log('Network name ', JSON.stringify(network?.chain?.name))
 
   return (
-    <div className="sticky z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
+    <div className="z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
         <h6 className="text-[22px] font-medium">{title}</h6>
         <div className="flex items-center">
           <NetworkDropdown
-            activeNetwork={network?.chain?.name}
+            activeNetwork={network?.chain?.name || 'Moonriver'}
             otherOption={
               network?.chain?.name === 'Astar' ? 'Moonriver' : 'Astar'
             }

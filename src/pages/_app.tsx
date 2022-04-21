@@ -74,7 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           autoConnect
           connectorStorageKey="chewy.wallet"
           connectors={connectors}
-          provider={providerAstar}
+          provider={providerMoonriver}
         >
           <Toaster position="top-right" />
           <Component {...pageProps} />

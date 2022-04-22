@@ -1,10 +1,15 @@
 import { Menu, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { Fragment } from 'react'
 import toast from 'react-hot-toast'
 import { useNetwork } from 'wagmi'
 
 import ChevronDown from '../icons/ChevronDown'
+
+const svgMappings: any = {
+  Aurora: '/static/aurora.svg',
+  Moonriver: '/static/moonriver.svg',
+  Astar: '/static/astar.svg'
+}
 
 export default function NetworkDropdown(props: any) {
   console.log(
@@ -12,35 +17,34 @@ export default function NetworkDropdown(props: any) {
     props
   )
   const [{ data: network }, switchNetwork] = useNetwork()
-  const switchToNetwork = async () => {
+  const switchToNetwork = async (networkName: string) => {
+    const mappings: any = {
+      Aurora: 1313161554,
+      Moonriver: 1285,
+      Astar: 592
+    }
     if (switchNetwork) {
-      let data
-      network?.chain?.name === 'Astar'
-        ? (data = await switchNetwork(1285))
-        : (data = await switchNetwork(592))
+      let data = await switchNetwork(mappings[networkName])
       if (data.error) {
         toast.error(`${data.error.message}, please add network to your wallet.`)
       }
     }
   }
+
+  console.log('Props other options ', props.otherOption)
   return (
     <Menu
       as="div"
       className="bg-[#F2F2F2] rounded w-36 relative inline-block text-left"
     >
       {({ open }) => (
-        <>
+        <div>
           <Menu.Button className="flex w-full font-semibold items-center justify-between px-2 py-1 bg-[#F2F2F2] rounded">
             <span className="inline-flex items-center space-x-1">
-              <img
-                src={
-                  props.activeNetwork === 'Moonriver'
-                    ? '/static/moonriver.svg'
-                    : '/static/astar.svg'
-                }
+              <embed
+                src={svgMappings[props.activeNetwork]}
                 className="w-4 h-4 rounded-full"
                 draggable={false}
-                alt=""
               />
               <span>{props.activeNetwork}</span>
             </span>
@@ -55,7 +59,6 @@ export default function NetworkDropdown(props: any) {
             />
           </Menu.Button>
           <Transition
-            as={Fragment}
             enter="transition ease-out duration-100"
             enterFrom="transform opacity-0 scale-95"
             enterTo="transform opacity-100 scale-100"
@@ -64,31 +67,30 @@ export default function NetworkDropdown(props: any) {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items className="absolute right-0 mt-1 w-36 origin-top-right bg-white border-[1.75px] border-[#E7E8E7] rounded-md focus:outline-none">
-              <Menu.Item>
-                <button
-                  onClick={switchToNetwork}
-                  className={clsx(
-                    'py-1 outline-none rounded-md font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
-                  )}
-                >
-                  <span className="inline-flex items-center space-x-2">
-                    <img
-                      src={
-                        props.otherOption === 'Moonriver'
-                          ? '/static/moonriver.svg'
-                          : '/static/astar.svg'
-                      }
-                      className="w-4 h-4 rounded-full"
-                      draggable={false}
-                      alt=""
-                    />
-                    <span>{props.otherOption}</span>
-                  </span>
-                </button>
-              </Menu.Item>
+              {props.otherOption &&
+                props.otherOption?.map((otherOption: string, index: number) => (
+                  <Menu.Item key={index}>
+                    <button
+                      onClick={() => switchToNetwork(otherOption)}
+                      className={clsx(
+                        'py-1 outline-none rounded-md font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
+                      )}
+                    >
+                      <span className="inline-flex items-center space-x-2">
+                        <img
+                          src={svgMappings[otherOption]}
+                          className="w-4 h-4 rounded-full"
+                          draggable={false}
+                          alt=""
+                        />
+                        <span>{otherOption}</span>
+                      </span>
+                    </button>
+                  </Menu.Item>
+                ))}
             </Menu.Items>
           </Transition>
-        </>
+        </div>
       )}
     </Menu>
   )

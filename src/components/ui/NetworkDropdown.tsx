@@ -26,12 +26,12 @@ export default function NetworkDropdown(props: any) {
   return (
     <Menu
       as="div"
-      className="bg-[#F2F2F2] w-36 rounded relative inline-block text-left"
+      className="bg-[#F2F2F2] rounded w-36 relative inline-block text-left"
     >
       {({ open }) => (
         <>
           <Menu.Button className="flex w-full font-semibold items-center justify-between px-2 py-1 bg-[#F2F2F2] rounded">
-            <span className="inline-flex items-center space-x-2">
+            <span className="inline-flex items-center space-x-1">
               <img
                 src={
                   props.activeNetwork === 'Moonriver'
@@ -46,7 +46,7 @@ export default function NetworkDropdown(props: any) {
             </span>
             <ChevronDown
               className={clsx(
-                'w-5 transition ease-in-out duration-200 h-5 ml-2 -mr-1',
+                'w-5 transition ease-in-out duration-200 h-5 ml-1 -mr-1',
                 {
                   'rotate-180': open
                 }
@@ -63,7 +63,7 @@ export default function NetworkDropdown(props: any) {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 mt-1 origin-top-right bg-white border-[1.75px] border-[#E7E8E7] rounded-md w-36 focus:outline-none">
+            <Menu.Items className="absolute right-0 mt-1 w-36 origin-top-right bg-white border-[1.75px] border-[#E7E8E7] rounded-md focus:outline-none">
               <Menu.Item>
                 <button
                   onClick={switchToNetwork}

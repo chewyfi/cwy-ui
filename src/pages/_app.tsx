@@ -64,6 +64,14 @@ const providerAstar = new providers.StaticJsonRpcProvider(
   }
 )
 
+const providerAurora = new providers.StaticJsonRpcProvider(
+  'https://mainnet.aurora.dev',
+  {
+    chainId: 1313161554,
+    name: 'Aurora'
+  }
+)
+
 const allProviders: any = [providerAstar, providerMoonriver]
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -26,7 +26,7 @@ export default function NetworkDropdown(props: any) {
   return (
     <Menu
       as="div"
-      className="bg-[#F2F2F2] rounded relative inline-block text-left"
+      className="bg-[#F2F2F2] rounded w-32 relative inline-block text-left"
     >
       {({ open }) => (
         <>

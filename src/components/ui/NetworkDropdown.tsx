@@ -26,7 +26,7 @@ export default function NetworkDropdown(props: any) {
   return (
     <Menu
       as="div"
-      className="bg-[#F2F2F2] rounded w-32 relative inline-block text-left"
+      className="bg-[#F2F2F2] rounded w-36 relative inline-block text-left"
     >
       {({ open }) => (
         <>
@@ -63,7 +63,7 @@ export default function NetworkDropdown(props: any) {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 mt-1 w-32 origin-top-right bg-white border-[1.75px] border-[#E7E8E7] rounded-md focus:outline-none">
+            <Menu.Items className="absolute right-0 mt-1 w-36 origin-top-right bg-white border-[1.75px] border-[#E7E8E7] rounded-md focus:outline-none">
               <Menu.Item>
                 <button
                   onClick={switchToNetwork}

@@ -45,7 +45,7 @@ const Header = ({
                 : setShowWalletModal(true)
             }
             className={clsx(
-              'px-2 py-1 ml-2 w-32 text-white font-semibold bg-black rounded focus:outline-none',
+              'px-2 py-1 ml-2 w-36 text-white font-semibold bg-black rounded focus:outline-none',
               {
                 'bg-red-300 border-0 text-black':
                   network.chain?.unsupported && switchNetwork

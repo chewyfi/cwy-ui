@@ -57,7 +57,9 @@ const Header = ({
           <button
             onClick={() =>
               network.chain?.unsupported && switchNetwork
-                ? switchToNetwork(network?.chain?.name)
+                ? switchToNetwork(
+                    network?.chain?.name ? network?.chain?.name : 'Moonriver'
+                  )
                 : setShowWalletModal(true)
             }
             className={clsx(

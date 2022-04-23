@@ -7,7 +7,7 @@ import { contractMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
 import { useAccount, useBalance, useContractRead } from 'wagmi'
 
-import astarAbi from '../../chain-info/abis/astarAbi.json'
+import AuroraAbi from '../../chain-info/abis/AuroraAbi.json'
 interface Props {
   item: APYType
   toggleDisclosure: () => void
@@ -18,30 +18,33 @@ interface Props {
 const accountMappings: any = {
   'ROSE-STABLES':
     contractMappings['Aurora']['ROSE-STABLES']['contract']['want'],
-  'WETH-WASTAR': contractMappings['Astar']['WETH-WASTAR']['contract']['want'],
-  'WBTC-WASTAR': contractMappings['Astar']['WBTC-WASTAR']['contract']['want'],
-  'USDC-WASTAR': contractMappings['Astar']['USDC-WASTAR']['contract']['want'],
-  'BEAST-USDC': contractMappings['Astar']['BEAST-USDC']['contract']['lp']
+  'WETH-WAurora':
+    contractMappings['Aurora']['WETH-WAurora']['contract']['want'],
+  'WBTC-WAurora':
+    contractMappings['Aurora']['WBTC-WAurora']['contract']['want'],
+  'USDC-WAurora':
+    contractMappings['Aurora']['USDC-WAurora']['contract']['want'],
+  'BEAST-USDC': contractMappings['Aurora']['BEAST-USDC']['contract']['lp']
 }
 
 // TODO: REMOVE
 const apyMappings: any = {
   'USDT-USDC': 'N/A',
-  'WETH-WASTAR': 'N/A',
-  'WBTC-WASTAR': 'N/A',
-  'USDC-WASTAR': 'N/A',
+  'WETH-WAurora': 'N/A',
+  'WBTC-WAurora': 'N/A',
+  'USDC-WAurora': 'N/A',
   'BEAST-USDC': 'N/A'
 }
 
 const tvlMappings: any = {
   'USDT-USDC': 340.12,
-  'WETH-WASTAR': 1134.34,
-  'WBTC-WASTAR': 3314.72,
-  'USDC-WASTAR': 20.02,
+  'WETH-WAurora': 1134.34,
+  'WBTC-WAurora': 3314.72,
+  'USDC-WAurora': 20.02,
   'BEAST-USDC': 5550.57
 }
 
-export const AstarVault: React.FC<Props> = ({
+export const AuroraVault: React.FC<Props> = ({
   item,
   toggleDisclosure,
   resPriceFeed,
@@ -60,10 +63,10 @@ export const AstarVault: React.FC<Props> = ({
     addressOrName: account?.address
   })
   const provider = new providers.StaticJsonRpcProvider(
-    'https://astar.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
+    'https://Aurora.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
     {
-      chainId: 592,
-      name: 'Astar'
+      chainId: 1313161554,
+      name: 'Aurora'
     }
   )
 
@@ -96,8 +99,8 @@ export const AstarVault: React.FC<Props> = ({
     useContractRead(
       {
         addressOrName:
-          contractMappings['Astar'][item.name]['contract']['Vault'],
-        contractInterface: astarAbi,
+          contractMappings['Aurora'][item.name]['contract']['Vault'],
+        contractInterface: AuroraAbi,
         signerOrProvider: provider
       },
       'balance'
@@ -108,8 +111,8 @@ export const AstarVault: React.FC<Props> = ({
     getBalanceUser
   ] = useContractRead(
     {
-      addressOrName: contractMappings['Astar'][item.name]['contract']['Vault'],
-      contractInterface: astarAbi,
+      addressOrName: contractMappings['Aurora'][item.name]['contract']['Vault'],
+      contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
     'balanceOf',
@@ -162,7 +165,7 @@ export const AstarVault: React.FC<Props> = ({
             {/* {item.apy
               ? item.apy
               : `${(
-                  parseFloat(resApyList[apyMappings['Astar'][item.name]]) * 100
+                  parseFloat(resApyList[apyMappings['Aurora'][item.name]]) * 100
                 ).toFixed(2)}%`} */}
           </span>
           <span>{item.emoji}</span>
@@ -181,7 +184,7 @@ export const AstarVault: React.FC<Props> = ({
           {balanceDataUnformatted &&
             (
               (balanceDataUnformatted as any) /
-              10 ** contractMappings['Astar'][item.name]['decimals']
+              10 ** contractMappings['Aurora'][item.name]['decimals']
             ).toFixed(2)}
 
           <span>{deposited.toFixed(2)}</span>

@@ -4,7 +4,7 @@ import Layout from 'src/components/shared/Layout'
 
 const loans = () => {
   return (
-    <Layout headerTitle="Loans" hideFooter>
+    <Layout headerTitle="Home" hideFooter>
       <div className="grid h-full mt-8 place-items-center">
         <div className="text-center">
           <div className="mb-5 font-bold">Coming soon</div>

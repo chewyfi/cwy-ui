@@ -11,7 +11,7 @@ import { TableHeader } from './TableHeader'
 
 const Table = (props: any) => {
   const context = useContext(AppContext)
-  const [{ data: network }, switchNetwork] = useNetwork()
+  const [{ data: network }] = useNetwork()
   const [moonriverApyList, setMoonriverApyList] = useState(
     context.apysMoonriver
   )

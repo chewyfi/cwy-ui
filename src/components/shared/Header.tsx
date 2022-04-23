@@ -34,19 +34,25 @@ const Header = ({
 
   console.log('Network name ', JSON.stringify(network?.chain?.name))
 
+  const getNetworkOptions = () => {
+    if (
+      network.chain?.id &&
+      [1285, 592, 1313161554].includes(network.chain?.id)
+    ) {
+      return [1285, 592, 1313161554].filter((el) => el !== network?.chain?.id)
+    } else {
+      return [592, 1313161554]
+    }
+  }
+
   return (
     <div className="z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
         <h6 className="text-[22px] font-medium">{title}</h6>
         <div className="flex items-center">
           <NetworkDropdown
-            activeNetwork={network?.chain?.name}
-            otherOption={
-              network?.chain?.name &&
-              ['Moonriver', 'Astar', 'Aurora'].filter(
-                (e) => e !== network?.chain?.name
-              )
-            }
+            activeNetworkId={network?.chain?.id}
+            otherOptions={getNetworkOptions()}
           />
           <button
             onClick={() =>

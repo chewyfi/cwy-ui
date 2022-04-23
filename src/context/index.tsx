@@ -90,7 +90,7 @@ const initialState = {
   ],
   apysAstar: [
     {
-      icon: '/static/tokens/funbeast.svg',
+      icons: ['/static/tokens/funbeast.svg', '/static/tokens/usdc.svg'],
       name: 'BEAST-USDC',
       strategy: 'Funbeast',
       suffix: 'BEAST-USDC',
@@ -99,7 +99,7 @@ const initialState = {
       contracts: poolAddressesAstar['BEAST-USDC']
     },
     {
-      icon: '/static/tokens/usdt.svg',
+      icons: ['/static/tokens/usdt.svg', '/static/tokens/usdc.svg'],
       name: 'USDT-USDC',
       suffix: 'USDT-USDC',
       isOpen: false,
@@ -107,28 +107,36 @@ const initialState = {
       contracts: poolAddressesAstar['USDT-USDC']
     },
     {
-      icon: '/static/tokens/weth.svg',
-      name: 'WETH-WASTAR',
+      icons: ['/static/tokens/weth.svg', '/static/tokens/wastr.svg'],
+      name: 'WETH-WASTR',
       suffix: 'WETH',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAstar['WETH-WASTAR']
+      contracts: poolAddressesAstar['WETH-WASTR']
     },
     {
-      icon: '/static/tokens/wastr.svg',
-      name: 'WBTC-WASTAR',
-      suffix: 'WBTC-WASTAR',
+      icons: ['/static/tokens/btc.svg', '/static/tokens/wastr.svg'],
+      name: 'WBTC-WASTR',
+      suffix: 'WBTC-WASTR',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAstar['WBTC-WASTAR']
+      contracts: poolAddressesAstar['WBTC-WASTR']
     },
     {
-      icon: '/static/tokens/usdc.svg',
-      name: 'USDC-WASTAR',
+      icons: ['/static/tokens/usdc.svg', '/static/tokens/wastr.svg'],
+      name: 'USDC-WASTR',
       strategy: 'Funbeast',
-      suffix: 'USDC-WASTAR',
+      suffix: 'USDC-WASTR',
       isOpen: false,
-      contracts: poolAddressesAstar['USDC-WASTAR']
+      contracts: poolAddressesAstar['USDC-WASTR']
+    },
+    {
+      icons: ['/static/tokens/funbeast.svg', '/static/tokens/wastr.svg'],
+      name: 'BEAST-WASTR',
+      strategy: 'Funbeast',
+      suffix: 'BEAST-WASTR',
+      isOpen: false,
+      contracts: poolAddressesAstar['BEAST-WASTR']
     }
   ]
 }

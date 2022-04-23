@@ -19,7 +19,7 @@ const WalletModal: React.FC<Props> = (props) => {
       as="div"
       open={props.show}
       className={clsx(
-        'top-0 bottom-0 overflow-y-scroll z-20 left-0 right-0 min-h-screen flex flex-row items-start justify-center',
+        'top-0 bottom-0 overflow-y-auto z-20 left-0 right-0 min-h-screen flex flex-row items-start justify-center',
         {
           fixed: props.show
         }

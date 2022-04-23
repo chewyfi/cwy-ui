@@ -352,7 +352,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
         open={props.show}
         as="div"
         className={clsx(
-          'top-0 bottom-0 overflow-y-scroll z-20 left-0 right-0 min-w-max flex flex-col items-center justify-center',
+          'top-0 bottom-0 overflow-y-auto z-20 left-0 right-0 min-w-max flex flex-col items-center justify-center',
           {
             fixed: props.show
           }

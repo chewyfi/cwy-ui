@@ -24,7 +24,6 @@ export default function NetworkDropdown(props: {
       }
     }
   }
-  console.log('Active network ', props.activeNetwork)
 
   console.log('Props other options ', props.otherOptions)
   return (

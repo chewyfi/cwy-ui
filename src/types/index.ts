@@ -1,5 +1,5 @@
 export type APYType = {
-  icon?: string | null
+  icon?: string | undefined
   icons?: string[]
   name: string
   apy?: string

@@ -131,7 +131,6 @@ const initialState = {
       contracts: poolAddressesAstar['USDC-WASTR']
     },
     {
-      icon: null,
       icons: ['/static/tokens/funbeast.svg', '/static/tokens/wastr.svg'],
       name: 'BEAST-WASTR',
       strategy: 'Funbeast',

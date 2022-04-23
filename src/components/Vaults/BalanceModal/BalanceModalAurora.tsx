@@ -8,7 +8,7 @@ import { APYType } from 'src/types'
 import useTxnToast from 'src/utils/hooks/useTxnToast'
 import { useAccount, useContractRead, useContractWrite } from 'wagmi'
 
-import astarAbi from '../../../chain-info/abis/astarAbi.json'
+import AuroraAbi from '../../../chain-info/abis/auroraAbi.json'
 import { contractMappings } from '../../../utils/constants'
 import { Alert } from '../../ui/Alert'
 import { Spinner } from '../../ui/Spinner'
@@ -44,17 +44,17 @@ const accountMappings: any = {
   'BEAST-USDC': '0xC1E0579bAA899E596Ca6d3331E2Da00b3A6b39c3'
 }
 
-const BalanceModalAstar: React.FC<Props> = (props) => {
+const BalanceModalAurora: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState<string>('')
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [withdrawMax, setWithdrawMax] = useState(false)
   const { txnToast } = useTxnToast()
   const [metaMaskBalance, setMetaMaskBalance] = useState('0')
   const provider = new providers.StaticJsonRpcProvider(
-    'https://astar.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
+    'https://Aurora.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
     {
       chainId: 592,
-      name: 'Astar'
+      name: 'Aurora'
     }
   )
   const router = useRouter()
@@ -74,7 +74,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
         await provider.send('eth_requestAccounts', [])
         const contract = new ethers.Contract(
           accountMappings[props.item.name],
-          astarAbi,
+          AuroraAbi,
           provider
         )
         const signer = await provider.getSigner()
@@ -119,17 +119,17 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
       addressOrName:
-        contractMappings['Astar'][props.item.name]['contract']['lp'],
-      contractInterface: astarAbi,
+        contractMappings['Aurora'][props.item.name]['contract']['lp'],
+      contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
     'approve',
     {
       args: [
-        contractMappings['Astar'][props.item.name]['contract']['Vault'],
+        contractMappings['Aurora'][props.item.name]['contract']['Vault'],
         BigInt(
           1000000000 *
-            10 ** contractMappings['Astar'][props.item.name]['decimals']
+            10 ** contractMappings['Aurora'][props.item.name]['decimals']
         )
       ]
     }
@@ -145,20 +145,20 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   ] = useContractRead(
     {
       addressOrName:
-        contractMappings['Astar'][props.item.name]['contract']['lp'],
-      contractInterface: astarAbi,
+        contractMappings['Aurora'][props.item.name]['contract']['lp'],
+      contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
     'allowance',
     {
       args: [
         account?.address,
-        contractMappings['Astar'][props.item.name]['contract']['Vault']
+        contractMappings['Aurora'][props.item.name]['contract']['Vault']
       ]
     }
   )
 
-  console.log('allowance balance astar ', allowanceBalance)
+  console.log('allowance balance Aurora ', allowanceBalance)
 
   const [
     { data: balanceDataUnformatted, loading: balanceDataLoading },
@@ -166,8 +166,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   ] = useContractRead(
     {
       addressOrName:
-        contractMappings['Astar'][props.item.name]['contract']['Vault'],
-      contractInterface: astarAbi,
+        contractMappings['Aurora'][props.item.name]['contract']['Vault'],
+      contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
     'balanceOf',
@@ -184,8 +184,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   ] = useContractWrite(
     {
       addressOrName:
-        contractMappings['Astar'][props.item.name]['contract']['Vault'],
-      contractInterface: astarAbi,
+        contractMappings['Aurora'][props.item.name]['contract']['Vault'],
+      contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
     'chewIn',
@@ -193,7 +193,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
       args: [
         (
           parseFloat(!depositAmount ? '0' : depositAmount) *
-          10 ** contractMappings['Astar'][props.item.name]['decimals']
+          10 ** contractMappings['Aurora'][props.item.name]['decimals']
         ).toString()
       ],
       overrides: {
@@ -211,7 +211,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     'DEPOSIT AMOUNT ',
     (
       parseFloat(!depositAmount ? '0' : depositAmount) *
-      10 ** contractMappings['Astar'][props.item.name]['decimals']
+      10 ** contractMappings['Aurora'][props.item.name]['decimals']
     ).toString()
   )
 
@@ -225,8 +225,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   ] = useContractWrite(
     {
       addressOrName:
-        contractMappings['Astar'][props.item.name]['contract']['Vault'],
-      contractInterface: astarAbi,
+        contractMappings['Aurora'][props.item.name]['contract']['Vault'],
+      contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
     'chewIn',
@@ -234,7 +234,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
       overrides: {
         value: (
           parseFloat(!depositAmount ? '0' : depositAmount) *
-          10 ** contractMappings['Astar'][props.item.name]['decimals']
+          10 ** contractMappings['Aurora'][props.item.name]['decimals']
         ).toString(),
         gasLimit: '10500000'
       }
@@ -244,8 +244,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   const [{ data: dataWithdrawAmount }, writeWithdrawAmount] = useContractWrite(
     {
       addressOrName:
-        contractMappings['Astar'][props.item.name]['contract']['Vault'],
-      contractInterface: astarAbi,
+        contractMappings['Aurora'][props.item.name]['contract']['Vault'],
+      contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
     'chewOut',
@@ -253,7 +253,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
       args: [
         BigInt(
           parseFloat(!withdrawAmount ? '0' : withdrawAmount) *
-            10 ** contractMappings['Astar'][props.item.name]['decimals']
+            10 ** contractMappings['Aurora'][props.item.name]['decimals']
         )
       ],
       overrides: {
@@ -266,8 +266,8 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     useContractWrite(
       {
         addressOrName:
-          contractMappings['Astar'][props.item.name]['contract']['Vault'],
-        contractInterface: astarAbi,
+          contractMappings['Aurora'][props.item.name]['contract']['Vault'],
+        contractInterface: AuroraAbi,
         signerOrProvider: provider
       },
       'chewAllOut',
@@ -310,7 +310,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     if (dataWithdrawAmountMax) {
       txnToast(
         `Withdrew Contract Balance`,
-        `https://blockscout.com/astar/tx/${dataWithdrawAmountMax.hash}`,
+        `https://blockscout.com/Aurora/tx/${dataWithdrawAmountMax.hash}`,
         'Blockscout'
       )
     }
@@ -318,7 +318,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     if (dataApproved) {
       txnToast(
         'Approved',
-        `https://blockscout.com/astar/tx/${dataApproved.hash}`,
+        `https://blockscout.com/Aurora/tx/${dataApproved.hash}`,
         'Blockscout'
       )
     }
@@ -326,14 +326,14 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
     if (dataWithdrawAmount) {
       txnToast(
         `Withdrawed ${withdrawAmount}`,
-        `https://blockscout.com/astar/tx/${dataWithdrawAmount.hash}`
+        `https://blockscout.com/Aurora/tx/${dataWithdrawAmount.hash}`
       )
     }
 
     if (dataDepositBNB) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://blockscout.com/astar/tx/${dataDepositBNB.hash}`,
+        `https://blockscout.com/Aurora/tx/${dataDepositBNB.hash}`,
         'Blockscout'
       )
     }
@@ -437,7 +437,9 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                       (
                         (balanceDataUnformatted as any) /
                         10 **
-                          contractMappings['Astar'][props.item.name]['decimals']
+                          contractMappings['Aurora'][props.item.name][
+                            'decimals'
+                          ]
                       ).toFixed(18)}{' '}
                     LP
                   </label>
@@ -459,7 +461,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
                           (
                             (balanceDataUnformatted as any) /
                             10 **
-                              contractMappings['Astar'][props.item.name][
+                              contractMappings['Aurora'][props.item.name][
                                 'decimals'
                               ]
                           )
@@ -503,4 +505,4 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
   )
 }
 
-export default BalanceModalAstar
+export default BalanceModalAurora

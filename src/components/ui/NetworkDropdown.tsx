@@ -37,7 +37,7 @@ export default function NetworkDropdown(props: {
             <span className="inline-flex items-center">
               <img
                 src={getNetworkLogo(props.activeNetworkId)}
-                className="w-4 h-4 rounded-full ml-[1px] mr-[9px]"
+                className="w-4 h-4 rounded-full ml-[1px] mr-[8px]"
                 draggable={false}
                 alt=""
               />

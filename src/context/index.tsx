@@ -129,6 +129,15 @@ const initialState = {
       suffix: 'USDC-WASTAR',
       isOpen: false,
       contracts: poolAddressesAstar['USDC-WASTAR']
+    },
+    {
+      icon: null,
+      icons: ['/static/tokens/funbeast.svg', '/static/tokens/wastr.svg'],
+      name: 'BEAST-WASTR',
+      strategy: 'Funbeast',
+      suffix: 'BEAST-WASTR',
+      isOpen: false,
+      contracts: poolAddressesAstar['BEAST-WASTR']
     }
   ]
 }

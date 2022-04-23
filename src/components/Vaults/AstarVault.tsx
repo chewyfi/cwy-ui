@@ -29,7 +29,8 @@ const apyMappings: any = {
   'WETH-WASTAR': 'N/A',
   'WBTC-WASTAR': 'N/A',
   'USDC-WASTAR': 'N/A',
-  'BEAST-USDC': 'N/A'
+  'BEAST-USDC': 'N/A',
+  'BEAST-WASTR': 'N/A'
 }
 
 const tvlMappings: any = {
@@ -129,7 +130,23 @@ export const AstarVault: React.FC<Props> = ({
         className="flex items-center w-full font-medium cursor-pointer"
       >
         <span className="flex items-center w-2/4 space-x-2">
-          <embed draggable={false} className="w-8 h-8 mx-3" src={item.icon} />
+          {item.icon && (
+            <embed draggable={false} className="w-8 h-8 mx-3" src={item.icon} />
+          )}
+          {item.icons && (
+            <span className="flex items-center mx-3">
+              <embed
+                draggable={false}
+                className="z-10 w-5 h-5"
+                src={item.icons[0]}
+              />
+              <embed
+                draggable={false}
+                className="w-5 h-5 -ml-2"
+                src={item.icons[1]}
+              />
+            </span>
+          )}
           <div className="flex flex-col">
             <span className="text-[15px] -mb-0.5 flex space-x-2">
               {item.name}
@@ -172,11 +189,11 @@ export const AstarVault: React.FC<Props> = ({
               ? formatMetaMaskBalance(metaMaskBalance)
               : null}
           </span>
-          <span>
+          {/* <span>
             {metaMaskBalance?.formatted
               ? formatMetaMaskBalance(metaMaskBalance)
               : null}
-          </span>
+          </span> */}
           {balanceDataUnformatted &&
             (
               (balanceDataUnformatted as any) /

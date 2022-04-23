@@ -16,7 +16,7 @@ export default function NetworkDropdown(props: any) {
     '🚀 ~ file: NetworkDropdown.tsx ~ line 10 ~ NetworkDropdown ~ props',
     props
   )
-  const [{ data: network }, switchNetwork] = useNetwork()
+  const [{}, switchNetwork] = useNetwork()
   const switchToNetwork = async (networkName: string) => {
     const mappings: any = {
       Aurora: 1313161554,

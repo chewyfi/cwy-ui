@@ -33,7 +33,7 @@ export default function NetworkDropdown(props: {
     >
       {({ open }) => (
         <div>
-          <Menu.Button className="flex w-full font-semibold items-center justify-between px-2 py-1 bg-[#F2F2F2] rounded">
+          <Menu.Button className="flex w-full font-semibold items-center justify-between px-2 pr-2.5 py-1 bg-[#F2F2F2] rounded">
             <span className="inline-flex items-center">
               <img
                 src={getNetworkLogo(props.activeNetworkId)}

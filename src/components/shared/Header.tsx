@@ -27,6 +27,17 @@ const Header = ({
 
   console.log('Network name ', JSON.stringify(network?.chain?.name))
 
+  const getNetworkOptions = () => {
+    if (
+      network.chain?.id &&
+      [1285, 592, 1313161554].includes(network.chain?.id)
+    ) {
+      return [1285, 592, 1313161554].filter((el) => el !== network?.chain?.id)
+    } else {
+      return [592, 1313161554]
+    }
+  }
+
   return (
     <div className="z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
@@ -34,9 +45,7 @@ const Header = ({
         <div className="flex items-center">
           <NetworkDropdown
             activeNetworkId={network?.chain?.id}
-            otherOptions={[1285, 592, 1313161554].filter(
-              (e) => e !== network?.chain?.id
-            )}
+            otherOptions={getNetworkOptions()}
           />
           <button
             onClick={() =>

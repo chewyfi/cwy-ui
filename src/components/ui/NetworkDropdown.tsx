@@ -18,6 +18,7 @@ export default function NetworkDropdown(props: any) {
   )
   const [{ data: network }, switchNetwork] = useNetwork()
   const switchToNetwork = async (networkName: string) => {
+    console.log('Switching to network', networkName)
     const mappings: any = {
       Aurora: 1313161554,
       Moonriver: 1285,
@@ -30,6 +31,7 @@ export default function NetworkDropdown(props: any) {
       }
     }
   }
+  console.log('Active network ', props.activeNetwork)
 
   console.log('Props other options ', props.otherOption)
   return (

@@ -16,9 +16,16 @@ const Header = ({
   const [{ data: network }, switchNetwork] = useNetwork()
   const [{ data: accountData }] = useAccount()
 
-  const switchToNetwork = async () => {
+  const switchToNetwork = async (networkName: string) => {
+    console.log('Network name ', networkName)
+    const mappings: any = {
+      Aurora: 1313161554,
+      Moonriver: 1285,
+      Astar: 592
+    }
     if (switchNetwork) {
-      let data = await switchNetwork(1285)
+      console.log('Switching to network', mappings[networkName])
+      let data = await switchNetwork(mappings[networkName])
       if (data.error) {
         toast.error(`${data.error.message}, please add network to your wallet.`)
       }
@@ -44,7 +51,7 @@ const Header = ({
           <button
             onClick={() =>
               network.chain?.unsupported && switchNetwork
-                ? switchToNetwork()
+                ? switchToNetwork(network?.chain?.name)
                 : setShowWalletModal(true)
             }
             className={clsx(

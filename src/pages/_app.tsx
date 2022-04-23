@@ -32,6 +32,14 @@ const supportedChains = [
       { name: 'Block Scout', url: 'https://blockscout.com/astar/' }
     ],
     testnet: false
+  },
+  {
+    id: 1313161554,
+    name: 'Aurora',
+    nativeCurrency: { name: 'Aurora', symbol: 'ETH', decimals: 18 },
+    rpcUrls: ['https://mainnet.aurora.dev/ '],
+    blockExplorers: [{ name: 'Aurora Scan', url: ' https://aurorascan.dev/' }],
+    testnet: false
   }
 ]
 

@@ -1,5 +1,7 @@
 import { poolAddressesAstar } from 'src/chain-info/pool-addresses-astar'
 import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
+
+import { poolAddressesAurora } from '../chain-info/pool-addresses-aurora'
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const CWY_DOCS_URL = 'https://docs.cwy.money'
@@ -83,6 +85,32 @@ export const contractMappings: any = {
       contract: poolAddressesAstar['BEAST-WASTR'],
       decimals: 18
     }
+  },
+  Aurora: {
+    'ROSE-STABLES': {
+      contract: poolAddressesAurora['ROSE-STABLES'],
+      decimals: 18
+    },
+    'ROSE-UST': {
+      contract: poolAddressesAurora['ROSE-UST'],
+      decimals: 18
+    },
+    'ROSE-FRAX': {
+      contract: poolAddressesAurora['ROSE-FRAX'],
+      decimals: 18
+    },
+    'ROSE-MAI': {
+      contract: poolAddressesAurora['ROSE-MAI'],
+      decimals: 18
+    },
+    'ROSE-BUSD': {
+      contract: poolAddressesAurora['ROSE-BUSD'],
+      decimals: 18
+    },
+    'ROSE-RUSD': {
+      contract: poolAddressesAurora['ROSE-RUSD'],
+      decimals: 18
+    }
   }
 }
 
@@ -116,5 +144,13 @@ export const apyMappings: any = {
     'WBTC-WASTR': null,
     'USDC-WASTR': null,
     'BEAST-USDC': null
+  },
+  Aurora: {
+    'ROSE-STABLES': null,
+    'ROSE-UST': null,
+    'ROSE-FRAX': null,
+    'ROSE-MAI': null,
+    'ROSE-BUSD': null,
+    'ROSE-RUSD': null
   }
 }

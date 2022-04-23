@@ -16,10 +16,11 @@ interface Props {
 }
 
 const accountMappings: any = {
-  'USDT-USDC': contractMappings['Astar']['USDT-USDC']['contract']['lp'],
-  'WETH-WASTAR': contractMappings['Astar']['WETH-WASTAR']['contract']['lp'],
-  'WBTC-WASTAR': contractMappings['Astar']['WBTC-WASTAR']['contract']['lp'],
-  'USDC-WASTAR': contractMappings['Astar']['USDC-WASTAR']['contract']['lp'],
+  'ROSE-STABLES':
+    contractMappings['Aurora']['ROSE-STABLES']['contract']['want'],
+  'WETH-WASTAR': contractMappings['Astar']['WETH-WASTAR']['contract']['want'],
+  'WBTC-WASTAR': contractMappings['Astar']['WBTC-WASTAR']['contract']['want'],
+  'USDC-WASTAR': contractMappings['Astar']['USDC-WASTAR']['contract']['want'],
   'BEAST-USDC': contractMappings['Astar']['BEAST-USDC']['contract']['lp']
 }
 

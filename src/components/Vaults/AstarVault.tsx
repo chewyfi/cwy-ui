@@ -17,27 +17,27 @@ interface Props {
 
 const accountMappings: any = {
   'USDT-USDC': contractMappings['Astar']['USDT-USDC']['contract']['lp'],
-  'WETH-WASTAR': contractMappings['Astar']['WETH-WASTAR']['contract']['lp'],
-  'WBTC-WASTAR': contractMappings['Astar']['WBTC-WASTAR']['contract']['lp'],
-  'USDC-WASTAR': contractMappings['Astar']['USDC-WASTAR']['contract']['lp'],
+  'WETH-WASTR': contractMappings['Astar']['WETH-WASTR']['contract']['lp'],
+  'WBTC-WASTR': contractMappings['Astar']['WBTC-WASTR']['contract']['lp'],
+  'USDC-WASTR': contractMappings['Astar']['USDC-WASTR']['contract']['lp'],
   'BEAST-USDC': contractMappings['Astar']['BEAST-USDC']['contract']['lp']
 }
 
 // TODO: REMOVE
 const apyMappings: any = {
   'USDT-USDC': 'N/A',
-  'WETH-WASTAR': 'N/A',
-  'WBTC-WASTAR': 'N/A',
-  'USDC-WASTAR': 'N/A',
+  'WETH-WASTR': 'N/A',
+  'WBTC-WASTR': 'N/A',
+  'USDC-WASTR': 'N/A',
   'BEAST-USDC': 'N/A',
   'BEAST-WASTR': 'N/A'
 }
 
 const tvlMappings: any = {
   'USDT-USDC': 340.12,
-  'WETH-WASTAR': 1134.34,
-  'WBTC-WASTAR': 3314.72,
-  'USDC-WASTAR': 20.02,
+  'WETH-WASTR': 1134.34,
+  'WBTC-WASTR': 3314.72,
+  'USDC-WASTR': 20.02,
   'BEAST-USDC': 5550.57
 }
 

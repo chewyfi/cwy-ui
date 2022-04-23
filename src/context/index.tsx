@@ -108,27 +108,27 @@ const initialState = {
     },
     {
       icon: '/static/tokens/weth.svg',
-      name: 'WETH-WASTAR',
+      name: 'WETH-WASTR',
       suffix: 'WETH',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAstar['WETH-WASTAR']
+      contracts: poolAddressesAstar['WETH-WASTR']
     },
     {
       icon: '/static/tokens/wastr.svg',
-      name: 'WBTC-WASTAR',
-      suffix: 'WBTC-WASTAR',
+      name: 'WBTC-WASTR',
+      suffix: 'WBTC-WASTR',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAstar['WBTC-WASTAR']
+      contracts: poolAddressesAstar['WBTC-WASTR']
     },
     {
       icon: '/static/tokens/usdc.svg',
-      name: 'USDC-WASTAR',
+      name: 'USDC-WASTR',
       strategy: 'Funbeast',
-      suffix: 'USDC-WASTAR',
+      suffix: 'USDC-WASTR',
       isOpen: false,
-      contracts: poolAddressesAstar['USDC-WASTAR']
+      contracts: poolAddressesAstar['USDC-WASTR']
     },
     {
       icon: null,

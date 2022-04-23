@@ -4,8 +4,10 @@ import { APYType } from 'src/types'
 import { useNetwork } from 'wagmi'
 
 import { AstarVault } from './AstarVault'
+import { AuroraVault } from './AuroraVault'
 import BalanceModal from './BalanceModal/BalanceModal'
 import BalanceModalAstar from './BalanceModal/BalanceModalAstar'
+import BalanceModalAurora from './BalanceModal/BalanceModalAurora'
 import { MoonriverVault } from './MoonriverVault'
 import { TableHeader } from './TableHeader'
 
@@ -16,6 +18,7 @@ const Table = (props: any) => {
     context.apysMoonriver
   )
   const [astarApyList, setAstarApyList] = useState(context.apysAstar)
+  const [auroraApyList, setAuroraApyList] = useState(context.apysAurora)
 
   console.log('current apy list ', moonriverApyList)
   console.log('current network ', network?.chain?.name)
@@ -47,6 +50,19 @@ const Table = (props: any) => {
     setAstarApyList(JSON.parse(JSON.stringify(vaultData)))
   }
 
+  const toggleDisclosureAurora = (index: number) => {
+    let vaultData = auroraApyList
+    vaultData.map((item, idx) => {
+      if (index === idx) {
+        item.isOpen = !item.isOpen
+        setSelectedAPY(item)
+      } else {
+        item.isOpen = false
+      }
+    })
+    setAstarApyList(JSON.parse(JSON.stringify(vaultData)))
+  }
+
   return (
     <div className="w-full">
       <TableHeader />
@@ -59,6 +75,14 @@ const Table = (props: any) => {
       )}
       {selectedAPY && network?.chain?.name === 'Astar' && (
         <BalanceModalAstar
+          onClose={() => setSelectedAPY(null)}
+          item={selectedAPY}
+          show
+        />
+      )}
+
+      {selectedAPY && network?.chain?.name === 'Aurora' && (
+        <BalanceModalAurora
           onClose={() => setSelectedAPY(null)}
           item={selectedAPY}
           show
@@ -88,6 +112,20 @@ const Table = (props: any) => {
               key={index}
               item={item}
               toggleDisclosure={() => toggleDisclosureAstar(index)}
+            />
+          ))}
+        </div>
+      )}
+
+      {network?.chain?.name === 'Aurora' && (
+        <div className="space-y-2">
+          {auroraApyList.map((item, index) => (
+            <AuroraVault
+              resPriceFeed={props.resPriceFeed}
+              resApyList={props.resApyList}
+              key={index}
+              item={item}
+              toggleDisclosure={() => toggleDisclosureMoonriver(index)}
             />
           ))}
         </div>

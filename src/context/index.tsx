@@ -1,11 +1,13 @@
 import { createContext } from 'react'
 import { poolAddressesAstar } from 'src/chain-info/pool-addresses-astar'
+import { poolAddressesAurora } from 'src/chain-info/pool-addresses-aurora'
 import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
 import { APYType } from 'src/types'
 
 export type InitialStateType = {
   apysMoonriver: APYType[]
   apysAstar: APYType[]
+  apysAurora: APYType[]
 }
 
 const initialState = {
@@ -141,53 +143,46 @@ const initialState = {
   ],
   apysAurora: [
     {
-      icons: ['/static/tokens/funbeast.svg', '/static/tokens/usdc.svg'],
-      name: 'BEAST-USDC',
+      icon: '/static/tokens/rose_stables.svg',
+      name: 'ROSE-STABLES',
       strategy: 'Funbeast',
-      suffix: 'BEAST-USDC',
+      suffix: 'ROSE',
       emoji: '🔥',
       isOpen: false,
-      contracts: poolAddressesAstar['BEAST-USDC']
+      contracts: poolAddressesAurora['ROSE-STABLES']
     },
     {
-      icons: ['/static/tokens/usdt.svg', '/static/tokens/usdc.svg'],
-      name: 'USDT-USDC',
-      suffix: 'USDT-USDC',
-      isOpen: false,
+      icon: '/static/tokens/rose_atust.svg',
+      name: 'ROSE-USDT',
       strategy: 'Funbeast',
-      contracts: poolAddressesAstar['USDT-USDC']
+      suffix: 'ROSE',
+      emoji: '🔥',
+      isOpen: false,
+      contracts: poolAddressesAurora['ROSE-UST']
     },
     {
-      icons: ['/static/tokens/weth.svg', '/static/tokens/wastr.svg'],
-      name: 'WETH-WASTR',
-      suffix: 'WETH',
+      icon: '/static/tokens/rose-frax.svg',
+      name: 'ROSE-FRAX',
+      suffix: 'ROSE',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAstar['WETH-WASTR']
+      contracts: poolAddressesAurora['ROSE-FRAX']
     },
     {
-      icons: ['/static/tokens/btc.svg', '/static/tokens/wastr.svg'],
-      name: 'WBTC-WASTR',
-      suffix: 'WBTC-WASTR',
+      icon: '/static/rose-mai.svg',
+      name: 'ROSE-MAI',
+      suffix: 'ROSE',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAstar['WBTC-WASTR']
+      contracts: poolAddressesAurora['ROSE-MAI']
     },
     {
-      icons: ['/static/tokens/usdc.svg', '/static/tokens/wastr.svg'],
-      name: 'USDC-WASTR',
+      icon: '/static/rose-busd.svg',
+      name: 'ROSE-BUSD',
       strategy: 'Funbeast',
-      suffix: 'USDC-WASTR',
+      suffix: 'BUSD',
       isOpen: false,
-      contracts: poolAddressesAstar['USDC-WASTR']
-    },
-    {
-      icons: ['/static/tokens/funbeast.svg', '/static/tokens/wastr.svg'],
-      name: 'BEAST-WASTR',
-      strategy: 'Funbeast',
-      suffix: 'BEAST-WASTR',
-      isOpen: false,
-      contracts: poolAddressesAstar['BEAST-WASTR']
+      contracts: poolAddressesAurora['ROSE-BUSD']
     }
   ]
 }

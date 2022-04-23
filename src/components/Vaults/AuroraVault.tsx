@@ -18,13 +18,10 @@ interface Props {
 const accountMappings: any = {
   'ROSE-STABLES':
     contractMappings['Aurora']['ROSE-STABLES']['contract']['want'],
-  'WETH-WAurora':
-    contractMappings['Aurora']['WETH-WAurora']['contract']['want'],
-  'WBTC-WAurora':
-    contractMappings['Aurora']['WBTC-WAurora']['contract']['want'],
-  'USDC-WAurora':
-    contractMappings['Aurora']['USDC-WAurora']['contract']['want'],
-  'BEAST-USDC': contractMappings['Aurora']['BEAST-USDC']['contract']['lp']
+  'ROSE-MAI': contractMappings['Aurora']['ROSE-MAI']['contract']['want'],
+  'ROSE-FRAX': contractMappings['Aurora']['ROSE-FRAX']['contract']['want'],
+  'ROSE-USDT': contractMappings['Aurora']['ROSE-USDT']['contract']['want'],
+  'ROSE-BUSD': contractMappings['Aurora']['ROSE-BUSD']['contract']['want']
 }
 
 // TODO: REMOVE
@@ -94,6 +91,8 @@ export const AuroraVault: React.FC<Props> = ({
     //   getDeposited()
     // }
   }, [account?.address])
+
+  console.log('ITEM NAME ', item.name)
 
   const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(

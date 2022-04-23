@@ -63,7 +63,7 @@ export const AuroraVault: React.FC<Props> = ({
     addressOrName: account?.address
   })
   const provider = new providers.StaticJsonRpcProvider(
-    'https://Aurora.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
+    'https://mainnet.aurora.dev',
     {
       chainId: 1313161554,
       name: 'Aurora'

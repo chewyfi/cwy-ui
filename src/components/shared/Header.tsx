@@ -33,13 +33,10 @@ const Header = ({
         <h6 className="text-[22px] font-medium">{title}</h6>
         <div className="flex items-center">
           <NetworkDropdown
-            activeNetwork={network?.chain?.name}
-            otherOption={
-              network?.chain?.name &&
-              ['Moonriver', 'Astar', 'Aurora'].filter(
-                (e) => e !== network?.chain?.name
-              )
-            }
+            activeNetworkId={network?.chain?.id}
+            otherOptions={[1285, 592, 1313161554].filter(
+              (e) => e !== network?.chain?.id
+            )}
           />
           <button
             onClick={() =>

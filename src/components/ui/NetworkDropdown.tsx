@@ -1,37 +1,31 @@
 import { Menu, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
+import { getNetworkLogo, getNetworkName } from 'src/utils/helpers'
 import { useNetwork } from 'wagmi'
 
 import ChevronDown from '../icons/ChevronDown'
 
-const svgMappings: any = {
-  Aurora: '/static/aurora.svg',
-  Moonriver: '/static/moonriver.svg',
-  Astar: '/static/astar.svg'
-}
-
-export default function NetworkDropdown(props: any) {
+export default function NetworkDropdown(props: {
+  activeNetworkId: number | undefined
+  otherOptions: number[]
+}) {
   console.log(
     '🚀 ~ file: NetworkDropdown.tsx ~ line 10 ~ NetworkDropdown ~ props',
     props
   )
   const [{}, switchNetwork] = useNetwork()
-  const switchToNetwork = async (networkName: string) => {
-    const mappings: any = {
-      Aurora: 1313161554,
-      Moonriver: 1285,
-      Astar: 592
-    }
+
+  const switchToNetwork = async (networkId: number) => {
     if (switchNetwork) {
-      let data = await switchNetwork(mappings[networkName])
+      let data = await switchNetwork(networkId)
       if (data.error) {
         toast.error(`${data.error.message}, please add network to your wallet.`)
       }
     }
   }
 
-  console.log('Props other options ', props.otherOption)
+  console.log('Props other options ', props.otherOptions)
   return (
     <Menu
       as="div"
@@ -40,13 +34,14 @@ export default function NetworkDropdown(props: any) {
       {({ open }) => (
         <div>
           <Menu.Button className="flex w-full font-semibold items-center justify-between px-2 py-1 bg-[#F2F2F2] rounded">
-            <span className="inline-flex items-center space-x-1">
-              <embed
-                src={svgMappings[props.activeNetwork]}
+            <span className="inline-flex items-center space-x-2">
+              <img
+                src={getNetworkLogo(props.activeNetworkId)}
                 className="w-4 h-4 rounded-full"
                 draggable={false}
+                alt=""
               />
-              <span>{props.activeNetwork}</span>
+              <span>{getNetworkName(props.activeNetworkId)}</span>
             </span>
             <ChevronDown
               className={clsx(
@@ -67,27 +62,29 @@ export default function NetworkDropdown(props: any) {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items className="absolute right-0 mt-1 w-36 origin-top-right bg-white border-[1.75px] border-[#E7E8E7] rounded-md focus:outline-none">
-              {props.otherOption &&
-                props.otherOption?.map((otherOption: string, index: number) => (
-                  <Menu.Item key={index}>
-                    <button
-                      onClick={() => switchToNetwork(otherOption)}
-                      className={clsx(
-                        'py-1 outline-none rounded-md font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
-                      )}
-                    >
-                      <span className="inline-flex items-center space-x-2">
-                        <img
-                          src={svgMappings[otherOption]}
-                          className="w-4 h-4 rounded-full"
-                          draggable={false}
-                          alt=""
-                        />
-                        <span>{otherOption}</span>
-                      </span>
-                    </button>
-                  </Menu.Item>
-                ))}
+              {props.otherOptions &&
+                props.otherOptions?.map(
+                  (otherOption: number, index: number) => (
+                    <Menu.Item key={index}>
+                      <button
+                        onClick={() => switchToNetwork(otherOption)}
+                        className={clsx(
+                          'py-1 outline-none rounded-md font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
+                        )}
+                      >
+                        <span className="inline-flex items-center space-x-2">
+                          <img
+                            src={getNetworkLogo(otherOption)}
+                            className="w-4 h-4 rounded-full"
+                            draggable={false}
+                            alt=""
+                          />
+                          <span>{getNetworkName(otherOption)}</span>
+                        </span>
+                      </button>
+                    </Menu.Item>
+                  )
+                )}
             </Menu.Items>
           </Transition>
         </div>

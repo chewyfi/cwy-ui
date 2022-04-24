@@ -116,10 +116,16 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
   //       .toString()
   //   }
   // }
+
+  console.log('PROPS ITEM NAME ', props.item.name)
+  console.log(
+    'CONTRACT',
+    contractMappings['Aurora'][props.item.name]['contract']
+  )
   const [{ data: dataApproved }, writeApprove] = useContractWrite(
     {
       addressOrName:
-        contractMappings['Aurora'][props.item.name]['contract']['lp'],
+        contractMappings['Aurora'][props.item.name]['contract']['Want'],
       contractInterface: AuroraAbi,
       signerOrProvider: provider
     },
@@ -145,7 +151,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
   ] = useContractRead(
     {
       addressOrName:
-        contractMappings['Aurora'][props.item.name]['contract']['lp'],
+        contractMappings['Aurora'][props.item.name]['contract']['Want'],
       contractInterface: AuroraAbi,
       signerOrProvider: provider
     },

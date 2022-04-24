@@ -125,7 +125,7 @@ const Table = (props: any) => {
               resApyList={props.resApyList}
               key={index}
               item={item}
-              toggleDisclosure={() => toggleDisclosureMoonriver(index)}
+              toggleDisclosure={() => toggleDisclosureAurora(index)}
             />
           ))}
         </div>

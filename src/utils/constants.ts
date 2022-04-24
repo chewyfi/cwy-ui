@@ -91,20 +91,20 @@ export const contractMappings: any = {
       contract: poolAddressesAurora['ROSE-STABLES'],
       decimals: 18
     },
-    'ROSE-USDT': {
-      contract: poolAddressesAurora['ROSE-UST'],
+    'UST-STABLES': {
+      contract: poolAddressesAurora['UST-STABLES'],
       decimals: 18
     },
-    'ROSE-FRAX': {
-      contract: poolAddressesAurora['ROSE-FRAX'],
+    'FRAX-STABLES': {
+      contract: poolAddressesAurora['FRAX-STABLES'],
       decimals: 18
     },
-    'ROSE-MAI': {
-      contract: poolAddressesAurora['ROSE-MAI'],
+    'MAI-STABLES': {
+      contract: poolAddressesAurora['MAI-STABLES'],
       decimals: 18
     },
-    'ROSE-BUSD': {
-      contract: poolAddressesAurora['ROSE-BUSD'],
+    'BUSD-STAPLES': {
+      contract: poolAddressesAurora['BUSD-STAPLES'],
       decimals: 18
     },
     'ROSE-RUSD': {

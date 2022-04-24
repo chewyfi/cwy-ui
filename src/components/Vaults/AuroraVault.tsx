@@ -18,19 +18,23 @@ interface Props {
 const accountMappings: any = {
   'ROSE-STABLES':
     contractMappings['Aurora']['ROSE-STABLES']['contract']['want'],
-  'ROSE-MAI': contractMappings['Aurora']['ROSE-MAI']['contract']['want'],
-  'ROSE-FRAX': contractMappings['Aurora']['ROSE-FRAX']['contract']['want'],
-  'ROSE-USDT': contractMappings['Aurora']['ROSE-USDT']['contract']['want'],
-  'ROSE-BUSD': contractMappings['Aurora']['ROSE-BUSD']['contract']['want']
+  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['want'],
+  'FRAX-STABLES':
+    contractMappings['Aurora']['FRAX-STABLES']['contract']['want'],
+  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['want'],
+  'BUSD-STAPLES':
+    contractMappings['Aurora']['BUSD-STAPLES']['contract']['want'],
+  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['want']
 }
 
 // TODO: REMOVE
 const apyMappings: any = {
-  'USDT-USDC': 'N/A',
-  'WETH-WAurora': 'N/A',
-  'WBTC-WAurora': 'N/A',
-  'USDC-WAurora': 'N/A',
-  'BEAST-USDC': 'N/A'
+  'ROSE-STABLES': '18',
+  'UST-STABLES': '26',
+  'FRAX-STABLES': '74',
+  'MAI-STABLES': '21',
+  'BUSD-STAPLES': '22',
+  'ROSE-RUSD': '36'
 }
 
 const tvlMappings: any = {
@@ -93,6 +97,8 @@ export const AuroraVault: React.FC<Props> = ({
   }, [account?.address])
 
   console.log('ITEM NAME ', item.name)
+
+  item.strategy = 'Rose'
 
   const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(
@@ -159,15 +165,7 @@ export const AuroraVault: React.FC<Props> = ({
           </div>
         </span>
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
-          <span>
-            {apyMappings[item.name]}%
-            {/* {item.apy
-              ? item.apy
-              : `${(
-                  parseFloat(resApyList[apyMappings['Aurora'][item.name]]) * 100
-                ).toFixed(2)}%`} */}
-          </span>
-          <span>{item.emoji}</span>
+          <span>{apyMappings[item.name]}%</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>

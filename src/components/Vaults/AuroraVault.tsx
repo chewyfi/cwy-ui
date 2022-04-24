@@ -31,7 +31,7 @@ const accountMappings: any = {
 const apyMappings: any = {
   'ROSE-STABLES': '18',
   'UST-STABLES': '26',
-  'FRAX-STABLES': '74',
+  'FRAX-STABLES': '23',
   'MAI-STABLES': '21',
   'BUSD-STAPLES': '22',
   'ROSE-RUSD': '36'

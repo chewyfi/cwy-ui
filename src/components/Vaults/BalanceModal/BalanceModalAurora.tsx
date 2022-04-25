@@ -51,7 +51,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
   const { txnToast } = useTxnToast()
   const [metaMaskBalance, setMetaMaskBalance] = useState('0')
   const provider = new providers.StaticJsonRpcProvider(
-    'https://Aurora.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
+    'https://mainnet.aurora.dev',
     {
       chainId: 592,
       name: 'Aurora'
@@ -182,7 +182,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
     }
   )
 
-  console.log('BALANCE DATA UNFORMATTED ', balanceDataUnformatted)
+  console.log('BALANCE DATA UNFORMATTED AURORA', balanceDataUnformatted)
 
   const [
     { data: dataDeposit, error: depositError, loading: depositLoading },
@@ -290,10 +290,10 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
       allowanceBalance &&
       parseInt(allowanceBalance.toString()) > 0
     ) {
-      console.log('wrote deposit')
+      console.log('wrote deposit aurora')
       await writeDeposit()
     } else {
-      console.log('wrote withdraw')
+      console.log('wrote withdraw aurora')
       await writeApprove()
       // localStorage.setItem(`props.item.name${account?.address}`, '1')
     }
@@ -316,7 +316,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
     if (dataWithdrawAmountMax) {
       txnToast(
         `Withdrew Contract Balance`,
-        `https://blockscout.com/Aurora/tx/${dataWithdrawAmountMax.hash}`,
+        `https://https://aurorascan.dev/tx/${dataWithdrawAmountMax.hash}`,
         'Blockscout'
       )
     }
@@ -324,7 +324,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
     if (dataApproved) {
       txnToast(
         'Approved',
-        `https://blockscout.com/Aurora/tx/${dataApproved.hash}`,
+        `https://https://aurorascan.dev/tx/${dataApproved.hash}`,
         'Blockscout'
       )
     }
@@ -332,14 +332,14 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
     if (dataWithdrawAmount) {
       txnToast(
         `Withdrawed ${withdrawAmount}`,
-        `https://blockscout.com/Aurora/tx/${dataWithdrawAmount.hash}`
+        `https://https://aurorascan.dev/tx/${dataWithdrawAmount.hash}`
       )
     }
 
     if (dataDepositBNB) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://blockscout.com/Aurora/tx/${dataDepositBNB.hash}`,
+        `https://https://aurorascan.dev/tx/${dataDepositBNB.hash}`,
         'Blockscout'
       )
     }

@@ -53,7 +53,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
   const provider = new providers.StaticJsonRpcProvider(
     'https://mainnet.aurora.dev',
     {
-      chainId: 592,
+      chainId: 1313161554,
       name: 'Aurora'
     }
   )

@@ -330,7 +330,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
     if (dataApproved) {
       txnToast(
         'Approved',
-        `https://https://aurorascan.dev/tx/${dataApproved.hash}`,
+        `https://aurorascan.dev/tx/${dataApproved.hash}`,
         'Aurorascan'
       )
     }

@@ -28,12 +28,12 @@ const accountMappings: any = {
 
 // TODO: REMOVE
 const apyMappings: any = {
-  'ROSE-STABLES': '18',
-  'UST-STABLES': '26',
-  'FRAX-STABLES': '23',
-  'MAI-STABLES': '21',
-  'BUSD-STAPLES': '22',
-  'ROSE-RUSD': '36'
+  'ROSE-STABLES': '18.23',
+  'UST-STABLES': '26.54',
+  'FRAX-STABLES': '23.72',
+  'MAI-STABLES': '21.43',
+  'BUSD-STAPLES': '22.01',
+  'ROSE-RUSD': '36.95'
 }
 
 const tvlMappings: any = {
@@ -187,7 +187,7 @@ export const AuroraVault: React.FC<Props> = ({
             </span>
             <span className="text-[14px] text-[#c0c0c0]">
               <span className="flex items-center font-normal">
-                <span className="mr-1">TVL $</span>
+                <span className="mr-1">TVL</span>$
                 {parseFloat(metaMaskBalance).toFixed(2)}
               </span>
             </span>

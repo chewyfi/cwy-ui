@@ -36,12 +36,16 @@ function roundTo(n: any, digits: any) {
   return n
 }
 
-const accountMappings: any = {
-  'USDT-USDC': '0x13cC5a0ec3c1561645195b6f3086eAE2a0fb7e8d',
-  'WETH-WASTR': '0x0ADcc0e7F1087665bc4639BdddAeAcE30005910f',
-  'WBTC-WASTR': '0xabC9f3c5F164D751f3A21A60fF5D306D4c44A723',
-  'USDC-WASTR': '0xC4ba558D1700b156a3511F112dFF8b86D108DEE9',
-  'BEAST-USDC': '0xC1E0579bAA899E596Ca6d3331E2Da00b3A6b39c3'
+const wantMappings: any = {
+  'ROSE-STABLES':
+    contractMappings['Aurora']['ROSE-STABLES']['contract']['want'],
+  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['want'],
+  'FRAX-STABLES':
+    contractMappings['Aurora']['FRAX-STABLES']['contract']['want'],
+  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['want'],
+  'BUSD-STAPLES':
+    contractMappings['Aurora']['BUSD-STAPLES']['contract']['want'],
+  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['want']
 }
 
 const BalanceModalAurora: React.FC<Props> = (props) => {
@@ -73,7 +77,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
         // Prompt user for account connections
         await provider.send('eth_requestAccounts', [])
         const contract = new ethers.Contract(
-          accountMappings[props.item.name],
+          wantMappings[props.item.name],
           AuroraAbi,
           provider
         )
@@ -97,6 +101,8 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
       }
     }
   }
+
+  console.log('AURORA NAMES ', props.item.name)
 
   // console.log(`Meta mask balance ${JSON.stringify(metaMaskBalance?.value)}`)
 
@@ -309,15 +315,15 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
     if (dataDeposit) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://blockscout.com/tx/${dataDeposit.hash}`,
-        'Blockscout'
+        `https://aurorascan.dev/tx/${dataDeposit.hash}`,
+        'Aurorascan'
       )
     }
     if (dataWithdrawAmountMax) {
       txnToast(
         `Withdrew Contract Balance`,
-        `https://https://aurorascan.dev/tx/${dataWithdrawAmountMax.hash}`,
-        'Blockscout'
+        `https://aurorascan.dev/tx/${dataWithdrawAmountMax.hash}`,
+        'Aurorascan'
       )
     }
 
@@ -325,22 +331,22 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
       txnToast(
         'Approved',
         `https://https://aurorascan.dev/tx/${dataApproved.hash}`,
-        'Blockscout'
+        'Aurorascan'
       )
     }
 
     if (dataWithdrawAmount) {
       txnToast(
         `Withdrawed ${withdrawAmount}`,
-        `https://https://aurorascan.dev/tx/${dataWithdrawAmount.hash}`
+        `https://aurorascan.dev/tx/${dataWithdrawAmount.hash}`
       )
     }
 
     if (dataDepositBNB) {
       txnToast(
         `Deposited ${depositAmount}`,
-        `https://https://aurorascan.dev/tx/${dataDepositBNB.hash}`,
-        'Blockscout'
+        `https://aurorascan.dev/tx/${dataDepositBNB.hash}`,
+        'Aurorascan'
       )
     }
   }, [

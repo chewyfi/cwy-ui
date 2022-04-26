@@ -1,13 +1,12 @@
 import clsx from 'clsx'
-import { providers } from 'ethers'
+import { ethers, providers } from 'ethers'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
-import { formatMetaMaskBalance } from 'src/utils/helpers'
-import { useAccount, useBalance, useContractRead } from 'wagmi'
+import { useAccount, useContractRead } from 'wagmi'
 
-import AuroraAbi from '../../chain-info/abis/auroraAbi.json'
+import auroraAbi from '../../chain-info/abis/auroraAbi.json'
 interface Props {
   item: APYType
   toggleDisclosure: () => void
@@ -17,14 +16,14 @@ interface Props {
 
 const accountMappings: any = {
   'ROSE-STABLES':
-    contractMappings['Aurora']['ROSE-STABLES']['contract']['want'],
-  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['want'],
+    contractMappings['Aurora']['ROSE-STABLES']['contract']['Want'],
+  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['Want'],
   'FRAX-STABLES':
-    contractMappings['Aurora']['FRAX-STABLES']['contract']['want'],
-  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['want'],
+    contractMappings['Aurora']['FRAX-STABLES']['contract']['Want'],
+  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['Want'],
   'BUSD-STAPLES':
-    contractMappings['Aurora']['BUSD-STAPLES']['contract']['want'],
-  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['want']
+    contractMappings['Aurora']['BUSD-STAPLES']['contract']['Want'],
+  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['Want']
 }
 
 // TODO: REMOVE
@@ -56,13 +55,10 @@ export const AuroraVault: React.FC<Props> = ({
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
+  const [metaMaskBalance, setMetaMaskBalance] = useState('0')
 
   const [{ data: account }] = useAccount()
 
-  const [{ data: metaMaskBalance }] = useBalance({
-    token: accountMappings[item.name],
-    addressOrName: account?.address
-  })
   const provider = new providers.StaticJsonRpcProvider(
     'https://mainnet.aurora.dev',
     {
@@ -70,8 +66,41 @@ export const AuroraVault: React.FC<Props> = ({
       name: 'Aurora'
     }
   )
+  async function connectToMetamask() {
+    if (window.ethereum) {
+      try {
+        let providerEth: any = window.ethereum
+        const provider = new ethers.providers.Web3Provider(providerEth, 'any')
+        // Prompt user for account connections
+        await provider.send('eth_requestAccounts', [])
+        const contract = new ethers.Contract(
+          accountMappings[item.name],
+          auroraAbi,
+          provider
+        )
+        const signer = await provider.getSigner()
+
+        const balance = (
+          await contract.balanceOf(signer.getAddress())
+        ).toString()
+
+        console.log(
+          'Balance ',
+          item.name,
+          (parseInt(balance) / 10 ** 18).toString()
+        )
+
+        setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
+
+        console.log(`${item.name} balance ${balance}`)
+      } catch (Error) {
+        console.log('ERROR ', Error)
+      }
+    }
+  }
 
   useEffect(() => {
+    connectToMetamask()
     // const TVLFetch = async () => {
     //   const { basePath: baseURL } = router
     //   const { info } = await (
@@ -105,7 +134,7 @@ export const AuroraVault: React.FC<Props> = ({
       {
         addressOrName:
           contractMappings['Aurora'][item.name]['contract']['Vault'],
-        contractInterface: AuroraAbi,
+        contractInterface: auroraAbi,
         signerOrProvider: provider
       },
       'balance'
@@ -117,7 +146,7 @@ export const AuroraVault: React.FC<Props> = ({
   ] = useContractRead(
     {
       addressOrName: contractMappings['Aurora'][item.name]['contract']['Vault'],
-      contractInterface: AuroraAbi,
+      contractInterface: auroraAbi,
       signerOrProvider: provider
     },
     'balanceOf',
@@ -168,11 +197,7 @@ export const AuroraVault: React.FC<Props> = ({
           <span>{apyMappings[item.name]}%</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
-          <span>
-            {metaMaskBalance?.formatted
-              ? formatMetaMaskBalance(metaMaskBalance)
-              : null}
-          </span>
+          <span>{parseFloat(metaMaskBalance).toFixed(2)}</span>
 
           {balanceDataUnformatted &&
             (

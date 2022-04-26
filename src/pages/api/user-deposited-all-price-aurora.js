@@ -13,12 +13,12 @@ export default async function handler(req, res) {
     }
   )
   const activeVaultsTotalDeposited = {
-    'ROSE-STABLES': 0,
-    'UST-STABLES': 0,
-    'FRAX-STABLES': 0,
-    'MAI-STABLES': 0,
-    'BUSD-STAPLES': 0,
-    'ROSE-RUSD': 0
+    STABLES: 0,
+    'STABLES-UST': 0,
+    'STABLES-FRAX': 0,
+    'STABLES-MAI': 0,
+    'STABLES-BUSD': 0,
+    'STABLES-RUSD': 0
   }
   for (const vault of Object.keys(activeVaultsTotalDeposited)) {
     var contract = new ethers.Contract(

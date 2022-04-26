@@ -15,25 +15,24 @@ interface Props {
 }
 
 const accountMappings: any = {
-  'ROSE-STABLES':
-    contractMappings['Aurora']['ROSE-STABLES']['contract']['Want'],
-  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['Want'],
-  'FRAX-STABLES':
-    contractMappings['Aurora']['FRAX-STABLES']['contract']['Want'],
-  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['Want'],
-  'BUSD-STAPLES':
-    contractMappings['Aurora']['BUSD-STAPLES']['contract']['Want'],
-  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['Want']
+  STABLES: contractMappings['Aurora']['STABLES']['contract']['Want'],
+  'STABLES-MAI': contractMappings['Aurora']['STABLES-MAI']['contract']['Want'],
+  'STABLES-FRAX':
+    contractMappings['Aurora']['STABLES-FRAX']['contract']['Want'],
+  'STABLES-UST': contractMappings['Aurora']['STABLES-UST']['contract']['Want'],
+  'STABLES-BUSD':
+    contractMappings['Aurora']['STABLES-BUSD']['contract']['Want'],
+  'STABLES-RUSD': contractMappings['Aurora']['STABLES-RUSD']['contract']['Want']
 }
 
 // TODO: REMOVE
 const apyMappings: any = {
-  'ROSE-STABLES': '18.23',
-  'UST-STABLES': '26.54',
-  'FRAX-STABLES': '23.72',
-  'MAI-STABLES': '21.43',
-  'BUSD-STAPLES': '22.01',
-  'ROSE-RUSD': '36.95'
+  STABLES: '18.23',
+  'STABLES-UST': '26.54',
+  'STABLES-FRAX': '23.72',
+  'STABLES-MAI': '21.43',
+  'STABLES-BUSD': '22.01',
+  'STABLES-RUSD': '36.95'
 }
 
 const tvlMappings: any = {

@@ -395,7 +395,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
                   <label className="mb-1 text-gray-500 text-[13px]">
                     Balance:
                     <br />
-                    {parseFloat(metaMaskBalance).toFixed(18)} LP
+                    {parseFloat(metaMaskBalance).toFixed(3)} LP
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -409,7 +409,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
                     <button
                       onClick={() => {
                         setDepositAmount(
-                          parseFloat(metaMaskBalance).toFixed(18).toString()
+                          parseFloat(metaMaskBalance).toFixed(3).toString()
                         )
                       }}
                       className="px-2 py-1 font-semibold bg-white border-2 border-l-0 border-gray-200 rounded-r-lg focus:outline-none"
@@ -449,7 +449,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
                           contractMappings['Aurora'][props.item.name][
                             'decimals'
                           ]
-                      ).toFixed(18)}{' '}
+                      ).toFixed(3)}{' '}
                     LP
                   </label>
                   <div className="flex items-center text-[14px]">
@@ -474,7 +474,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
                                 'decimals'
                               ]
                           )
-                            .toFixed(18)
+                            .toFixed(3)
                             .toString()
                         )
                         setWithdrawMax(true)

@@ -148,7 +148,8 @@ const initialState = {
       suffix: 'ROSE',
       emoji: '🔥',
       isOpen: false,
-      contracts: poolAddressesAurora['STABLES']
+      contracts: poolAddressesAurora['STABLES'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/stables'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose-atust.a480f729.svg',
@@ -157,7 +158,8 @@ const initialState = {
       suffix: 'ROSE',
       emoji: '🔥',
       isOpen: false,
-      contracts: poolAddressesAurora['STABLES-UST']
+      contracts: poolAddressesAurora['STABLES-UST'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/ust'
     },
     {
       icon: '/static/tokens/rose-frax.svg',
@@ -165,7 +167,8 @@ const initialState = {
       suffix: 'ROSE',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAurora['STABLES-FRAX']
+      contracts: poolAddressesAurora['STABLES-FRAX'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/frax'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose-mai.dcd82123.svg',
@@ -173,7 +176,8 @@ const initialState = {
       suffix: 'ROSE',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAurora['STABLES-MAI']
+      contracts: poolAddressesAurora['STABLES-MAI'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/mai'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose-busd.07b2b924.svg',
@@ -181,7 +185,8 @@ const initialState = {
       strategy: 'Funbeast',
       suffix: 'BUSD',
       isOpen: false,
-      contracts: poolAddressesAurora['STABLES-BUSD']
+      contracts: poolAddressesAurora['STABLES-BUSD'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/busd'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose.54bf1c83.svg',
@@ -189,7 +194,8 @@ const initialState = {
       strategy: 'Rose',
       suffix: 'RUSD',
       isOpen: false,
-      contracts: poolAddressesAurora['STABLES-RUSD']
+      contracts: poolAddressesAurora['STABLES-RUSD'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/rusd'
     }
   ]
 }

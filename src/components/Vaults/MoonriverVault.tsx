@@ -15,13 +15,7 @@ import {
 import { contractMappings } from 'src/utils/constants'
 import { apyMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
-import {
-  useAccount,
-  useBalance,
-  useContractRead,
-  useNetwork,
-  useProvider
-} from 'wagmi'
+import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
 
 import nativeAbi from '../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../chain-info/abis/normalAbi.json'
@@ -56,7 +50,6 @@ export const MoonriverVault: React.FC<Props> = ({
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
-  const [{ data: network }, switchNetwork] = useNetwork()
 
   const [{ data: account }] = useAccount()
 

@@ -155,6 +155,19 @@ export const AuroraVault: React.FC<Props> = ({
     }
   )
 
+  const [{ data: totalValueLocked, loading: tvlDataLoading }, getTVL] =
+    useContractRead(
+      {
+        addressOrName:
+          contractMappings['Aurora'][item.name]['contract']['Vault'],
+        contractInterface: auroraAbi,
+        signerOrProvider: provider
+      },
+      'balance'
+    )
+
+  console.log(`Total value locked `, totalValueData)
+
   console.log(`Balance data unformatted ${balanceDataUnformatted}`)
   return (
     <div
@@ -188,7 +201,8 @@ export const AuroraVault: React.FC<Props> = ({
             <span className="text-[14px] text-[#c0c0c0]">
               <span className="flex items-center font-normal">
                 <span className="mr-1">TVL</span>$
-                {parseFloat(metaMaskBalance).toFixed(2)}
+                {totalValueData &&
+                  (parseFloat(totalValueData.toString()) / 10 ** 18).toFixed(2)}
               </span>
             </span>
           </div>

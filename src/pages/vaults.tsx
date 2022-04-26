@@ -24,12 +24,14 @@ export default function Vaults(props: any) {
           await fetch(`${baseURL}/api/total-value-locked-usd-aurora`)
         ).json()
         globalVaultValue = activeVaultsTotalValueLocked
-      } else {
+      } else if (network?.chain?.name === 'Moonriver') {
         console.log('ENTERED AURORA ELSE')
         const { activeVaultsTotalValueLocked } = await (
           await fetch(`${baseURL}/api/total-value-locked-usd`)
         ).json()
         globalVaultValue = activeVaultsTotalValueLocked
+      } else {
+        return
       }
 
       let sum = 0.0
@@ -54,13 +56,15 @@ export default function Vaults(props: any) {
             )
           ).json()
           globalTotalDeposits = activeVaultsTotalDeposited
-        } else {
+        } else if (network?.chain?.name === 'Moonriver') {
           const { activeVaultsTotalDeposited } = await (
             await fetch(
               `${baseURL}/api/user-deposited-all-price?useraddress=${account?.address}`
             )
           ).json()
           globalTotalDeposits = activeVaultsTotalDeposited
+        } else {
+          return
         }
 
         let sum = 0

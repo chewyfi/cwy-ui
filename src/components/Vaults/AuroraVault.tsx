@@ -166,9 +166,6 @@ export const AuroraVault: React.FC<Props> = ({
       'balance'
     )
 
-  console.log(`Total value locked `, totalValueData)
-
-  console.log(`Balance data unformatted ${balanceDataUnformatted}`)
   return (
     <div
       className={clsx(

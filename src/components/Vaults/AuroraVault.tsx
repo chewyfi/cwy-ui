@@ -187,8 +187,8 @@ export const AuroraVault: React.FC<Props> = ({
             </span>
             <span className="text-[14px] text-[#c0c0c0]">
               <span className="flex items-center font-normal">
-                <span className="mr-1">TVL $</span>
-                0$
+                <span className="mr-1">TVL $</span>$
+                {parseFloat(metaMaskBalance).toFixed(2)}
               </span>
             </span>
           </div>

@@ -38,14 +38,14 @@ function roundTo(n: any, digits: any) {
 
 const wantMappings: any = {
   'ROSE-STABLES':
-    contractMappings['Aurora']['ROSE-STABLES']['contract']['want'],
-  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['want'],
+    contractMappings['Aurora']['ROSE-STABLES']['contract']['Want'],
+  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['Want'],
   'FRAX-STABLES':
-    contractMappings['Aurora']['FRAX-STABLES']['contract']['want'],
-  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['want'],
+    contractMappings['Aurora']['FRAX-STABLES']['contract']['Want'],
+  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['Want'],
   'BUSD-STAPLES':
-    contractMappings['Aurora']['BUSD-STAPLES']['contract']['want'],
-  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['want']
+    contractMappings['Aurora']['BUSD-STAPLES']['contract']['Want'],
+  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['Want']
 }
 
 const BalanceModalAurora: React.FC<Props> = (props) => {
@@ -395,10 +395,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
                   <label className="mb-1 text-gray-500 text-[13px]">
                     Balance:
                     <br />
-                    {parseFloat(metaMaskBalance) > 0
-                      ? parseFloat(metaMaskBalance).toFixed(18).toString()
-                      : '0.0000000000000000'}{' '}
-                    LP
+                    {parseFloat(metaMaskBalance).toFixed(18)} LP
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

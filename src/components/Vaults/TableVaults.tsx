@@ -20,7 +20,7 @@ const Table = (props: any) => {
   const [astarApyList, setAstarApyList] = useState(context.apysAstar)
   const [auroraApyList, setAuroraApyList] = useState(context.apysAurora)
 
-  console.log('current apy list ', moonriverApyList)
+  // console.log('current apy list ', moonriverApyList)
   console.log('current network ', network?.chain?.name)
 
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)

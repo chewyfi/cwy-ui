@@ -5,9 +5,9 @@ import { useNetwork } from 'wagmi'
 
 import { AstarVault } from './AstarVault'
 import { AuroraVault } from './AuroraVault'
-import BalanceModal from './BalanceModal/BalanceModal'
 import BalanceModalAstar from './BalanceModal/BalanceModalAstar'
 import BalanceModalAurora from './BalanceModal/BalanceModalAurora'
+import BalanceModal from './BalanceModal/BalanceModalMoonriver'
 import { MoonriverVault } from './MoonriverVault'
 import { TableHeader } from './TableHeader'
 

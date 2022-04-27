@@ -25,7 +25,7 @@ const Header = ({
     }
     if (switchNetwork) {
       console.log('Switching to network', mappings[networkName])
-      let data = await switchNetwork(mappings[networkName])
+      let data = await switchNetwork(mappings[networkName] || 1285)
       if (data.error) {
         toast.error(`${data.error.message}, please add network to your wallet.`)
       }

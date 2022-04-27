@@ -15,10 +15,15 @@ const LINKS = [
     icon: '/static/sidebar/vaults-icon.png'
   },
   {
-    name: 'Staking',
-    path: '/staking',
+    name: 'Presale',
+    path: '/presale',
     icon: '/static/sidebar/staking-icon.png'
   }
+  // {
+  //   name: 'Staking',
+  //   path: '/staking',
+  //   icon: '/static/sidebar/staking-icon.png'
+  // }
   // {
   //   name: 'Loans',
   //   path: '/loans',

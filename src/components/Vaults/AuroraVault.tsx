@@ -72,8 +72,8 @@ export const AuroraVault: React.FC<Props> = ({
   const getApr = (array: any) => {
     const filtered = array[0].filter((apr: any) => {
       if (apr.name === item.name) {
-        console.log('MATCHED ', apr.apr)
-        return apr.apr
+        console.log('MATCHED ', parseFloat(apr.apr).toFixed(2))
+        return parseFloat(apr.apr).toFixed(2)
       }
     })[0]
 
@@ -195,7 +195,7 @@ export const AuroraVault: React.FC<Props> = ({
           </div>
         </span>
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
-          <span>{aprList && getApr(aprList)}</span>
+          <span>{aprList && parseFloat(getApr(aprList)).toFixed(2)}%</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>{parseFloat(metaMaskBalance).toFixed(2)}</span>

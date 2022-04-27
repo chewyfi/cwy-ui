@@ -48,7 +48,7 @@ const Header = ({
   return (
     <div className="z-10 text-[15px] bg-white top-0 flex items-center justify-between w-full pb-2 pt-5">
       <div className="flex items-center justify-between w-full mt-2">
-        <h6 className="text-[22px] font-medium">{title}</h6>
+        <h6 className="text-[19px] font-medium">{title}</h6>
         <div className="flex items-center">
           <NetworkDropdown
             activeNetworkId={network?.chain?.id}

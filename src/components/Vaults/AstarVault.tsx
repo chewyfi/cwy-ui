@@ -152,7 +152,7 @@ export const AstarVault: React.FC<Props> = ({
               {item.name}
               {item.getSomeUrl && (
                 <a
-                  className="ml-2 text-[15px] text-[#c0c0c0] underline"
+                  className="ml-2 text-[15px] transition duration-200 ease-in-out hover:opacity-60 text-[#c0c0c0] underline"
                   href={item.getSomeUrl}
                   target="_blank"
                   rel="noreferrer"

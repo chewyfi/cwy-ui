@@ -7,7 +7,7 @@ import { contractMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
 import { useAccount, useBalance, useContractRead } from 'wagmi'
 
-import astarAbi from '../../chain-info/abis/astarAbi.json'
+import astarAbi from '../../../chain-info/abis/astarAbi.json'
 interface Props {
   item: APYType
   toggleDisclosure: () => void

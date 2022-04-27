@@ -3,12 +3,12 @@ import { AppContext } from 'src/context'
 import { APYType } from 'src/types'
 import { useNetwork } from 'wagmi'
 
-import { AstarVault } from './AstarVault'
-import { AuroraVault } from './AuroraVault'
-import BalanceModalAstar from './BalanceModal/BalanceModalAstar'
-import BalanceModalAurora from './BalanceModal/BalanceModalAurora'
-import BalanceModal from './BalanceModal/BalanceModalMoonriver'
-import { MoonriverVault } from './MoonriverVault'
+import BalanceModalAstar from './BalanceModals/BalanceModalAstar'
+import BalanceModalAurora from './BalanceModals/BalanceModalAurora'
+import BalanceModal from './BalanceModals/BalanceModalMoonriver'
+import { AstarVault } from './NetworkVaults/AstarVault'
+import { AuroraVault } from './NetworkVaults/AuroraVault'
+import { MoonriverVault } from './NetworkVaults/MoonriverVault'
 import { TableHeader } from './TableHeader'
 
 const Table = (props: any) => {

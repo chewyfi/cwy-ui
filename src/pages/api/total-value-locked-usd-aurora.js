@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-import auroraAbi from '../../chain-info/abis/normalAbi.json'
+import auroraAbi from '../../chain-info/abis/normalMoonriverAbi.json'
 import { contractMappings } from '../../utils/constants'
 const vaultMappings = {
   STABLES: contractMappings['Aurora']['STABLES']['contract']['Vault'],

@@ -6,7 +6,7 @@ import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
 import { useAccount, useContractRead } from 'wagmi'
 
-import auroraAbi from '../../chain-info/abis/auroraAbi.json'
+import auroraAbi from '../../../chain-info/abis/auroraAbi.json'
 interface Props {
   item: APYType
   toggleDisclosure: () => void

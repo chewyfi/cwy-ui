@@ -13,8 +13,8 @@ import {
   useProvider
 } from 'wagmi'
 
-import nativeAbi from '../../../chain-info/abis/nativeAbi.json'
-import normalAbi from '../../../chain-info/abis/normalAbi.json'
+import nativeAbi from '../../../chain-info/abis/nativeMoonriverAbi.json'
+import normalAbi from '../../../chain-info/abis/normalMoonriverAbi.json'
 import { contractMappings } from '../../../utils/constants'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,

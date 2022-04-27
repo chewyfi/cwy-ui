@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-import auroraAbi from '../../chain-info/abis/normalAbi.json'
+import auroraAbi from '../../chain-info/abis/normalMoonriverAbi.json'
 import { contractMappings } from '../../utils/constants'
 
 export default async function handler(req, res) {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from 'src/context'
 import { APYType } from 'src/types'
 import { useNetwork } from 'wagmi'
@@ -17,11 +17,41 @@ const Table = (props: any) => {
   const [moonriverApyList, setMoonriverApyList] = useState(
     context.apysMoonriver
   )
+
   const [astarApyList, setAstarApyList] = useState(context.apysAstar)
   const [auroraApyList, setAuroraApyList] = useState(context.apysAurora)
-
+  const [auroraAprs, setAuroraAprs] = useState<any>()
   // console.log('current apy list ', moonriverApyList)
   console.log('current network ', network?.chain?.name)
+
+  useEffect(() => {
+    if (network?.chain?.name === 'Aurora') {
+      async function getData() {
+        const arrayAurora = await await (
+          await fetch(
+            'https://raw.githubusercontent.com/RoseOnAurora/apr/master/data.json'
+          )
+        ).json()
+        const apyMappings: any = {
+          'Stables Farm': 'ROSE-STABLES',
+          'Frax Farm': 'FRAX-STABLES',
+          'UST Farm': 'UST-STABLES',
+          'BUSD Farm': 'BUSD-STAPLES',
+          'MAI Farm': 'MAI-STABLES',
+          'RUSD Farm': 'ROSE-RUSD'
+        }
+
+        const arr = arrayAurora.map((apr: any) => {
+          return {
+            apr: apr.apr,
+            name: apyMappings[apr.name]
+          }
+        })
+        setAuroraAprs(arr)
+      }
+      getData()
+    }
+  }, [network?.chain?.name])
 
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosureMoonriver = (index: number) => {
@@ -121,6 +151,7 @@ const Table = (props: any) => {
         <div className="space-y-2">
           {auroraApyList.map((item, index) => (
             <AuroraVault
+              aprList={auroraAprs}
               resPriceFeed={props.resPriceFeed}
               resApyList={props.resApyList}
               key={index}

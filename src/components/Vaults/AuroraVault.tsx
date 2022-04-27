@@ -12,6 +12,7 @@ interface Props {
   toggleDisclosure: () => void
   resPriceFeed: any
   resApyList: any
+  aprList?: any
 }
 
 const accountMappings: any = {
@@ -28,12 +29,12 @@ const accountMappings: any = {
 
 // TODO: REMOVE
 const apyMappings: any = {
-  'ROSE-STABLES': '18.23',
-  'UST-STABLES': '26.54',
-  'FRAX-STABLES': '23.72',
-  'MAI-STABLES': '21.43',
-  'BUSD-STAPLES': '22.01',
-  'ROSE-RUSD': '36.95'
+  'Stables Farm': 'ROSE-STABLES',
+  'Frax Farm': 'FRAX-STABLES',
+  'UST Farm': 'UST-STABLES',
+  'BUSD Farm': 'BUSD-STAPLES',
+  'MAI Farm': 'MAI-STABLES',
+  'RUSD Farm': 'ROSE-RUSD'
 }
 
 const tvlMappings: any = {
@@ -48,9 +49,11 @@ export const AuroraVault: React.FC<Props> = ({
   item,
   toggleDisclosure,
   resPriceFeed,
-  resApyList
+  resApyList,
+  aprList
 }) => {
   console.log('ITEM NAME ', item.name)
+  // console.log('APR LIST', aprList)
 
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
@@ -66,6 +69,23 @@ export const AuroraVault: React.FC<Props> = ({
       name: 'Aurora'
     }
   )
+
+  const getApr = (array: any) => {
+    const filtered = array.filter((apr: any) => {
+      if (apr.name === item.name) {
+        console.log('MATCHED ', apr.name)
+        return apr.apr
+      }
+    })
+    console.log('filtered ', filtered)
+    if (filtered.length > 0) {
+      return filtered[0].apr
+    } else {
+      console.log('NA CASE ', array)
+      return 'NA'
+    }
+  }
+
   async function connectToMetamask() {
     if (window.ethereum) {
       try {
@@ -101,28 +121,6 @@ export const AuroraVault: React.FC<Props> = ({
 
   useEffect(() => {
     connectToMetamask()
-    // const TVLFetch = async () => {
-    //   const { basePath: baseURL } = router
-    //   const { info } = await (
-    //     await fetch(
-    //       `${baseURL}/api/total-value-locked-usd-vault?vault=${item.name}`
-    //     )
-    //   ).json()
-    //   setTVL(info.balance)
-    // }
-    // TVLFetch()
-    // if (account?.address) {
-    //   const getDeposited = async () => {
-    //     const { basePath: baseURL } = router
-    //     const { deposited } = await (
-    //       await fetch(
-    //         `${baseURL}/api/user-deposited?vault=${item.name}&useraddress=${account.address}`
-    //       )
-    //     ).json()
-    //     setDeposited(deposited)
-    //   }
-    //   getDeposited()
-    // }
   }, [account?.address])
 
   console.log('ITEM NAME ', item.name)
@@ -205,7 +203,7 @@ export const AuroraVault: React.FC<Props> = ({
           </div>
         </span>
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
-          <span>{apyMappings[item.name]}%</span>
+          <span>{aprList && getApr(aprList)}</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>{parseFloat(metaMaskBalance).toFixed(2)}</span>

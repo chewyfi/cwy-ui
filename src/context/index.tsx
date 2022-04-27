@@ -1,7 +1,7 @@
 import { createContext } from 'react'
-import { poolAddressesAstar } from 'src/chain-info/pool-addresses-astar'
-import { poolAddressesAurora } from 'src/chain-info/pool-addresses-aurora'
-import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
+import { poolAddressesAstar } from 'src/chain-info/network-addreses/pool-addresses-astar'
+import { poolAddressesAurora } from 'src/chain-info/network-addreses/pool-addresses-aurora'
+import { poolAddressesMoonriver } from 'src/chain-info/network-addreses/pool-addresses-moonriver'
 import { APYType } from 'src/types'
 
 export type InitialStateType = {

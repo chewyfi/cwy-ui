@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 
 import normalAbi from '../../chain-info/abis/normalMoonriverAbi.json'
-import { poolAddressesMoonriver } from '../../chain-info/pool-addresses-moonriver'
+import { poolAddressesMoonriver } from '../../chain-info/pool-addreses/pool-addresses-moonriver'
 
 const contractMappings = {
   MOVR: { contract: poolAddressesMoonriver['MoonbeamMOVR'], decimals: 18 },

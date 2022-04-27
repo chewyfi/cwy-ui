@@ -1,7 +1,6 @@
-import { poolAddressesAstar } from 'src/chain-info/pool-addresses-astar'
-import { poolAddressesMoonriver } from 'src/chain-info/pool-addresses-moonriver'
-
-import { poolAddressesAurora } from '../chain-info/pool-addresses-aurora'
+import { poolAddressesAstar } from 'src/chain-info/network-addreses/pool-addresses-astar'
+import { poolAddressesAurora } from 'src/chain-info/network-addreses/pool-addresses-aurora'
+import { poolAddressesMoonriver } from 'src/chain-info/network-addreses/pool-addresses-moonriver'
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const CWY_DOCS_URL = 'https://docs.cwy.money'

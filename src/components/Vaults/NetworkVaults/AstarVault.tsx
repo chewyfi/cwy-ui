@@ -1,11 +1,10 @@
 import clsx from 'clsx'
-import { providers } from 'ethers'
+import { ethers, providers } from 'ethers'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
-import { formatMetaMaskBalance } from 'src/utils/helpers'
-import { useAccount, useBalance, useContractRead } from 'wagmi'
+import { useAccount, useContractRead } from 'wagmi'
 
 import astarAbi from '../../../chain-info/abis/astarAbi.json'
 interface Props {
@@ -52,13 +51,11 @@ export const AstarVault: React.FC<Props> = ({
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
+  const [metaMaskBalance, setMetaMaskBalance] = useState('0')
 
   const [{ data: account }] = useAccount()
 
-  const [{ data: metaMaskBalance }] = useBalance({
-    token: accountMappings[item.name],
-    addressOrName: account?.address
-  })
+  console.log('METAMASK BALANCE ', metaMaskBalance)
   const provider = new providers.StaticJsonRpcProvider(
     'https://astar.blastapi.io/81297d7f-8827-4a29-86f1-a2dc3ffbf66b',
     {
@@ -67,7 +64,33 @@ export const AstarVault: React.FC<Props> = ({
     }
   )
 
+  async function connectToMetamask() {
+    if (window.ethereum) {
+      try {
+        let providerEth: any = window.ethereum
+        const provider = new ethers.providers.Web3Provider(providerEth, 'any')
+        // Prompt user for account connections
+        await provider.send('eth_requestAccounts', [])
+        const contract = new ethers.Contract(
+          accountMappings[item.name],
+          astarAbi,
+          provider
+        )
+        const signer = await provider.getSigner()
+
+        const balance = (
+          await contract.balanceOf(signer.getAddress())
+        ).toString()
+
+        setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
+      } catch (Error) {
+        console.log('ERROR ', Error)
+      }
+    }
+  }
+
   useEffect(() => {
+    connectToMetamask()
     // const TVLFetch = async () => {
     //   const { basePath: baseURL } = router
     //   const { info } = await (
@@ -185,9 +208,7 @@ export const AstarVault: React.FC<Props> = ({
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
-            {metaMaskBalance?.formatted
-              ? formatMetaMaskBalance(metaMaskBalance)
-              : null}
+            <span>{parseFloat(metaMaskBalance).toFixed(2)}</span>
           </span>
           {/* <span>
             {metaMaskBalance?.formatted
@@ -200,7 +221,7 @@ export const AstarVault: React.FC<Props> = ({
               10 ** contractMappings['Astar'][item.name]['decimals']
             ).toFixed(2)}
 
-          <span>{deposited.toFixed(2)}</span>
+          {/* <span>{deposited.toFixed(2)}</span> */}
         </span>
       </div>
     </div>

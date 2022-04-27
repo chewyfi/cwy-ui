@@ -412,7 +412,8 @@ const BalanceModal: React.FC<Props> = (props) => {
                           contractMappings['Moonriver'][props.item.name][
                             'decimals'
                           ]
-                      ).toFixed(2)}
+                      ).toFixed(2)}{' '}
+                    {props.item.suffix}
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input

@@ -1,8 +1,17 @@
+import clsx from 'clsx'
+import { useNetwork } from 'wagmi'
+
 export const TableHeader = () => {
+  const [{ data: network }] = useNetwork()
+
   return (
     <div className="w-full">
       <div className="text-[15px] flex py-3 font-medium items-center w-full">
-        <span className="flex items-center w-2/4">
+        <span
+          className={clsx('flex items-center w-2/4', {
+            '!w-3/4': network.chain?.id === 1313161554
+          })}
+        >
           <span className="flex flex-col items-start w-1/3 ml-3">
             <span className="-mb-1">Token</span>
             <span className="-mb-1">Strategy</span>

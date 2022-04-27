@@ -15,13 +15,7 @@ import {
 import { contractMappings } from 'src/utils/constants'
 import { apyMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
-import {
-  useAccount,
-  useBalance,
-  useContractRead,
-  useNetwork,
-  useProvider
-} from 'wagmi'
+import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
 
 import nativeAbi from '../../chain-info/abis/nativeAbi.json'
 import normalAbi from '../../chain-info/abis/normalAbi.json'
@@ -56,7 +50,6 @@ export const MoonriverVault: React.FC<Props> = ({
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
-  const [{ data: network }, switchNetwork] = useNetwork()
 
   const [{ data: account }] = useAccount()
 
@@ -125,7 +118,7 @@ export const MoonriverVault: React.FC<Props> = ({
               {item.name}
               {item.getSomeUrl && (
                 <a
-                  className="ml-2 text-[15px] text-[#c0c0c0] underline"
+                  className="ml-2 transition duration-200 ease-in-out hover:opacity-60 text-[15px] text-[#c0c0c0] underline"
                   href={item.getSomeUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -139,7 +132,7 @@ export const MoonriverVault: React.FC<Props> = ({
             </span>
             <span className="text-[14px] text-[#c0c0c0]">
               <span className="flex items-center font-normal">
-                <span className="mr-1">TVL $</span>
+                <span>TVL $</span>
                 {tvl && tvl.toFixed(2)}
               </span>
             </span>

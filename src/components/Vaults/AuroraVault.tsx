@@ -16,15 +16,14 @@ interface Props {
 }
 
 const accountMappings: any = {
-  'ROSE-STABLES':
-    contractMappings['Aurora']['ROSE-STABLES']['contract']['Want'],
-  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['Want'],
-  'FRAX-STABLES':
-    contractMappings['Aurora']['FRAX-STABLES']['contract']['Want'],
-  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['Want'],
-  'BUSD-STAPLES':
-    contractMappings['Aurora']['BUSD-STAPLES']['contract']['Want'],
-  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['Want']
+  STABLES: contractMappings['Aurora']['STABLES']['contract']['Want'],
+  'STABLES-MAI': contractMappings['Aurora']['STABLES-MAI']['contract']['Want'],
+  'STABLES-FRAX':
+    contractMappings['Aurora']['STABLES-FRAX']['contract']['Want'],
+  'STABLES-UST': contractMappings['Aurora']['STABLES-UST']['contract']['Want'],
+  'STABLES-BUSD':
+    contractMappings['Aurora']['STABLES-BUSD']['contract']['Want'],
+  'STABLES-RUSD': contractMappings['Aurora']['STABLES-RUSD']['contract']['Want']
 }
 
 // TODO: REMOVE
@@ -174,14 +173,14 @@ export const AuroraVault: React.FC<Props> = ({
         onClick={() => toggleDisclosure()}
         className="flex items-center w-full font-medium cursor-pointer"
       >
-        <span className="flex items-center w-2/4 space-x-2">
+        <span className="flex items-center w-3/4 space-x-2">
           <embed draggable={false} className="w-8 h-8 mx-3" src={item.icon} />
           <div className="flex flex-col">
             <span className="text-[15px] -mb-0.5 flex space-x-2">
               {item.name}
               {item.getSomeUrl && (
                 <a
-                  className="ml-2 text-[15px] text-[#c0c0c0] underline"
+                  className="ml-2 text-[15px] transition duration-200 ease-in-out hover:opacity-60 text-[#c0c0c0] underline"
                   href={item.getSomeUrl}
                   target="_blank"
                   rel="noreferrer"

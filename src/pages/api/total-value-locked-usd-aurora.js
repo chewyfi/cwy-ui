@@ -3,15 +3,15 @@ import { ethers } from 'ethers'
 import auroraAbi from '../../chain-info/abis/normalAbi.json'
 import { contractMappings } from '../../utils/constants'
 const vaultMappings = {
-  'ROSE-STABLES':
-    contractMappings['Aurora']['ROSE-STABLES']['contract']['Vault'],
-  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['Vault'],
-  'FRAX-STABLES':
-    contractMappings['Aurora']['FRAX-STABLES']['contract']['Vault'],
-  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['Vault'],
-  'BUSD-STAPLES':
-    contractMappings['Aurora']['BUSD-STAPLES']['contract']['Vault'],
-  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['Vault']
+  STABLES: contractMappings['Aurora']['STABLES']['contract']['Vault'],
+  'STABLES-MAI': contractMappings['Aurora']['STABLES-MAI']['contract']['Vault'],
+  'STABLES-FRAX':
+    contractMappings['Aurora']['STABLES-FRAX']['contract']['Vault'],
+  'STABLES-UST': contractMappings['Aurora']['STABLES-UST']['contract']['Vault'],
+  'STABLES-BUSD':
+    contractMappings['Aurora']['STABLES-BUSD']['contract']['Vault'],
+  'STABLES-RUSD':
+    contractMappings['Aurora']['STABLES-RUSD']['contract']['Vault']
 }
 
 export default async function handler(req, res) {

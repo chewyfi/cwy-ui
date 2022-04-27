@@ -37,15 +37,14 @@ function roundTo(n: any, digits: any) {
 }
 
 const wantMappings: any = {
-  'ROSE-STABLES':
-    contractMappings['Aurora']['ROSE-STABLES']['contract']['Want'],
-  'MAI-STABLES': contractMappings['Aurora']['MAI-STABLES']['contract']['Want'],
-  'FRAX-STABLES':
-    contractMappings['Aurora']['FRAX-STABLES']['contract']['Want'],
-  'UST-STABLES': contractMappings['Aurora']['UST-STABLES']['contract']['Want'],
-  'BUSD-STAPLES':
-    contractMappings['Aurora']['BUSD-STAPLES']['contract']['Want'],
-  'ROSE-RUSD': contractMappings['Aurora']['ROSE-RUSD']['contract']['Want']
+  STABLES: contractMappings['Aurora']['STABLES']['contract']['Want'],
+  'STABLES-MAI': contractMappings['Aurora']['STABLES-MAI']['contract']['Want'],
+  'STABLES-FRAX':
+    contractMappings['Aurora']['STABLES-FRAX']['contract']['Want'],
+  'STABLES-UST': contractMappings['Aurora']['STABLES-UST']['contract']['Want'],
+  'STABLES-BUSD':
+    contractMappings['Aurora']['STABLES-BUSD']['contract']['Want'],
+  'STABLES-RUSD': contractMappings['Aurora']['STABLES-RUSD']['contract']['Want']
 }
 
 const BalanceModalAurora: React.FC<Props> = (props) => {
@@ -393,9 +392,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
               <div className="flex space-x-2">
                 <div className="mt-1">
                   <label className="mb-1 text-gray-500 text-[13px]">
-                    Balance:
-                    <br />
-                    {parseFloat(metaMaskBalance).toFixed(2)} LP
+                    Balance: {parseFloat(metaMaskBalance).toFixed(2)} LP
                   </label>
                   <div className="flex items-center text-[14px]">
                     <input
@@ -440,8 +437,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
                 </div>
                 <div className="mt-1">
                   <label className="mb-1 text-[13px] text-gray-500">
-                    Deposited:
-                    <br />
+                    Deposited:{' '}
                     {balanceDataUnformatted &&
                       (
                         (balanceDataUnformatted as any) /

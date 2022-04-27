@@ -143,53 +143,59 @@ const initialState = {
   apysAurora: [
     {
       icon: '/static/tokens/rose_stables.svg',
-      name: 'ROSE-STABLES',
+      name: 'STABLES',
       strategy: 'Funbeast',
       suffix: 'ROSE',
       emoji: '🔥',
       isOpen: false,
-      contracts: poolAddressesAurora['ROSE-STABLES']
+      contracts: poolAddressesAurora['STABLES'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/stables'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose-atust.a480f729.svg',
-      name: 'UST-STABLES',
+      name: 'STABLES-UST',
       strategy: 'Funbeast',
       suffix: 'ROSE',
       emoji: '🔥',
       isOpen: false,
-      contracts: poolAddressesAurora['UST-STABLES']
+      contracts: poolAddressesAurora['STABLES-UST'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/ust'
     },
     {
       icon: '/static/tokens/rose-frax.svg',
-      name: 'FRAX-STABLES',
+      name: 'STABLES-FRAX',
       suffix: 'ROSE',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAurora['FRAX-STABLES']
+      contracts: poolAddressesAurora['STABLES-FRAX'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/frax'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose-mai.dcd82123.svg',
-      name: 'MAI-STABLES',
+      name: 'STABLES-MAI',
       suffix: 'ROSE',
       strategy: 'Funbeast',
       isOpen: false,
-      contracts: poolAddressesAurora['MAI-STABLES']
+      contracts: poolAddressesAurora['STABLES-MAI'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/mai'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose-busd.07b2b924.svg',
-      name: 'BUSD-STAPLES',
+      name: 'STABLES-BUSD',
       strategy: 'Funbeast',
       suffix: 'BUSD',
       isOpen: false,
-      contracts: poolAddressesAurora['BUSD-STAPLES']
+      contracts: poolAddressesAurora['STABLES-BUSD'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/busd'
     },
     {
       icon: 'https://app.rose.fi/static/media/rose.54bf1c83.svg',
-      name: 'ROSE-RUSD',
+      name: 'STABLES-RUSD',
       strategy: 'Rose',
       suffix: 'RUSD',
       isOpen: false,
-      contracts: poolAddressesAurora['ROSE-RUSD']
+      contracts: poolAddressesAurora['STABLES-RUSD'],
+      getSomeUrl: 'https://app.rose.fi/#/pools/rusd'
     }
   ]
 }

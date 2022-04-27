@@ -87,28 +87,28 @@ export const contractMappings: any = {
     }
   },
   Aurora: {
-    'ROSE-STABLES': {
-      contract: poolAddressesAurora['ROSE-STABLES'],
+    STABLES: {
+      contract: poolAddressesAurora['STABLES'],
       decimals: 18
     },
-    'UST-STABLES': {
-      contract: poolAddressesAurora['UST-STABLES'],
+    'STABLES-UST': {
+      contract: poolAddressesAurora['STABLES-UST'],
       decimals: 18
     },
-    'FRAX-STABLES': {
-      contract: poolAddressesAurora['FRAX-STABLES'],
+    'STABLES-FRAX': {
+      contract: poolAddressesAurora['STABLES-FRAX'],
       decimals: 18
     },
-    'MAI-STABLES': {
-      contract: poolAddressesAurora['MAI-STABLES'],
+    'STABLES-MAI': {
+      contract: poolAddressesAurora['STABLES-MAI'],
       decimals: 18
     },
-    'BUSD-STAPLES': {
-      contract: poolAddressesAurora['BUSD-STAPLES'],
+    'STABLES-BUSD': {
+      contract: poolAddressesAurora['STABLES-BUSD'],
       decimals: 18
     },
-    'ROSE-RUSD': {
-      contract: poolAddressesAurora['ROSE-RUSD'],
+    'STABLES-RUSD': {
+      contract: poolAddressesAurora['STABLES-RUSD'],
       decimals: 18
     }
   }
@@ -146,11 +146,11 @@ export const apyMappings: any = {
     'BEAST-USDC': null
   },
   Aurora: {
-    'ROSE-STABLES': null,
+    STABLES: null,
     'ROSE-UST': null,
     'ROSE-FRAX': null,
     'ROSE-MAI': null,
     'ROSE-BUSD': null,
-    'ROSE-RUSD': null
+    'STABLES-RUSD': null
   }
 }

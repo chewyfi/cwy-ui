@@ -9,7 +9,8 @@ export const TableHeader = () => {
       <div className="text-[15px] flex py-3 font-medium items-center w-full">
         <span
           className={clsx('flex items-center w-2/4', {
-            '!w-3/4': network.chain?.id === 1313161554
+            '!w-3/4':
+              network.chain?.id === 1313161554 || network.chain?.id === 1285
           })}
         >
           <span className="flex flex-col items-start w-1/3 ml-3">

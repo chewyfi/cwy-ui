@@ -12,15 +12,15 @@ const contractMappings = {
   USDC: { contract: poolAddressesMoonriver['MoonbeamUSDC'], decimals: 6 },
   FRAX: { contract: poolAddressesMoonriver['MoonbeamFRAX'], decimals: 18 },
   USDT: { contract: poolAddressesMoonriver['MoonbeamUSDT'], decimals: 6 },
-  solar3POOL: {
+  '3POOL': {
     contract: poolAddressesMoonriver['Solarbeam3pool'],
     decimals: 18
   },
-  solar3FRAX: {
+  FRAX3POOL: {
     contract: poolAddressesMoonriver['SolarbeamFrax3pool'],
     decimals: 18
   },
-  solarstKSM: {
+  'KSM-stKSM': {
     contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
     decimals: 18
   }
@@ -32,9 +32,9 @@ const priceFeedMappings = {
   WBTC: 'bitcoin',
   WETH: 'ethereum',
   MOVR: 'moonriver',
-  solar3POOL: '3pool',
-  solar3FRAX: 'FRAX-3pool',
-  solarstKSM: 'KSM-pool'
+  '3POOL': '3pool',
+  FRAX3POOL: 'FRAX-3pool',
+  'KSM-stKSM': 'KSM-pool'
 }
 
 export default async function handler(req, res) {

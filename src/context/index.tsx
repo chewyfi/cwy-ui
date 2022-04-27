@@ -63,7 +63,7 @@ const initialState = {
     },
     {
       icon: '/static/tokens/3pool.svg',
-      name: 'solar3POOL',
+      name: '3POOL',
       isOpen: false,
       strategy: 'Solarbeam',
       suffix: 'LP',
@@ -72,7 +72,7 @@ const initialState = {
     },
     {
       icon: '/static/tokens/frax3pool.svg',
-      name: 'solar3FRAX',
+      name: 'FRAX3POOL',
       isOpen: false,
       strategy: 'Solarbeam',
       suffix: 'LP',
@@ -82,7 +82,7 @@ const initialState = {
     },
     {
       icon: '/static/tokens/2ksm.svg',
-      name: 'solarstKSM',
+      name: 'KSM-stKSM',
       isOpen: false,
       strategy: 'Solarbeam',
       suffix: 'LP',

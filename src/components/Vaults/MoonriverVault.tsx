@@ -33,9 +33,9 @@ const accountMappings: any = {
   USDC: USDC_TOKEN_CONTRACT,
   USDT: USDT_TOKEN_CONTRACT,
   FRAX: FRAX_TOKEN_CONTRACT,
-  solar3FRAX: FRAX_3POOL_TOKEN_CONTRACT,
-  solarstKSM: TWO_KSM_TOKEN_CONTRACT,
-  solar3POOL: THREE_POOL_TOKEN_CONTRACT
+  FRAX3POOL: FRAX_3POOL_TOKEN_CONTRACT,
+  'KSM-stKSM': TWO_KSM_TOKEN_CONTRACT,
+  '3POOL': THREE_POOL_TOKEN_CONTRACT
 }
 
 export const MoonriverVault: React.FC<Props> = ({
@@ -106,7 +106,7 @@ export const MoonriverVault: React.FC<Props> = ({
         onClick={() => toggleDisclosure()}
         className="flex items-center w-full font-medium cursor-pointer"
       >
-        <span className="flex items-center w-2/4 space-x-2">
+        <span className="flex items-center w-3/4 space-x-2">
           <img
             alt=""
             draggable={false}

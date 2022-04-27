@@ -13,15 +13,15 @@ const contractMappings = {
   USDC: { contract: poolAddressesMoonriver['MoonbeamUSDC'], decimals: 6 },
   FRAX: { contract: poolAddressesMoonriver['MoonbeamFRAX'], decimals: 18 },
   USDT: { contract: poolAddressesMoonriver['MoonbeamUSDT'], decimals: 6 },
-  solar3POOL: {
+  '3POOL': {
     contract: poolAddressesMoonriver['Solarbeam3pool'],
     decimals: 18
   },
-  solar3FRAX: {
+  FRAX3POOL: {
     contract: poolAddressesMoonriver['SolarbeamFrax3pool'],
     decimals: 18
   },
-  solarstKSM: {
+  'KSM-stKSM': {
     contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
     decimals: 18
   }

@@ -6,8 +6,8 @@ export const poolAddressesMoonriver = {
     Want: '0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d'
   },
   MoonbeamFRAX: {
-    Vault: '0xb3f9f791ad5aa16e92a58d86f4e8ed9cd985dbe0',
-    Strategy: '0x5be32da7627570c34da15b3410a15d6723d58306',
+    Vault: '0xb1fC259aC92D1E562105Be3826A6F60E485DE01b',
+    Strategy: '0x351B5B3f3baCb7BBE9448dCdb5ECA89FDFB0851e',
     Want: '0x1a93b23281cc1cde4c4741353f3064709a16197d'
   },
   MoonbeamUSDT: {

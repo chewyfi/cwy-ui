@@ -1,4 +1,5 @@
 import { Disclosure } from '@headlessui/react'
+import clsx from 'clsx'
 import React from 'react'
 import Footer from 'src/components/shared/Footer'
 import Layout from 'src/components/shared/Layout'
@@ -11,7 +12,7 @@ const presale = () => {
           Connect to Fantom Network to participate in $CWY Presale
         </span>
         <div className="mt-5">
-          <span className="text-[20px] font-medium">Terms</span>
+          <span className="text-[19px] font-medium">Terms</span>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 rounded-lg">
             <div className="flex items-center justify-between">
               <span className="text-[#cfcfcf]">Price</span>
@@ -34,7 +35,7 @@ const presale = () => {
           </div>
         </div>
         <div className="mt-5">
-          <span className="text-[20px] font-medium">Deposit</span>
+          <span className="text-[19px] font-medium">Deposit</span>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 rounded-lg">
             <div className="flex">
               <div className="w-full">
@@ -74,31 +75,64 @@ const presale = () => {
           </div>
         </div>
         <div className="mt-5">
-          <span className="text-[20px] font-medium">FAQ</span>
+          <span className="text-[19px] font-medium">FAQ</span>
           <div className="text-[#cfcfcf]">
             <Disclosure as="div">
-              <Disclosure.Button className="flex justify-between w-full px-4 py-6 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 rounded-lg">
-                <span>Tokenomics</span>
-              </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2">
-                Visit https://docs.cwy.money
-              </Disclosure.Panel>
+              {({ open }) => (
+                <>
+                  <Disclosure.Button
+                    className={clsx(
+                      'flex justify-between w-full rounded-t-lg px-4 py-6 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 ',
+                      {
+                        'rounded-lg': !open
+                      }
+                    )}
+                  >
+                    <span>Tokenomics</span>
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="px-4 bg-[#f7f7f7] rounded-b-lg pb-2">
+                    Visit https://docs.cwy.money
+                  </Disclosure.Panel>
+                </>
+              )}
             </Disclosure>
             <Disclosure as="div" className="mt-2">
-              <Disclosure.Button className="flex justify-between w-full px-4 py-6 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 rounded-lg">
-                <span>Goal of raising funds</span>
-              </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2">
-                Visit https://docs.cwy.money
-              </Disclosure.Panel>
+              {({ open }) => (
+                <>
+                  <Disclosure.Button
+                    className={clsx(
+                      'flex justify-between w-full rounded-t-lg px-4 py-6 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 ',
+                      {
+                        'rounded-lg': !open
+                      }
+                    )}
+                  >
+                    <span>Goal of raising funds</span>
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="px-4 bg-[#f7f7f7] rounded-b-lg pb-2">
+                    Visit https://docs.cwy.money
+                  </Disclosure.Panel>
+                </>
+              )}
             </Disclosure>
             <Disclosure as="div" className="mt-2">
-              <Disclosure.Button className="flex justify-between w-full px-4 py-6 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 rounded-lg">
-                <span>Roadmap</span>
-              </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2">
-                Visit https://docs.cwy.money
-              </Disclosure.Panel>
+              {({ open }) => (
+                <>
+                  <Disclosure.Button
+                    className={clsx(
+                      'flex justify-between w-full rounded-t-lg px-4 py-6 bg-[#f7f7f7] text-[16px] mt-3 space-y-2 ',
+                      {
+                        'rounded-lg': !open
+                      }
+                    )}
+                  >
+                    <span>Roadmap</span>
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="px-4 bg-[#f7f7f7] pb-2 rounded-b-lg">
+                    Visit https://docs.cwy.money
+                  </Disclosure.Panel>
+                </>
+              )}
             </Disclosure>
           </div>
         </div>

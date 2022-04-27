@@ -70,18 +70,19 @@ export const AuroraVault: React.FC<Props> = ({
   )
 
   const getApr = (array: any) => {
-    const filtered = array.filter((apr: any) => {
+    const filtered = array[0].filter((apr: any) => {
       if (apr.name === item.name) {
-        console.log('MATCHED ', apr.name)
+        console.log('MATCHED ', apr.apr)
         return apr.apr
       }
-    })
-    console.log('filtered ', filtered)
-    if (filtered.length > 0) {
-      return filtered[0].apr
+    })[0]
+
+    if (filtered) {
+      console.log('FILTERED VAL ', filtered.apr)
+      return filtered.apr
     } else {
-      console.log('NA CASE ', array)
-      return 'NA'
+      console.log('NA case')
+      return 'N/A'
     }
   }
 
@@ -103,15 +104,7 @@ export const AuroraVault: React.FC<Props> = ({
           await contract.balanceOf(signer.getAddress())
         ).toString()
 
-        console.log(
-          'Balance ',
-          item.name,
-          (parseInt(balance) / 10 ** 18).toString()
-        )
-
         setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
-
-        console.log(`${item.name} balance ${balance}`)
       } catch (Error) {
         console.log('ERROR ', Error)
       }

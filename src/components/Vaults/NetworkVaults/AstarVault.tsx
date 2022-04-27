@@ -210,18 +210,12 @@ export const AstarVault: React.FC<Props> = ({
           <span>
             <span>{parseFloat(metaMaskBalance).toFixed(2)}</span>
           </span>
-          {/* <span>
-            {metaMaskBalance?.formatted
-              ? formatMetaMaskBalance(metaMaskBalance)
-              : null}
-          </span> */}
+
           {balanceDataUnformatted &&
             (
               (balanceDataUnformatted as any) /
               10 ** contractMappings['Astar'][item.name]['decimals']
             ).toFixed(2)}
-
-          {/* <span>{deposited.toFixed(2)}</span> */}
         </span>
       </div>
     </div>

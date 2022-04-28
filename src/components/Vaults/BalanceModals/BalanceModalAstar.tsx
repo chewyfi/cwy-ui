@@ -36,14 +36,6 @@ function roundTo(n: any, digits: any) {
   return n
 }
 
-const accountMappings: any = {
-  'USDT-USDC': '0x13cC5a0ec3c1561645195b6f3086eAE2a0fb7e8d',
-  'WETH-WASTR': '0x0ADcc0e7F1087665bc4639BdddAeAcE30005910f',
-  'WBTC-WASTR': '0xabC9f3c5F164D751f3A21A60fF5D306D4c44A723',
-  'USDC-WASTR': '0xC4ba558D1700b156a3511F112dFF8b86D108DEE9',
-  'BEAST-USDC': '0xC1E0579bAA899E596Ca6d3331E2Da00b3A6b39c3'
-}
-
 const BalanceModalAstar: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState<string>('')
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
@@ -73,7 +65,7 @@ const BalanceModalAstar: React.FC<Props> = (props) => {
         // Prompt user for account connections
         await provider.send('eth_requestAccounts', [])
         const contract = new ethers.Contract(
-          accountMappings[props.item.name],
+          contractMappings['Astar'][props.item.name]['contract']['Vault'],
           astarAbi,
           provider
         )

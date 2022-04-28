@@ -164,7 +164,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         contractInterface: normalAbi,
         signerOrProvider: provider
       },
-      'deposit',
+      'chewIn',
       {
         args: [
           (
@@ -192,7 +192,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       contractInterface: nativeAbi,
       signerOrProvider: provider
     },
-    'depositBNB',
+    'chewIn',
     {
       overrides: {
         value: (
@@ -233,7 +233,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
-      props.item.name !== 'MOVR' ? 'withdrawAll' : 'withdrawAllBNB',
+      props.item.name !== 'MOVR' ? 'chewOut' : 'chewOut',
       {
         overrides: {
           gasLimit: '9500000'

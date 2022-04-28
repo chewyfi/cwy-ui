@@ -155,10 +155,10 @@ const Table = (props: any) => {
         </div>
       )}
 
-      {!network?.chain?.name && (
+      {/* {!network?.chain?.name && (
         <div className="space-y-2">
           {moonriverApyList.map((item, index) => (
-            <MoonriverVault
+            <EmptyMoonriverVault
               resPriceFeed={props.resPriceFeed}
               resApyList={props.resApyList}
               key={index}
@@ -167,7 +167,7 @@ const Table = (props: any) => {
             />
           ))}
         </div>
-      )}
+      )} */}
     </div>
   )
 }

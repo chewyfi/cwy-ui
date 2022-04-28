@@ -199,7 +199,7 @@ const BalanceModal: React.FC<Props> = (props) => {
           parseFloat(!depositAmount ? '0' : depositAmount) *
           10 ** contractMappings['Moonriver'][props.item.name]['decimals']
         ).toString(),
-        gasLimit: '10500000'
+        gasLimit: '3000000'
       }
     }
   )

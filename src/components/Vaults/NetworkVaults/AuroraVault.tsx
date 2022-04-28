@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
+import { aprToApy } from 'src/utils/helpers'
 import { useAccount, useContractRead } from 'wagmi'
 
 import auroraAbi from '../../../chain-info/abis/auroraAbi.json'
@@ -79,10 +80,10 @@ export const AuroraVault: React.FC<Props> = ({
 
     if (filtered) {
       console.log('FILTERED VAL ', filtered.apr)
-      return filtered.apr
+      return parseFloat(filtered.apr) / 100
     } else {
       console.log('NA case')
-      return 'N/A'
+      return 0
     }
   }
 
@@ -195,7 +196,7 @@ export const AuroraVault: React.FC<Props> = ({
           </div>
         </span>
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
-          <span>{aprList && parseFloat(getApr(aprList)).toFixed(2)}%</span>
+          <span>{aprList && aprToApy(getApr(aprList)).toFixed(2)}%</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>{parseFloat(metaMaskBalance).toFixed(2)}</span>

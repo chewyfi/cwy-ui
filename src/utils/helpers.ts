@@ -2,6 +2,10 @@ export const shortenAddress = (address: string, chars = 4) => {
   return `${address.substring(0, chars + 2)}...${address.substring(42 - chars)}`
 }
 
+export const aprToApy = (rate: number) => {
+  return (Math.pow(1 + rate / 365, 365) - 1) * 100
+}
+
 export const getWalletLogo = (name: string) => {
   switch (name) {
     case 'MetaMask':

@@ -15,6 +15,7 @@ import {
 import { contractMappings } from 'src/utils/constants'
 import { apyMappings } from 'src/utils/constants'
 import { formatMetaMaskBalance } from 'src/utils/helpers'
+import { aprToApy } from 'src/utils/helpers'
 import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
 
 import nativeAbi from '../../../chain-info/abis/nativeMoonriverAbi.json'
@@ -141,10 +142,9 @@ export const MoonriverVault: React.FC<Props> = ({
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
           <span>
             {item.apy
-              ? item.apy
-              : `${(
-                  parseFloat(resApyList[apyMappings['Moonriver'][item.name]]) *
-                  100
+              ? aprToApy(parseFloat(item.apy))
+              : `${aprToApy(
+                  parseFloat(resApyList[apyMappings['Moonriver'][item.name]])
                 ).toFixed(2)}%`}
           </span>
           <span>{item.emoji}</span>

@@ -99,9 +99,7 @@ export const MoonriverVault: React.FC<Props> = ({
 
   return (
     <div
-      className={clsx(
-        'py-3 px-2 rounded-lg bg-[#f7f7f7] transition duration-200 ease-in-out hover:bg-[#f0f0f0]'
-      )}
+      className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
     >
       <div
         onClick={() => toggleDisclosure()}
@@ -119,7 +117,7 @@ export const MoonriverVault: React.FC<Props> = ({
               {item.name}
               {item.getSomeUrl && (
                 <a
-                  className="ml-2 transition duration-200 ease-in-out hover:opacity-60 text-[15px] text-[#c0c0c0] underline"
+                  className="ml-2 hover:opacity-60 text-[15px] text-[#c0c0c0] underline"
                   href={item.getSomeUrl}
                   target="_blank"
                   rel="noreferrer"

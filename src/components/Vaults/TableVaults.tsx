@@ -154,6 +154,20 @@ const Table = (props: any) => {
           ))}
         </div>
       )}
+
+      {!network?.chain?.name && (
+        <div className="space-y-2">
+          {moonriverApyList.map((item, index) => (
+            <MoonriverVault
+              resPriceFeed={props.resPriceFeed}
+              resApyList={props.resApyList}
+              key={index}
+              item={item}
+              toggleDisclosure={() => toggleDisclosureAurora(index)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

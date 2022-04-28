@@ -18,24 +18,6 @@ interface Props {
   item: APYType
 }
 
-function roundTo(n: any, digits: any) {
-  var negative = false
-  if (digits === undefined) {
-    digits = 0
-  }
-  if (n < 0) {
-    negative = true
-    n = n * -1
-  }
-  var multiplicator = Math.pow(10, digits)
-  n = parseFloat((n * multiplicator).toFixed(11))
-  n = (Math.round(n) / multiplicator).toFixed(digits)
-  if (negative) {
-    n = (n * -1).toFixed(digits)
-  }
-  return n
-}
-
 const BalanceModalAstar: React.FC<Props> = (props) => {
   const [depositAmount, setDepositAmount] = useState<string>('')
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')

@@ -49,3 +49,21 @@ export const formatMetaMaskBalance = (token: any) => {
   }
   return parseFloat(token?.formatted).toFixed(2)
 }
+
+export const roundTo = (n: any, digits: any) => {
+  var negative = false
+  if (digits === undefined) {
+    digits = 0
+  }
+  if (n < 0) {
+    negative = true
+    n = n * -1
+  }
+  var multiplicator = Math.pow(10, digits)
+  n = parseFloat((n * multiplicator).toFixed(11))
+  n = (Math.round(n) / multiplicator).toFixed(digits)
+  if (negative) {
+    n = (n * -1).toFixed(digits)
+  }
+  return n
+}

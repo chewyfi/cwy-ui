@@ -91,28 +91,6 @@ export const AstarVault: React.FC<Props> = ({
 
   useEffect(() => {
     connectToMetamask()
-    // const TVLFetch = async () => {
-    //   const { basePath: baseURL } = router
-    //   const { info } = await (
-    //     await fetch(
-    //       `${baseURL}/api/total-value-locked-usd-vault?vault=${item.name}`
-    //     )
-    //   ).json()
-    //   setTVL(info.balance)
-    // }
-    // TVLFetch()
-    // if (account?.address) {
-    //   const getDeposited = async () => {
-    //     const { basePath: baseURL } = router
-    //     const { deposited } = await (
-    //       await fetch(
-    //         `${baseURL}/api/user-deposited?vault=${item.name}&useraddress=${account.address}`
-    //       )
-    //     ).json()
-    //     setDeposited(deposited)
-    //   }
-    //   getDeposited()
-    // }
   }, [account?.address])
 
   const [{ data: totalValueData, loading: loadingTotalValue }] =

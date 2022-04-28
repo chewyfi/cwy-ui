@@ -1,8 +1,8 @@
 export const poolAddressesMoonriver = {
   Treasure: '0x9E7e642DEA4a7C95F70CA3B6f1d15A416097517A',
   MoonbeamUSDC: {
-    Vault: '0x934c5419286B2F5722871c1206E4B8E9c59246E0',
-    Strategy: '0xaa0df6a1dbe11848fa4f824abd076d994166b94e',
+    Vault: '0x170ff4298beCA123B83FC8867C57434C73edD65a',
+    Strategy: '0x036E46D951E3B529727291c753777078ceFf5eDF',
     Want: '0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d'
   },
   MoonbeamFRAX: {
@@ -11,13 +11,13 @@ export const poolAddressesMoonriver = {
     Want: '0x1a93b23281cc1cde4c4741353f3064709a16197d'
   },
   MoonbeamUSDT: {
-    Vault: '0x3A13fF87166B85ccfa0f360A238C6dd996b6aD39',
-    Strategy: '0xB1793CF2806Fd2F9a1096eb12e7f9dd975462372',
+    Vault: '0xd6cd213c4C9B17755bbEA804bf140F4c85E2F9Bc',
+    Strategy: '0xf6d2EC98539B4703f211dd5CE529BCBc8487C3EF',
     Want: '0xB44a9B6905aF7c801311e8F4E76932ee959c663C'
   },
   MoonbeamETH: {
-    Vault: '0x25F891fC8d9D63D68DB3815EFAEE6225a3421F6a',
-    Strategy: '0xF62D54f768A3bbE1ca2008125B35E79C38a279f2',
+    Vault: '0x52055dA66bE071099a30889eDd2338C7f391deB6',
+    Strategy: '0x2D6e634C248a8676316458986E68F63d37D4F1Ba',
     Want: '0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C'
   },
   MoonbeamMOVR: {
@@ -31,8 +31,8 @@ export const poolAddressesMoonriver = {
     Want: '0xfb29918d393AaAa7dD118B51A8b7fCf862F5f336'
   },
   MoonbeamBTCSupplyOnly: {
-    Vault: '0xaEE11188f88AF3Dc72C7E68BDC3dF1E2B5665556',
-    Strategy: '0x56dc314E5Be27cA60Cb60C725fc1585F0e20Dcc9',
+    Vault: '0x6D4FD9BBa86DEf062BD7207c1C2fEC285D246923',
+    Strategy: '0x11C93dB2e127adA34F0F02102AA6a1f367DC6C23',
     Want: '0x6aB6d61428fde76768D7b45D8BFeec19c6eF91A8'
   },
   SolarbeamFrax3pool: {

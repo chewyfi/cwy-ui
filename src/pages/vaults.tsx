@@ -31,7 +31,11 @@ export default function Vaults(props: any) {
         ).json()
         globalVaultValue = activeVaultsTotalValueLocked
       } else {
-        return
+        console.log('ENTERED AURORA ELSE')
+        const { activeVaultsTotalValueLocked } = await (
+          await fetch(`${baseURL}/api/total-value-locked-usd`)
+        ).json()
+        globalVaultValue = activeVaultsTotalValueLocked
       }
 
       let sum = 0.0
@@ -87,7 +91,9 @@ export default function Vaults(props: any) {
             <span>${!totalTVL ? null : totalTVL}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
-            <h6>{network?.chain?.name} TVL</h6>
+            <h6>
+              {network?.chain?.name ? network?.chain?.name : 'Moonriver'} TVL
+            </h6>
             <span>${!totalTVL ? null : totalTVL}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">

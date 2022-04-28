@@ -27,16 +27,6 @@ const accountMappings: any = {
   'STABLES-RUSD': contractMappings['Aurora']['STABLES-RUSD']['contract']['Want']
 }
 
-// TODO: REMOVE
-const apyMappings: any = {
-  'Stables Farm': 'ROSE-STABLES',
-  'Frax Farm': 'FRAX-STABLES',
-  'UST Farm': 'UST-STABLES',
-  'BUSD Farm': 'BUSD-STAPLES',
-  'MAI Farm': 'MAI-STABLES',
-  'RUSD Farm': 'ROSE-RUSD'
-}
-
 const tvlMappings: any = {
   'USDT-USDC': 340.12,
   'WETH-WAurora': 1134.34,

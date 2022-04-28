@@ -145,11 +145,11 @@ export const apyMappings: any = {
     'BEAST-USDC': null
   },
   Aurora: {
-    STABLES: null,
-    'ROSE-UST': null,
-    'ROSE-FRAX': null,
-    'ROSE-MAI': null,
-    'ROSE-BUSD': null,
-    'STABLES-RUSD': null
+    'Stables Farm': 'STABLES',
+    'Frax Farm': 'STABLES-FRAX',
+    'UST Farm': 'STABLES-UST',
+    'BUSD Farm': 'STABLES-BUSD',
+    'MAI Farm': 'STABLES-MAI',
+    'RUSD Farm': 'STABLES-RUSD'
   }
 }

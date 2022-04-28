@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
+import { apyMappings } from 'src/utils/constants'
 import { useAccount, useContractRead } from 'wagmi'
 
 import astarAbi from '../../../chain-info/abis/astarAbi.json'
@@ -20,24 +21,6 @@ const accountMappings: any = {
   'WBTC-WASTR': contractMappings['Astar']['WBTC-WASTR']['contract']['lp'],
   'USDC-WASTR': contractMappings['Astar']['USDC-WASTR']['contract']['lp'],
   'BEAST-USDC': contractMappings['Astar']['BEAST-USDC']['contract']['lp']
-}
-
-// TODO: REMOVE
-const apyMappings: any = {
-  'USDT-USDC': 'N/A',
-  'WETH-WASTR': 'N/A',
-  'WBTC-WASTR': 'N/A',
-  'USDC-WASTR': 'N/A',
-  'BEAST-USDC': 'N/A',
-  'BEAST-WASTR': 'N/A'
-}
-
-const tvlMappings: any = {
-  'USDT-USDC': 340.12,
-  'WETH-WASTR': 1134.34,
-  'WBTC-WASTR': 3314.72,
-  'USDC-WASTR': 20.02,
-  'BEAST-USDC': 5550.57
 }
 
 export const AstarVault: React.FC<Props> = ({

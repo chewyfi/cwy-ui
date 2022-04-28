@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from 'src/context'
 import { APYType } from 'src/types'
+import { apyMappings } from 'src/utils/constants'
 import { useNetwork } from 'wagmi'
 
 import BalanceModalAstar from './BalanceModals/BalanceModalAstar'
@@ -31,19 +32,11 @@ const Table = (props: any) => {
           'https://raw.githubusercontent.com/RoseOnAurora/apr/master/data.json'
         )
       ).json()
-      const apyMappings: any = {
-        'Stables Farm': 'STABLES',
-        'Frax Farm': 'STABLES-FRAX',
-        'UST Farm': 'STABLES-UST',
-        'BUSD Farm': 'STABLES-BUSD',
-        'MAI Farm': 'STABLES-MAI',
-        'RUSD Farm': 'STABLES-RUSD'
-      }
 
       const arr = arrayAurora.map((apr: any, index: number) => {
         return {
           apr: apr.apr,
-          name: apyMappings[apr.name],
+          name: apyMappings['Aurora'][apr.name],
           key: index
         }
       })

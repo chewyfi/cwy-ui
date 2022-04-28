@@ -67,7 +67,7 @@ const Table = (props: any) => {
         item.isOpen = false
       }
     })
-    setAstarApyList(JSON.parse(JSON.stringify(vaultData)))
+    setAuroraApyList(JSON.parse(JSON.stringify(vaultData)))
   }
 
   return (

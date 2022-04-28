@@ -211,7 +211,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
       signerOrProvider: provider
     },
-    props.item.name !== 'MOVR' ? 'withdraw' : 'withdrawBNB',
+    props.item.name !== 'MOVR' ? 'chewOut' : 'withdrawBNB',
     {
       args: [
         BigInt(
@@ -233,7 +233,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         contractInterface: props.item.name !== 'MOVR' ? normalAbi : nativeAbi,
         signerOrProvider: provider
       },
-      props.item.name !== 'MOVR' ? 'chewOut' : 'chewOut',
+      props.item.name !== 'MOVR' ? 'chewAllOut' : 'chewAllOut',
       {
         overrides: {
           gasLimit: '9500000'

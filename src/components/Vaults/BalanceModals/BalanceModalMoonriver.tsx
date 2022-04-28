@@ -192,7 +192,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       contractInterface: nativeAbi,
       signerOrProvider: provider
     },
-    'chewIn',
+    'depositBNB',
     {
       overrides: {
         value: (

@@ -105,9 +105,7 @@ export const AstarVault: React.FC<Props> = ({
   console.log(`Balance data unformatted ${balanceDataUnformatted}`)
   return (
     <div
-      className={clsx(
-        'py-3 px-2 rounded-lg bg-[#f7f7f7] transition duration-200 ease-in-out'
-      )}
+      className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
     >
       <div
         onClick={() => toggleDisclosure()}
@@ -136,7 +134,7 @@ export const AstarVault: React.FC<Props> = ({
               {item.name}
               {item.getSomeUrl && (
                 <a
-                  className="ml-2 text-[15px] transition duration-200 ease-in-out hover:opacity-60 text-[#c0c0c0] underline"
+                  className="ml-2 text-[15px] hover:opacity-60 text-[#c0c0c0] underline"
                   href={item.getSomeUrl}
                   target="_blank"
                   rel="noreferrer"

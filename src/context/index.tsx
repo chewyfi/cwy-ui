@@ -1,12 +1,10 @@
 import { createContext } from 'react'
-import { poolAddressesAstar } from 'src/chain-info/network-addreses/pool-addresses-astar'
 import { poolAddressesAurora } from 'src/chain-info/network-addreses/pool-addresses-aurora'
 import { poolAddressesMoonriver } from 'src/chain-info/network-addreses/pool-addresses-moonriver'
 import { APYType } from 'src/types'
 
 export type InitialStateType = {
   apysMoonriver: APYType[]
-  apysAstar: APYType[]
   apysAurora: APYType[]
 }
 
@@ -88,56 +86,6 @@ const initialState = {
       suffix: 'LP',
       getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm',
       contracts: poolAddressesMoonriver['SolarbeamstKSMpool']
-    }
-  ],
-  apysAstar: [
-    {
-      icons: ['/static/tokens/funbeast.svg', '/static/tokens/usdc.svg'],
-      name: 'BEAST-USDC',
-      strategy: 'Funbeast',
-      suffix: 'BEAST-USDC',
-      isOpen: false,
-      contracts: poolAddressesAstar['BEAST-USDC']
-    },
-    {
-      icons: ['/static/tokens/usdt.svg', '/static/tokens/usdc.svg'],
-      name: 'USDT-USDC',
-      suffix: 'USDT-USDC',
-      isOpen: false,
-      strategy: 'Funbeast',
-      contracts: poolAddressesAstar['USDT-USDC']
-    },
-    {
-      icons: ['/static/tokens/weth.svg', '/static/tokens/wastr.svg'],
-      name: 'WETH-WASTR',
-      suffix: 'WETH',
-      strategy: 'Funbeast',
-      isOpen: false,
-      contracts: poolAddressesAstar['WETH-WASTR']
-    },
-    {
-      icons: ['/static/tokens/btc.svg', '/static/tokens/wastr.svg'],
-      name: 'WBTC-WASTR',
-      suffix: 'WBTC-WASTR',
-      strategy: 'Funbeast',
-      isOpen: false,
-      contracts: poolAddressesAstar['WBTC-WASTR']
-    },
-    {
-      icons: ['/static/tokens/usdc.svg', '/static/tokens/wastr.svg'],
-      name: 'USDC-WASTR',
-      strategy: 'Funbeast',
-      suffix: 'USDC-WASTR',
-      isOpen: false,
-      contracts: poolAddressesAstar['USDC-WASTR']
-    },
-    {
-      icons: ['/static/tokens/funbeast.svg', '/static/tokens/wastr.svg'],
-      name: 'BEAST-WASTR',
-      strategy: 'Funbeast',
-      suffix: 'BEAST-WASTR',
-      isOpen: false,
-      contracts: poolAddressesAstar['BEAST-WASTR']
     }
   ],
   apysAurora: [

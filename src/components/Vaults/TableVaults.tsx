@@ -4,10 +4,8 @@ import { APYType } from 'src/types'
 import { apyMappings } from 'src/utils/constants'
 import { useNetwork } from 'wagmi'
 
-import BalanceModalAstar from './BalanceModals/BalanceModalAstar'
 import BalanceModalAurora from './BalanceModals/BalanceModalAurora'
 import BalanceModal from './BalanceModals/BalanceModalMoonriver'
-import { AstarVault } from './NetworkVaults/AstarVault'
 import { AuroraVault } from './NetworkVaults/AuroraVault'
 import { MoonriverVault } from './NetworkVaults/MoonriverVault'
 import { TableHeader } from './TableHeader'
@@ -19,7 +17,6 @@ const Table = (props: any) => {
     context.apysMoonriver
   )
 
-  const [astarApyList, setAstarApyList] = useState(context.apysAstar)
   const [auroraApyList, setAuroraApyList] = useState(context.apysAurora)
   const [auroraAprs, setAuroraAprs] = useState<any>([])
   // console.log('current apy list ', moonriverApyList)
@@ -60,19 +57,6 @@ const Table = (props: any) => {
     setMoonriverApyList(JSON.parse(JSON.stringify(vaultData)))
   }
 
-  const toggleDisclosureAstar = (index: number) => {
-    let vaultData = astarApyList
-    vaultData.map((item, idx) => {
-      if (index === idx) {
-        item.isOpen = !item.isOpen
-        setSelectedAPY(item)
-      } else {
-        item.isOpen = false
-      }
-    })
-    setAstarApyList(JSON.parse(JSON.stringify(vaultData)))
-  }
-
   const toggleDisclosureAurora = (index: number) => {
     let vaultData = auroraApyList
     vaultData.map((item, idx) => {
@@ -96,13 +80,6 @@ const Table = (props: any) => {
           show
         />
       )}
-      {selectedAPY && network?.chain?.name === 'Astar' && (
-        <BalanceModalAstar
-          onClose={() => setSelectedAPY(null)}
-          item={selectedAPY}
-          show
-        />
-      )}
 
       {selectedAPY && network?.chain?.name === 'Aurora' && (
         <BalanceModalAurora
@@ -121,20 +98,6 @@ const Table = (props: any) => {
               key={index}
               item={item}
               toggleDisclosure={() => toggleDisclosureMoonriver(index)}
-            />
-          ))}
-        </div>
-      )}
-
-      {network?.chain?.name === 'Astar' && (
-        <div className="space-y-2">
-          {astarApyList.map((item, index) => (
-            <AstarVault
-              resPriceFeed={props.resPriceFeed}
-              resApyList={props.resmoonriverApyList}
-              key={index}
-              item={item}
-              toggleDisclosure={() => toggleDisclosureAstar(index)}
             />
           ))}
         </div>

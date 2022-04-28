@@ -35,13 +35,10 @@ const Header = ({
   console.log('Network name ', JSON.stringify(network?.chain?.name))
 
   const getNetworkOptions = () => {
-    if (
-      network.chain?.id &&
-      [1285, 592, 1313161554].includes(network.chain?.id)
-    ) {
-      return [1285, 592, 1313161554].filter((el) => el !== network?.chain?.id)
+    if (network.chain?.id && [1285, 1313161554].includes(network.chain?.id)) {
+      return [1285, 1313161554].filter((el) => el !== network?.chain?.id)
     } else {
-      return [592, 1313161554]
+      return [1313161554]
     }
   }
 

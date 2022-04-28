@@ -4,21 +4,21 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 const LINKS = [
-  {
-    name: 'Home',
-    path: '/home',
-    icon: '/static/sidebar/home-icon.png'
-  },
+  // {
+  //   name: 'Home',
+  //   path: '/home',
+  //   icon: '/static/sidebar/home-icon.png'
+  // },
   {
     name: 'Vaults',
     path: '/vaults',
     icon: '/static/sidebar/vaults-icon.png'
-  },
-  {
-    name: 'Presale',
-    path: '/presale',
-    icon: '/static/sidebar/staking-icon.png'
   }
+  // {
+  //   name: 'Presale',
+  //   path: '/presale',
+  //   icon: '/static/sidebar/staking-icon.png'
+  // }
   // {
   //   name: 'Staking',
   //   path: '/staking',

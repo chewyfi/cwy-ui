@@ -173,7 +173,7 @@ const BalanceModal: React.FC<Props> = (props) => {
           ).toString()
         ],
         overrides: {
-          gasLimit: '9500000'
+          gasLimit: '3000000'
         }
       }
     )
@@ -220,7 +220,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         )
       ],
       overrides: {
-        gasLimit: '9500000'
+        gasLimit: '3000000'
       }
     }
   )
@@ -236,7 +236,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       props.item.name !== 'MOVR' ? 'chewAllOut' : 'withdrawAllBNB',
       {
         overrides: {
-          gasLimit: '9500000'
+          gasLimit: '3000000'
         }
       }
     )

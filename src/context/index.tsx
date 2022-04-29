@@ -1,13 +1,14 @@
-import { createContext } from 'react'
+import { createContext, useReducer } from 'react'
 import { poolAddressesAurora } from 'src/chain-info/network-addreses/pool-addresses-aurora'
 import { poolAddressesMoonriver } from 'src/chain-info/network-addreses/pool-addresses-moonriver'
 import { APYType } from 'src/types'
+
+import { reducer } from './reducers'
 
 export type InitialStateType = {
   apysMoonriver: APYType[]
   apysAurora: APYType[]
 }
-
 const initialState = {
   apysMoonriver: [
     {
@@ -148,10 +149,13 @@ const initialState = {
   ]
 }
 
-export const AppContext = createContext<InitialStateType>(initialState)
+export const AppContext = createContext<any>(initialState)
 
 export const AppProvider: React.FC = ({ children }) => {
+  const [globalState, dispatch] = useReducer(reducer, initialState)
   return (
-    <AppContext.Provider value={initialState}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ globalState, dispatch }}>
+      {children}
+    </AppContext.Provider>
   )
 }

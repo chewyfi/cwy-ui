@@ -14,13 +14,10 @@ const Table = (props: any) => {
   const context = useContext(AppContext)
   const [{ data: network }] = useNetwork()
   const [moonriverApyList, setMoonriverApyList] = useState(
-    context.apysMoonriver
+    context.globalState.apysMoonriver
   )
-
   const [auroraApyList, setAuroraApyList] = useState(context.apysAurora)
   const [auroraAprs, setAuroraAprs] = useState<any>([])
-  // console.log('current apy list ', moonriverApyList)
-  console.log('current network ', network?.chain?.name)
 
   useEffect(() => {
     async function getData() {
@@ -46,12 +43,9 @@ const Table = (props: any) => {
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosureMoonriver = (index: number) => {
     let vaultData = moonriverApyList
-    vaultData.map((item, idx) => {
+    vaultData.map((item: React.SetStateAction<APYType | null>, idx: number) => {
       if (index === idx) {
-        item.isOpen = !item.isOpen
         setSelectedAPY(item)
-      } else {
-        item.isOpen = false
       }
     })
     setMoonriverApyList(JSON.parse(JSON.stringify(vaultData)))
@@ -59,12 +53,9 @@ const Table = (props: any) => {
 
   const toggleDisclosureAurora = (index: number) => {
     let vaultData = auroraApyList
-    vaultData.map((item, idx) => {
+    vaultData.map((item: React.SetStateAction<APYType | null>, idx: number) => {
       if (index === idx) {
-        item.isOpen = !item.isOpen
         setSelectedAPY(item)
-      } else {
-        item.isOpen = false
       }
     })
     setAuroraApyList(JSON.parse(JSON.stringify(vaultData)))
@@ -91,21 +82,24 @@ const Table = (props: any) => {
 
       {network?.chain?.name === 'Moonriver' && (
         <div className="space-y-2">
-          {moonriverApyList.map((item, index) => (
-            <MoonriverVault
-              resPriceFeed={props.resPriceFeed}
-              resApyList={props.resApyList}
-              key={index}
-              item={item}
-              toggleDisclosure={() => toggleDisclosureMoonriver(index)}
-            />
-          ))}
+          {context.globalState.apysMoonriver.map(
+            (item: APYType, index: number) => (
+              <MoonriverVault
+                resPriceFeed={props.resPriceFeed}
+                resApyList={props.resApyList}
+                key={index}
+                index={index}
+                item={item}
+                toggleDisclosure={() => toggleDisclosureMoonriver(index)}
+              />
+            )
+          )}
         </div>
       )}
 
       {network?.chain?.name === 'Aurora' && (
         <div className="space-y-2">
-          {auroraApyList.map((item, index) => (
+          {auroraApyList.map((item: APYType, index: number) => (
             <AuroraVault
               aprList={Array(auroraAprs)}
               resPriceFeed={props.resPriceFeed}

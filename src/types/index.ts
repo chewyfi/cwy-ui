@@ -4,6 +4,7 @@ export type APYType = {
   name: string
   apy?: string
   tvl?: string
+  userDeposited?: string
   emoji?: string
   isOpen: boolean
   suffix?: string

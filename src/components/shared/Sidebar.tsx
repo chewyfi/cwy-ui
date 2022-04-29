@@ -13,12 +13,12 @@ const LINKS = [
     name: 'Vaults',
     path: '/vaults',
     icon: '/static/sidebar/vaults-icon.png'
-  },
-  {
-    name: 'Presale',
-    path: '/presale',
-    icon: '/static/sidebar/staking-icon.png'
   }
+  // {
+  //   name: 'Presale',
+  //   path: '/presale',
+  //   icon: '/static/sidebar/staking-icon.png'
+  // }
   // {
   //   name: 'Staking',
   //   path: '/staking',

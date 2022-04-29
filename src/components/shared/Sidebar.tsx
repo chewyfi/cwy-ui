@@ -4,11 +4,11 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 const LINKS = [
-  // {
-  //   name: 'Home',
-  //   path: '/home',
-  //   icon: '/static/sidebar/home-icon.png'
-  // },
+  {
+    name: 'Home',
+    path: '/home',
+    icon: '/static/sidebar/home-icon.png'
+  },
   {
     name: 'Vaults',
     path: '/vaults',

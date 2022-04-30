@@ -57,6 +57,10 @@ export const contractMappings: any = {
     'KSM-stKSM': {
       contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
       decimals: 18
+    },
+    'KBTC-BTC-STRATEGY': {
+      contract: poolAddressesMoonriver['KBTC-BTC-STRATEGY'],
+      decimals: 18
     }
   },
   Astar: {

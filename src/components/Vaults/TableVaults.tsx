@@ -12,10 +12,7 @@ import { TableHeader } from './TableHeader'
 
 const Table = (props: any) => {
   const [{ data: network }] = useNetwork()
-
   const { dispatch, globalState } = useContext(AppContext)
-
-  console.log('GLOBAL STATE ', globalState)
   const [auroraAprs, setAuroraAprs] = useState<any>([])
 
   useEffect(() => {

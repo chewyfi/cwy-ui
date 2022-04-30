@@ -92,6 +92,15 @@ const initialState = {
       suffix: 'LP',
       getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm',
       contracts: poolAddressesMoonriver['SolarbeamstKSMpool']
+    },
+    {
+      icon: '/static/tokens/2ksm.svg',
+      name: 'KBTC-BTC-STRATEGY',
+      isOpen: false,
+      strategy: 'Solarbeam',
+      suffix: 'LP',
+      getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm',
+      contracts: poolAddressesMoonriver['SolarbeamstKSMpool']
     }
   ],
   apysAurora: [

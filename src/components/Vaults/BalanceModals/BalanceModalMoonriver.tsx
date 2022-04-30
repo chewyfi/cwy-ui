@@ -173,7 +173,7 @@ const BalanceModal: React.FC<Props> = (props) => {
           ).toString()
         ],
         overrides: {
-          gasLimit: '3000000'
+          gasLimit: '10000000'
         }
       }
     )
@@ -199,7 +199,7 @@ const BalanceModal: React.FC<Props> = (props) => {
           parseFloat(!depositAmount ? '0' : depositAmount) *
           10 ** contractMappings['Moonriver'][props.item.name]['decimals']
         ).toString(),
-        gasLimit: '3000000'
+        gasLimit: '10000000'
       }
     }
   )
@@ -220,7 +220,7 @@ const BalanceModal: React.FC<Props> = (props) => {
         )
       ],
       overrides: {
-        gasLimit: '3000000'
+        gasLimit: '10000000'
       }
     }
   )
@@ -236,7 +236,7 @@ const BalanceModal: React.FC<Props> = (props) => {
       props.item.name !== 'MOVR' ? 'chewAllOut' : 'withdrawAllBNB',
       {
         overrides: {
-          gasLimit: '3000000'
+          gasLimit: '10000000'
         }
       }
     )

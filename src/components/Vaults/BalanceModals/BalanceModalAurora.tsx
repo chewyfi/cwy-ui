@@ -208,7 +208,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
         ).toString()
       ],
       overrides: {
-        gasLimit: '3000000'
+        gasLimit: '10000000'
       }
     }
   )
@@ -247,7 +247,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
           parseFloat(!depositAmount ? '0' : depositAmount) *
           10 ** contractMappings['Aurora'][props.item.name]['decimals']
         ).toString(),
-        gasLimit: '3000000'
+        gasLimit: '10000000'
       }
     }
   )
@@ -268,7 +268,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
         )
       ],
       overrides: {
-        gasLimit: '3000000'
+        gasLimit: '10000000'
       }
     }
   )
@@ -284,7 +284,7 @@ const BalanceModalAurora: React.FC<Props> = (props) => {
       'chewAllOut',
       {
         overrides: {
-          gasLimit: '3000000'
+          gasLimit: '10000000'
         }
       }
     )

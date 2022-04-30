@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { providers } from 'ethers'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { UPDATE_APY, UPDATE_DEPOSITED, UPDATE_TVL } from 'src/context/actions'
@@ -16,9 +17,8 @@ import {
 import { contractMappings } from 'src/utils/constants'
 import { apyMappings } from 'src/utils/constants'
 import { aprToApy, formatMetaMaskBalance } from 'src/utils/helpers'
-import { useAccount, useBalance, useContractRead, useProvider } from 'wagmi'
+import { useAccount, useBalance, useContractRead } from 'wagmi'
 
-import nativeAbi from '../../../chain-info/abis/nativeMoonriverAbi.json'
 import normalAbi from '../../../chain-info/abis/normalMoonriverAbi.json'
 import { AppContext } from '../../../context/index'
 interface Props {
@@ -48,20 +48,49 @@ export const MoonriverVault: React.FC<Props> = ({
   resApyList,
   index
 }) => {
+  const [{ data: account }] = useAccount()
+
   const { dispatch } = useContext(AppContext)
-  const provider = useProvider()
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
-
-  const [{ data: account }] = useAccount()
+  const provider = new providers.StaticJsonRpcProvider(
+    'https://moonriver-api.us-east-1.bwarelabs.com/202ce99d-c545-475a-a918-8b8effff9915',
+    {
+      chainId: 1285,
+      name: 'moonriver'
+    }
+  )
 
   const [{ data: metaMaskBalance }] = useBalance({
     token: accountMappings[item.name],
     addressOrName: account?.address
   })
 
+  const [
+    {
+      data: balanceDataUnformatted,
+      loading: balanceDataLoading,
+      error: balanceError
+    },
+    getData
+  ] = useContractRead(
+    {
+      addressOrName:
+        contractMappings['Moonriver'][item.name]['contract']['Vault'],
+      contractInterface: normalAbi,
+      signerOrProvider: provider
+    },
+    'balanceOf',
+    {
+      args: [account?.address]
+    }
+  )
+
+  console.log('get data', getData)
+
   useEffect(() => {
+    getData()
     const TVLFetch = async () => {
       const { basePath: baseURL } = router
 
@@ -113,17 +142,6 @@ export const MoonriverVault: React.FC<Props> = ({
       }
     })
   }, [account?.address])
-
-  const [{ data: totalValueData, loading: loadingTotalValue }] =
-    useContractRead(
-      {
-        addressOrName:
-          contractMappings['Moonriver'][item.name]['contract']['Vault'],
-        contractInterface: item.name !== 'MOVR' ? normalAbi : nativeAbi,
-        signerOrProvider: provider
-      },
-      'balance'
-    )
 
   return (
     <div
@@ -183,11 +201,11 @@ export const MoonriverVault: React.FC<Props> = ({
               : null}
           </span>
 
-          <span>
-            {item.userDeposited
-              ? parseFloat(item.userDeposited).toFixed(2)
-              : '0.00'}
-          </span>
+          {balanceDataUnformatted &&
+            (
+              (balanceDataUnformatted as any) /
+              10 ** contractMappings['Moonriver'][item.name]['decimals']
+            ).toFixed(2)}
         </span>
       </div>
     </div>

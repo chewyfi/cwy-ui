@@ -42,8 +42,11 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
         network,
         vault,
         tvl
-      }: { network: keyof InitialStateType; vault: string; tvl: string } =
-        action.payload
+      }: {
+        network: 'apysMoonriver' | 'apysAurora'
+        vault: string
+        tvl: string
+      } = action.payload
 
       const element = draft[network].find(
         (element: APYType) => element.name === vault
@@ -56,8 +59,11 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
         network,
         vault,
         deposited
-      }: { network: keyof InitialStateType; vault: string; deposited: string } =
-        action.payload
+      }: {
+        network: 'apysMoonriver' | 'apysAurora'
+        vault: string
+        deposited: string
+      } = action.payload
       const element = draft[network].find(
         (element: APYType) => element.name === vault
       )

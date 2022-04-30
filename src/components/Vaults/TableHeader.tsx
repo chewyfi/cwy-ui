@@ -8,7 +8,7 @@ import { SORT_BY_APY, SORT_BY_DEPOSITED } from '../../context/actions'
 
 export const TableHeader = () => {
   const [{ data: network }] = useNetwork()
-  const { dispatch } = useContext(AppContext)
+  const { dispatch, globalState } = useContext(AppContext)
   const [up, setUp] = useState(false)
 
   return (

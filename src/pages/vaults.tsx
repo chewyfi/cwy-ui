@@ -6,36 +6,49 @@ import { AppContext } from 'src/context'
 import { useAccount, useNetwork } from 'wagmi'
 
 // import db from '../db/db.js'
-import { SET_NETWORK_TVL, SET_TOTAL_TVL } from '../context/actions'
 
 export default function Vaults(props: any) {
   // db.push('hey')
-  const [totalTVL, setTotalTVL] = useState(0)
   const [myDeposits, setMyDeposits] = useState<any>(0)
   const [{ data: account }] = useAccount()
   const [{ data: network }, switchNetwork] = useNetwork()
   const router = useRouter()
   const { dispatch, globalState } = useContext(AppContext)
 
+  const [networkTVL, setNetworkTVL] = useState(0)
+  const [totalTVL, setTotalTVL] = useState(0)
+
   useEffect(() => {
-    setTimeout(() => {
-      dispatch({
-        type: SET_NETWORK_TVL,
-        payload: {
-          network: 'apysMoonriver'
+    const fetchSpecificTVL = async () => {
+      const { basePath: baseURL } = router
+      switch (globalState.selectedNetwork) {
+        case 1285: {
+          const { sum } = await (
+            await fetch(`${baseURL}/api/get-tvl-moonriver`)
+          ).json()
+          setNetworkTVL(sum)
+          break
         }
-      })
-      dispatch({
-        type: SET_NETWORK_TVL,
-        payload: {
-          network: 'apysAurora'
+        case 1313161554: {
+          const { sum } = await (
+            await fetch(`${baseURL}/api/get-tvl-aurora`)
+          ).json()
+          setNetworkTVL(sum)
+          break
         }
-      })
-      dispatch({
-        type: SET_TOTAL_TVL
-      })
-    }, 500)
-  }, [account?.address, network?.chain?.name])
+      }
+      const { sum: sum1 } = await (
+        await fetch(`${baseURL}/api/get-tvl-moonriver`)
+      ).json()
+      const { sum: sum2 } = await (
+        await fetch(`${baseURL}/api/get-tvl-aurora`)
+      ).json()
+
+      console.log('setting total tvl to ', sum1 + sum2)
+      setTotalTVL(sum1 + sum2)
+    }
+    fetchSpecificTVL()
+  }, [globalState.selectedNetwork])
 
   return (
     <Layout headerTitle="Vaults">
@@ -43,14 +56,14 @@ export default function Vaults(props: any) {
         <div className="grid w-full grid-cols-3 my-4 text-[#c0c0c0] gap-2">
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>Total TVL </h6>
-            <span>${globalState.totalTVL.toFixed(2)}</span>
+            <span>${totalTVL.toFixed(2)}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>
               {globalState.selectedNetwork === 1285 ? 'Moonriver' : 'Aurora'}{' '}
               TVL
             </h6>
-            <span>${globalState.moonriverTVL.toFixed(2)}</span>
+            <span>${networkTVL.toFixed(2)}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>My Deposits</h6>

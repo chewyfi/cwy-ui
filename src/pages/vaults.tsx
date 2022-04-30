@@ -26,9 +26,15 @@ export default function Vaults(props: any) {
         }
       })
       dispatch({
+        type: SET_NETWORK_TVL,
+        payload: {
+          network: 'apysAurora'
+        }
+      })
+      dispatch({
         type: SET_TOTAL_TVL
       })
-    }, 300)
+    }, 500)
   }, [account?.address, network?.chain?.name])
 
   return (
@@ -41,7 +47,8 @@ export default function Vaults(props: any) {
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>
-              {network?.chain?.name ? network?.chain?.name : 'Moonriver'} TVL
+              {globalState.selectedNetwork === 1285 ? 'Moonriver' : 'Aurora'}{' '}
+              TVL
             </h6>
             <span>${globalState.moonriverTVL.toFixed(2)}</span>
           </div>

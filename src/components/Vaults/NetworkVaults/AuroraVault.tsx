@@ -1,7 +1,9 @@
 import clsx from 'clsx'
 import { ethers, providers } from 'ethers'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { AppContext } from 'src/context'
+import { UPDATE_TVL } from 'src/context/actions'
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
 import { aprToApy } from 'src/utils/helpers'
@@ -42,9 +44,7 @@ export const AuroraVault: React.FC<Props> = ({
   resApyList,
   aprList
 }) => {
-  console.log('ITEM NAME ', item.name)
-  // console.log('APR LIST', aprList)
-
+  const { dispatch } = useContext(AppContext)
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
@@ -104,6 +104,16 @@ export const AuroraVault: React.FC<Props> = ({
 
   useEffect(() => {
     connectToMetamask()
+    if (totalValueData) {
+      dispatch({
+        type: UPDATE_TVL,
+        payload: {
+          tvl: (parseFloat(totalValueData.toString()) / 10 ** 18).toFixed(2),
+          network: 'apysAurora',
+          vault: item.name
+        }
+      })
+    }
   }, [account?.address])
 
   const [{ data: totalValueData, loading: loadingTotalValue }] =

@@ -11,6 +11,7 @@ export type InitialStateType = {
   moonriverTVL: number
   auroraTVL: number
   totalTVL: number
+  selectedNetwork: number
 }
 
 const initialState = {
@@ -153,7 +154,8 @@ const initialState = {
   ],
   moonriverTVL: 0,
   auroraTVL: 0,
-  totalTVL: 0
+  totalTVL: 0,
+  selectedNetwork: 1285
 }
 
 export const AppContext = createContext<any>(initialState)

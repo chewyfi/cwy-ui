@@ -106,10 +106,6 @@ export const AuroraVault: React.FC<Props> = ({
     connectToMetamask()
   }, [account?.address])
 
-  console.log('ITEM NAME ', item.name)
-
-  item.strategy = 'Rose'
-
   const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(
       {

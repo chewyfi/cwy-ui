@@ -1,9 +1,12 @@
 import { Menu, Transition } from '@headlessui/react'
 import clsx from 'clsx'
+import { useContext } from 'react'
 import toast from 'react-hot-toast'
+import { AppContext } from 'src/context'
 import { getNetworkLogo, getNetworkName } from 'src/utils/helpers'
 import { useNetwork } from 'wagmi'
 
+import { SET_SELECTED_NETWORK } from '../../context/actions'
 import ChevronDown from '../icons/ChevronDown'
 
 export default function NetworkDropdown(props: {
@@ -15,8 +18,16 @@ export default function NetworkDropdown(props: {
     props
   )
   const [{}, switchNetwork] = useNetwork()
+  const { dispatch, globalState } = useContext(AppContext)
+  console.log('DROPDOWN RERENDER ', globalState.selectedNetwork)
 
   const switchToNetwork = async (networkId: number) => {
+    dispatch({
+      type: SET_SELECTED_NETWORK,
+      payload: {
+        networkId
+      }
+    })
     if (switchNetwork) {
       let data = await switchNetwork(networkId)
       if (data.error) {
@@ -36,12 +47,12 @@ export default function NetworkDropdown(props: {
           <Menu.Button className="flex w-full font-semibold items-center justify-between px-2 pr-2.5 py-1 bg-[#F2F2F2] rounded">
             <span className="inline-flex items-center">
               <img
-                src={getNetworkLogo(props.activeNetworkId)}
+                src={getNetworkLogo(globalState.selectedNetwork)}
                 className="w-4 h-4 rounded-full ml-[1px] mr-[8px]"
                 draggable={false}
                 alt=""
               />
-              <span>{getNetworkName(props.activeNetworkId)}</span>
+              <span>{getNetworkName(globalState.selectedNetwork)}</span>
             </span>
             <ChevronDown
               className={clsx(
@@ -67,7 +78,16 @@ export default function NetworkDropdown(props: {
                   (otherOption: number, index: number) => (
                     <Menu.Item key={index}>
                       <button
-                        onClick={() => switchToNetwork(otherOption)}
+                        onClick={() => {
+                          console.log('DISPATCHING ', otherOption)
+                          dispatch({
+                            type: SET_SELECTED_NETWORK,
+                            payload: {
+                              networkId: otherOption
+                            }
+                          })
+                          switchToNetwork(otherOption)
+                        }}
                         className={clsx(
                           'py-1 outline-none rounded-md font-semibold hover:bg-[#F2F2F2] w-full flex items-center px-2'
                         )}

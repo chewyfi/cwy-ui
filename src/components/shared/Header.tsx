@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, { useContext } from 'react'
 import toast from 'react-hot-toast'
+import { AppContext } from 'src/context'
 import { shortenAddress } from 'src/utils/helpers'
 import { useAccount, useNetwork } from 'wagmi'
 
@@ -15,6 +16,7 @@ const Header = ({
 }) => {
   const [{ data: network }, switchNetwork] = useNetwork()
   const [{ data: accountData }] = useAccount()
+  const { dispatch, globalState } = useContext(AppContext)
 
   const switchToNetwork = async (networkName: string) => {
     console.log('Network name ', networkName)
@@ -35,11 +37,11 @@ const Header = ({
   console.log('Network name ', JSON.stringify(network?.chain?.name))
 
   const getNetworkOptions = () => {
-    if (network.chain?.id && [1285, 1313161554].includes(network.chain?.id)) {
-      return [1285, 1313161554].filter((el) => el !== network?.chain?.id)
-    } else {
-      return [1313161554]
-    }
+    const otherOptions = [1285, 1313161554].filter(
+      (el) => el !== globalState.selectedNetwork
+    )
+    console.log('other options! ', otherOptions)
+    return otherOptions
   }
 
   return (

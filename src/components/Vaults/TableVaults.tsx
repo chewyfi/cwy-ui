@@ -11,15 +11,11 @@ import { MoonriverVault } from './NetworkVaults/MoonriverVault'
 import { TableHeader } from './TableHeader'
 
 const Table = (props: any) => {
-  const context = useContext(AppContext)
   const [{ data: network }] = useNetwork()
-  const [moonriverApyList, setMoonriverApyList] = useState(
-    context.globalState.apysMoonriver
-  )
+
   const { dispatch, globalState } = useContext(AppContext)
 
   console.log('GLOBAL STATE ', globalState)
-  const [auroraApyList, setAuroraApyList] = useState(context.apysAurora)
   const [auroraAprs, setAuroraAprs] = useState<any>([])
 
   useEffect(() => {
@@ -43,25 +39,24 @@ const Table = (props: any) => {
     getData()
   }, [])
 
+  console.log('table vaults selectednetwork ', globalState.selectedNetwork)
   const [selectedAPY, setSelectedAPY] = useState<APYType | null>(null)
   const toggleDisclosureMoonriver = (index: number) => {
-    let vaultData = moonriverApyList
+    let vaultData = globalState.apysMoonriver
     vaultData.map((item: React.SetStateAction<APYType | null>, idx: number) => {
       if (index === idx) {
         setSelectedAPY(item)
       }
     })
-    setMoonriverApyList(JSON.parse(JSON.stringify(vaultData)))
   }
 
   const toggleDisclosureAurora = (index: number) => {
-    let vaultData = auroraApyList
+    let vaultData = globalState.apysAurora
     vaultData.map((item: React.SetStateAction<APYType | null>, idx: number) => {
       if (index === idx) {
         setSelectedAPY(item)
       }
     })
-    setAuroraApyList(JSON.parse(JSON.stringify(vaultData)))
   }
 
   return (
@@ -83,7 +78,7 @@ const Table = (props: any) => {
         />
       )}
 
-      {network?.chain?.name === 'Moonriver' && (
+      {globalState.selectedNetwork === 1285 && (
         <div className="space-y-2">
           {globalState.apysMoonriver.map((item: APYType, index: number) => (
             <MoonriverVault
@@ -98,9 +93,9 @@ const Table = (props: any) => {
         </div>
       )}
 
-      {network?.chain?.name === 'Aurora' && (
+      {globalState.selectedNetwork === 1313161554 && (
         <div className="space-y-2">
-          {auroraApyList.map((item: APYType, index: number) => (
+          {globalState.apysAurora.map((item: APYType, index: number) => (
             <AuroraVault
               aprList={Array(auroraAprs)}
               resPriceFeed={props.resPriceFeed}

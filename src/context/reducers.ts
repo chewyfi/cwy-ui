@@ -5,6 +5,7 @@ import { InitialStateType } from '.'
 import {
   OPEN_MODAL,
   SET_NETWORK_TVL,
+  SET_SELECTED_NETWORK,
   SET_TOTAL_TVL,
   SORT_BY_APY,
   SORT_BY_DEPOSITED,
@@ -130,7 +131,12 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
       draft['totalTVL'] = tvl + tvl2
       break
     }
-
+    case SET_SELECTED_NETWORK: {
+      const { networkId } = action.payload
+      console.log('setting network to ', networkId)
+      draft['selectedNetwork'] = networkId
+      break
+    }
     default:
       break
   }

@@ -25,8 +25,11 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
         network,
         vault,
         apy
-      }: { network: keyof InitialStateType; vault: string; apy: string } =
-        action.payload
+      }: {
+        network: 'apysMoonriver' | 'apysAurora'
+        vault: string
+        apy: string
+      } = action.payload
       const element = draft[network].find(
         (element: APYType) => element.name === vault
       )

@@ -160,7 +160,7 @@ export const MoonriverVault: React.FC<Props> = ({
             <span className="text-[14px] text-[#c0c0c0]">
               <span className="flex items-center font-normal">
                 <span>TVL $</span>
-                {item.tvl && parseFloat(item.tvl).toFixed(2)}
+                {item.tvl ? parseFloat(item.tvl).toFixed(2) : '0.00'}
               </span>
             </span>
           </div>

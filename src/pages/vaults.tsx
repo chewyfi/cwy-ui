@@ -1,85 +1,34 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout from 'src/components/shared/Layout'
 import TableVault from 'src/components/Vaults/TableVaults'
+import { AppContext } from 'src/context'
 import { useAccount, useNetwork } from 'wagmi'
 
 // import db from '../db/db.js'
+import { SET_NETWORK_TVL, SET_TOTAL_TVL } from '../context/actions'
 
 export default function Vaults(props: any) {
   // db.push('hey')
   const [totalTVL, setTotalTVL] = useState(0)
   const [myDeposits, setMyDeposits] = useState<any>(0)
-  const router = useRouter()
   const [{ data: account }] = useAccount()
   const [{ data: network }, switchNetwork] = useNetwork()
+  const router = useRouter()
+  const { dispatch, globalState } = useContext(AppContext)
 
   useEffect(() => {
-    const getTotalTVL = async () => {
-      const { basePath: baseURL } = router
-      let globalVaultValue
-      if (network?.chain?.name === 'Aurora') {
-        console.log('ENTERED AURORA IF')
-        const { activeVaultsTotalValueLocked } = await (
-          await fetch(`${baseURL}/api/total-value-locked-usd-aurora`)
-        ).json()
-        globalVaultValue = activeVaultsTotalValueLocked
-      } else if (network?.chain?.name === 'Moonriver') {
-        console.log('ENTERED AURORA ELSE')
-        const { activeVaultsTotalValueLocked } = await (
-          await fetch(`${baseURL}/api/total-value-locked-usd`)
-        ).json()
-        globalVaultValue = activeVaultsTotalValueLocked
-      } else {
-        console.log('ENTERED AURORA ELSE')
-        const { activeVaultsTotalValueLocked } = await (
-          await fetch(`${baseURL}/api/total-value-locked-usd`)
-        ).json()
-        globalVaultValue = activeVaultsTotalValueLocked
-      }
-
-      let sum = 0.0
-      Object.values(globalVaultValue).forEach(
-        (val: any) => (sum += parseFloat(val))
-      )
-      console.log('SETTING TOTAL TVL TO BE ', parseFloat(sum.toFixed(2)))
-      setTotalTVL(parseFloat(sum.toFixed(2)))
-      sessionStorage.setItem('totalTVL', parseFloat(sum.toFixed(2)).toString())
-    }
-    getTotalTVL()
-
-    const getTotalUserDeposits = async () => {
-      if (account?.address) {
-        const { basePath: baseURL } = router
-        let globalTotalDeposits
-        if (network?.chain?.name === 'Aurora') {
-          console.log('FETCHING AURORA USER BALANCES ')
-          const { activeVaultsTotalDeposited } = await (
-            await fetch(
-              `${baseURL}/api/user-deposited-all-price-aurora?useraddress=${account?.address}`
-            )
-          ).json()
-          globalTotalDeposits = activeVaultsTotalDeposited
-        } else if (network?.chain?.name === 'Moonriver') {
-          const { activeVaultsTotalDeposited } = await (
-            await fetch(
-              `${baseURL}/api/user-deposited-all-price?useraddress=${account?.address}`
-            )
-          ).json()
-          globalTotalDeposits = activeVaultsTotalDeposited
-        } else {
-          return
+    setTimeout(() => {
+      dispatch({
+        type: SET_NETWORK_TVL,
+        payload: {
+          network: 'apysMoonriver'
         }
-
-        let sum = 0
-        Object.values(globalTotalDeposits).forEach(
-          (val: any) => (sum += parseFloat(val))
-        )
-        setMyDeposits(parseFloat(sum.toFixed(2)))
-        console.log('Setting my deposits ', parseFloat(sum.toFixed(2)))
-      }
-    }
-    getTotalUserDeposits()
+      })
+      dispatch({
+        type: SET_TOTAL_TVL
+      })
+    }, 300)
   }, [account?.address, network?.chain?.name])
 
   return (
@@ -88,13 +37,13 @@ export default function Vaults(props: any) {
         <div className="grid w-full grid-cols-3 my-4 text-[#c0c0c0] gap-2">
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>Total TVL </h6>
-            <span>${!totalTVL ? null : totalTVL}</span>
+            <span>${globalState.totalTVL.toFixed(2)}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>
               {network?.chain?.name ? network?.chain?.name : 'Moonriver'} TVL
             </h6>
-            <span>${!totalTVL ? null : totalTVL}</span>
+            <span>${globalState.moonriverTVL.toFixed(2)}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>My Deposits</h6>

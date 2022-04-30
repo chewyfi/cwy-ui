@@ -16,6 +16,9 @@ const Table = (props: any) => {
   const [moonriverApyList, setMoonriverApyList] = useState(
     context.globalState.apysMoonriver
   )
+  const { dispatch, globalState } = useContext(AppContext)
+
+  console.log('GLOBAL STATE ', globalState)
   const [auroraApyList, setAuroraApyList] = useState(context.apysAurora)
   const [auroraAprs, setAuroraAprs] = useState<any>([])
 
@@ -82,18 +85,16 @@ const Table = (props: any) => {
 
       {network?.chain?.name === 'Moonriver' && (
         <div className="space-y-2">
-          {context.globalState.apysMoonriver.map(
-            (item: APYType, index: number) => (
-              <MoonriverVault
-                resPriceFeed={props.resPriceFeed}
-                resApyList={props.resApyList}
-                key={index}
-                index={index}
-                item={item}
-                toggleDisclosure={() => toggleDisclosureMoonriver(index)}
-              />
-            )
-          )}
+          {globalState.apysMoonriver.map((item: APYType, index: number) => (
+            <MoonriverVault
+              resPriceFeed={props.resPriceFeed}
+              resApyList={props.resApyList}
+              key={index}
+              index={index}
+              item={item}
+              toggleDisclosure={() => toggleDisclosureMoonriver(index)}
+            />
+          ))}
         </div>
       )}
 

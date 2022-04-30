@@ -4,6 +4,8 @@ import { APYType } from 'src/types'
 import { InitialStateType } from '.'
 import {
   OPEN_MODAL,
+  SET_NETWORK_TVL,
+  SET_TOTAL_TVL,
   SORT_BY_APY,
   SORT_BY_DEPOSITED,
   SORT_BY_TVL,
@@ -64,8 +66,11 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
       const {
         network,
         vault
-      }: { network: keyof InitialStateType; vault: string; deposited: string } =
-        action.payload
+      }: {
+        network: 'apysMoonriver' | 'apysAurora'
+        vault: string
+        deposited: string
+      } = action.payload
       draft[network].map((element: APYType) =>
         element.name === vault ? (element.isOpen = !element.isOpen) : null
       )
@@ -73,7 +78,6 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
     }
 
     case SORT_BY_TVL: {
-      console.log('SORT BY TVL CALLED')
       draft['apysMoonriver'].sort((a, b) => {
         return parseFloat(b.tvl ? b.tvl : '0') - parseFloat(a.tvl ? a.tvl : '0')
       })
@@ -93,6 +97,30 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
         )
       })
       break
+    case SET_NETWORK_TVL: {
+      const { network }: { network: 'apysMoonriver' | 'apysAurora' } =
+        action.payload
+      const tvl = draft[network].reduce(
+        (a, b) => a + parseFloat(b.tvl ? b.tvl : '0'),
+        0
+      )
+      console.log('MOONRIVER TVL CALCULATED ', tvl)
+      draft['moonriverTVL'] = tvl
+      break
+    }
+    case SET_TOTAL_TVL: {
+      const tvl = draft['apysAurora'].reduce(
+        (a, b) => a + parseFloat(b.tvl ? b.tvl : '0'),
+        0
+      )
+      const tvl2 = draft['apysMoonriver'].reduce(
+        (a, b) => a + parseFloat(b.tvl ? b.tvl : '0'),
+        0
+      )
+      console.log('TOTAL TVL CALCULATED ', tvl + tvl2)
+      draft['totalTVL'] = tvl + tvl2
+      break
+    }
 
     default:
       break

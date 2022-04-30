@@ -8,7 +8,11 @@ import { reducer } from './reducers'
 export type InitialStateType = {
   apysMoonriver: APYType[]
   apysAurora: APYType[]
+  moonriverTVL: number
+  auroraTVL: number
+  totalTVL: number
 }
+
 const initialState = {
   apysMoonriver: [
     {
@@ -146,7 +150,10 @@ const initialState = {
       contracts: poolAddressesAurora['STABLES-RUSD'],
       getSomeUrl: 'https://app.rose.fi/#/pools/rusd'
     }
-  ]
+  ],
+  moonriverTVL: 0,
+  auroraTVL: 0,
+  totalTVL: 0
 }
 
 export const AppContext = createContext<any>(initialState)

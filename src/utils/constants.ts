@@ -61,7 +61,7 @@ export const contractMappings: any = {
       decimals: 18
     },
     'KBTC-BTC': {
-      contract: poolAddressesMoonriver['KBTC-BTC-STRATEGY'],
+      contract: poolAddressesMoonriver['KBTC-BTC'],
       decimals: 18
     }
   },

@@ -24,8 +24,8 @@ const contractMappings = {
     contract: poolAddressesMoonriver['SolarbeamstKSMpool'],
     decimals: 18
   },
-  'KBTC-BTC-STRATEGY': {
-    contract: poolAddressesMoonriver['KBTC-BTC-STRATEGY'],
+  'KBTC-BTC': {
+    contract: poolAddressesMoonriver['KBTC-BTC'],
     decimals: 18
   }
 }

@@ -47,7 +47,7 @@ export const poolAddressesMoonriver = {
     Want: '0x493147C85Fe43F7B056087a6023dF32980Bcb2D1',
     PoolId: 13
   },
-  'KBTC-BTC-STRATEGY': {
+  'KBTC-BTC': {
     Vault: '0x4E559796BbB4d7272C83E0BbB9CF234a27e66aa3',
     Strategy: '0xDaE531B7FF28D1c3fb814C4111B9C6C72977b9cC',
     Want: '0x4F707d051b4b49B63e72Cc671e78E152ec66f2fA',

@@ -140,7 +140,7 @@ const initialState = {
       tvl: null,
       suffix: 'LP',
       getSomeUrl: 'https://app.solarbeam.io/exchange/stable-pool/add/stksm',
-      contracts: poolAddressesMoonriver['KBTC-BTC-STRATEGY']
+      contracts: poolAddressesMoonriver['KBTC-BTC']
     }
   ],
   apysAurora: [

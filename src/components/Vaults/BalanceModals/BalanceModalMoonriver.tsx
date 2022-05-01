@@ -15,7 +15,10 @@ import {
 
 import nativeAbi from '../../../chain-info/abis/nativeMoonriverAbi.json'
 import normalAbi from '../../../chain-info/abis/normalMoonriverAbi.json'
-import { contractMappings } from '../../../utils/constants'
+import {
+  contractMappings,
+  KBTC_BTC_TOKEN_CONTRACT
+} from '../../../utils/constants'
 import {
   FRAX_3POOL_TOKEN_CONTRACT,
   FRAX_TOKEN_CONTRACT,
@@ -62,7 +65,8 @@ const accountMappings: any = {
   FRAX: FRAX_TOKEN_CONTRACT,
   FRAX3POOL: FRAX_3POOL_TOKEN_CONTRACT,
   'KSM-stKSM': TWO_KSM_TOKEN_CONTRACT,
-  '3POOL': THREE_POOL_TOKEN_CONTRACT
+  '3POOL': THREE_POOL_TOKEN_CONTRACT,
+  'KBTC-BTC': KBTC_BTC_TOKEN_CONTRACT
 }
 
 const BalanceModal: React.FC<Props> = (props) => {

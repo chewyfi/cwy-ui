@@ -137,7 +137,7 @@ export const MoonriverVault: React.FC<Props> = ({
 
       const { info } = await (
         await fetch(
-          `${baseURL}/api/total-value-locked-usd-vault?vault=${item.name}`
+          `${baseURL}/api/total-value-locked-usd-vault-moonriver?vault=${item.name}`
         )
       ).json()
 

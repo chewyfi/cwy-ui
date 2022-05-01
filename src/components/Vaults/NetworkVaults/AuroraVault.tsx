@@ -127,9 +127,30 @@ export const AuroraVault: React.FC<Props> = ({
     }
   }
 
+  const [{ data: totalValueData, loading: loadingTotalValue }] =
+    useContractRead(
+      {
+        addressOrName:
+          contractMappings['Aurora'][item.name]['contract']['Vault'],
+        contractInterface: auroraAbi,
+        signerOrProvider: provider
+      },
+      'balance'
+    )
+
   useEffect(() => {
     connectToMetamask()
-  }, [account?.address])
+    totalValueData &&
+      item.tvl === null &&
+      dispatch({
+        type: UPDATE_TVL,
+        payload: {
+          network: 'apysAurora',
+          vault: item.name,
+          tvl: parseInt(totalValueData.toString()) / 10 ** 18
+        }
+      })
+  }, [account?.address, totalValueData])
 
   const [
     { data: balanceDataUnformatted, loading: balanceDataLoading },
@@ -154,27 +175,6 @@ export const AuroraVault: React.FC<Props> = ({
         deposited: parseFloat(balanceDataUnformatted?.toString()) / 10 ** 18,
         network: 'apysAurora',
         vault: item.name
-      }
-    })
-
-  const [{ data: totalValueData, loading: loadingTotalValue }] =
-    useContractRead(
-      {
-        addressOrName:
-          contractMappings['Aurora'][item.name]['contract']['Vault'],
-        contractInterface: auroraAbi,
-        signerOrProvider: provider
-      },
-      'balance'
-    )
-  totalValueData &&
-    item.tvl === null &&
-    dispatch({
-      type: UPDATE_TVL,
-      payload: {
-        network: 'apysAurora',
-        vault: item.name,
-        tvl: parseInt(totalValueData.toString()) / 10 ** 18
       }
     })
 

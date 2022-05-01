@@ -47,7 +47,7 @@ export default function Vaults(props: any) {
       }
     }
     fetchSpecificTVL()
-  }, [globalState.selectedNetwork, network?.chain.id])
+  }, [globalState.selectedNetwork, network?.chain?.id])
 
   return (
     <Layout headerTitle="Vaults">

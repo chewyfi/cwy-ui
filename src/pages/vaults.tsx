@@ -16,6 +16,9 @@ export default function Vaults(props: any) {
   const { dispatch, globalState } = useContext(AppContext)
 
   const [networkTVL, setNetworkTVL] = useState(0)
+  const [moonriverTVL, setMoonriverTVL] = useState(0)
+  const [auroraTVL, setAuroraTVL] = useState(0)
+
   const [totalTVL, setTotalTVL] = useState(0)
 
   useEffect(() => {
@@ -26,26 +29,15 @@ export default function Vaults(props: any) {
           const { sum } = await (
             await fetch(`${baseURL}/api/get-tvl-moonriver`)
           ).json()
-          setNetworkTVL(sum)
-          break
+          setMoonriverTVL(sum)
         }
         case 1313161554: {
           const { sum } = await (
             await fetch(`${baseURL}/api/get-tvl-aurora`)
           ).json()
-          setNetworkTVL(sum)
-          break
+          setAuroraTVL(sum)
         }
       }
-      const { sum: sum1 } = await (
-        await fetch(`${baseURL}/api/get-tvl-moonriver`)
-      ).json()
-      const { sum: sum2 } = await (
-        await fetch(`${baseURL}/api/get-tvl-aurora`)
-      ).json()
-
-      console.log('setting total tvl to ', sum1 + sum2)
-      setTotalTVL(sum1 + sum2)
     }
     fetchSpecificTVL()
   }, [globalState.selectedNetwork])
@@ -56,14 +48,19 @@ export default function Vaults(props: any) {
         <div className="grid w-full grid-cols-3 my-4 text-[#c0c0c0] gap-2">
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>Total TVL </h6>
-            <span>${totalTVL.toFixed(2)}</span>
+            <span>${(moonriverTVL + auroraTVL).toFixed(2)}</span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>
               {globalState.selectedNetwork === 1285 ? 'Moonriver' : 'Aurora'}{' '}
               TVL
             </h6>
-            <span>${networkTVL.toFixed(2)}</span>
+            <span>
+              $
+              {globalState.selectedNetwork === 1285
+                ? moonriverTVL.toFixed(2)
+                : auroraTVL.toFixed(2)}
+            </span>
           </div>
           <div className="px-4 py-3 bg-[#f7f7f7] text-[17px] rounded-lg">
             <h6>My Deposits</h6>

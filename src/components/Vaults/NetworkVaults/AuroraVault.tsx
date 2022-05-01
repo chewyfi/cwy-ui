@@ -12,7 +12,7 @@ import {
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
 import { aprToApy } from 'src/utils/helpers'
-import { useAccount, useContractRead } from 'wagmi'
+import { useAccount, useContractRead, useNetwork } from 'wagmi'
 
 import auroraAbi from '../../../chain-info/abis/auroraAbi.json'
 interface Props {
@@ -49,11 +49,12 @@ export const AuroraVault: React.FC<Props> = ({
   resApyList,
   aprList
 }) => {
-  const { dispatch } = useContext(AppContext)
+  const { dispatch, globalState } = useContext(AppContext)
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
   const [metaMaskBalance, setMetaMaskBalance] = useState('0')
+  const [{ data: network }, switchNetwork] = useNetwork()
 
   const [{ data: account }] = useAccount()
 
@@ -183,7 +184,12 @@ export const AuroraVault: React.FC<Props> = ({
       className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
     >
       <div
-        onClick={() => toggleDisclosure()}
+        onClick={() => {
+          if (network?.chain?.name !== globalState.selectedNetwork) {
+          } else {
+            toggleDisclosure()
+          }
+        }}
         className="flex items-center w-full font-medium cursor-pointer"
       >
         <span className="flex items-center w-3/4 space-x-2">

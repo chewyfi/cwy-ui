@@ -22,7 +22,7 @@ import {
 } from 'src/utils/constants'
 import { contractMappings } from 'src/utils/constants'
 import { aprToApy } from 'src/utils/helpers'
-import { useAccount, useBalance, useContractRead } from 'wagmi'
+import { useAccount, useBalance, useContractRead, useNetwork } from 'wagmi'
 
 import normalAbi from '../../../chain-info/abis/normalMoonriverAbi.json'
 import { AppContext } from '../../../context/index'
@@ -57,8 +57,9 @@ export const MoonriverVault: React.FC<Props> = ({
   index
 }) => {
   const [{ data: account }] = useAccount()
+  const [{ data: network }, switchNetwork] = useNetwork()
 
-  const { dispatch } = useContext(AppContext)
+  const { dispatch, globalState } = useContext(AppContext)
   const router = useRouter()
   const [deposited, setDeposited] = useState(0)
   const [tvl, setTVL] = useState(0)
@@ -160,7 +161,12 @@ export const MoonriverVault: React.FC<Props> = ({
       className={clsx('py-3 px-2 rounded-lg bg-[#f7f7f7] hover:bg-[#f0f0f0]')}
     >
       <div
-        onClick={toggleDisclosure}
+        onClick={() => {
+          if (network?.chain?.name !== globalState.selectedNetwork) {
+          } else {
+            toggleDisclosure()
+          }
+        }}
         className="flex items-center w-full font-medium cursor-pointer"
       >
         <span className="flex items-center w-3/4 space-x-2">

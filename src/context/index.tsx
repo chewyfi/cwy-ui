@@ -131,7 +131,7 @@ const initialState = {
     },
     {
       icon: '/static/tokens/wbtc.svg',
-      name: 'KBTC-BTC-STRATEGY',
+      name: 'KBTC-BTC',
       isOpen: false,
       strategy: 'Solarbeam',
       userDeposited: null,

@@ -26,7 +26,7 @@ import { useAccount, useBalance, useContractRead } from 'wagmi'
 
 import normalAbi from '../../../chain-info/abis/normalMoonriverAbi.json'
 import { AppContext } from '../../../context/index'
-import { KBTC_BTC_STRATEGY_CONTRACT } from '../../../utils/constants'
+import { KBTC_BTC_TOKEN_CONTRACT } from '../../../utils/constants'
 import { formatMetaMaskBalance } from '../../../utils/helpers'
 interface Props {
   item: APYType
@@ -46,7 +46,7 @@ const accountMappings: any = {
   FRAX3POOL: FRAX_3POOL_TOKEN_CONTRACT,
   'KSM-stKSM': TWO_KSM_TOKEN_CONTRACT,
   '3POOL': THREE_POOL_TOKEN_CONTRACT,
-  'KBTC-BTC-STRATEGY': KBTC_BTC_STRATEGY_CONTRACT
+  'KBTC-BTC': KBTC_BTC_TOKEN_CONTRACT
 }
 
 export const MoonriverVault: React.FC<Props> = ({
@@ -119,9 +119,7 @@ export const MoonriverVault: React.FC<Props> = ({
         vault: item.name
       }
     })
-  console.log(
-    `APY VALS ${item.name} ${resApyList[apyMappings['Moonriver'][item.name]]}`
-  )
+
   item.apy === null &&
     dispatch({
       type: UPDATE_APY,

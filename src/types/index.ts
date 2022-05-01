@@ -2,10 +2,10 @@ export type APYType = {
   icon?: string | undefined
   icons?: string[]
   name: string
-  apy?: string
-  tvl?: string
-  userDeposited?: string
-  userMetamaskBalance?: number
+  apy: string | null
+  tvl: string | null
+  userDeposited: string | null
+  userMetamaskBalance: number
   emoji?: string
   isOpen: boolean
   suffix?: string

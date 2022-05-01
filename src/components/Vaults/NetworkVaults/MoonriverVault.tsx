@@ -73,7 +73,7 @@ export const MoonriverVault: React.FC<Props> = ({
     addressOrName: account?.address
   })
 
-  !item.userMetamaskBalance &&
+  item.userMetamaskBalance === null &&
     metaMaskBalance &&
     dispatch({
       type: SET_USER_METAMASK_BALANCE,
@@ -104,7 +104,8 @@ export const MoonriverVault: React.FC<Props> = ({
     }
   )
 
-  !item.userDeposited &&
+  item.userDeposited === null &&
+    balanceDataUnformatted !== undefined &&
     dispatch({
       type: UPDATE_DEPOSITED,
       payload: {
@@ -116,7 +117,7 @@ export const MoonriverVault: React.FC<Props> = ({
         vault: item.name
       }
     })
-  !item.apy &&
+  item.apy === null &&
     dispatch({
       type: UPDATE_APY,
       payload: {

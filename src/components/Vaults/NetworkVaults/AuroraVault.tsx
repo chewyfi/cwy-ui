@@ -72,7 +72,7 @@ export const AuroraVault: React.FC<Props> = ({
         return parseFloat(apr.apr).toFixed(2)
       }
     })[0]
-    !item.apy &&
+    item.apy === null &&
       filtered.apr &&
       dispatch({
         type: UPDATE_APY,
@@ -109,49 +109,27 @@ export const AuroraVault: React.FC<Props> = ({
           await contract.balanceOf(signer.getAddress())
         ).toString()
 
-        setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
+        const balanceFormatted = (parseInt(balance) / 10 ** 18).toString()
+        item.userMetamaskBalance === null &&
+          dispatch({
+            type: SET_USER_METAMASK_BALANCE,
+            payload: {
+              network: 'apysAurora',
+              vault: item.name,
+              userMetamaskBalance: balanceFormatted
+            }
+          })
+
+        setMetaMaskBalance(balanceFormatted)
       } catch (Error) {
         console.log('ERROR ', Error)
       }
     }
   }
 
-  !item.userMetamaskBalance &&
-    metaMaskBalance &&
-    console.log('DISPATCHING BALANCE ', metaMaskBalance)
-  dispatch({
-    type: SET_USER_METAMASK_BALANCE,
-    payload: {
-      network: 'apysAurora',
-      vault: item.name,
-      userMetamaskBalance: metaMaskBalance
-    }
-  })
-
   useEffect(() => {
     connectToMetamask()
-    if (totalValueData) {
-      dispatch({
-        type: UPDATE_TVL,
-        payload: {
-          tvl: (parseFloat(totalValueData.toString()) / 10 ** 18).toFixed(2),
-          network: 'apysAurora',
-          vault: item.name
-        }
-      })
-    }
   }, [account?.address])
-
-  const [{ data: totalValueData, loading: loadingTotalValue }] =
-    useContractRead(
-      {
-        addressOrName:
-          contractMappings['Aurora'][item.name]['contract']['Vault'],
-        contractInterface: auroraAbi,
-        signerOrProvider: provider
-      },
-      'balance'
-    )
 
   const [
     { data: balanceDataUnformatted, loading: balanceDataLoading },
@@ -167,9 +145,12 @@ export const AuroraVault: React.FC<Props> = ({
       args: [account?.address]
     }
   )
+  console.log(
+    ` Balance data unformatted ${balanceDataUnformatted} for vault ${item.name}`
+  )
 
-  !item.userDeposited &&
-    balanceDataUnformatted &&
+  item.userDeposited === null &&
+    balanceDataUnformatted !== undefined &&
     dispatch({
       type: UPDATE_DEPOSITED,
       payload: {
@@ -178,7 +159,8 @@ export const AuroraVault: React.FC<Props> = ({
         vault: item.name
       }
     })
-  const [{ data: totalValueLocked, loading: tvlDataLoading }, getTVL] =
+
+  const [{ data: totalValueData, loading: loadingTotalValue }] =
     useContractRead(
       {
         addressOrName:
@@ -188,9 +170,8 @@ export const AuroraVault: React.FC<Props> = ({
       },
       'balance'
     )
-
   totalValueData &&
-    !item.tvl &&
+    item.tvl === null &&
     dispatch({
       type: UPDATE_TVL,
       payload: {

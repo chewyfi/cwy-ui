@@ -70,7 +70,9 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
         (element: APYType) => element.name === vault
       )
 
-      element && deposited ? (element.userDeposited = deposited) : null
+      element && deposited
+        ? (element.userDeposited = deposited)
+        : (element!.userDeposited = '0.00')
       break
     }
 

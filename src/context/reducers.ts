@@ -90,8 +90,13 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
     }
 
     case SORT_BY_TVL: {
-      console.log('SORT BY TVL')
-      draft['apysMoonriver'].sort((a, b) => {
+      const {
+        network
+      }: {
+        network: 'apysMoonriver' | 'apysAurora'
+      } = action.payload
+      console.log('SORT BY TVL NETWORK ', network)
+      draft[network].sort((a, b) => {
         return parseFloat(b.tvl ? b.tvl : '0') - parseFloat(a.tvl ? a.tvl : '0')
       })
       break

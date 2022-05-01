@@ -73,7 +73,8 @@ export const MoonriverVault: React.FC<Props> = ({
     addressOrName: account?.address
   })
 
-  metaMaskBalance &&
+  !item.userMetamaskBalance &&
+    metaMaskBalance &&
     dispatch({
       type: SET_USER_METAMASK_BALANCE,
       payload: {
@@ -115,14 +116,15 @@ export const MoonriverVault: React.FC<Props> = ({
         vault: item.name
       }
     })
-  dispatch({
-    type: UPDATE_APY,
-    payload: {
-      apy: resApyList[apyMappings['Moonriver'][item.name]],
-      network: 'apysMoonriver',
-      vault: item.name
-    }
-  })
+  !item.apy &&
+    dispatch({
+      type: UPDATE_APY,
+      payload: {
+        apy: resApyList[apyMappings['Moonriver'][item.name]],
+        network: 'apysMoonriver',
+        vault: item.name
+      }
+    })
 
   useEffect(() => {
     getData()

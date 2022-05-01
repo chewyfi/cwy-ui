@@ -3,7 +3,12 @@ import { ethers, providers } from 'ethers'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from 'src/context'
-import { UPDATE_TVL } from 'src/context/actions'
+import {
+  SET_USER_METAMASK_BALANCE,
+  UPDATE_APY,
+  UPDATE_DEPOSITED,
+  UPDATE_TVL
+} from 'src/context/actions'
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
 import { aprToApy } from 'src/utils/helpers'
@@ -70,6 +75,14 @@ export const AuroraVault: React.FC<Props> = ({
 
     if (filtered) {
       console.log('FILTERED VAL ', filtered.apr)
+      dispatch({
+        type: UPDATE_APY,
+        payload: {
+          apy: parseFloat(filtered.apr) / 100,
+          network: 'apysAurora',
+          vault: item.name
+        }
+      })
       return parseFloat(filtered.apr) / 100
     } else {
       console.log('NA case')
@@ -94,6 +107,15 @@ export const AuroraVault: React.FC<Props> = ({
         const balance = (
           await contract.balanceOf(signer.getAddress())
         ).toString()
+        metaMaskBalance &&
+          dispatch({
+            type: SET_USER_METAMASK_BALANCE,
+            payload: {
+              network: 'apysAurora',
+              vault: item.name,
+              userMetamaskBalance: (parseInt(balance) / 10 ** 18).toString()
+            }
+          })
 
         setMetaMaskBalance((parseInt(balance) / 10 ** 18).toString())
       } catch (Error) {
@@ -141,6 +163,18 @@ export const AuroraVault: React.FC<Props> = ({
       args: [account?.address]
     }
   )
+
+  !item.userDeposited &&
+    dispatch({
+      type: UPDATE_DEPOSITED,
+      payload: {
+        deposited: balanceDataUnformatted
+          ? parseFloat(balanceDataUnformatted?.toString()) / 10 ** 18
+          : 0,
+        network: 'apysAurora',
+        vault: item.name
+      }
+    })
 
   const [{ data: totalValueLocked, loading: tvlDataLoading }, getTVL] =
     useContractRead(
@@ -193,13 +227,13 @@ export const AuroraVault: React.FC<Props> = ({
           <span>{aprList && aprToApy(getApr(aprList)).toFixed(2)}%</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
-          <span>{parseFloat(metaMaskBalance).toFixed(2)}</span>
+          <span>
+            {item?.userMetamaskBalance ? item?.userMetamaskBalance : '0.00'}
+          </span>
 
-          {balanceDataUnformatted &&
-            (
-              (balanceDataUnformatted as any) /
-              10 ** contractMappings['Aurora'][item.name]['decimals']
-            ).toFixed(2)}
+          {item?.userDeposited
+            ? parseFloat(item?.userDeposited).toFixed(2)
+            : '0.00'}
         </span>
       </div>
     </div>

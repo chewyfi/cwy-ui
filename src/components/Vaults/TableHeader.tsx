@@ -1,15 +1,94 @@
 import clsx from 'clsx'
 import { useContext, useState } from 'react'
 import { AppContext } from 'src/context'
-import { SORT_BY_TVL } from 'src/context/actions'
 import { useNetwork } from 'wagmi'
 
-import { SORT_BY_APY, SORT_BY_DEPOSITED } from '../../context/actions'
+import {
+  SORT_BY_APY,
+  SORT_BY_DEPOSITED,
+  SORT_BY_TVL
+} from '../../context/actions'
 
 export const TableHeader = () => {
   const [{ data: network }] = useNetwork()
   const { dispatch, globalState } = useContext(AppContext)
   const [up, setUp] = useState(false)
+
+  function sortByTvl() {
+    switch (globalState.selectedNetwork) {
+      case 1285: {
+        dispatch({
+          type: SORT_BY_TVL,
+          payload: {
+            network: 'apysMoonriver'
+          }
+        })
+        break
+      }
+      case 1313161554: {
+        dispatch({
+          type: SORT_BY_TVL,
+          payload: {
+            network: 'apysAurora'
+          }
+        })
+        break
+      }
+      default:
+        break
+    }
+  }
+
+  function sortByApy() {
+    switch (globalState.selectedNetwork) {
+      case 1285: {
+        dispatch({
+          type: SORT_BY_APY,
+          payload: {
+            network: 'apysMoonriver'
+          }
+        })
+        break
+      }
+      case 1313161554: {
+        dispatch({
+          type: SORT_BY_APY,
+          payload: {
+            network: 'apysAurora'
+          }
+        })
+        break
+      }
+      default:
+        break
+    }
+  }
+
+  function sortByDeposited() {
+    console.log('Sort by Deposited clicked')
+    switch (globalState.selectedNetwork) {
+      case 1285: {
+        dispatch({
+          type: SORT_BY_DEPOSITED,
+          payload: {
+            network: 'apysMoonriver'
+          }
+        })
+        break
+      }
+      case 1313161554: {
+        dispatch({
+          type: SORT_BY_DEPOSITED,
+          payload: {
+            network: 'apysAurora'
+          }
+        })
+        break
+      }
+      default:
+        break
+    }
+  }
 
   return (
     <div className="w-full">
@@ -26,16 +105,7 @@ export const TableHeader = () => {
             <span className="flex items-center space-x-2">
               TVL
               <img
-                onClick={() => {
-                  console.log('DISPATCH FIRING')
-                  console.log('i WAS CLICKED')
-                  dispatch({
-                    type: SORT_BY_TVL,
-                    payload: {
-                      up
-                    }
-                  })
-                }}
+                onClick={() => sortByTvl()}
                 className="h-2 ml-3"
                 src="/static/down-arrow.svg"
                 alt=""
@@ -49,12 +119,7 @@ export const TableHeader = () => {
             className="h-2 ml-3"
             src="/static/down-arrow.svg"
             alt=""
-            onClick={() => {
-              console.log('SORT BY APY CALLED')
-              dispatch({
-                type: SORT_BY_APY
-              })
-            }}
+            onClick={() => sortByApy()}
           />
         </span>
         <span className="flex justify-end w-1/3 mr-3">
@@ -66,11 +131,7 @@ export const TableHeader = () => {
               className="h-2 ml-3"
               src="/static/down-arrow.svg"
               alt=""
-              onClick={() => {
-                dispatch({
-                  type: SORT_BY_DEPOSITED
-                })
-              }}
+              onClick={() => sortByDeposited()}
             />
           </div>
         </span>

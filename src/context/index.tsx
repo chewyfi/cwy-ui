@@ -107,7 +107,7 @@ const initialState = {
     {
       icon: '/static/tokens/rose_stables.svg',
       name: 'STABLES',
-      strategy: 'Funbeast',
+      strategy: 'ROSE',
       suffix: 'ROSE',
       emoji: '🔥',
       isOpen: false,
@@ -117,7 +117,7 @@ const initialState = {
     {
       icon: 'https://app.rose.fi/static/media/rose-atust.a480f729.svg',
       name: 'STABLES-UST',
-      strategy: 'Funbeast',
+      strategy: 'ROSE',
       suffix: 'ROSE',
       emoji: '🔥',
       isOpen: false,
@@ -128,7 +128,7 @@ const initialState = {
       icon: '/static/tokens/rose-frax.svg',
       name: 'STABLES-FRAX',
       suffix: 'ROSE',
-      strategy: 'Funbeast',
+      strategy: 'Rose',
       isOpen: false,
       contracts: poolAddressesAurora['STABLES-FRAX'],
       getSomeUrl: 'https://app.rose.fi/#/pools/frax'
@@ -137,7 +137,7 @@ const initialState = {
       icon: 'https://app.rose.fi/static/media/rose-mai.dcd82123.svg',
       name: 'STABLES-MAI',
       suffix: 'ROSE',
-      strategy: 'Funbeast',
+      strategy: 'Rose',
       isOpen: false,
       contracts: poolAddressesAurora['STABLES-MAI'],
       getSomeUrl: 'https://app.rose.fi/#/pools/mai'
@@ -145,7 +145,7 @@ const initialState = {
     {
       icon: 'https://app.rose.fi/static/media/rose-busd.07b2b924.svg',
       name: 'STABLES-BUSD',
-      strategy: 'Funbeast',
+      strategy: 'Rose',
       suffix: 'BUSD',
       isOpen: false,
       contracts: poolAddressesAurora['STABLES-BUSD'],

@@ -2,6 +2,7 @@ import produce from 'immer'
 import { APYType } from 'src/types'
 
 import { InitialStateType } from '.'
+import { SET_USER_METAMASK_BALANCE } from './actions'
 import {
   OPEN_MODAL,
   SET_NETWORK_TVL,
@@ -68,6 +69,7 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
       const element = draft[network].find(
         (element: APYType) => element.name === vault
       )
+
       element && deposited ? (element.userDeposited = deposited) : null
       break
     }
@@ -88,25 +90,35 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
     }
 
     case SORT_BY_TVL: {
+      console.log('SORT BY TVL')
       draft['apysMoonriver'].sort((a, b) => {
         return parseFloat(b.tvl ? b.tvl : '0') - parseFloat(a.tvl ? a.tvl : '0')
       })
       break
     }
 
-    case SORT_BY_APY:
-      draft['apysMoonriver'].sort((a, b) => {
+    case SORT_BY_APY: {
+      const { network }: { network: 'apysMoonriver' | 'apysAurora' } =
+        action.payload
+      console.log('SORT BY APY CALLED')
+      draft[network].sort((a, b) => {
         return parseFloat(b.apy ? b.apy : '0') - parseFloat(a.apy ? a.apy : '0')
       })
       break
-    case SORT_BY_DEPOSITED:
-      draft['apysMoonriver'].sort((a, b) => {
+    }
+    case SORT_BY_DEPOSITED: {
+      const { network }: { network: 'apysMoonriver' | 'apysAurora' } =
+        action.payload
+      console.log('SORT BY DEPOSITED CALLED')
+      draft[network].sort((a, b) => {
         return (
           parseFloat(b.userDeposited ? b.userDeposited : '0') -
           parseFloat(a.userDeposited ? a.userDeposited : '0')
         )
       })
+      console.log('proxy', JSON.parse(JSON.stringify(draft[network])))
       break
+    }
     case SET_NETWORK_TVL: {
       const { network }: { network: 'apysMoonriver' | 'apysAurora' } =
         action.payload
@@ -135,6 +147,25 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
       const { networkId } = action.payload
       console.log('setting network to ', networkId)
       draft['selectedNetwork'] = networkId
+      break
+    }
+    case SET_USER_METAMASK_BALANCE: {
+      console.log('setting metamask balance')
+      const {
+        network,
+        vault,
+        userMetamaskBalance
+      }: {
+        network: 'apysMoonriver' | 'apysAurora'
+        vault: string
+        userMetamaskBalance: number
+      } = action.payload
+      const element = draft[network].find(
+        (element: APYType) => element.name === vault
+      )
+      element && userMetamaskBalance
+        ? (element.userMetamaskBalance = userMetamaskBalance)
+        : null
       break
     }
     default:

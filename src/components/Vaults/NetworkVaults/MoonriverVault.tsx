@@ -2,9 +2,15 @@ import clsx from 'clsx'
 import { providers } from 'ethers'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
-import { UPDATE_APY, UPDATE_DEPOSITED, UPDATE_TVL } from 'src/context/actions'
+import {
+  SET_USER_METAMASK_BALANCE,
+  UPDATE_APY,
+  UPDATE_DEPOSITED,
+  UPDATE_TVL
+} from 'src/context/actions'
 import { APYType } from 'src/types'
 import {
+  apyMappings,
   FRAX_3POOL_TOKEN_CONTRACT,
   FRAX_TOKEN_CONTRACT,
   THREE_POOL_TOKEN_CONTRACT,
@@ -15,12 +21,12 @@ import {
   WETH_TOKEN_CONTRACT
 } from 'src/utils/constants'
 import { contractMappings } from 'src/utils/constants'
-import { apyMappings } from 'src/utils/constants'
-import { aprToApy, formatMetaMaskBalance } from 'src/utils/helpers'
+import { aprToApy } from 'src/utils/helpers'
 import { useAccount, useBalance, useContractRead } from 'wagmi'
 
 import normalAbi from '../../../chain-info/abis/normalMoonriverAbi.json'
 import { AppContext } from '../../../context/index'
+import { formatMetaMaskBalance } from '../../../utils/helpers'
 interface Props {
   item: APYType
   toggleDisclosure: () => void
@@ -67,6 +73,16 @@ export const MoonriverVault: React.FC<Props> = ({
     addressOrName: account?.address
   })
 
+  metaMaskBalance &&
+    dispatch({
+      type: SET_USER_METAMASK_BALANCE,
+      payload: {
+        network: 'apysMoonriver',
+        vault: item.name,
+        userMetamaskBalance: formatMetaMaskBalance(metaMaskBalance)
+      }
+    })
+
   const [
     {
       data: balanceDataUnformatted,
@@ -87,7 +103,26 @@ export const MoonriverVault: React.FC<Props> = ({
     }
   )
 
-  console.log('get data', getData)
+  !item.userDeposited &&
+    dispatch({
+      type: UPDATE_DEPOSITED,
+      payload: {
+        deposited: balanceDataUnformatted
+          ? parseFloat(balanceDataUnformatted?.toString()) /
+            10 ** contractMappings['Moonriver'][item.name]['decimals']
+          : 0,
+        network: 'apysMoonriver',
+        vault: item.name
+      }
+    })
+  dispatch({
+    type: UPDATE_APY,
+    payload: {
+      apy: resApyList[apyMappings['Moonriver'][item.name]],
+      network: 'apysMoonriver',
+      vault: item.name
+    }
+  })
 
   useEffect(() => {
     getData()
@@ -112,35 +147,6 @@ export const MoonriverVault: React.FC<Props> = ({
       // set context TVL
     }
     TVLFetch()
-    if (account?.address) {
-      const getDeposited = async () => {
-        const { basePath: baseURL } = router
-        const { deposited } = await (
-          await fetch(
-            `${baseURL}/api/user-deposited?vault=${item.name}&useraddress=${account.address}`
-          )
-        ).json()
-        setDeposited(deposited)
-        deposited &&
-          dispatch({
-            type: UPDATE_DEPOSITED,
-            payload: {
-              deposited: deposited,
-              network: 'apysMoonriver',
-              vault: item.name
-            }
-          })
-      }
-      getDeposited()
-    }
-    dispatch({
-      type: UPDATE_APY,
-      payload: {
-        apy: resApyList[apyMappings['Moonriver'][item.name]],
-        network: 'apysMoonriver',
-        vault: item.name
-      }
-    })
   }, [account?.address])
 
   return (
@@ -184,28 +190,17 @@ export const MoonriverVault: React.FC<Props> = ({
           </div>
         </span>
         <span className="text-[17px] space-x-1 ml-6 w-1/3 font-normal">
-          <span>
-            {item.apy && aprToApy(parseFloat(item.apy)).toFixed(2)}%
-            {/* {item.apy
-              ? aprToApy(parseFloat(item.apy))
-              : `${aprToApy(
-                  parseFloat(resApyList[apyMappings['Moonriver'][item.name]])
-                ).toFixed(2)}%`} */}
-          </span>
+          <span>{item.apy && aprToApy(parseFloat(item.apy)).toFixed(2)}%</span>
           <span>{item.emoji}</span>
         </span>
         <span className="flex mr-1 font-normal items-end flex-col w-1/3 px-2 text-[17px] text-[#c0c0c0]">
           <span>
-            {metaMaskBalance?.formatted
-              ? formatMetaMaskBalance(metaMaskBalance)
-              : null}
+            {item?.userMetamaskBalance ? item?.userMetamaskBalance : '0.00'}
           </span>
 
-          {balanceDataUnformatted &&
-            (
-              (balanceDataUnformatted as any) /
-              10 ** contractMappings['Moonriver'][item.name]['decimals']
-            ).toFixed(2)}
+          {item?.userDeposited
+            ? parseFloat(item?.userDeposited).toFixed(2)
+            : '0.00'}
         </span>
       </div>
     </div>

@@ -56,6 +56,8 @@ const Table = (props: any) => {
     })
   }
 
+  console.log('GLOBAL STATE AURORA ', globalState.apysAurora)
+
   return (
     <div className="w-full">
       <TableHeader />

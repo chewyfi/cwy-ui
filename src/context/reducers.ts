@@ -32,16 +32,11 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
         vault: string
         apy: string
       } = action.payload
-      if (vault.startsWith('K')) {
-        console.log('VAULT WE WANT ', vault)
-      }
+
       const element = draft[network].find(
         (element: APYType) => element.name === vault
       )
-
       element && apy ? (element.apy = apy) : null
-      console.log('proxy element', JSON.parse(JSON.stringify(element)))
-
       break
     }
 
@@ -113,7 +108,6 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
     case SORT_BY_APY: {
       const { network }: { network: 'apysMoonriver' | 'apysAurora' } =
         action.payload
-      console.log('SORT BY APY CALLED')
       draft[network].sort((a, b) => {
         return parseFloat(b.apy ? b.apy : '0') - parseFloat(a.apy ? a.apy : '0')
       })

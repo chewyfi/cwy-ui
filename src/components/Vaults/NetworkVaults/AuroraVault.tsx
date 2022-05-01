@@ -145,9 +145,6 @@ export const AuroraVault: React.FC<Props> = ({
       args: [account?.address]
     }
   )
-  console.log(
-    ` Balance data unformatted ${balanceDataUnformatted} for vault ${item.name}`
-  )
 
   item.userDeposited === null &&
     balanceDataUnformatted !== undefined &&

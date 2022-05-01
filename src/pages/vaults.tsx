@@ -22,6 +22,13 @@ export default function Vaults(props: any) {
   const [totalTVL, setTotalTVL] = useState(0)
 
   useEffect(() => {
+    if (globalState.selectedNetwork != network?.chain?.id) {
+      ;(async function () {
+        console.log('self executing')
+        switchNetwork && (await switchNetwork(globalState.selectedNetwork))
+      })()
+    }
+
     const fetchSpecificTVL = async () => {
       const { basePath: baseURL } = router
       switch (globalState.selectedNetwork) {
@@ -40,7 +47,7 @@ export default function Vaults(props: any) {
       }
     }
     fetchSpecificTVL()
-  }, [globalState.selectedNetwork])
+  }, [globalState.selectedNetwork, network?.chain.id])
 
   return (
     <Layout headerTitle="Vaults">

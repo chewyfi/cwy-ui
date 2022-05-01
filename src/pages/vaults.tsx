@@ -103,10 +103,15 @@ export const getServerSideProps = async () => {
         'moonwell-btc-supply': 0.06771444175688035,
         '3POOL': 0.09543339242173845,
         'KSM-stKSM': 0.5135319496290187,
-        FRAX3POOL: 0.14432707914902142
+        FRAX3POOL: 0.14432707914902142,
+        'KBTC-BTC-STRATEGY': 0.2068
       }
       let update = resApyListJson
       resApyListJson = Object.assign({}, resApyListJson, update)
+    } else {
+      resApyListJson = Object.assign({}, resApyListJson, {
+        'KBTC-BTC-STRATEGY': 0.2068
+      })
     }
   } catch (error) {
     console.log('Values not equal to 10 catch error ', error)

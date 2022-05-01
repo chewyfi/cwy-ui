@@ -47,6 +47,8 @@ const Table = (props: any) => {
     })
   }
 
+  console.log('PROPS APY LIST ', props.resApyList)
+
   const toggleDisclosureAurora = (index: number) => {
     let vaultData = globalState.apysAurora
     vaultData.map((item: React.SetStateAction<APYType | null>, idx: number) => {

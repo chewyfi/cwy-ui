@@ -32,10 +32,16 @@ export const reducer = produce((draft: InitialStateType, action: Action) => {
         vault: string
         apy: string
       } = action.payload
+      if (vault.startsWith('K')) {
+        console.log('VAULT WE WANT ', vault)
+      }
       const element = draft[network].find(
         (element: APYType) => element.name === vault
       )
+
       element && apy ? (element.apy = apy) : null
+      console.log('proxy element', JSON.parse(JSON.stringify(element)))
+
       break
     }
 

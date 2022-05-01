@@ -24,6 +24,8 @@ export const THREE_POOL_TOKEN_CONTRACT =
   '0xfb29918d393AaAa7dD118B51A8b7fCf862F5f336'
 export const FRAX_3POOL_TOKEN_CONTRACT =
   '0x884609A4D86BBA8477112E36e27f7A4ACecB3575'
+export const KBTC_BTC_STRATEGY_CONTRACT =
+  '0x4F707d051b4b49B63e72Cc671e78E152ec66f2fA'
 
 export const MoonbeamMOVRDecimals = 18
 export const MoonbeamETHDecimals = 18
@@ -139,7 +141,8 @@ export const apyMappings: any = {
     WBTC: 'moonwell-btc-supply',
     FRAX3POOL: 'FRAX3POOL',
     'KSM-stKSM': 'KSM-stKSM',
-    '3POOL': '3POOL'
+    '3POOL': '3POOL',
+    'KBTC-BTC-STRATEGY': 'KBTC-BTC-STRATEGY'
   },
   Astar: {
     'USDT-USDC': null,

@@ -5,7 +5,7 @@ export type APYType = {
   apy: string | null
   tvl: string | null
   userDeposited: string | null
-  userMetamaskBalance: number
+  userMetamaskBalance: number | null
   emoji?: string
   isOpen: boolean
   suffix?: string

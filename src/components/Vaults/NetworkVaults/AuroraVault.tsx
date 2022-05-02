@@ -185,8 +185,9 @@ export const AuroraVault: React.FC<Props> = ({
     >
       <div
         onClick={() => {
-          if (network?.chain?.name !== globalState.selectedNetwork) {
+          if (network?.chain?.id !== globalState.selectedNetwork) {
           } else {
+            console.log('Toggling disclosure')
             toggleDisclosure()
           }
         }}

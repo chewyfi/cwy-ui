@@ -162,7 +162,7 @@ export const MoonriverVault: React.FC<Props> = ({
     >
       <div
         onClick={() => {
-          if (network?.chain?.name !== globalState.selectedNetwork) {
+          if (network?.chain?.id !== globalState.selectedNetwork) {
           } else {
             toggleDisclosure()
           }

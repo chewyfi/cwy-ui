@@ -10,7 +10,7 @@ const useOtherNetworkHook = () => {
           <div className="w-full p-3">
             <div className="flex items-center justify-between"></div>
             <h6 className="text-opacity-50 text-[13px]">
-              Please connect metamask{' '}
+              Please connect MetaMask{' '}
               {correctNetwork && `to ${networkMappings[correctNetwork]}`}
             </h6>
           </div>

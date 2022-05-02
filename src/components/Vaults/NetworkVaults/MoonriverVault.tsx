@@ -28,6 +28,7 @@ import normalAbi from '../../../chain-info/abis/normalMoonriverAbi.json'
 import { AppContext } from '../../../context/index'
 import { KBTC_BTC_TOKEN_CONTRACT } from '../../../utils/constants'
 import { formatMetaMaskBalance } from '../../../utils/helpers'
+import useOtherNetworkHook from '../../../utils/hooks/switchToCorrectNetwork'
 interface Props {
   item: APYType
   toggleDisclosure: () => void
@@ -58,6 +59,7 @@ export const MoonriverVault: React.FC<Props> = ({
 }) => {
   const [{ data: account }] = useAccount()
   const [{ data: network }, switchNetwork] = useNetwork()
+  const { otherNetworkToast } = useOtherNetworkHook()
 
   const { dispatch, globalState } = useContext(AppContext)
   const router = useRouter()
@@ -163,6 +165,7 @@ export const MoonriverVault: React.FC<Props> = ({
       <div
         onClick={() => {
           if (network?.chain?.id !== globalState.selectedNetwork) {
+            otherNetworkToast(globalState.selectedNetwork)
           } else {
             toggleDisclosure()
           }

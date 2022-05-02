@@ -12,6 +12,7 @@ import {
 import { APYType } from 'src/types'
 import { contractMappings } from 'src/utils/constants'
 import { aprToApy } from 'src/utils/helpers'
+import useOtherNetworkHook from 'src/utils/hooks/switchToCorrectNetwork'
 import { useAccount, useContractRead, useNetwork } from 'wagmi'
 
 import auroraAbi from '../../../chain-info/abis/auroraAbi.json'
@@ -55,6 +56,7 @@ export const AuroraVault: React.FC<Props> = ({
   const [tvl, setTVL] = useState(0)
   const [metaMaskBalance, setMetaMaskBalance] = useState('0')
   const [{ data: network }, switchNetwork] = useNetwork()
+  const { otherNetworkToast } = useOtherNetworkHook()
 
   const [{ data: account }] = useAccount()
 
@@ -186,6 +188,7 @@ export const AuroraVault: React.FC<Props> = ({
       <div
         onClick={() => {
           if (network?.chain?.id !== globalState.selectedNetwork) {
+            otherNetworkToast(globalState.selectedNetwork)
           } else {
             console.log('Toggling disclosure')
             toggleDisclosure()

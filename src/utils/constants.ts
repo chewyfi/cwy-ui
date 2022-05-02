@@ -37,6 +37,11 @@ export const Solarbeam3poolDecimals = 18
 export const SolarbeamFrax3poolDecimals = 18
 export const SolarbeamstKSMpoolDecimals = 18
 
+export const networkMappings: { 1285: string; 1313161554: string } = {
+  1285: 'Moonriver',
+  1313161554: 'Aurora'
+}
+
 export const contractMappings: any = {
   Moonriver: {
     MOVR: { contract: poolAddressesMoonriver['MoonbeamMOVR'], decimals: 18 },

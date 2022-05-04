@@ -5,27 +5,27 @@ import { useEffect } from 'react'
 const footerItems = [
   {
     href: 'https://twitter.com/chewyfi',
-    logo: '/static/landing/twitter.svg',
+    logo: '/static/landing/twitter.png',
     className: 'w-8 h-8'
   },
   {
     href: 'http://discord.gg/m7TWUjBc9v',
-    logo: '/static/landing/discord.svg',
-    className: 'w-8 h-8'
+    logo: '/static/landing/discord.png',
+    className: 'w-8'
   },
   {
     href: 'https://t.me/chewyfi',
-    logo: '/static/landing/telegram.svg',
+    logo: '/static/landing/telegram.png',
     className: 'w-8 h-8'
   },
   {
     href: 'https://chewyfi.substack.com',
-    logo: '/static/landing/substack.svg',
-    className: 'w-7 h-7'
+    logo: '/static/landing/substack.png',
+    className: 'h-7'
   },
   {
     href: 'https://github.com/chewyfi',
-    logo: '/static/landing/github.svg',
+    logo: '/static/landing/github.png',
     className: 'w-8 h-8'
   }
 ]
@@ -39,7 +39,7 @@ export default function Landing() {
   return (
     <div
       style={{
-        backgroundImage: 'url(/static/landing/bg-pink.png)',
+        backgroundImage: 'url(/static/landing/bg-pink.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100% 100%',
         backgroundPosition: '0% 0%',

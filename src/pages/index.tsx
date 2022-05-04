@@ -49,11 +49,6 @@ export default function Landing() {
     >
       <Head>
         <title>Chewy</title>
-        <style jsx global>{`
-          html {
-            overflow: hidden !important;
-          }
-        `}</style>
       </Head>
       <div className="font-bold text-center text-white">
         <h1 className="text-[51px]">Chewy</h1>

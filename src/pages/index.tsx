@@ -55,7 +55,7 @@ export default function Landing() {
         <p className="text-[20px]">
           Foundational layer for interest-bearing tokens.
         </p>
-        <div className="mt-6 mb-8">
+        <div className="mb-8 mt-7">
           <Link href="https://app.sushi.com/miso">
             <a target="_blank" rel="noreferrer">
               <button className="transition font-bold ease-in-out delay-75 hover:scale-105 duration-200 text-[20px] uppercase text-[#ff6486] py-3 px-16 bg-white rounded-lg shadow">

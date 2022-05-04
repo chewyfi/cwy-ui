@@ -1,3 +1,4 @@
+import { ChevronDownIcon } from '@heroicons/react/solid'
 import clsx from 'clsx'
 import { useContext, useState } from 'react'
 import { AppContext } from 'src/context'
@@ -104,35 +105,39 @@ export const TableHeader = () => {
             <span className="-mb-1">Strategy</span>
             <span className="flex items-center space-x-2">
               TVL
-              <img
-                onClick={() => sortByTvl()}
-                className="h-2 ml-3"
-                src="/static/down-arrow.svg"
-                alt=""
-              />
+              <button>
+                <ChevronDownIcon
+                  onClick={() => sortByTvl()}
+                  className="-mr-1 ml-2 h-5 w-5"
+                  aria-hidden="true"
+                />
+              </button>
             </span>
           </span>
         </span>
         <span className="flex items-center w-1/3 ml-8">
           APY
-          <img
-            className="h-2 ml-3"
-            src="/static/down-arrow.svg"
-            alt=""
-            onClick={() => sortByApy()}
-          />
+          <button>
+            <ChevronDownIcon
+              onClick={() => sortByApy()}
+              className="-mr-1 ml-1 h-5 w-5"
+              aria-hidden="true"
+            />
+          </button>
         </span>
         <span className="flex justify-end w-1/3 mr-3">
           <div className="flex flex-col text-left">
             <span className="-mb-1">Balance</span>
 
-            <span>Deposited</span>
-            <img
-              className="h-2 ml-3"
-              src="/static/down-arrow.svg"
-              alt=""
-              onClick={() => sortByDeposited()}
-            />
+            <span className="-mb-1">
+              Deposited
+              <button>
+                <ChevronDownIcon
+                  onClick={() => sortByDeposited()}
+                  className="-mr-1 -mb-1 ml-1 h-5 w-5"
+                />
+              </button>
+            </span>
           </div>
         </span>
       </div>

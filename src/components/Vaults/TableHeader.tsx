@@ -115,7 +115,7 @@ export const TableHeader = () => {
             </span>
           </span>
         </span>
-        <span className="flex items-center w-1/3 ml-8">
+        <span className="flex items-center w-1/3 ml-8 -mb-5">
           APY
           <button>
             <ChevronDownIcon

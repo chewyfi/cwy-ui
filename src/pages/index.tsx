@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 const footerItems = [
   {
@@ -29,21 +30,40 @@ const footerItems = [
   }
 ]
 
-export default function Vaults() {
+export default function Landing() {
+  useEffect(() => {
+    const element = document.getElementsByTagName('html')[0]
+    element.style.setProperty('overflow-y', 'auto', 'important')
+  }, [])
+
   return (
-    <div className="grid h-screen place-items-center bg-gradient-to-b to-[#ff6486] from-[#ffafbe]">
+    <div
+      style={{
+        backgroundImage: 'url(/static/landing/bg-pink.png)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+        backgroundPosition: '0% 0%',
+        objectFit: 'cover'
+      }}
+      className="grid h-screen !overflow-y-hidden place-items-center"
+    >
       <Head>
         <title>Chewy</title>
+        <style jsx global>{`
+          html {
+            overflow: hidden !important;
+          }
+        `}</style>
       </Head>
       <div className="font-bold text-center text-white">
         <h1 className="text-[51px]">Chewy</h1>
         <p className="text-[20px]">
           Foundational layer for interest-bearing tokens.
         </p>
-        <div className="my-10">
+        <div className="mt-10 mb-8">
           <Link href="https://app.sushi.com/miso">
             <a target="_blank" rel="noreferrer">
-              <button className="transition ease-in-out delay-75 hover:scale-105 duration-300 text-[20px] uppercase text-[#ff6486] py-3 px-6 bg-white rounded-lg shadow">
+              <button className="transition font-bold ease-in-out delay-75 hover:scale-105 duration-200 text-[20px] uppercase text-[#ff6486] py-3 px-16 bg-white rounded-lg shadow">
                 Enter the presale
               </button>
             </a>
